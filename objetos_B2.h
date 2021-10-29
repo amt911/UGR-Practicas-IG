@@ -138,4 +138,8 @@ class _ply_rot: public _objeto_ply
 	vector<_vertex3f> perfil;
 };
 
+<<<<<<< HEAD
 //HOla
+=======
+
+>>>>>>> 2dc491a99a8081d3a5d3653605193c2f93ae2834
