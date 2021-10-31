@@ -19,6 +19,8 @@ Girar 90 grados toda la figura para que este bien
 Por consiguiente de lo primero, quitar el glRotate de los cilindros y conos que tengan 270.
 
 
+Poner como parametro por defecto del cilindro y del cono el eje y.
+
 Hacer alas, flaps, speed brakes, alerones, timon.
 
 Si da tiempo, hacer afterburner.

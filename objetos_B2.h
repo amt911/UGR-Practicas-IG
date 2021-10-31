@@ -155,3 +155,8 @@ class _cuerpo{
 	vector<_cilindro> esquinas;
 	_cono nariz;
 };
+
+
+class _alas{
+	
+};
