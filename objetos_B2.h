@@ -102,7 +102,7 @@ int num;
 class _esfera: public _rotacion
 {
 	public:
-	_esfera(int radio=1, int num_puntos=6, int num_rot=5, Eje axis=y);
+	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=z);
 };
 
 //************************************************************************
@@ -143,7 +143,7 @@ class _ply_rot: public _objeto_ply
 // caza
 //************************************************************************
 
-class _cuerpo{
+class _cuerpo: public _triangulos3D{
 	public:
 		_cuerpo();
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
@@ -156,7 +156,18 @@ class _cuerpo{
 	_cono nariz;
 };
 
+//************************************************************************
 
-class _alas{
-	
+class _alas: public _triangulos3D{
+	public:
+		_alas();
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		float altura, anchura;
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	vector<_esfera> esquinas;
+
 };

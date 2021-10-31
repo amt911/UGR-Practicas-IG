@@ -740,7 +740,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
   glPushMatrix();
   glTranslatef(-0.9218, -1.4685, 2.0717);
-  glRotatef(35.9, 1, 0, 0);
+  glRotatef(3.59, 1, 0, 0);
   //glTranslatef(-0.216,0, 0);
   glScalef(0.432, 1, 0.406);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
@@ -1169,4 +1169,174 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   nariz.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
+}
+
+
+
+//************************************************************************
+_alas::_alas(){
+
+}
+
+
+void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Cubos con la forma primitiva de las alas
+    //derecha
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.354, 1.5932, 2.1596);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-15.9, 0, 0, 1);
+  glScalef(2.45, 0.38, 0.12);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.3537, 1.1572, 2.1749);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-23.5, 0, 0, 1);
+  glScalef(2.45, 0.3, 0.12);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-5.7552, 2.4362, 1.9762);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-15.9, 0, 0, 1);
+  glScalef(0.1, 0.23, 0.105);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-5.8797, 2.7862, 1.9762);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-15.9, 0, 0, 1);
+  glScalef(0.16, 0.11, 0.075);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+  //izquierda
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.354, 1.5932, 2.1596);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(15.9, 0, 0, 1);
+  glScalef(2.45, 0.38, 0.12);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.3537, 1.1572, 2.1749);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(23.5, 0, 0, 1);
+  glScalef(2.45, 0.3, 0.12);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(5.7552, 2.4362, 1.9762);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(15.9, 0, 0, 1);
+  glScalef(0.1, 0.23, 0.105);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(5.8797, 2.7862, 1.9762);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(15.9, 0, 0, 1);
+  glScalef(0.16, 0.11, 0.075);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+
+//Cilindros para el filo de las alas
+  //derecha
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(-3.6565, 1.0302, 2.1568);  
+  glRotatef(-24.8, 0, 0, 1);
+  glRotatef(-94.6, 0, 1, 0);
+  glScalef(0.12, 0.366, 2.096);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(-5.8499, 2.315, 1.9745);
+  glRotatef(90, 1, 0, 0);  
+  glRotatef(14.5, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.165, 0.12, 0.465);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+  //izquierda       
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(3.6565, 1.0302, 2.1568);
+  glRotatef(24.8, 0, 0, 1);
+  glRotatef(94.6, 0, 1, 0);
+  glScalef(0.12, 0.366, 2.096);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(5.8499, 2.315, 1.9745);
+  glRotatef(90, 1, 0, 0);  
+  glRotatef(-14.5, 0, 1, 0);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(0.165, 0.12, 0.465);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+  //Esferas para las esquinas
+  //derecha
+  esquinas.push_back(_esfera());
+
+  glPushMatrix();
+  glTranslatef(-5.6556, 1.8168, 1.9831);
+  glRotatef(-4.6, 0, 1, 0);
+  glScalef(0.237, 0.237, 0.12);
+  esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+  //izquierda
+  esquinas.push_back(_esfera());
+
+  glPushMatrix();
+  glTranslatef(5.6556, 1.8168, 1.9831);
+  glRotatef(4.6, 0, 1, 0);
+  glScalef(0.237, 0.237, 0.12);
+  esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();      
 }
