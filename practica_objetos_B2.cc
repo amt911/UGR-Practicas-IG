@@ -12,7 +12,7 @@
 using namespace std;
 
 // tipos
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO, CAZA} _tipo_objeto;
 _tipo_objeto t_objeto=CUBO;
 _modo   modo=POINTS;
 
@@ -41,6 +41,8 @@ _cilindro cilindro(1, 3, ROTACIONES, x);
 _ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
 
+
+_cuerpo prueba;
 
 
 //**************************************************************************
@@ -128,6 +130,7 @@ switch (t_objeto){
 		case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+		case CAZA: prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	}
 
 }
@@ -196,6 +199,7 @@ switch (toupper(Tecla1)){
 		case 'X':t_objeto=ROTACION_X; break;
 		case 'A':t_objeto=RELOJ; break;
 		case 'W':t_objeto=RARO; break;
+		case 'F':t_objeto=CAZA; break;
 	}
 glutPostRedisplay();
 }
@@ -291,73 +295,6 @@ perfil2.push_back(aux);
 aux.x=1.0; aux.y=1.8; aux.z=0.0;
 perfil2.push_back(aux);
 */
-
-
-//Reloj de arena
-/*
-aux.x=3; aux.y=-5.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=3; aux.y=-4.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.2; aux.y=-4.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.9; aux.y=-4; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=2.2; aux.y=-3.45; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=2; aux.y=-2.85; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.7; aux.y=-2.25; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.2; aux.y=-1.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=0.55; aux.y=-0.75; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=0.3; aux.y=0; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=0.55; aux.y=0.75; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.2; aux.y=1.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.7; aux.y=2.25; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=2; aux.y=2.85; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=2.2; aux.y=3.45; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.9; aux.y=4; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=1.2; aux.y=4.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=3; aux.y=4.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-aux.x=3; aux.y=5.5; aux.z=0.0;
-perfil2.push_back(aux);
-
-reloj.parametros(perfil2, ROT);
-*/
-
-//perfil2.clear();
-
-
 
 //Figura que se puede rotar tanto en el eje y como en el x para probar que funciona
 aux.x=3; aux.y=0; aux.z=0.0;

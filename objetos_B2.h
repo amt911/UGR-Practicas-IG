@@ -53,7 +53,7 @@ class _cubo: public _triangulos3D
 {
 public:
 
-	_cubo(float tam=0.5);
+	_cubo(float tam=2);
 };
 
 
@@ -112,7 +112,7 @@ class _esfera: public _rotacion
 class _cono: public _rotacion
 {
 	public:
-		_cono(double radio=0.5, double h=1, int num=3, Eje axis=y);
+		_cono(double radio=1, double h=2, int num=12, Eje axis=z);
 };
 
 //************************************************************************
@@ -122,7 +122,7 @@ class _cono: public _rotacion
 class _cilindro: public _rotacion
 {
 	public:
-		_cilindro(double radio=0.5, double h=1, int num=3, Eje axis=y);
+		_cilindro(double radio=1, double h=2, int num=12, Eje axis=z);
 };
 
 //************************************************************************
@@ -138,4 +138,20 @@ class _ply_rot: public _objeto_ply
 	vector<_vertex3f> perfil;
 };
 
-//HOla
+
+//************************************************************************
+// caza
+//************************************************************************
+
+class _cuerpo{
+	public:
+		_cuerpo();
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+
+	float altura, anchura;
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> esquinas;
+	_cono nariz;
+};
