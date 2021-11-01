@@ -51,6 +51,7 @@ _frenos_delanteros p6;
 _timon p7;
 _frenos_traseros p8;
 _ventana_fija p9;
+_tornado caza;
 
 //**************************************************************************
 //
@@ -137,7 +138,7 @@ switch (t_objeto){
 		case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case CAZA: prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
+		case CAZA: /*prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
 		prueba2.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
 		prueba3.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
 		prueba5.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
@@ -145,7 +146,10 @@ switch (t_objeto){
 		p6.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
 		p7.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
 		p8.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		p9.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
+		p9.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);*/
+
+		//prueba5.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
 		break;
 	}
 
@@ -240,6 +244,15 @@ switch (Tecla1){
 	case GLUT_KEY_DOWN:Observer_angle_x++;break;
 	case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
 	case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
+	case GLUT_KEY_F1: {caza.giro_ventana+=1; 
+	cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						if(caza.giro_ventana>caza.max_giro_ventana){
+							caza.giro_ventana=caza.max_giro_ventana;
+						}
+							
+						break;
+	}
+	case GLUT_KEY_F2: caza.giro_ventana-=1; break;
 	}
 glutPostRedisplay();
 }

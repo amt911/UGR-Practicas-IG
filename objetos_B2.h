@@ -195,6 +195,10 @@ class _ventana_movil: public _triangulos3D{
 	public:
 		_ventana_movil()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		
+		double x=0;
+		double y=2.99002;
+		double z=1.60318;
 
 	protected:
 	vector<_cubo> base;
@@ -210,6 +214,10 @@ class _ventana_fija: public _triangulos3D{
 	public:
 		_ventana_fija()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		double x=0;
+		double y=2.99002;
+		double z=1.60318;
 
 	protected:
 	vector<_cubo> base;
@@ -262,4 +270,27 @@ class _frenos_traseros: public _triangulos3D{
 
 	protected:
 	vector<_cubo> base;
+};
+
+
+//************************************************************************
+
+class _tornado: public _triangulos3D{
+	public:
+		_tornado()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	double giro_ventana=0;
+	const double max_giro_ventana=12;
+	const double min_giro_ventana=0;
+	protected:
+	_cuerpo cuerpo;
+	_alas alas;
+	_alas_traseras alas_traseras;
+	_ventana_fija ventana_fija;
+	_ventana_movil ventana_movil;
+	_flaps flaps;
+	_frenos_delanteros frenos_delanteros;
+	_frenos_traseros frenos_traseros;
+	_timon timon;
 };

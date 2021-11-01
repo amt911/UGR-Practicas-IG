@@ -1639,7 +1639,8 @@ void _alas_traseras::draw(_modo modo, float r1, float g1, float b1, float r2, fl
 
 
 //************************************************************************
-
+/*
+//Version en su sitio
 void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
   //Primero los cubos
   base.push_back(_cubo());
@@ -1695,6 +1696,65 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
   filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix(); 
 }
+*/
+
+//Version centrada
+void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Primero los cubos
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, -0.64416, 1.204);
+  glRotatef(1.1, 1, 0, 0);
+  glScalef(0.324, 0.064, 1.21);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+  //derecha
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-0.2509, -0.44495, 1.1041);
+  glRotatef(-11.3, 0, 0, 1);
+  glScalef(0.05, 0.16, 1.11);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  //izquierda
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0.2509, -0.44495, 1.1041);
+  glRotatef(11.3, 0, 0, 1);
+  glScalef(0.05, 0.16, 1.11);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+
+  //Ahora los cilindros
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -0.26732, 0.97712);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.265, 0.985, 0.265);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -0.28891, 2.0103);
+  glRotatef(104, 1, 0, 0);
+  glScalef(0.265, 0.115, 0.265);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+}
+
 
 //************************************************************************
 void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
@@ -1919,4 +1979,17 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
   glScalef(0.26, 0.02, 0.64);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();           
+}
+
+
+
+void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  
+  
+
+  glPushMatrix();
+  glTranslatef(ventana_movil.x, ventana_movil.y, ventana_movil.z);
+  glRotatef(-giro_ventana, 1, 0, 0);
+  ventana_movil.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
 }
