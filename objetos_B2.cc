@@ -1070,9 +1070,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 1.9416, 2.6448);
+  glTranslatef(0, 1.3726, 2.6448);
   glRotatef(88.2, 1, 0, 0);
-  glScalef(0.226, 0.235, 2.431);
+  glScalef(0.226, 0.235, 2.951);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -1161,8 +1161,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 //Nariz provisional
   glPushMatrix();
-  glTranslatef(0, -6.407, 1.68);
-  glRotatef(92.3, 1, 0, 0);
+  glTranslatef(0, -6.407, 1.6131);
+  glRotatef(94.7, 1, 0, 0);
   glScalef(0.475, 0.502, 0.73);
   nariz.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
@@ -1170,12 +1170,42 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 //Curva de la nariz
   glPushMatrix();
-  glTranslatef(0, -5.201, 1.71);
-  //glRotatef(92.3, 1, 0, 0);
+  glTranslatef(0, -5.201, 1.7112);
+  glRotatef(4.72, 1, 0, 0);
   glScalef(0.557, 1.112, 0.557);
   nariz_curva.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
+
+//Filos del timon
+  esquinas.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, 2.1481, 3.0535);
+  glRotatef(-71.4, 1, 0, 0);
+  glScalef(0.12, 0.232, 1.2);
+  esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+
+  esquinas.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, 4.5454, 4.3036);
+  glRotatef(-55.3, 1, 0, 0);
+  glScalef(0.12, 0.232, 1.64);
+  esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+
+  esquinas.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, 6.4318, 5.1996);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.12, 0.232, 0.67);
+  esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
 }
 
 
@@ -1624,4 +1654,281 @@ void _alas_traseras::draw(_modo modo, float r1, float g1, float b1, float r2, fl
     glScalef(0.135, 0.125, 0.035);
     esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
     glPopMatrix();                 
+}
+
+
+
+
+//************************************************************************
+
+void _ventana::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+	/*vector<_cubo> base;
+	vector<_cilindro> filos;
+	vector<_esfera> esquinas;*/
+
+  //Primero los cubos
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, -2.807, 2.3459);
+  glRotatef(1.1, 1, 0, 0);
+  glScalef(0.324, 1.21, 0.064);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+  //derecha
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-0.2509, -2.707, 2.5451);
+  glRotatef(11.3, 0, 1, 0);
+  glScalef(0.05, 1.11, 0.16);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-0.2208, -4.05, 2.5154);
+  glRotatef(12.1, 0, 0, 1);
+  glRotatef(14.5, 0, 1, 0);
+  glRotatef(7.47, 1, 0, 0);
+  glScalef(0.05, 0.26, 0.16);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+  //izquierda
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0.2509, -2.707, 2.5451);
+  glRotatef(-11.3, 0, 1, 0);
+  glScalef(0.05, 1.11, 0.16);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0.2208, -4.05, 2.5154);
+  glRotatef(-12.1, 0, 0, 1);
+  glRotatef(-14.5, 0, 1, 0);
+  glRotatef(7.47, 1, 0, 0);
+  glScalef(0.05, 0.26, 0.16);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+  //Ahora los cilindros
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -2.58, 2.7227);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.265, 0.265, 0.985);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -3.863, 2.587);
+  glRotatef(117, 1, 0, 0);
+  glScalef(0.265, 0.265, 0.225);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  //Esfera
+  glPushMatrix();
+  glTranslatef(0, -3.503, 2.6997);
+  //glRotatef(117, 1, 0, 0);
+  glScalef(0.265, 0.485, 0.265);
+  esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+
+  //Cono
+  glPushMatrix();
+  glTranslatef(0, -4.52, 2.3811);
+  glRotatef(106, 1, 0, 0);
+  glScalef(0.249, 0.249, 0.429);
+  pico.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+}
+
+
+//************************************************************************
+
+//************************************************************************
+
+void _flaps::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //derecho
+  flaps.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.5797, 2.0297, 2.1596);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-14.6, 0, 0, 1);
+  glScalef(2.23, 0.26, 0.08);
+  flaps[flaps.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //izquierdo
+  flaps.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.5797, 2.0297, 2.1596);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(14.6, 0, 0, 1);
+  glScalef(2.23, 0.26, 0.08);
+  flaps[flaps.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+}
+
+
+//************************************************************************
+
+void _frenos_delanteros::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //derecho
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.4478, 1.7708, 2.2518);
+  glRotatef(-4.6, 0, 1, 0);
+  glRotatef(-15.9, 0, 0, 1);
+  glScalef(1.29, 0.18, 0.02);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+  //izquierdo
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.4478, 1.7708, 2.2518);
+  glRotatef(4.6, 0, 1, 0);
+  glRotatef(15.9, 0, 0, 1);
+  glScalef(1.29, 0.18, 0.02);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+}
+
+//************************************************************************
+void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Marco exterior
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 5.2054, 2.8443);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.05, 0.48);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 6.1446, 3.5657);
+  glRotatef(-33.5, 1, 0, 0);
+  glScalef(0.126, 0.05, 0.9);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 6.307, 4.3052);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.05, 0.34);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix(); 
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 5.4248, 3.5728);
+  glRotatef(-37.8, 1, 0, 0);
+  glScalef(0.126, 0.05, 0.95);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+  //Relleno del marco (de arriba a abajo)
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 6.2811, 4.2144);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.08, 0.28);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 6.2015, 4.0864);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.08, 0.28);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 5.7799, 3.5791);
+  glRotatef(-35.6, 1, 0, 0);
+  glScalef(0.126, 0.29, 0.71);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();            
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 5.3469, 3.0795);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.08, 0.3);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();       
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0, 5.2284, 2.9204);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.08, 0.3);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();       
+}
+
+
+//************************************************************************
+void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //derecho
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-0.7922, 3.6341, 2.3859);
+  glRotatef(-23.5, 0, 1, 0);
+  glScalef(0.26, 0.64, 0.02);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();         
+
+
+  //izquierdo
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(0.7922, 3.6341, 2.3859);
+  glRotatef(23.5, 0, 1, 0);
+  glScalef(0.26, 0.64, 0.02);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();           
 }

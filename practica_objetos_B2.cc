@@ -45,6 +45,11 @@ _ply_rot reloj("revolucion", ROTACIONES, y);
 _cuerpo prueba;
 _alas prueba2;
 _alas_traseras prueba3;
+_ventana prueba5;
+_flaps flaps;
+_frenos_delanteros p6;
+_timon p7;
+_frenos_traseros p8;
 
 //**************************************************************************
 //
@@ -133,7 +138,13 @@ switch (t_objeto){
 		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case CAZA: prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
 		prueba2.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
-		prueba3.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+		prueba3.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
+		prueba5.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		flaps.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		p6.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		p7.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		p8.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
+		break;
 	}
 
 }

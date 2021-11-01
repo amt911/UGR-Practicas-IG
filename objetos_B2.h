@@ -187,3 +187,64 @@ class _alas_traseras: public _triangulos3D{
 	vector<_cilindro> filos;
 	vector<_esfera> esquinas;	
 };
+
+
+//************************************************************************
+
+class _ventana: public _triangulos3D{
+	public:
+		_ventana()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	_esfera esquina;	
+	_cono pico;	
+};
+
+//************************************************************************
+
+class _flaps: public _triangulos3D{
+	public:
+		_flaps()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> flaps;
+};
+
+
+//************************************************************************
+
+class _frenos_delanteros: public _triangulos3D{
+	public:
+		_frenos_delanteros()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> base;
+};
+
+//************************************************************************
+
+class _timon: public _triangulos3D{
+	public:
+		_timon()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> base;
+};
+
+
+//************************************************************************
+
+class _frenos_traseros: public _triangulos3D{
+	public:
+		_frenos_traseros()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> base;
+};
