@@ -102,7 +102,7 @@ int num;
 class _esfera: public _rotacion
 {
 	public:
-	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=z);
+	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=y);
 };
 
 //************************************************************************
@@ -112,7 +112,7 @@ class _esfera: public _rotacion
 class _cono: public _rotacion
 {
 	public:
-		_cono(double radio=1, double h=2, int num=12, Eje axis=z);
+		_cono(double radio=1, double h=2, int num=12, Eje axis=y);
 };
 
 //************************************************************************
@@ -122,7 +122,7 @@ class _cono: public _rotacion
 class _cilindro: public _rotacion
 {
 	public:
-		_cilindro(double radio=1, double h=2, int num=12, Eje axis=z);
+		_cilindro(double radio=1, double h=2, int num=12, Eje axis=y);
 };
 
 //************************************************************************
@@ -191,17 +191,32 @@ class _alas_traseras: public _triangulos3D{
 
 //************************************************************************
 
-class _ventana: public _triangulos3D{
+class _ventana_movil: public _triangulos3D{
 	public:
-		_ventana()=default;
+		_ventana_movil()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
 
 	protected:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
-	_esfera esquina;	
+	//_esfera esquina;	
 	_cono pico;	
 };
+
+
+//************************************************************************
+
+class _ventana_fija: public _triangulos3D{
+	public:
+		_ventana_fija()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	protected:
+	vector<_cubo> base;
+	_cilindro filos;
+	_cono pico;	
+};
+
 
 //************************************************************************
 
