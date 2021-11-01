@@ -154,6 +154,7 @@ class _cuerpo: public _triangulos3D{
 	vector<_cubo> base;
 	vector<_cilindro> esquinas;
 	_cono nariz;
+	_esfera nariz_curva;
 };
 
 //************************************************************************
@@ -170,4 +171,19 @@ class _alas: public _triangulos3D{
 	vector<_cilindro> filos;
 	vector<_esfera> esquinas;
 
+};
+
+
+//************************************************************************
+
+class _alas_traseras: public _triangulos3D{
+	public:
+		_alas_traseras();
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	vector<_esfera> esquinas;	
 };

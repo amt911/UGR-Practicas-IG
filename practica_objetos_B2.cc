@@ -44,7 +44,7 @@ _ply_rot reloj("revolucion", ROTACIONES, y);
 
 _cuerpo prueba;
 _alas prueba2;
-
+_alas_traseras prueba3;
 
 //**************************************************************************
 //
@@ -132,7 +132,8 @@ switch (t_objeto){
 		case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case CAZA: prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
-		prueba2.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+		prueba2.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
+		prueba3.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	}
 
 }
