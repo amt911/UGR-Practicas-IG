@@ -739,10 +739,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-0.9218, -1.4685, 2.0717);
+  glTranslatef(-0.9218, 2.0717, 1.4685);
   glRotatef(3.59, 1, 0, 0);
-  //glTranslatef(-0.216,0, 0);
-  glScalef(0.432, 1, 0.406);
+  glScalef(0.432, 0.406, 1);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -750,10 +749,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0.9218, -1.4685, 2.0717);
+  glTranslatef(0.9218, 2.0717, 1.4685);
   glRotatef(3.59, 1, 0, 0);
-  //glTranslatef(0.9218, -1.4685, 2);
-  glScalef(0.432, 1, 0.406);
+  glScalef(0.432, 0.406, 1);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -769,9 +767,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, -1.5759, 1.7076);
-  //glTranslatef(0, 0.5, 1);
-  glScalef(-0.59, 3.62, 0.302);
+  glTranslatef(0, 1.7076, 1.5759);
+  glScalef(-0.59, 0.302, 3.62);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -779,9 +776,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, -3.468, 2.0306);
+  glTranslatef(0, 2.0306, 3.468);
   glRotatef(3.59, 1, 0, 0);
-  glScalef(0.59, 1.031, 0.116);
+  glScalef(0.59, 0.116, 1.031);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -789,18 +786,17 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, -0.8318, 2.1069);
+  glTranslatef(0, 2.1069, 0.8318);
   glRotatef(4.92, 1, 0, 0);
-  glScalef(0.925, 0.466, 0.406);
+  glScalef(0.925, 0.406, 0.466);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 0.4898, 2.1277);
-  //glRotatef(4.92, 1, 0, 0);
-  glScalef(0.925, 1, 0.406);
+  glTranslatef(0, 2.1277, -0.4898);
+  glScalef(0.925, 0.406, 1);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -809,18 +805,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-0.9414, 0.4284, 2.1277);
-  glRotatef(-8.05, 0, 0, 1);
-  glScalef(0.270, 0.976, 0.406);
+  glTranslatef(-0.9414, 2.1277, -0.4284);
+  glRotatef(-8.05, 0, 1, 0);
+  glScalef(0.270, 0.406, 0.976);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0.9414, 0.4284, 2.1277);
-  glRotatef(8.05, 0, 0, 1);
-  glScalef(0.270, 0.976, 0.406);
+  glTranslatef(0.9414, 2.1277, -0.4284);
+  glRotatef(8.05, 0, 1, 0);
+  glScalef(0.270, 0.406, 0.976);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -828,18 +824,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0.5176, 0.0620, 1.6152);
-  glRotatef(-13.9, 0, 0, 1);
-  glScalef(0.270, 1.061, 0.137);
+  glTranslatef(0.5176, 1.6152, -0.0620);
+  glRotatef(-13.9, 0, 1, 0);
+  glScalef(0.270, 0.137, 1.061);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-0.5176, 0.0620, 1.6152);
-  glRotatef(13.9, 0, 0, 1);
-  glScalef(0.270, 1.061, 0.137);
+  glTranslatef(-0.5176, 1.6152, -0.0620);
+  glRotatef(13.9, 0, 1, 0);
+  glScalef(0.270, 0.137, 1.061);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -849,18 +845,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(1.2496, 0.7854, 2.2815);
-  glRotatef(-38.4, 0, 0, 1);
-  glScalef(0.451, 0.29, 0.209);
+  glTranslatef(1.2496, 2.2815, -0.7854);
+  glRotatef(-38.4, 0, 1, 0);
+  glScalef(0.451, 0.209, 0.29);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-1.2496, 0.7854, 2.2815);
-  glRotatef(38.4, 0, 0, 1);
-  glScalef(0.451, 0.29, 0.209);
+  glTranslatef(-1.2496, 2.2815, -0.7854);
+  glRotatef(38.4, 0, 1, 0);
+  glScalef(0.451, 0.209, 0.29);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -868,9 +864,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(1.4784, 0.2166, 2.2815);
-  glRotatef(9.56, 0, 0, 1);
-  glScalef(0.381, 0.46, 0.209);
+  glTranslatef(1.4784, 2.2815, -0.2166);
+  glRotatef(9.56, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.46);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -878,9 +874,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-1.4784, 0.2166, 2.2815);
-  glRotatef(-9.56, 0, 0, 1);
-  glScalef(0.381, 0.46, 0.209);
+  glTranslatef(-1.4784, 2.2815, -0.2166);
+  glRotatef(-9.56, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.46);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -889,9 +885,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(1.3179, -0.4604, 2.2815);
-  glRotatef(-30.9, 0, 0, 1);
-  glScalef(0.381, 0.56, 0.209);
+  glTranslatef(1.3179, 2.2815, 0.4604);
+  glRotatef(-30.9, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.56);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -899,9 +895,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-1.3179, -0.4604, 2.2815);
-  glRotatef(30.9, 0, 0, 1);
-  glScalef(0.381, 0.56, 0.209);
+  glTranslatef(-1.3179, 2.2815, 0.4604);
+  glRotatef(30.9, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.56);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();      
 
@@ -910,9 +906,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 2.0821, 1.9206);
-  //glRotatef(-30.9, 0, 0, 1);
-  glScalef(1.061, 0.651, 0.24);
+  glTranslatef(0, 1.9206, -2.0821);
+  glScalef(1.061, 0.24, 0.651);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -920,18 +915,16 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 3.3869, 2.0298);
-  //glRotatef(-30.9, 0, 0, 1);
-  glScalef(1.061, 0.651, 0.123);
+  glTranslatef(0, 2.0298, -3.3869);
+  glScalef(1.061, 0.123, 0.651);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 4.6922, 2.0298);
-  //glRotatef(-30.9, 0, 0, 1);
-  glScalef(1.061, 0.651, 0.087);
+  glTranslatef(0, 2.0298, -4.6922);
+  glScalef(1.061, 0.087, 0.651);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();      
 
@@ -939,9 +932,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 3.3869, 1.8741);
+  glTranslatef(0, 1.8741, -3.3869);
   glRotatef(6.37, 1, 0, 0);
-  glScalef(1.061, 0.651, 0.123);
+  glScalef(1.061, 0.123, 0.651);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -950,18 +943,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 2.5387, 2.8153);
+  glTranslatef(0, 2.8153, -2.5387);
   glRotatef(-71.4, 1, 0, 0);
-  glScalef(0.126, 0.435, 1.08);
+  glScalef(0.126, 1.08, 0.435);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 4.4713, 3.8394);
+  glTranslatef(0, 3.8394, -4.4713);
   glRotatef(-55.3, 1, 0, 0);
-  glScalef(0.126, 0.435, 1.96);
+  glScalef(0.126, 1.96, 0.435);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -969,9 +962,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 4.8354, 3.6107);
+  glTranslatef(0, 3.6107, -4.8354);
   glRotatef(-37.5, 1, 0, 0);
-  glScalef(0.126, 0.435, 1.33);
+  glScalef(0.126, 1.33, 0.435);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -980,9 +973,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 5.0584, 2.5365);
-  //glRotatef(-71.4, 1, 0, 0);
-  glScalef(0.126, 0.509, 0.247);
+  glTranslatef(0, 2.5365, -5.0584);
+  glScalef(0.126, 0.247, 0.509);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();      
 
@@ -990,9 +982,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 6.2732, 4.8361);
-  //glRotatef(-71.4, 1, 0, 0);
-  glScalef(0.126, 0.435, 0.477);
+  glTranslatef(0, 4.8361, -6.2732);
+  glScalef(0.126, 0.477, 0.435);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -1000,9 +991,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 6.787, 4.8291);
+  glTranslatef(0, 4.8291, -6.787);
   glRotatef(-33.3, 1, 0, 0);
-  glScalef(0.126, 0.195, 0.437);
+  glScalef(0.126, 0.437, 0.195);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix(); 
 
@@ -1010,9 +1001,8 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0, 6.9019, 5.1565);
-  //glRotatef(-71.4, 1, 0, 0);
-  glScalef(0.126, 0.195, 0.157);
+  glTranslatef(0, 5.1565, -6.9019);
+  glScalef(0.126, 0.157, 0.195);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();           
 
@@ -1022,9 +1012,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, -1.5759, 1.4345);
+  glTranslatef(0, 1.4345, 1.5759);
   glRotatef(270, 1, 0, 0);
-  glScalef(0.595, 0.279, 3.620);
+  glScalef(0.595, 3.620, 0.279);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1032,10 +1022,10 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0.2268, 0.2723, 1.4545);
-  glRotatef(-13.9, 0, 0, 1);
+  glTranslatef(0.2268, 1.4545, -0.2723);
+  glRotatef(-13.9, 0, 1, 0);
   glRotatef(270, 1, 0, 0);
-  glScalef(0.608, 0.279, 0.899);
+  glScalef(0.608, 0.899, 0.279);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1043,10 +1033,10 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(-0.2268, 0.2723, 1.4545);
-  glRotatef(13.9, 0, 0, 1);
+  glTranslatef(-0.2268, 1.4545, -0.2723);
+  glRotatef(13.9, 0, 1, 0);
   glRotatef(270, 1, 0, 0);
-  glScalef(0.608, 0.279, 0.899);
+  glScalef(0.608, 0.899, 0.279);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1059,9 +1049,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, -2.8629, 2.1643);
+  glTranslatef(0, 2.1643, 2.8629);
   glRotatef(93.2, 1, 0, 0);
-  glScalef(0.595, 0.279, 2.297);
+  glScalef(0.595, 2.297, 0.279);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();       
 
@@ -1070,9 +1060,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 1.3726, 2.6448);
+  glTranslatef(0, 2.6448, -1.3726);
   glRotatef(88.2, 1, 0, 0);
-  glScalef(0.226, 0.235, 2.951);
+  glScalef(0.226, 2.951, 0.235);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();    
 
@@ -1081,9 +1071,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 1.58, 1.5948);
+  glTranslatef(0, 1.5948, -1.58);
   glRotatef(271, 1, 0, 0);
-  glScalef(1.059, 0.422, 0.538);
+  glScalef(1.059, 0.538, 0.422);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1091,9 +1081,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 2.7727, 2.1295);
+  glTranslatef(0, 2.1295, -2.7727);
   glRotatef(270, 1, 0, 0);
-  glScalef(1.059, 0.422, 1.257);
+  glScalef(1.059, 1.257, 0.422);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1101,9 +1091,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 3.0631, 1.7274);
+  glTranslatef(0, 1.7274, -3.0631);
   glRotatef(276, 1, 0, 0);
-  glScalef(1.059, 0.423, 0.990);
+  glScalef(1.059, 0.990, 0.423);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1111,9 +1101,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 4.4509, 2.1102);
+  glTranslatef(0, 2.1102, -4.4509);
   glRotatef(269, 1, 0, 0);
-  glScalef(1.059, 0.422, 0.41);
+  glScalef(1.059, 0.41, 0.422);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1121,9 +1111,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 4.6683, 1.9194);
+  glTranslatef(0, 1.9194, -4.6683);
   glRotatef(276, 1, 0, 0);
-  glScalef(1.059, 0.422, 0.632);
+  glScalef(1.059, 0.632, 0.422);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -1131,9 +1121,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 5.1279, 2.0774);
+  glTranslatef(0, 2.0774, -5.1279);
   glRotatef(266, 1, 0, 0);
-  glScalef(1.059, 0.422, 0.41);
+  glScalef(1.059, 0.41, 0.422);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -1142,18 +1132,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0.4586, 5.5719, 2.0356);
+  glTranslatef(0.4586, 2.0356, -5.5719);
   glRotatef(270, 1, 0, 0);
-  glScalef(0.321, 0.321, 0.129);
+  glScalef(0.321, 0.129, 0.321);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(-0.4586, 5.5719, 2.0356);
+  glTranslatef(-0.4586, 2.0356, -5.5719);
   glRotatef(270, 1, 0, 0);
-  glScalef(0.321, 0.321, 0.129);
+  glScalef(0.321, 0.129, 0.321);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1161,18 +1151,18 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 //Nariz provisional
   glPushMatrix();
-  glTranslatef(0, -6.407, 1.6131);
+  glTranslatef(0, 1.6131, 6.407);
   glRotatef(94.7, 1, 0, 0);
-  glScalef(0.475, 0.502, 0.73);
+  glScalef(0.475, 0.73, 0.502);
   nariz.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
 
 //Curva de la nariz
   glPushMatrix();
-  glTranslatef(0, -5.201, 1.7112);
+  glTranslatef(0, 1.7112, 5.201);
   glRotatef(4.72, 1, 0, 0);
-  glScalef(0.557, 1.112, 0.557);
+  glScalef(0.557, 0.557, 1.112);
   nariz_curva.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 
@@ -1181,9 +1171,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 2.1481, 3.0535);
+  glTranslatef(0, 3.0535, -2.1481);
   glRotatef(-71.4, 1, 0, 0);
-  glScalef(0.12, 0.232, 1.2);
+  glScalef(0.12, 1.2, 0.232);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1191,9 +1181,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 4.5454, 4.3036);
+  glTranslatef(0, 4.3036, -4.5454);
   glRotatef(-55.3, 1, 0, 0);
-  glScalef(0.12, 0.232, 1.64);
+  glScalef(0.12, 1.64, 0.232);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
@@ -1201,9 +1191,9 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   esquinas.push_back(_cilindro());
 
   glPushMatrix();
-  glTranslatef(0, 6.4318, 5.1996);
+  glTranslatef(0, 5.1996, -6.4318);
   glRotatef(90, 1, 0, 0);
-  glScalef(0.12, 0.232, 0.67);
+  glScalef(0.12, 0.67, 0.232);
   esquinas[esquinas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();  
 }
