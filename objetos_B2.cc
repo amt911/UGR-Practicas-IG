@@ -1915,9 +1915,11 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(-0.7922, 3.6341, 2.3859);
-  glRotatef(-23.5, 0, 1, 0);
-  glScalef(0.26, 0.64, 0.02);
+  //glTranslatef(-0.7922, 3.6341, 2.3859);
+  glTranslatef(-0.7922, 2.3859, -3.6341);
+  glRotatef(23.5, 0, 0, 1);
+  //glScalef(0.26, 0.64, 0.02);
+  glScalef(0.26, 0.02, 0.64);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();         
 
@@ -1926,9 +1928,9 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
   base.push_back(_cubo());
 
   glPushMatrix();
-  glTranslatef(0.7922, 3.6341, 2.3859);
-  glRotatef(23.5, 0, 1, 0);
-  glScalef(0.26, 0.64, 0.02);
+  glTranslatef(0.7922, 2.3859, -3.6341);
+  glRotatef(-23.5, 0, 0, 1);
+  glScalef(0.26, 0.02, 0.64);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();           
 }
