@@ -148,7 +148,7 @@ class _cuerpo: public _triangulos3D{
 		_cuerpo();
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
 
-	float altura, anchura;
+	double y=1.95865;
 
 	protected:
 	vector<_cubo> base;
@@ -199,6 +199,8 @@ class _ventana_movil: public _triangulos3D{
 		double x=0;
 		double y=2.99002;
 		double z=1.60318;
+		double intermedio_y=1.03152;
+		double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
 
 	protected:
 	vector<_cubo> base;
@@ -256,6 +258,15 @@ class _timon: public _triangulos3D{
 		_timon()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
 
+
+		const double y=3.579368;
+		const double z=-5.78512;
+
+		const double intermedio_y=1.620681;
+		const double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
+
+		//double intermedio_x=1.03152;
+		//double x_i_f=x-intermedio_x;	//Lo que hay que subir desde el intermedio hasta el final		
 	protected:
 	vector<_cubo> base;
 };
@@ -281,8 +292,29 @@ class _tornado: public _triangulos3D{
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
 
 	double giro_ventana=0;
-	const double max_giro_ventana=12;
+	const double max_giro_ventana=45;
 	const double min_giro_ventana=0;
+
+
+	double giro_aeronave_x=0;
+	//const double max_giro_aeronave_x=180;
+	//const double min_giro_aeronave_x=0;
+
+	double giro_aeronave_y=0;
+	//const double max_giro_aeronave_y=180;
+	//const double min_giro_aeronave_y=0;
+
+	double giro_aeronave_z=0;
+	//const double max_giro_aeronave_z=180;
+	//const double min_giro_aeronave_z=0;		
+
+	const double timon_trans_giro_z=-0.340424;
+	const double angulo_timon=37.8;
+	
+	
+	double timon_giro=0;
+	const double max_timon_giro=30;
+
 	protected:
 	_cuerpo cuerpo;
 	_alas alas;

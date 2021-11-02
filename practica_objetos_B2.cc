@@ -245,14 +245,57 @@ switch (Tecla1){
 	case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
 	case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
 	case GLUT_KEY_F1: {caza.giro_ventana+=1; 
-	cout <<"------------giro: " <<caza.giro_ventana <<endl;
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.giro_ventana>caza.max_giro_ventana){
 							caza.giro_ventana=caza.max_giro_ventana;
 						}
 							
 						break;
 	}
-	case GLUT_KEY_F2: caza.giro_ventana-=1; break;
+	case GLUT_KEY_F2:{
+		caza.giro_ventana-=1; 
+		
+		if(caza.giro_ventana<caza.min_giro_ventana)
+			caza.giro_ventana=caza.min_giro_ventana;
+
+		break;
+
+	} 
+
+	case GLUT_KEY_F3: caza.giro_aeronave_z+=1; break;
+	case GLUT_KEY_F4: caza.giro_aeronave_z-=1; break;
+
+	case GLUT_KEY_F5:{
+		//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
+		caza.giro_aeronave_y+=1; break;	//SOLO CUANDO LA Z ESTE A 90 O -90
+	} 
+	case GLUT_KEY_F6:{
+//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
+	 caza.giro_aeronave_y-=1; break;
+	}
+
+	case GLUT_KEY_F7: caza.giro_aeronave_x+=1; break;
+	case GLUT_KEY_F8: caza.giro_aeronave_x-=1; break;		
+
+
+	case GLUT_KEY_F9: {caza.timon_giro+=1; 
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						if(caza.timon_giro>caza.max_timon_giro){
+							caza.timon_giro=caza.max_timon_giro;
+						}
+							
+						break;
+	}
+	case GLUT_KEY_F10:{
+		caza.timon_giro-=1; 
+		
+		if(caza.timon_giro<-caza.max_timon_giro){
+			caza.timon_giro=-caza.max_timon_giro;
+		}
+
+		break;
+
+	} 	
 	}
 glutPostRedisplay();
 }
