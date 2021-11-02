@@ -44,7 +44,7 @@ _ply_rot reloj("revolucion", ROTACIONES, y);
 
 _cuerpo prueba;
 _alas prueba2;
-_alas_traseras prueba3;
+//_alas_traseras prueba3;
 _ventana_movil prueba5;
 _flaps flaps;
 _frenos_delanteros p6;
@@ -291,6 +291,26 @@ switch (Tecla1){
 		
 		if(caza.timon_giro<-caza.max_timon_giro){
 			caza.timon_giro=-caza.max_timon_giro;
+		}
+
+		break;
+
+	} 	
+
+
+	case GLUT_KEY_F11: {caza.angulo_trasero+=1; 
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						if(caza.angulo_trasero>caza.max_angulo_trasero){
+							caza.angulo_trasero=caza.max_angulo_trasero;
+						}
+							
+						break;
+	}
+	case GLUT_KEY_F12:{
+		caza.angulo_trasero-=1; 
+		
+		if(caza.angulo_trasero<-caza.max_angulo_trasero){
+			caza.angulo_trasero=-caza.max_angulo_trasero;
 		}
 
 		break;
