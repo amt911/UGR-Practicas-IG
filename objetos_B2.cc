@@ -1824,6 +1824,175 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 
 //************************************************************************
 
+void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Cubos con la forma primitiva de las alas
+  //izquierda
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.354-x, 2.1596, -1.5932);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.38);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(3.3537-x, 2.1749, -1.1572);
+  glRotatef(23.5, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.3);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(5.7552-x, 1.9762, -2.4362);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.1, 0.105, 0.23);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();   
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(5.8797-x, 1.9762, -2.7862);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.16, 0.075, 0.11);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+
+//Cilindros para el filo de las alas
+  //izquierda       
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(3.6565-x, 2.1568, -1.0302);
+  glRotatef(24.8, 0, 1, 0);
+  glRotatef(-94.6, 0, 0, 1);
+  glScalef(0.12, 2.096, 0.366);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  filos.push_back(_cilindro());
+//tal cual
+  glPushMatrix();
+  glTranslatef(5.8499-x, 1.9745, -2.315);
+  glRotatef(90, 1, 0, 0);  
+  glRotatef(14.5, 0, 0, 1);
+  glRotatef(4.6, 0, 1, 0);
+  glScalef(0.165, 0.465, 0.12);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+  //Esferas para las esquinas   
+  //izquierda
+  glPushMatrix();
+  glTranslatef(5.6556-x, 1.9831, -1.8168);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.237, 0.12, 0.237);
+  esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();      
+}
+
+//************************************************************************
+
+
+void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Cubos con la forma primitiva de las alas
+    //derecha
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.354-x, 2.1596, -1.5932);
+  glRotatef(-15.9, 0, 1, 0);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.38);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-3.3537-x, 2.1749, -1.1572);
+  glRotatef(-23.5, 0, 1, 0);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.3);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();     
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-5.7552-x, 1.9762, -2.4362);
+  glRotatef(-15.9, 0, 1, 0);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(0.1, 0.105, 0.23);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+  base.push_back(_cubo());
+
+  glPushMatrix();
+  glTranslatef(-5.8797-x, 1.9762, -2.7862);
+  glRotatef(-15.9, 0, 1, 0);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(0.16, 0.075, 0.11);
+  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();    
+
+
+
+//Cilindros para el filo de las alas
+  //derecha
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(-3.6565-x, 2.1568, -1.0302);  
+  glRotatef(-24.8, 0, 1, 0);
+  glRotatef(94.6, 0, 0, 1);
+  glScalef(0.12, 2.096, 0.366);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  filos.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(-5.8499-x, 1.9745, -2.315);
+  glRotatef(90, 1, 0, 0);  
+  glRotatef(-14.5, 0, 0, 1);
+  glRotatef(-4.6, 0, 1, 0);
+  glScalef(0.165, 0.465, 0.12);
+  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+  //Esferas para las esquinas
+  //derecha
+  glPushMatrix();
+  glTranslatef(-5.6556-x, 1.9831, -1.8168);
+  glRotatef(4.6, 0, 0, 1);
+  glScalef(0.237, 0.12, 0.237);
+  esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();        
+}
+
+//************************************************************************
+
 void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
 
   //Empiezo por la forma basica (los cubos)
@@ -2362,6 +2531,20 @@ void _frenos_delanteros::draw(_modo modo, float r1, float g1, float b1, float r2
 }
 
 //************************************************************************
+
+void _freno_individual::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  glPushMatrix();
+  glTranslatef(0, 0, -0.18);
+  //glRotatef(-15.9, 0, 1, 0);
+  //glRotatef(4.6, 0, 0, 1);
+  glScalef(1.29, 0.02, 0.18);
+  base.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+}
+
+//************************************************************************
+
+
 /*
 //Version en su sitio
 void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
@@ -2647,6 +2830,57 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
   td.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
+
+
+  //IMPORTANTE HACERLE A LOS FRENOS Y LOS FLAPS EL GIRO DE LAS ALAS TAMBIEN
+
+  //Frenos delanteros
+  //Derecha
+  glPushMatrix();
+  glTranslatef(0, frenos.y_i_f, 0);         //Lo movemos hasta su posicion final
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(-3.4478, frenos.intermedio_y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+  glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+  glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+  glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
+  glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
+  frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //izquierda
+  glPushMatrix();
+/*
+  glRotatef(angulo_alas, 0, 1, 0);
+  glTranslatef()*/
+  glTranslatef(0, frenos.y_i_f, 0);         //Lo movemos hasta su posicion final
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(3.4478, frenos.intermedio_y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+  glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+  glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+  glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
+  glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
+  frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();  
+
+
+  //ALAS
+  //IZQUIERDA
+  glPushMatrix();
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0);  
+  glTranslatef(ala_izda.x, 0, 0);
+  glRotatef(angulo_alas, 0, 1, 0);
+  ala_izda.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+  
+  ala_dcha.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
 
   glPopMatrix();
 }

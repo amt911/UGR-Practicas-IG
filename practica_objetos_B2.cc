@@ -209,7 +209,7 @@ switch (toupper(Tecla1)){
 	case '2':modo=EDGES;break;
 	case '3':modo=SOLID;break;
 	case '4':modo=SOLID_CHESS;break;
-        case 'P':t_objeto=PIRAMIDE;break;
+        /*case 'P':t_objeto=PIRAMIDE;break;
         case 'C':t_objeto=CUBO;break;
         case 'O':t_objeto=OBJETO_PLY;break;	
         case 'R':t_objeto=ROTACION;break;
@@ -218,8 +218,47 @@ switch (toupper(Tecla1)){
 		case 'Z':t_objeto=CILINDRO; break;
 		case 'X':t_objeto=ROTACION_X; break;
 		case 'A':t_objeto=RELOJ; break;
-		case 'W':t_objeto=RARO; break;
+		case 'W':t_objeto=RARO; break;*/
 		case 'F':t_objeto=CAZA; break;
+	case 'A': {caza.giro_frenos+=1; 
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						if(caza.giro_frenos>caza.max_giro_frenos){
+							caza.giro_frenos=caza.max_giro_frenos;
+						}
+							
+						break;
+	}
+	case 'S':{
+		caza.giro_frenos-=1; 
+		
+						if(caza.giro_frenos<0){
+							caza.giro_frenos=0;
+						}
+
+		break;
+
+	} 	
+
+
+	case 'Z': {caza.angulo_alas+=1; 
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						if(caza.angulo_alas>caza.max_angulo_alas){
+							caza.angulo_alas=caza.max_angulo_alas;
+						}
+							
+						break;
+	}
+	case 'X':{
+		caza.angulo_alas-=1; 
+		
+						if(caza.angulo_alas<0){
+							caza.angulo_alas=0;
+						}
+
+		break;
+
+	} 				
+
 	}
 glutPostRedisplay();
 }
@@ -316,6 +355,8 @@ switch (Tecla1){
 		break;
 
 	} 	
+
+	
 	}
 glutPostRedisplay();
 }

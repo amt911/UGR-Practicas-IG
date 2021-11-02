@@ -174,6 +174,43 @@ class _alas: public _triangulos3D{
 
 //************************************************************************
 
+//************************************************************************
+
+class _ala_izda: public _triangulos3D{
+	public:
+		_ala_izda()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double angulo_y=23.5;
+		const double angulo_z=-4.6;
+		const double x=1.3854;
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	_esfera esquina;
+
+};
+
+class _ala_dcha: public _triangulos3D{
+	public:
+		_ala_dcha()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	const double angulo_y=-23.5;
+	const double angulo_z=4.6;
+	const double x=-1.3854;
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	_esfera esquina;
+
+};
+
+
+//************************************************************************
+
 class _ala_ti: public _triangulos3D{
 	public:
 		_ala_ti(){}
@@ -275,6 +312,24 @@ class _frenos_delanteros: public _triangulos3D{
 
 //************************************************************************
 
+class _freno_individual: public _triangulos3D{
+	public:
+		_freno_individual()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double y=2.2518;
+		const double intermedio_y=0.29316;
+		const double y_i_f=y-intermedio_y;
+		const double freno_delantero_angulo_y=-15.9;
+		const double freno_delantero_angulo_z=4.6;
+
+	protected:
+	_cubo base;
+};
+
+
+//************************************************************************
+
 class _timon: public _triangulos3D{
 	public:
 		_timon()=default;
@@ -340,15 +395,25 @@ class _tornado: public _triangulos3D{
 	double angulo_trasero=0;
 	const double max_angulo_trasero=45;
 
+
+
+	double angulo_alas=0;
+	double max_angulo_alas=40;
+
+
+	double giro_frenos=0;
+	const double max_giro_frenos=45;
+
 	protected:
 	_cuerpo cuerpo;
-	//_alas alas;
+	_ala_izda ala_izda;
+	_ala_dcha ala_dcha;
 	_ala_td td;
 	_ala_ti ti;
 	_ventana_fija ventana_fija;
 	_ventana_movil ventana_movil;
 	_flaps flaps;
-	_frenos_delanteros frenos_delanteros;
+	_freno_individual frenos;
 	_frenos_traseros frenos_traseros;
 	_timon timon;
 };
