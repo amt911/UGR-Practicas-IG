@@ -305,7 +305,40 @@ switch (toupper(Tecla1)){
 
 		break;
 
-	} 					
+	} 
+
+	case 'Y': {caza.tt_giro_x+=1;
+				caza.tt_giro_y+=1; 
+				caza.giro_tren_d+=1;
+				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+				if(caza.tt_giro_x>caza.max_tt_giro_x)
+					caza.tt_giro_x=caza.max_tt_giro_x;
+
+
+				if(caza.tt_giro_y>caza.max_tt_giro_y)
+					caza.tt_giro_y=caza.max_tt_giro_y;
+
+				if(caza.giro_tren_d>caza.max_giro_tren_d)
+					caza.giro_tren_d=caza.max_giro_tren_d;					
+						break;
+	}
+	case 'U':{
+		caza.tt_giro_x-=1;
+		caza.tt_giro_y-=1;
+		caza.giro_tren_d-=1;
+
+				if(caza.tt_giro_x<0)
+					caza.tt_giro_x=0;
+
+				if(caza.tt_giro_y<0)
+					caza.tt_giro_y=0;
+
+				if(caza.giro_tren_d<0)
+					caza.giro_tren_d=0;						
+
+		break;
+
+	} 						
 
 	}
 

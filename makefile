@@ -1,6 +1,6 @@
 .PHONY: x clean tar
 
-EJECUTABLE= practica_objetos_B2
+EJECUTABLE= practica_objetos_B2.out
 
 MODULOS:= practica_objetos_B2.o\
          objetos_B2.o\

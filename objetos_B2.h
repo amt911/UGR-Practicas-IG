@@ -409,6 +409,39 @@ class _freno_trasero_individual: public _triangulos3D{
 
 //************************************************************************
 
+class _tren_trasero: public _triangulos3D{
+	public:
+		_tren_trasero()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double x_r=-0.89669;
+		const double y_r=1.30617;
+		const double z_r=-1.107;
+
+	protected:
+	vector<_cilindro> piezas;
+};
+
+
+
+//************************************************************************
+
+class _tren_delantero: public _triangulos3D{
+	public:
+		_tren_delantero()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double y=-69;
+		const double z=-69;
+
+	protected:
+	vector<_cilindro> piezas;
+};
+
+
+
+//************************************************************************
+
 class _tornado: public _triangulos3D{
 	public:
 		_tornado()=default;
@@ -461,6 +494,16 @@ class _tornado: public _triangulos3D{
 	double ft_giro=0;
 	const double max_ft_giro=60;
 
+
+	double tt_giro_x=0;
+	const double max_tt_giro_x=120;
+	double tt_giro_y=0;
+	const double max_tt_giro_y=30;
+
+	double giro_tren_d=0;
+	const double max_giro_tren_d=100;
+
+
 	protected:
 	_cuerpo cuerpo;
 	_ala_izda ala_izda;
@@ -473,4 +516,6 @@ class _tornado: public _triangulos3D{
 	_freno_individual frenos;
 	_freno_trasero_individual ft;
 	_timon timon;
+	_tren_trasero tt;
+	_tren_delantero tren_d;
 };

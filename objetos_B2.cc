@@ -2792,6 +2792,59 @@ void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, f
 //************************************************************************
 
 
+void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Brazo
+  piezas.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -0.6, 0);
+  glScalef(0.05, 0.57, 0.05);
+  piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //Rueda
+  glPushMatrix();
+  glTranslatef(-0.1262, -1.1462, 0);
+  glRotatef(90, 0, 0, 1);
+  glScalef(0.34, 0.16, 0.34);
+  piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+}
+
+//************************************************************************
+
+void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //Brazo
+  piezas.push_back(_cilindro());
+
+  glPushMatrix();
+  glTranslatef(0, -0.55, 0);
+  glScalef(0.05, 0.57, 0.05);
+  piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //Ruedas
+  //Izquierda
+  glPushMatrix();
+  glTranslatef(-0.1543, -1.1262, -0.006611);
+  glRotatef(90, 0, 0, 1);
+  glScalef(0.2, 0.12, 0.2);
+  piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //Derecha
+  glPushMatrix();
+  glTranslatef(0.1543, -1.1262, -0.006611);
+  glRotatef(90, 0, 0, 1);
+  glScalef(0.2, 0.12, 0.2);
+  piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+}  
+
+
+
+//************************************************************************
+
 void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
 
   
@@ -3062,6 +3115,50 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
   ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
+  //Tren de aterrizaje trasero
+  //Derecha
+  glPushMatrix();
+  //Propio de la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Propio de la pieza
+  glTranslatef(tt.x_r, tt.y_r, tt.z_r);
+  //glRotatef(tt_giro, 0, 0, 1);  //Realizamos la animacion
+
+  glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
+  glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
+  tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //Izquierda
+  glPushMatrix();
+  //Propio de la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Propio de la pieza
+  glTranslatef(-tt.x_r, tt.y_r, tt.z_r);
+  //glRotatef(tt_giro, 0, 0, 1);  //Realizamos la animacion
+
+  glRotatef(-tt_giro_y, 0, 1, 0);  //Realizamos la animacion
+  glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
+  glRotatef(180, 0, 1, 0);    //Rotamos la pieza para el otro sitio
+  tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  glPushMatrix();
+  //HACER LAS TRANSFORMACIONES NECESARIAS PARA QUE SE MUEVA CON LA AERONAVE Y QUE ESTE EN SU SITIO
+  
+  glRotatef(-giro_tren_d, 1, 0, 0);
+  tren_d.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
 
   //glPopMatrix();
 }
