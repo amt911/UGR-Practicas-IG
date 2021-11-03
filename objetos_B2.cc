@@ -2776,6 +2776,21 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
 }
 
 
+//************************************************************************
+void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //izquierdo
+  glPushMatrix();
+  //glTranslatef(0.7922, 2.3859, -3.6341);
+  glTranslatef(0, 0, -0.64);
+  //glRotatef(-23.5, 0, 0, 1);
+  glScalef(0.26, 0.02, 0.64);
+  base.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();           
+}
+
+
+//************************************************************************
+
 
 void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
 
@@ -3009,6 +3024,44 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
   //*****************
   flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
+
+
+
+  //SPD BRK Traseros
+  //Izquierda
+  glPushMatrix();
+  //Parte que se mueve con la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Parte propia de la pieza
+  glTranslatef(ft.x, ft.y, -ft.centro_z+ft.z);
+  glRotatef(ft.angulo_z_l, 0, 0, 1);
+  glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+  glRotatef(ft_giro, 1, 0, 0);    //Animacion
+  ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //Derecha
+  glPushMatrix();
+  //Parte que se mueve con la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Parte propia de la pieza
+  glTranslatef(-ft.x, ft.y, -ft.centro_z+ft.z);
+  glRotatef(-ft.angulo_z_l, 0, 0, 1);
+  glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+  glRotatef(ft_giro, 1, 0, 0);    //Animacion
+  ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
 
   //glPopMatrix();
 }

@@ -15,9 +15,9 @@ panavia tornado (este es el que voy a hacer)
 
 
 TODO:
-Girar 90 grados toda la figura para que este bien
-Por consiguiente de lo primero, quitar el glRotate de los cilindros y conos que tengan 270.
-Poner como parametro por defecto del cilindro y del cono el eje y.
+//Girar 90 grados toda la figura para que este bien
+//Por consiguiente de lo primero, quitar el glRotate de los cilindros y conos que tengan 270.
+//Poner como parametro por defecto del cilindro y del cono el eje y.
 
 //Hacer alas, flaps, speed brakes, alerones, timon.
 
@@ -32,3 +32,22 @@ HACER ANIMACION.
 
 
 //Quizas ponerle en la parte del timon algunos cilindros
+
+
+
+
+Hacerle un tren de aterrizaje para hacer una animacion.
+
+Una idea general puede ser: 
+El avion despega (con los afterburners)
+Mete el tren de aterrizaje
+Hace unos giros subsonicos
+Pasa a supersonico girando las alas
+Y hace de nuevo otros giros, PERO esta vez con las alas traseras.
+
+Finalmente el avion pasa a subsonico, abre los flaps, abre el tren de aterrizaje y aterriza ABRIENDO los spd brk traseros y delanteros.
+
+
+
+IMPORTANTE CAMBIAR VELOCIDAD DE ANIMACION
+MEJORAR CODIGO EN GENERAL

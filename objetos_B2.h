@@ -386,6 +386,29 @@ class _frenos_traseros: public _triangulos3D{
 
 //************************************************************************
 
+class _freno_trasero_individual: public _triangulos3D{
+	public:
+		_freno_trasero_individual()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double angulo_z_l=-23.5;
+		const double x=0.7922;
+		const double y=2.3859;
+		const double z=-2.9941;
+
+
+		const double centro_z=0.64;	//Para centrar la figura
+
+
+
+	protected:
+	_cubo base;
+};
+
+
+
+//************************************************************************
+
 class _tornado: public _triangulos3D{
 	public:
 		_tornado()=default;
@@ -435,6 +458,9 @@ class _tornado: public _triangulos3D{
 	const double max_flap_trans=0.25;	//GUESSING
 
 
+	double ft_giro=0;
+	const double max_ft_giro=60;
+
 	protected:
 	_cuerpo cuerpo;
 	_ala_izda ala_izda;
@@ -445,6 +471,6 @@ class _tornado: public _triangulos3D{
 	_ventana_movil ventana_movil;
 	_flap flap;
 	_freno_individual frenos;
-	_frenos_traseros frenos_traseros;
+	_freno_trasero_individual ft;
 	_timon timon;
 };

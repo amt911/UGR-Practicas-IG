@@ -288,7 +288,24 @@ switch (toupper(Tecla1)){
 
 		break;
 
-	} 				
+	} 	
+
+	case 'K': {caza.ft_giro+=1; 
+				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+				if(caza.ft_giro>caza.max_ft_giro)
+					caza.ft_giro=caza.max_ft_giro;
+							
+						break;
+	}
+	case 'L':{
+		caza.ft_giro-=1;
+
+				if(caza.ft_giro<0)
+					caza.ft_giro=0;
+
+		break;
+
+	} 					
 
 	}
 
