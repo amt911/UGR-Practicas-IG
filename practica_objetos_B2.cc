@@ -259,7 +259,39 @@ switch (toupper(Tecla1)){
 
 	} 				
 
+	
+
+	case 'H': {caza.flap_giro+=1; 
+	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+						/*if(caza.angulo_alas>caza.max_angulo_alas){
+							caza.angulo_alas=caza.max_angulo_alas;
+						}*/
+				caza.flap_trans+=0.01;
+				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+				if(caza.flap_trans>caza.max_flap_trans)
+					caza.flap_trans=caza.max_flap_trans;
+
+				if(caza.flap_giro>caza.max_flap_giro)
+					caza.flap_giro=caza.max_flap_giro;
+
+							
+						break;
 	}
+	case 'J':{
+		caza.flap_giro-=1; 
+		caza.flap_trans-=0.01;
+						if(caza.flap_trans<0)
+					caza.flap_trans=0;
+
+				if(caza.flap_giro<0)
+					caza.flap_giro=0;
+
+		break;
+
+	} 				
+
+	}
+
 glutPostRedisplay();
 }
 

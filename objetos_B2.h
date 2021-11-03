@@ -300,6 +300,29 @@ class _flaps: public _triangulos3D{
 
 
 //************************************************************************
+class _flap: public _triangulos3D{
+	public:
+		_flap()=default;
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+		const double angulo_y_r=14.6;
+		const double angulo_z_r=-4.6;
+
+		const double z=-1.7697;
+
+		const double mover_centro_x_r=-3.5797;
+		const double mover_centro_z=0.26;
+		const double mover_centro_y=-2.1596;
+
+		const double intermedio_y=1.95865;
+	protected:
+	_cubo flap;
+};
+
+
+//************************************************************************
+
+
 
 class _frenos_delanteros: public _triangulos3D{
 	public:
@@ -390,7 +413,7 @@ class _tornado: public _triangulos3D{
 	
 	
 	double timon_giro=0;
-	const double max_timon_giro=30;
+	const double max_timon_giro=45;
 
 	double angulo_trasero=0;
 	const double max_angulo_trasero=45;
@@ -402,7 +425,15 @@ class _tornado: public _triangulos3D{
 
 
 	double giro_frenos=0;
-	const double max_giro_frenos=45;
+	const double max_giro_frenos=60;
+
+
+	double flap_giro=0;
+	const double max_flap_giro=45;
+
+	double flap_trans=0;
+	const double max_flap_trans=0.25;	//GUESSING
+
 
 	protected:
 	_cuerpo cuerpo;
@@ -412,7 +443,7 @@ class _tornado: public _triangulos3D{
 	_ala_ti ti;
 	_ventana_fija ventana_fija;
 	_ventana_movil ventana_movil;
-	_flaps flaps;
+	_flap flap;
 	_freno_individual frenos;
 	_frenos_traseros frenos_traseros;
 	_timon timon;

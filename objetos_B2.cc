@@ -406,7 +406,7 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
   num_aux-=numVer0;
 
   //Simplemente es para comprobar que lo hace bien
-  cout <<"numVer0: " <<numVer0 <<endl;
+  //cout <<"numVer0: " <<numVer0 <<endl;
 
   // tratamiento de las caras 
   caras.resize((num*2*(num_aux-1))+2*(num));
@@ -541,10 +541,10 @@ _esfera::_esfera(int radio, int num_puntos, int num_rot, Eje axis){
   //vertices=perfil;
   //Lo pongo en el constructor para simplificar las cosas
   //Pero es recomendable ponerlo en el main
-  cout<<"Esfera: ";
+  //cout<<"Esfera: ";
   parametros(perfil, num_rot, axis);
 
-  cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
+  //cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
 }
 
 //************************************************************************
@@ -623,10 +623,10 @@ _cono::_cono(double radio, double h, int num, Eje axis){
   }
 
   //vertices=perfil;
-  cout<<"Cono: ";
+  //cout<<"Cono: ";
   parametros(perfil, num, axis);
 
-  cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
+  //cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
 }
 
 //************************************************************************
@@ -685,10 +685,10 @@ _cilindro::_cilindro(double radio, double h, int num, Eje axis){
   }
 
   //vertices=perfil;
-  cout<<"Cilindro: ";
+  //cout<<"Cilindro: ";
   parametros(perfil, num, axis);
 
-  cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
+  //cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
 }
 
 
@@ -1907,8 +1907,6 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
 }
 
 //************************************************************************
-
-
 void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
   //Cubos con la forma primitiva de las alas
     //derecha
@@ -2506,6 +2504,22 @@ void _flaps::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
 
 //************************************************************************
 
+//************************************************************************
+
+void _flap::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
+  //izquierdo
+  glPushMatrix();
+  //glTranslatef(0, 2.1596, 0);
+  //glRotatef(14.6, 0, 1, 0);
+  //glRotatef(-4.6, 0, 0, 1);
+  glScalef(2.23, 0.08, 0.26);
+  flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+}
+
+//************************************************************************
+
+
 void _frenos_delanteros::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
   //derecho
   base.push_back(_cubo());
@@ -2766,7 +2780,7 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
 void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
 
   
-  glPushMatrix();
+  //glPushMatrix();
 
   glPushMatrix();
   glTranslatef(0, cuerpo.y, 0);
@@ -2837,10 +2851,19 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
   //Frenos delanteros
   //Derecha
   glPushMatrix();
+
+  //PARTE DE LA ANIMACION DE TODA LA AERONAVE
   glTranslatef(0, frenos.y_i_f, 0);         //Lo movemos hasta su posicion final
   glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  
+  //PARTE DE LAS ALAS PRINCIPALES (ANIMACION)
+  glTranslatef(ala_dcha.x, 0, 0); 
+  glRotatef(-angulo_alas, 0, 1, 0);
+  glTranslatef(-ala_dcha.x, 0, 0);  
+
+//PARTE DE LA ANIMACION DE LA PROPIA PIEZA
   glTranslatef(-3.4478, frenos.intermedio_y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
   glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
   glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
@@ -2851,13 +2874,22 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
 
   //izquierda
   glPushMatrix();
-/*
-  glRotatef(angulo_alas, 0, 1, 0);
-  glTranslatef()*/
+
+  //PARTE DE LA ANIMACION DE TODA LA AERONAVE
   glTranslatef(0, frenos.y_i_f, 0);         //Lo movemos hasta su posicion final
   glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  
+  
+  //PARTE DE LAS ALAS PRINCIPALES (ANIMACION)
+  glTranslatef(ala_izda.x, 0, 0);
+  glRotatef(angulo_alas, 0, 1, 0);
+  glTranslatef(-ala_izda.x, 0, 0);
+
+
+
+  //PARTE DE LA ANIMACION DE LA PROPIA PIEZA
   glTranslatef(3.4478, frenos.intermedio_y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
   glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
   glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
@@ -2870,17 +2902,113 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
   //ALAS
   //IZQUIERDA
   glPushMatrix();
+
+  //PROPIA DE LA AERONAVE
   glTranslatef(0, cuerpo.y, 0);  
   glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
   glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
   glTranslatef(0, -cuerpo.y, 0);  
+
+  //Propia del ala
   glTranslatef(ala_izda.x, 0, 0);
   glRotatef(angulo_alas, 0, 1, 0);
   ala_izda.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
   
-  ala_dcha.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  //DERECHA
+  glPushMatrix();
 
+  //PROPIA DE LA AERONAVE
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0);  
+
+  //Propia del ala  
+  glTranslatef(ala_dcha.x, 0, 0);
+  glRotatef(-angulo_alas, 0, 1, 0);
+  ala_dcha.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
+
+
+  //FLAPS
+
+  //IZQUIERDO
+  glPushMatrix();
+  //Propio de la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Propio de las alas
+  glTranslatef(ala_izda.x, 0, 0); 
+  glRotatef(angulo_alas, 0, 1, 0);
+  glTranslatef(-ala_izda.x, 0, 0);    
+
+
+  //Propio del flap
+  //Por ultimo, lo movemos a su sitio
+  glTranslatef(-flap.mover_centro_x_r, -flap.mover_centro_y, -flap.mover_centro_z+flap.z);
+
+  //Aplicamos las rotaciones para que este en su sitio el flap
+  glRotatef(flap.angulo_y_r, 0, 1, 0);
+  glRotatef(flap.angulo_z_r, 0, 0, 1);
+  //*************************
+
+  glTranslatef(0, 0, flap.mover_centro_z);  //Ahora lo movemos al centro de verdad
+
+  //Hacemos los giros y translaciones correspondientes
+  glTranslatef(0, 0, -flap_trans);
+  glRotatef(-flap_giro, 1, 0, 0);
+  //***************************************************
+  
+  //LO ponemos en posicion para animarlo
+  glTranslatef(0, 0, -flap.mover_centro_z);
+  //*****************
+  flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+
+ //DERECHO
+  glPushMatrix();
+  //Propio de la aeronave
+  glTranslatef(0, cuerpo.y, 0);  
+  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
+  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
+  glTranslatef(0, -cuerpo.y, 0); 
+
+  //Propio de las alas
+  glTranslatef(ala_dcha.x, 0, 0); 
+  glRotatef(-angulo_alas, 0, 1, 0);
+  glTranslatef(-ala_dcha.x, 0, 0);    
+
+
+  //Propio del flap
+  //Por ultimo, lo movemos a su sitio
+  glTranslatef(flap.mover_centro_x_r, -flap.mover_centro_y, -flap.mover_centro_z+flap.z);
+
+  //Aplicamos las rotaciones para que este en su sitio el flap
+  glRotatef(-flap.angulo_y_r, 0, 1, 0);
+  glRotatef(-flap.angulo_z_r, 0, 0, 1);
+  //*************************
+
+  glTranslatef(0, 0, flap.mover_centro_z);  //Ahora lo movemos al centro de verdad
+
+  //Hacemos los giros y translaciones correspondientes
+  glTranslatef(0, 0, -flap_trans);
+  glRotatef(-flap_giro, 1, 0, 0);
+  //***************************************************
+
+  //LO ponemos en posicion para animarlo
+  glTranslatef(0, 0, -flap.mover_centro_z);
+  //*****************
+  flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  glPopMatrix();
+
+  //glPopMatrix();
 }
