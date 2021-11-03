@@ -431,8 +431,8 @@ class _tren_delantero: public _triangulos3D{
 		_tren_delantero()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
 
-		const double y=-69;
-		const double z=-69;
+		const double y=1.28617;
+		const double z=3.5297;
 
 	protected:
 	vector<_cilindro> piezas;
