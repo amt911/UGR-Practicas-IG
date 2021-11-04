@@ -210,26 +210,6 @@ class _ala_dcha: public _triangulos3D{
 
 
 //************************************************************************
-
-class _ala_ti: public _triangulos3D{
-	public:
-		_ala_ti(){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
-
-	const double x=1.0603;
-	const double y=1.984261;
-	const double z=-4.66768;
-
-	const double intermedio_y=0.025641;
-	const double y_i_f=y-intermedio_y;
-
-	protected:
-	vector<_cubo> base;
-	vector<_cilindro> filos;
-	_esfera esquina;	
-};
-
-
 class _ala_td: public _triangulos3D{
 	public:
 		_ala_td(){}
@@ -248,6 +228,26 @@ class _ala_td: public _triangulos3D{
 	_esfera esquina;	
 };
 
+
+
+
+class _ala_ti: public _triangulos3D{
+	public:
+		_ala_ti(){}
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+
+	const double x=1.0603;
+	const double y=1.984261;
+	const double z=-4.66768;
+
+	const double intermedio_y=0.025641;
+	const double y_i_f=y-intermedio_y;
+
+	protected:
+	vector<_cubo> base;
+	vector<_cilindro> filos;
+	_esfera esquina;	
+};
 //************************************************************************
 
 class _ventana_movil: public _triangulos3D{
