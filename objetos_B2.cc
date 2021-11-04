@@ -1223,7 +1223,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
   glPushMatrix();
   glTranslatef(0, -0.2509, 1.5759);
-  glScalef(-0.59, 0.302, 3.62);
+  glScalef(0.59, 0.302, 3.62);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();
 
