@@ -11,6 +11,7 @@
 const float AXIS_SIZE=5000;
 typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID} _modo;
 enum Eje{x, y, z};
+enum Tipo{NORMAL, ESPECIAL};
 
 //*************************************************************************
 // clase punto
@@ -146,7 +147,7 @@ class _ply_rot: public _objeto_ply
 class _cuerpo: public _triangulos3D{
 	public:
 		_cuerpo();
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);
 
 	double y=1.95865;
 
@@ -162,7 +163,7 @@ class _cuerpo: public _triangulos3D{
 class _alas: public _triangulos3D{
 	public:
 		_alas();
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
 	vector<_cubo> base;
@@ -179,7 +180,7 @@ class _alas: public _triangulos3D{
 class _ala_izda: public _triangulos3D{
 	public:
 		_ala_izda()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y=23.5;
 		const double angulo_z=-4.6;
@@ -195,7 +196,7 @@ class _ala_izda: public _triangulos3D{
 class _ala_dcha: public _triangulos3D{
 	public:
 		_ala_dcha()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double angulo_y=-23.5;
 	const double angulo_z=4.6;
@@ -213,7 +214,7 @@ class _ala_dcha: public _triangulos3D{
 class _ala_td: public _triangulos3D{
 	public:
 		_ala_td(){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=-1.0603;
 	const double y=1.984261;
@@ -234,7 +235,7 @@ class _ala_td: public _triangulos3D{
 class _ala_ti: public _triangulos3D{
 	public:
 		_ala_ti(){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=1.0603;
 	const double y=1.984261;
@@ -253,7 +254,7 @@ class _ala_ti: public _triangulos3D{
 class _ventana_movil: public _triangulos3D{
 	public:
 		_ventana_movil()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 		
 		double x=0;
 		double y=2.99002;
@@ -274,7 +275,7 @@ class _ventana_movil: public _triangulos3D{
 class _ventana_fija: public _triangulos3D{
 	public:
 		_ventana_fija()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		double x=0;
 		double y=2.99002;
@@ -292,7 +293,7 @@ class _ventana_fija: public _triangulos3D{
 class _flaps: public _triangulos3D{
 	public:
 		_flaps()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
 	vector<_cubo> flaps;
@@ -303,7 +304,7 @@ class _flaps: public _triangulos3D{
 class _flap: public _triangulos3D{
 	public:
 		_flap()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y_r=14.6;
 		const double angulo_z_r=-4.6;
@@ -327,7 +328,7 @@ class _flap: public _triangulos3D{
 class _frenos_delanteros: public _triangulos3D{
 	public:
 		_frenos_delanteros()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
 	vector<_cubo> base;
@@ -338,7 +339,7 @@ class _frenos_delanteros: public _triangulos3D{
 class _freno_individual: public _triangulos3D{
 	public:
 		_freno_individual()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=2.2518;
 		const double intermedio_y=0.29316;
@@ -356,7 +357,7 @@ class _freno_individual: public _triangulos3D{
 class _timon: public _triangulos3D{
 	public:
 		_timon()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 
 		const double y=3.579368;
@@ -377,7 +378,7 @@ class _timon: public _triangulos3D{
 class _frenos_traseros: public _triangulos3D{
 	public:
 		_frenos_traseros()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
 	vector<_cubo> base;
@@ -389,7 +390,7 @@ class _frenos_traseros: public _triangulos3D{
 class _freno_trasero_individual: public _triangulos3D{
 	public:
 		_freno_trasero_individual()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_z_l=-23.5;
 		const double x=0.7922;
@@ -412,7 +413,7 @@ class _freno_trasero_individual: public _triangulos3D{
 class _tren_trasero: public _triangulos3D{
 	public:
 		_tren_trasero()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double x_r=-0.89669;
 		const double y_r=1.30617;
@@ -429,7 +430,7 @@ class _tren_trasero: public _triangulos3D{
 class _tren_delantero: public _triangulos3D{
 	public:
 		_tren_delantero()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=1.28617;
 		const double z=3.5297;
@@ -445,7 +446,7 @@ class _tren_delantero: public _triangulos3D{
 class _tornado: public _triangulos3D{
 	public:
 		_tornado()=default;
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	double giro_ventana=0;
 	const double max_giro_ventana=45;
