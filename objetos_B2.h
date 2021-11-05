@@ -445,11 +445,14 @@ class _tren_delantero: public _triangulos3D{
 
 class _tornado: public _triangulos3D{
 	public:
-		_tornado()=default;
+		_tornado(){
+			for(int i=0; i<50; i++)
+				actos[i]=false;
+		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 
-	double constante=1;
+	//double constante=1;
 
 	double giro_ventana=0;
 	const double max_giro_ventana=45;
@@ -474,7 +477,8 @@ class _tornado: public _triangulos3D{
 	double timon_giro=0;
 	const double max_timon_giro=45;
 
-	double angulo_trasero=0;
+	double angulo_trasero_r=0;
+	double angulo_trasero_l=0;
 	const double max_angulo_trasero=45;
 
 
@@ -483,7 +487,8 @@ class _tornado: public _triangulos3D{
 	double max_angulo_alas=40;
 
 
-	double giro_frenos=0;
+	double giro_frenos_l=0;
+	double giro_frenos_r=0;
 	const double max_giro_frenos=60;
 
 
@@ -506,6 +511,8 @@ class _tornado: public _triangulos3D{
 	double giro_tren_d=0;
 	const double max_giro_tren_d=100;
 
+
+	bool actos[50];
 
 	protected:
 	_cuerpo cuerpo;

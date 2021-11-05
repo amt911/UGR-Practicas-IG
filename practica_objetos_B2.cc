@@ -13,9 +13,11 @@ using namespace std;
 
 // tipos
 typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO, CAZA} _tipo_objeto;
+enum Activo{SI, NO};
 _tipo_objeto t_objeto=CUBO;
 _modo   modo=POINTS;
 Tipo tipo;
+Activo ac=NO;
 
 // variables que definen la posicion de la camara en coordenadas polares
 GLfloat Observer_distance;
@@ -212,6 +214,8 @@ switch (toupper(Tecla1)){
 	case '4':modo=SOLID_CHESS;break;
 	case '5':tipo=NORMAL;break;
 	case '6':tipo=ESPECIAL;break;
+	case '9': ac=SI;break;
+	case '0': ac=NO;break;
         /*case 'P':t_objeto=PIRAMIDE;break;
         case 'C':t_objeto=CUBO;break;
         case 'O':t_objeto=OBJETO_PLY;break;	
@@ -223,15 +227,8 @@ switch (toupper(Tecla1)){
 		case 'A':t_objeto=RELOJ; break;
 		case 'W':t_objeto=RARO; break;*/
 		case 'F':t_objeto=CAZA; break;
-		case '0': caza.constante+=0.1; break;
-		case '9':{
-			caza.constante-=0.1; 
-			if(caza.constante<0.1)
-				caza.constante=0.1;	
-		break;
-		}
-	case 'A': {caza.giro_frenos+=caza.constante*1; 
-	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
+		/*
+	case 'A': {caza.giro_frenos+=1; 
 						if(caza.giro_frenos>caza.max_giro_frenos){
 							caza.giro_frenos=caza.max_giro_frenos;
 						}
@@ -239,7 +236,7 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'S':{
-		caza.giro_frenos-=caza.constante*1; 
+		caza.giro_frenos-=1; 
 		
 						if(caza.giro_frenos<0){
 							caza.giro_frenos=0;
@@ -250,7 +247,7 @@ switch (toupper(Tecla1)){
 	} 	
 
 
-	case 'Z': {caza.angulo_alas+=caza.constante*1; 
+	case 'Z': {caza.angulo_alas+=1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.angulo_alas>caza.max_angulo_alas){
 							caza.angulo_alas=caza.max_angulo_alas;
@@ -259,7 +256,7 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'X':{
-		caza.angulo_alas-=caza.constante*1; 
+		caza.angulo_alas-=1; 
 		
 						if(caza.angulo_alas<0){
 							caza.angulo_alas=0;
@@ -271,13 +268,10 @@ switch (toupper(Tecla1)){
 
 	
 
-	case 'H': {caza.flap_giro+=caza.constante*1; 
-	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
-						/*if(caza.angulo_alas>caza.max_angulo_alas){
-							caza.angulo_alas=caza.max_angulo_alas;
-						}*/
-				caza.flap_trans+=caza.constante*0.01;
-				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+	case 'H': {caza.flap_giro+=1; 
+
+				caza.flap_trans+=0.01;
+
 				if(caza.flap_trans>caza.max_flap_trans)
 					caza.flap_trans=caza.max_flap_trans;
 
@@ -288,8 +282,8 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'J':{
-		caza.flap_giro-=caza.constante*1; 
-		caza.flap_trans-=caza.constante*0.01;
+		caza.flap_giro-=1; 
+		caza.flap_trans-=0.01;
 						if(caza.flap_trans<0)
 					caza.flap_trans=0;
 
@@ -300,15 +294,15 @@ switch (toupper(Tecla1)){
 
 	} 	
 
-	case 'K': {caza.ft_giro+=caza.constante*1; 
-				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+	case 'K': {caza.ft_giro+=1; 
+
 				if(caza.ft_giro>caza.max_ft_giro)
 					caza.ft_giro=caza.max_ft_giro;
 							
 						break;
 	}
 	case 'L':{
-		caza.ft_giro-=caza.constante*1;
+		caza.ft_giro-=1;
 
 				if(caza.ft_giro<0)
 					caza.ft_giro=0;
@@ -317,10 +311,10 @@ switch (toupper(Tecla1)){
 
 	} 
 
-	case 'Y': {caza.tt_giro_x+=caza.constante*1;
-				caza.tt_giro_y+=caza.constante*1; 
-				caza.giro_tren_d+=caza.constante*1;
-				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
+	case 'Y': {caza.tt_giro_x+=1;
+				caza.tt_giro_y+=1; 
+				caza.giro_tren_d+=1;
+
 				if(caza.tt_giro_x>caza.max_tt_giro_x)
 					caza.tt_giro_x=caza.max_tt_giro_x;
 
@@ -333,9 +327,9 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'U':{
-		caza.tt_giro_x-=caza.constante*1;
-		caza.tt_giro_y-=caza.constante*1;
-		caza.giro_tren_d-=caza.constante*1;
+		caza.tt_giro_x-=1;
+		caza.tt_giro_y-=1;
+		caza.giro_tren_d-=1;
 
 				if(caza.tt_giro_x<0)
 					caza.tt_giro_x=0;
@@ -348,7 +342,22 @@ switch (toupper(Tecla1)){
 
 		break;
 
-	} 						
+	} 	*/
+
+	case 'D': caza.giro_aeronave_z+=1; break;
+	case 'A': caza.giro_aeronave_z-=1; break;
+
+	case 'Z':{
+		//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
+		caza.giro_aeronave_y+=1; break;	//SOLO CUANDO LA Z ESTE A 90 O -90
+	} 
+	case 'X':{
+//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
+	 caza.giro_aeronave_y-=1; break;
+	}
+
+	case 'W': caza.giro_aeronave_x+=1; break;
+	case 'S': caza.giro_aeronave_x-=1; break;						
 
 	}
 
@@ -375,41 +384,26 @@ switch (Tecla1){
 	case GLUT_KEY_DOWN:Observer_angle_x++;break;
 	case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
 	case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
-	case GLUT_KEY_F1: {caza.giro_ventana+=caza.constante*1; 
-	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
-						if(caza.giro_ventana>caza.max_giro_ventana){
-							caza.giro_ventana=caza.max_giro_ventana;
-						}
-							
-						break;
+	case GLUT_KEY_F1: {
+		caza.giro_ventana+=1; 
+
+		if(caza.giro_ventana>caza.max_giro_ventana)
+			caza.giro_ventana=caza.max_giro_ventana;
+			
+		break;
 	}
 	case GLUT_KEY_F2:{
-		caza.giro_ventana-=caza.constante*1; 
+		caza.giro_ventana-=1; 
 		
 		if(caza.giro_ventana<caza.min_giro_ventana)
 			caza.giro_ventana=caza.min_giro_ventana;
 
 		break;
 
-	} 
-
-	case GLUT_KEY_F3: caza.giro_aeronave_z+=caza.constante*1; break;
-	case GLUT_KEY_F4: caza.giro_aeronave_z-=caza.constante*1; break;
-
-	case GLUT_KEY_F5:{
-		//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
-		caza.giro_aeronave_y+=caza.constante*1; break;	//SOLO CUANDO LA Z ESTE A 90 O -90
-	} 
-	case GLUT_KEY_F6:{
-//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
-	 caza.giro_aeronave_y-=caza.constante*1; break;
-	}
-
-	case GLUT_KEY_F7: caza.giro_aeronave_x+=caza.constante*1; break;
-	case GLUT_KEY_F8: caza.giro_aeronave_x-=caza.constante*1; break;		
+	} 		
 
 
-	case GLUT_KEY_F9: {caza.timon_giro+=caza.constante*1; 
+	case GLUT_KEY_F9: {caza.timon_giro+=1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.timon_giro>caza.max_timon_giro){
 							caza.timon_giro=caza.max_timon_giro;
@@ -418,7 +412,7 @@ switch (Tecla1){
 						break;
 	}
 	case GLUT_KEY_F10:{
-		caza.timon_giro-=caza.constante*1; 
+		caza.timon_giro-=1; 
 		
 		if(caza.timon_giro<-caza.max_timon_giro){
 			caza.timon_giro=-caza.max_timon_giro;
@@ -429,20 +423,26 @@ switch (Tecla1){
 	} 	
 
 
-	case GLUT_KEY_F11: {caza.angulo_trasero+=caza.constante*1; 
+	case GLUT_KEY_F11: {caza.angulo_trasero_l+=1; 
+						caza.angulo_trasero_r+=1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
-						if(caza.angulo_trasero>caza.max_angulo_trasero){
-							caza.angulo_trasero=caza.max_angulo_trasero;
-						}
+						if(caza.angulo_trasero_l>caza.max_angulo_trasero)
+							caza.angulo_trasero_l=caza.max_angulo_trasero;
 							
+
+						if(caza.angulo_trasero_r>caza.max_angulo_trasero)
+							caza.angulo_trasero_r=caza.max_angulo_trasero;							
 						break;
 	}
 	case GLUT_KEY_F12:{
-		caza.angulo_trasero-=caza.constante*1; 
+		caza.angulo_trasero_l-=1; 
+		caza.angulo_trasero_r-=1; 
 		
-		if(caza.angulo_trasero<-caza.max_angulo_trasero){
-			caza.angulo_trasero=-caza.max_angulo_trasero;
-		}
+		if(caza.angulo_trasero_r<-caza.max_angulo_trasero)
+			caza.angulo_trasero_r=-caza.max_angulo_trasero;
+
+		if(caza.angulo_trasero_l<-caza.max_angulo_trasero)
+			caza.angulo_trasero_l=-caza.max_angulo_trasero;
 
 		break;
 
@@ -487,6 +487,163 @@ glViewport(0,0,Window_width,Window_high);
 }
 
 
+int sleep=0;
+void animacion(){
+	bool encontrado=false;
+	int acto=0;
+	
+	for(int i=0; i<10 && !encontrado; i++){
+		if(!caza.actos[i]){
+			encontrado=true;
+			acto=i;
+		}
+	}
+
+	switch(acto){
+		case 0:{		//Abre la ventana para entrar
+		cout <<"Fase " <<acto <<endl;
+			caza.giro_ventana+=0.3;
+			cout <<caza.giro_ventana <<endl;
+
+			if(caza.giro_ventana>caza.max_giro_ventana){
+				//cout <<"*******************************";
+				caza.actos[acto]=true;
+			}
+			break;
+		}
+
+		case 1:{	//La cierra
+		cout <<"Fase " <<acto <<endl;
+			caza.giro_ventana-=0.3;
+
+			if(caza.giro_ventana<0)
+				caza.actos[acto]=true;			
+
+			break;
+		}
+
+		case 2:{	//Baja los flaps
+		cout <<"Fase " <<acto <<endl;
+			if(caza.flap_giro<=caza.max_flap_giro)
+				caza.flap_giro+=0.1;
+
+			if(caza.flap_trans<=caza.max_flap_trans)
+				caza.flap_trans+=0.001;
+
+
+			if(caza.flap_giro>caza.max_flap_giro and caza.flap_trans>caza.max_flap_trans)
+				caza.actos[acto]=true;
+			break;
+		}
+
+		case 3:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		cout <<"Fase " <<acto <<endl;
+			sleep++;
+			cout <<sleep <<endl;
+			if(sleep==45){
+				caza.actos[acto]=true;
+				sleep=0;
+			}
+			break;
+		}
+
+		case 4:{		//Fase de mover aeronave un poco hacia arriba y las alas
+		cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_aeronave_x>=-15)
+				caza.giro_aeronave_x-=0.1;
+
+			if(caza.angulo_trasero_l<=20){
+				caza.angulo_trasero_l+=0.3;
+				caza.angulo_trasero_r+=0.3;
+			}
+
+			if(caza.angulo_trasero_l>20 and caza.giro_aeronave_x<-15)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		case 5:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		cout <<"Fase " <<acto <<endl;
+			sleep++;
+			cout <<"aii" <<sleep <<endl;
+			if(sleep==45){
+				caza.actos[acto]=true;
+				sleep=0;
+			}
+
+			break;
+		}
+
+		case 6:{		//Fase de poner todo recto
+		cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_aeronave_x<=0)
+				caza.giro_aeronave_x+=0.1;
+
+			if(caza.angulo_trasero_l>=-10){
+				caza.angulo_trasero_l-=0.3;
+				caza.angulo_trasero_r-=0.3;
+			}
+
+			if(caza.angulo_trasero_l<-10 and caza.giro_aeronave_x>0)
+				caza.actos[acto]=true;
+
+			break;
+		}				
+
+
+		case 7:{		//Fase de poner todo recto
+		cout <<"Fase " <<acto <<endl;
+
+			if(caza.angulo_trasero_l<=0){
+				caza.angulo_trasero_l+=0.3;
+				caza.angulo_trasero_r+=0.3;
+			}
+
+			if(caza.angulo_trasero_l>0)
+				caza.actos[acto]=true;
+
+			break;
+		}	
+
+		case 8:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		cout <<"Fase " <<acto <<endl;
+			sleep++;
+			cout <<"aii" <<sleep <<endl;
+			if(sleep==45){
+				caza.actos[acto]=true;
+				sleep=0;
+			}
+
+			break;
+		}
+
+		case 9:{		//Fase de levantar los flaps
+		cout <<"Fase " <<acto <<endl;
+			if(caza.flap_giro>=0)
+				caza.flap_giro-=0.3;
+
+			if(caza.flap_trans>=0)
+				caza.flap_trans-=0.003;
+
+
+			if(caza.flap_giro<0 and caza.flap_trans<0)
+				caza.actos[acto]=true;
+
+			break;
+		}	
+
+		//Fase de levantar un spd brk a la mitad de la posicion final
+
+		//Fase de levantar del todo el spd brk y de girar la aeronave en el eje z 90 grados							
+	}
+
+	glutPostRedisplay();
+}
+
+
 //***************************************************************************
 // Programa principal
 //
@@ -497,8 +654,22 @@ glViewport(0,0,Window_width,Window_high);
 
 int main(int argc, char *argv[] )
 {
+	
  const int ROT=4;
 
+	cout <<"Controles: " <<endl;
+	cout <<"Mover aeronave sobre eje x: W/S" <<endl;
+	cout <<"Mover aeronave sobre eje y: " <<endl;
+	cout <<"Mover aeronave sobre eje z: A/D" <<endl;
+	cout <<"Mover flaps: " <<endl;
+	cout <<"Mover alas principales: " <<endl;
+	cout <<"Mover freno aereo delantero izquierdo: " <<endl;
+	cout <<"Mover freno aereo delantero derecho: " <<endl;
+	cout <<"Mover frenos aereos traseros: " <<endl;
+	cout <<"Mover tren de aterrizaje: " <<endl;
+	cout <<"Mover ala trasera hacia izquierda/derecha: " <<endl;
+	cout <<"Mover ala trasera hacia arriba/abajo: " <<endl;
+	cout <<"Mover ventana de cabina: F1/F2" <<endl;
 
 
 // perfil 
@@ -610,6 +781,8 @@ initialize();
 // creación del objeto ply
 ply.parametros(argv[1]);
 
+//if(ac==SI)
+	glutIdleFunc(animacion);
 //ply1 = new _objeto_ply(argv[1]);
 
 // inicio del bucle de eventos

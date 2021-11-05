@@ -2361,7 +2361,7 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
         glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
         glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
-        glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
+        glRotatef(giro_frenos_l, 1, 0, 0);    //Realizamos la animacion
         frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
       glPopMatrix();  
 
@@ -2398,7 +2398,7 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
         glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
         glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
-        glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
+        glRotatef(giro_frenos_r, 1, 0, 0);    //Realizamos la animacion
         frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
       glPopMatrix();     
 
@@ -2440,7 +2440,7 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
     //Ala trasera izquierda
     glPushMatrix(); 
       glTranslatef(ti.x, ti.y-cuerpo.y, ti.z);
-      glRotatef(angulo_trasero, 1, 0, 0);
+      glRotatef(angulo_trasero_l, 1, 0, 0);
       ti.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
@@ -2449,7 +2449,7 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
     //Ala trasera derecha
     glPushMatrix();
       glTranslatef(td.x, td.y-cuerpo.y, td.z);
-      glRotatef(angulo_trasero, 1, 0, 0);
+      glRotatef(angulo_trasero_r, 1, 0, 0);
       td.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
