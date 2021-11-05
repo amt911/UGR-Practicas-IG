@@ -223,7 +223,14 @@ switch (toupper(Tecla1)){
 		case 'A':t_objeto=RELOJ; break;
 		case 'W':t_objeto=RARO; break;*/
 		case 'F':t_objeto=CAZA; break;
-	case 'A': {caza.giro_frenos+=1; 
+		case '0': caza.constante+=0.1; break;
+		case '9':{
+			caza.constante-=0.1; 
+			if(caza.constante<0.1)
+				caza.constante=0.1;	
+		break;
+		}
+	case 'A': {caza.giro_frenos+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.giro_frenos>caza.max_giro_frenos){
 							caza.giro_frenos=caza.max_giro_frenos;
@@ -232,7 +239,7 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'S':{
-		caza.giro_frenos-=1; 
+		caza.giro_frenos-=caza.constante*1; 
 		
 						if(caza.giro_frenos<0){
 							caza.giro_frenos=0;
@@ -243,7 +250,7 @@ switch (toupper(Tecla1)){
 	} 	
 
 
-	case 'Z': {caza.angulo_alas+=1; 
+	case 'Z': {caza.angulo_alas+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.angulo_alas>caza.max_angulo_alas){
 							caza.angulo_alas=caza.max_angulo_alas;
@@ -252,7 +259,7 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'X':{
-		caza.angulo_alas-=1; 
+		caza.angulo_alas-=caza.constante*1; 
 		
 						if(caza.angulo_alas<0){
 							caza.angulo_alas=0;
@@ -264,12 +271,12 @@ switch (toupper(Tecla1)){
 
 	
 
-	case 'H': {caza.flap_giro+=1; 
+	case 'H': {caza.flap_giro+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						/*if(caza.angulo_alas>caza.max_angulo_alas){
 							caza.angulo_alas=caza.max_angulo_alas;
 						}*/
-				caza.flap_trans+=0.01;
+				caza.flap_trans+=caza.constante*0.01;
 				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
 				if(caza.flap_trans>caza.max_flap_trans)
 					caza.flap_trans=caza.max_flap_trans;
@@ -281,8 +288,8 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'J':{
-		caza.flap_giro-=1; 
-		caza.flap_trans-=0.01;
+		caza.flap_giro-=caza.constante*1; 
+		caza.flap_trans-=caza.constante*0.01;
 						if(caza.flap_trans<0)
 					caza.flap_trans=0;
 
@@ -293,7 +300,7 @@ switch (toupper(Tecla1)){
 
 	} 	
 
-	case 'K': {caza.ft_giro+=1; 
+	case 'K': {caza.ft_giro+=caza.constante*1; 
 				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
 				if(caza.ft_giro>caza.max_ft_giro)
 					caza.ft_giro=caza.max_ft_giro;
@@ -301,7 +308,7 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'L':{
-		caza.ft_giro-=1;
+		caza.ft_giro-=caza.constante*1;
 
 				if(caza.ft_giro<0)
 					caza.ft_giro=0;
@@ -310,9 +317,9 @@ switch (toupper(Tecla1)){
 
 	} 
 
-	case 'Y': {caza.tt_giro_x+=1;
-				caza.tt_giro_y+=1; 
-				caza.giro_tren_d+=1;
+	case 'Y': {caza.tt_giro_x+=caza.constante*1;
+				caza.tt_giro_y+=caza.constante*1; 
+				caza.giro_tren_d+=caza.constante*1;
 				//cout <<"---------------------flap.trans: " <<caza.flap_trans <<endl;
 				if(caza.tt_giro_x>caza.max_tt_giro_x)
 					caza.tt_giro_x=caza.max_tt_giro_x;
@@ -326,9 +333,9 @@ switch (toupper(Tecla1)){
 						break;
 	}
 	case 'U':{
-		caza.tt_giro_x-=1;
-		caza.tt_giro_y-=1;
-		caza.giro_tren_d-=1;
+		caza.tt_giro_x-=caza.constante*1;
+		caza.tt_giro_y-=caza.constante*1;
+		caza.giro_tren_d-=caza.constante*1;
 
 				if(caza.tt_giro_x<0)
 					caza.tt_giro_x=0;
@@ -368,7 +375,7 @@ switch (Tecla1){
 	case GLUT_KEY_DOWN:Observer_angle_x++;break;
 	case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
 	case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
-	case GLUT_KEY_F1: {caza.giro_ventana+=1; 
+	case GLUT_KEY_F1: {caza.giro_ventana+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.giro_ventana>caza.max_giro_ventana){
 							caza.giro_ventana=caza.max_giro_ventana;
@@ -377,7 +384,7 @@ switch (Tecla1){
 						break;
 	}
 	case GLUT_KEY_F2:{
-		caza.giro_ventana-=1; 
+		caza.giro_ventana-=caza.constante*1; 
 		
 		if(caza.giro_ventana<caza.min_giro_ventana)
 			caza.giro_ventana=caza.min_giro_ventana;
@@ -386,23 +393,23 @@ switch (Tecla1){
 
 	} 
 
-	case GLUT_KEY_F3: caza.giro_aeronave_z+=1; break;
-	case GLUT_KEY_F4: caza.giro_aeronave_z-=1; break;
+	case GLUT_KEY_F3: caza.giro_aeronave_z+=caza.constante*1; break;
+	case GLUT_KEY_F4: caza.giro_aeronave_z-=caza.constante*1; break;
 
 	case GLUT_KEY_F5:{
 		//if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
-		caza.giro_aeronave_y+=1; break;	//SOLO CUANDO LA Z ESTE A 90 O -90
+		caza.giro_aeronave_y+=caza.constante*1; break;	//SOLO CUANDO LA Z ESTE A 90 O -90
 	} 
 	case GLUT_KEY_F6:{
 //if(caza.giro_aeronave_z>=90 or caza.giro_aeronave_z<=-90)
-	 caza.giro_aeronave_y-=1; break;
+	 caza.giro_aeronave_y-=caza.constante*1; break;
 	}
 
-	case GLUT_KEY_F7: caza.giro_aeronave_x+=1; break;
-	case GLUT_KEY_F8: caza.giro_aeronave_x-=1; break;		
+	case GLUT_KEY_F7: caza.giro_aeronave_x+=caza.constante*1; break;
+	case GLUT_KEY_F8: caza.giro_aeronave_x-=caza.constante*1; break;		
 
 
-	case GLUT_KEY_F9: {caza.timon_giro+=1; 
+	case GLUT_KEY_F9: {caza.timon_giro+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.timon_giro>caza.max_timon_giro){
 							caza.timon_giro=caza.max_timon_giro;
@@ -411,7 +418,7 @@ switch (Tecla1){
 						break;
 	}
 	case GLUT_KEY_F10:{
-		caza.timon_giro-=1; 
+		caza.timon_giro-=caza.constante*1; 
 		
 		if(caza.timon_giro<-caza.max_timon_giro){
 			caza.timon_giro=-caza.max_timon_giro;
@@ -422,7 +429,7 @@ switch (Tecla1){
 	} 	
 
 
-	case GLUT_KEY_F11: {caza.angulo_trasero+=1; 
+	case GLUT_KEY_F11: {caza.angulo_trasero+=caza.constante*1; 
 	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
 						if(caza.angulo_trasero>caza.max_angulo_trasero){
 							caza.angulo_trasero=caza.max_angulo_trasero;
@@ -431,7 +438,7 @@ switch (Tecla1){
 						break;
 	}
 	case GLUT_KEY_F12:{
-		caza.angulo_trasero-=1; 
+		caza.angulo_trasero-=caza.constante*1; 
 		
 		if(caza.angulo_trasero<-caza.max_angulo_trasero){
 			caza.angulo_trasero=-caza.max_angulo_trasero;

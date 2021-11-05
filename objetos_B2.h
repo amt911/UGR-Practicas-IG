@@ -448,10 +448,12 @@ class _tornado: public _triangulos3D{
 		_tornado()=default;
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
+
+	double constante=1;
+
 	double giro_ventana=0;
 	const double max_giro_ventana=45;
 	const double min_giro_ventana=0;
-
 
 	double giro_aeronave_x=0;
 	//const double max_giro_aeronave_x=180;
