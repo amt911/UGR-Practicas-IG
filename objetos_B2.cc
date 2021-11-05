@@ -1809,7 +1809,6 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 
 
   filos.push_back(_cilindro());
-//tal cual
   glPushMatrix();
   glTranslatef(5.8499, 1.9745, -2.315);
   glRotatef(90, 1, 0, 0);  
@@ -1845,6 +1844,16 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 //************************************************************************
 
 void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
+ float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
+
+ if(tipo==ESPECIAL){
+   rf1=0;
+   gf1=0.89;
+   bf1=0.134;
+
+   rf2=gf2=bf2=0.22;
+ }  
+  
   //Cubos con la forma primitiva de las alas
   //izquierda
   base.push_back(_cubo());
@@ -1854,7 +1863,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.38);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1865,7 +1874,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(23.5, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.3);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1876,7 +1885,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.1, 0.105, 0.23);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();   
 
 
@@ -1887,7 +1896,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.16, 0.075, 0.11);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -1901,19 +1910,18 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(24.8, 0, 1, 0);
   glRotatef(-94.6, 0, 0, 1);
   glScalef(0.12, 2.096, 0.366);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
   filos.push_back(_cilindro());
-//tal cual
   glPushMatrix();
   glTranslatef(5.8499, 1.9745, -2.315);
   glRotatef(90, 1, 0, 0);  
   glRotatef(14.5, 0, 0, 1);
   glRotatef(4.6, 0, 1, 0);
   glScalef(0.165, 0.465, 0.12);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
   //Esferas para las esquinas   
@@ -1922,12 +1930,22 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glTranslatef(5.6556, 1.9831, -1.8168);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.237, 0.12, 0.237);
-  esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();      
 }
 
 //************************************************************************
 void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
+ float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
+
+ if(tipo==ESPECIAL){
+   rf1=0;
+   gf1=0.89;
+   bf1=0.134;
+
+   rf2=gf2=bf2=0.22;
+ }   
+  
   //Cubos con la forma primitiva de las alas
     //derecha
   base.push_back(_cubo());
@@ -1937,7 +1955,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.38);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1948,7 +1966,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-23.5, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.3);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1959,7 +1977,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.1, 0.105, 0.23);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1970,7 +1988,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.16, 0.075, 0.11);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1984,7 +2002,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-24.8, 0, 1, 0);
   glRotatef(94.6, 0, 0, 1);
   glScalef(0.12, 2.096, 0.366);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -1996,7 +2014,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-14.5, 0, 0, 1);
   glRotatef(-4.6, 0, 1, 0);
   glScalef(0.165, 0.465, 0.12);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
   //Esferas para las esquinas
@@ -2005,13 +2023,22 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glTranslatef(-5.6556, 1.9831, -1.8168);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.237, 0.12, 0.237);
-  esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+  esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
   glPopMatrix();        
 }
 
 //************************************************************************
 
 void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
+ float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
+
+ if(tipo==ESPECIAL){
+   rf1=0;
+   gf1=0.89;
+   bf1=0.134;
+
+   rf2=gf2=bf2=0.22;
+ }  
 
   //Empiezo por la forma basica (los cubos)
     //derecha
@@ -2023,7 +2050,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(31.4, 0, 1, 0);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.68);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();      
 
 
@@ -2035,7 +2062,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(35.2, 0, 1, 0);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.4);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2045,7 +2072,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(-0.5423, -0.012661, -0.62752);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.32, 0.045, 0.411);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2056,7 +2083,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(1.19, 1, 0, 0);
     glRotatef(1.66, 0, 0, 1);
     glScalef(0.4, 0.045, 0.181);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2068,7 +2095,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(35.2, 0, 1, 0);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.231, 0.045, 0.330);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2080,7 +2107,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(35.2, 0, 1, 0);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.121, 0.045, 0.16);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2090,7 +2117,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(-0.1629, -0.001461, 0.29108);
     glRotatef(2.75, 0, 0, 1);
     glScalef(0.16, 0.045, 1.222);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2102,7 +2129,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-18, 0, 1, 0);
     glRotatef(1.66, 0, 0, 1);
     glScalef(1.06, 0.045, 0.181);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2116,7 +2143,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(2.75, 0, 0, 1);
     glRotatef(88.9, 1, 0, 0);       
     glScalef(0.15, 1.56, 0.04);
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
 
@@ -2127,7 +2154,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(1.19, 0, 0, 1);
     glRotatef(91.7, 1, 0, 0);       
     glScalef(0.15, 0.34, 0.04);
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
 
@@ -2138,13 +2165,22 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(3.9, 1, 0, 0);       
     glRotatef(5.9, 0, 0, 1);
     glScalef(0.135, 0.035, 0.125);
-    esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    esquina.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();                
 }
 
 
 void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
+ float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
 
+ if(tipo==ESPECIAL){
+   rf1=0;
+   gf1=0.89;
+   bf1=0.134;
+
+   rf2=gf2=bf2=0.22;
+ }  
+ 
   //Empiezo por la forma basica (los cubos)
     //izquierda
     base.push_back(_cubo());
@@ -2155,7 +2191,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-31.4, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.68);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
     base.push_back(_cubo());
@@ -2166,7 +2202,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.4);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();
 
     base.push_back(_cubo());
@@ -2175,7 +2211,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.5423, -0.012661, -0.62752);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.32, 0.045, 0.411);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();          
 
 
@@ -2186,7 +2222,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(1.19, 1, 0, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(0.4, 0.045, 0.181);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -2198,7 +2234,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.231, 0.045, 0.330);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -2210,7 +2246,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.121, 0.045, 0.16);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -2220,7 +2256,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.1629, -0.001461, 0.29108);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.16, 0.045, 1.222);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -2232,7 +2268,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(18, 0, 1, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(1.06, 0.045, 0.181);
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -2247,7 +2283,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-2.75, 0, 0, 1);
     glRotatef(88.9, 1, 0, 0);       
     glScalef(0.15, 1.56, 0.04);
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
     filos.push_back(_cilindro());
@@ -2257,7 +2293,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-1.19, 0, 0, 1);
     glRotatef(91.7, 1, 0, 0);       
     glScalef(0.15, 0.34, 0.04);
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
 
@@ -2268,71 +2304,13 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(3.9, 1, 0, 0);
     glRotatef(-5.9, 0, 0, 1);
     glScalef(0.135, 0.035, 0.125);
-    esquina.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+    esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
     glPopMatrix();                 
 }
 
 
 
 //************************************************************************
-/*
-//Version en su sitio
-void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-  //Primero los cubos
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 2.3459, 2.807);
-  glRotatef(1.1, 1, 0, 0);
-  glScalef(0.324, 0.064, 1.21);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-  //derecha
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(-0.2509, 2.5451, 2.707);
-  glRotatef(-11.3, 0, 0, 1);
-  glScalef(0.05, 0.16, 1.11);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-
-  //izquierda
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0.2509, 2.5451, 2.707);
-  glRotatef(11.3, 0, 0, 1);
-  glScalef(0.05, 0.16, 1.11);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-
-
-  //Ahora los cilindros
-  filos.push_back(_cilindro());
-
-  glPushMatrix();
-  glTranslatef(0, 2.7227, 2.58);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.265, 0.985, 0.265);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();     
-
-
-
-  filos.push_back(_cilindro());
-
-  glPushMatrix();
-  glTranslatef(0, 2.7011, 3.6135);
-  glRotatef(104, 1, 0, 0);
-  glScalef(0.265, 0.115, 0.265);
-  filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-}
-*/
 
 //Version centrada
 void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
@@ -2393,55 +2371,6 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
 
 
 //************************************************************************
-/*
-void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(-0.2208, 2.5154, 4.05);
-  glRotatef(-14.5, 0, 0, 1);
-  glRotatef(12.1, 0, 1, 0);
-  glRotatef(7.47, 1, 0, 0);
-  glScalef(0.05, 0.16, 0.26);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();   
-
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0.2208, 2.5154, 4.05);
-  glRotatef(14.5, 0, 0, 1);
-  glRotatef(-12.1, 0, 1, 0);
-  glRotatef(7.47, 1, 0, 0);
-  glScalef(0.05, 0.16, 0.26);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();   
-
-
-  //cilindro
-  glPushMatrix();
-  glTranslatef(0, 2.587, 3.863);
-  glRotatef(117, 1, 0, 0);
-  glScalef(0.265, 0.225, 0.265);
-  filos.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-
-  //Cono
-  glPushMatrix();
-  glTranslatef(0, 2.3811, 4.52);
-  glRotatef(106, 1, 0, 0);
-  glScalef(0.249, 0.429, 0.249);
-  pico.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-}
-
-*/
 //Version centrado
 void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
 
@@ -2571,103 +2500,6 @@ void _freno_individual::draw(_modo modo, float r1, float g1, float b1, float r2,
 
 //************************************************************************
 
-
-/*
-//Version en su sitio
-void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-  //Marco exterior
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  //glTranslatef(0, 5.2054, 2.8443);
-  glTranslatef(0, 2.8443, -5.2054);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.48, 0.05);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 3.5657, -6.1446);
-  glRotatef(-33.5, 1, 0, 0);
-  glScalef(0.126, 0.9, 0.05);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();   
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 4.3052, -6.307);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.34, 0.05);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix(); 
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 3.5728, -5.4248);
-  glRotatef(-37.8, 1, 0, 0);
-  glScalef(0.126, 0.95, 0.05);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();     
-
-  //Relleno del marco (de arriba a abajo)
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 4.2144, -6.2811);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();     
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 4.0864, -6.2015);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();  
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 3.5791, -5.7799);
-  glRotatef(-35.6, 1, 0, 0);
-  glScalef(0.126, 0.71, 0.29);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();            
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 3.0795, -5.3469);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();       
-
-
-  base.push_back(_cubo());
-
-  glPushMatrix();
-  glTranslatef(0, 2.9204, -5.2284);
-  glRotatef(90, 1, 0, 0);
-  glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();       
-}
-*/
-
 //Version centrado
 void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
   //Marco exterior
@@ -2767,10 +2599,8 @@ void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, 
   base.push_back(_cubo());
 
   glPushMatrix();
-  //glTranslatef(-0.7922, 3.6341, 2.3859);
   glTranslatef(-0.7922, 2.3859, -3.6341);
   glRotatef(23.5, 0, 0, 1);
-  //glScalef(0.26, 0.64, 0.02);
   glScalef(0.26, 0.02, 0.64);
   base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor);
   glPopMatrix();         
@@ -2854,354 +2684,6 @@ void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, f
 
 
 //************************************************************************
-/*
-void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-
-  
-  //glPushMatrix();
-  //Cuerpo de la aeronave
-  glPushMatrix();
-  glTranslatef(0, cuerpo.y, 0);
-  glRotatef(giro_aeronave_x, 1, 0, 0);
-  glRotatef(giro_aeronave_y, 0, 1, 0);
-  glRotatef(giro_aeronave_z, 0, 0, 1);  
-  cuerpo.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //Ventana de la aeronave
-  glPushMatrix();
-  //Propio de la aeronave  
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);
-  glRotatef(giro_aeronave_y, 0, 1, 0);
-  glRotatef(giro_aeronave_z, 0, 0, 1);  
-  //glTranslatef(0, -cuerpo.y, 0);
-  glTranslatef(ventana_movil.x, ventana_movil.y-cuerpo.y, ventana_movil.z);  //Movemos la pieza a su sitio, pero mas abajo para poder realizar la animacion propia de la aeronave
-  
-  //Propio de la pieza
-  ventana_fija.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glRotatef(-giro_ventana, 1, 0, 0);
-  ventana_movil.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //Timon
-  glPushMatrix();
-  //Propio de la aeronave 
-  glTranslatef(0, cuerpo.y, 0);
-  glRotatef(giro_aeronave_x, 1, 0, 0);
-  glRotatef(giro_aeronave_y, 0, 1, 0);
-  glRotatef(giro_aeronave_z, 0, 0, 1);    
-  glTranslatef(0, timon.y-cuerpo.y, timon.z);  
-  //glTranslatef(0, timon.intermedio_y, timon.z);  
-
-  //Propio de la pieza
-  glRotatef(-angulo_timon, 1, 0, 0);   //Deshacemos el cambio
-  glTranslatef(0, 0, -timon_trans_giro_z); //LO movemos para poder hacer el propio giro
-  glRotatef(timon_giro, 0, 1, 0);   //Hacemos el propio giro
-  glTranslatef(0, 0, timon_trans_giro_z); //LO movemos para poder hacer el propio giro
-  glRotatef(angulo_timon, 1, 0, 0);   //Lo ponemos recto
-  timon.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Ala trasera izquierda
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);
-  glRotatef(giro_aeronave_x, 1, 0, 0);
-  glRotatef(giro_aeronave_y, 0, 1, 0);
-  glRotatef(giro_aeronave_z, 0, 0, 1);    
-  glTranslatef(ti.x, ti.y-cuerpo.y, ti.z);
-
-
-  //Animacion de la pieza
-  glRotatef(angulo_trasero, 1, 0, 0);
-  ti.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Ala trasera derecha
-  glPushMatrix();
-  //Propio de la aeronave
-  //glTranslatef(0, td.y_i_f, 0);
-  glTranslatef(0, cuerpo.y, 0);
-  glRotatef(giro_aeronave_x, 1, 0, 0);
-  glRotatef(giro_aeronave_y, 0, 1, 0);
-  glRotatef(giro_aeronave_z, 0, 0, 1);    
-  glTranslatef(td.x, td.y-cuerpo.y, td.z);
-  //glTranslatef(td.x, td.intermedio_y, td.z);
-
-  //Propio de la pieza
-  glRotatef(angulo_trasero, 1, 0, 0);
-  td.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Frenos aereos delanteros
-  //Derecha
-  glPushMatrix();
-
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  
-  //Propio del ala
-  glTranslatef(ala_dcha.x, 0, 0); 
-  glRotatef(-angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_dcha.x, 0, 0);  
-
-  //Propio de la pieza
-  glTranslatef(-3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-  glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-  glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
-  glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
-  glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
-  frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //izquierda
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);         //Lo movemos hasta su posicion final
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  
-  
-  //Propio del ala
-  glTranslatef(ala_izda.x, 0, 0);
-  glRotatef(angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_izda.x, 0, 0);
-
-
-
-  //Propio de la pieza
-  glTranslatef(3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-  glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-  glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
-  glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
-  glRotatef(giro_frenos, 1, 0, 0);    //Realizamos la animacion
-  frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();  
-
-
-  //Alas
-  //Izquierda
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0);  
-
-  //Propio del ala
-  glTranslatef(ala_izda.x, 0, 0);
-  glRotatef(angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_izda.x, 0, 0);
-  ala_izda.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //Derecha
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0);  
-
-  //Propio del ala  
-  glTranslatef(ala_dcha.x, 0, 0);
-  glRotatef(-angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_dcha.x, 0, 0);
-  ala_dcha.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //FLAPS
-  //Izquierdo
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de las alas
-  glTranslatef(ala_izda.x, 0, 0); 
-  glRotatef(angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_izda.x, 0, 0);    
-
-
-  //Propio de la pieza
-  //Por ultimo, lo movemos a su sitio
-  glTranslatef(-flap.mover_centro_x_r, -flap.mover_centro_y, -flap.mover_centro_z+flap.z);
-
-  //Aplicamos las rotaciones para que este en su sitio el flap
-  glRotatef(flap.angulo_y_r, 0, 1, 0);
-  glRotatef(flap.angulo_z_r, 0, 0, 1);
-  //*************************
-
-  glTranslatef(0, 0, flap.mover_centro_z);  //Ahora lo movemos al centro de verdad
-
-  //Hacemos los giros y translaciones correspondientes
-  glTranslatef(0, 0, -flap_trans);
-  glRotatef(-flap_giro, 1, 0, 0);
-  //***************************************************
-  
-  //LO ponemos en posicion para animarlo
-  glTranslatef(0, 0, -flap.mover_centro_z);
-  //*****************
-  flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
- //Derecho
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de las alas
-  glTranslatef(ala_dcha.x, 0, 0); 
-  glRotatef(-angulo_alas, 0, 1, 0);
-  glTranslatef(-ala_dcha.x, 0, 0);    
-
-
-  //Propio de la pieza
-  //Por ultimo, lo movemos a su sitio
-  glTranslatef(flap.mover_centro_x_r, -flap.mover_centro_y, -flap.mover_centro_z+flap.z);
-
-  //Aplicamos las rotaciones para que este en su sitio el flap
-  glRotatef(-flap.angulo_y_r, 0, 1, 0);
-  glRotatef(-flap.angulo_z_r, 0, 0, 1);
-  //*************************
-
-  glTranslatef(0, 0, flap.mover_centro_z);  //Ahora lo movemos al centro de verdad
-
-  //Hacemos los giros y translaciones correspondientes
-  glTranslatef(0, 0, -flap_trans);
-  glRotatef(-flap_giro, 1, 0, 0);
-  //***************************************************
-
-  //LO ponemos en posicion para animarlo
-  glTranslatef(0, 0, -flap.mover_centro_z);
-  //*****************
-  flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //SPD BRK Traseros
-  //Izquierda
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de la pieza
-  glTranslatef(ft.x, ft.y, -ft.centro_z+ft.z);
-  glRotatef(ft.angulo_z_l, 0, 0, 1);
-  glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
-  glRotatef(ft_giro, 1, 0, 0);    //Animacion
-  ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Derecha
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de la pieza
-  glTranslatef(-ft.x, ft.y, -ft.centro_z+ft.z);
-  glRotatef(-ft.angulo_z_l, 0, 0, 1);
-  glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
-  glRotatef(ft_giro, 1, 0, 0);    //Animacion
-  ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Tren de aterrizaje trasero
-  //Derecha
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de la pieza
-  glTranslatef(tt.x_r, tt.y_r, tt.z_r);
-  glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
-  glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-  tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-
-  //Izquierda
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de la pieza
-  glTranslatef(-tt.x_r, tt.y_r, tt.z_r);
-  glRotatef(-tt_giro_y, 0, 1, 0);  //Realizamos la animacion
-  glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-  glRotatef(180, 0, 1, 0);    //Rotamos la pieza para el otro sitio
-  tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-
-  //Tren de aterrizaje delantero
-  glPushMatrix();
-  //Propio de la aeronave
-  glTranslatef(0, cuerpo.y, 0);  
-  glRotatef(giro_aeronave_x, 1, 0, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_y, 0, 1, 0);    //Hacemos los giros
-  glRotatef(giro_aeronave_z, 0, 0, 1);    //Hacemos los giros
-  glTranslatef(0, -cuerpo.y, 0); 
-
-  //Propio de la pieza
-  glTranslatef(0, tren_d.y, tren_d.z);  
-  glRotatef(-giro_tren_d, 1, 0, 0);
-  tren_d.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-  glPopMatrix();
-
-  //glPopMatrix();
-}
-*/
-
-
 
 void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
 
@@ -3332,8 +2814,6 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
     //SPD BRK Traseros
     //Izquierda
     glPushMatrix();
-      //glTranslatef(0, -cuerpo.y, 0); 
-      //glTranslatef(ft.x, ft.y, -ft.centro_z+ft.z);
       glTranslatef(ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
       glRotatef(ft.angulo_z_l, 0, 0, 1);
       glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
@@ -3345,7 +2825,6 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
 
     //Derecha
     glPushMatrix();
-      //glTranslatef(0, -cuerpo.y, 0); 
       glTranslatef(-ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
       glRotatef(-ft.angulo_z_l, 0, 0, 1);
       glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
@@ -3358,7 +2837,6 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
     //Tren de aterrizaje trasero
     //Derecha
     glPushMatrix();
-      //glTranslatef(0, -cuerpo.y, 0); 
       glTranslatef(tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
       glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
       glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
@@ -3369,18 +2847,15 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
 
     //Izquierda
     glPushMatrix();
-      //glTranslatef(0, -cuerpo.y, 0); 
       glTranslatef(-tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      //glRotatef(180, 0, 1, 0);    //Rotamos la pieza para el otro sitio
       tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
 
     //Tren de aterrizaje delantero
     glPushMatrix();
-      //glTranslatef(0, -cuerpo.y, 0); 
       glTranslatef(0, tren_d.y-cuerpo.y, tren_d.z);  
       glRotatef(-giro_tren_d, 1, 0, 0);
       tren_d.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
