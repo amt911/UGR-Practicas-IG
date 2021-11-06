@@ -492,7 +492,7 @@ void animacion(){
 	bool encontrado=false;
 	int acto=0;
 	
-	for(int i=0; i<10 && !encontrado; i++){
+	for(int i=0; i<40 && !encontrado; i++){
 		if(!caza.actos[i]){
 			encontrado=true;
 			acto=i;
@@ -525,10 +525,10 @@ void animacion(){
 		case 2:{	//Baja los flaps
 		cout <<"Fase " <<acto <<endl;
 			if(caza.flap_giro<=caza.max_flap_giro)
-				caza.flap_giro+=0.1;
+				caza.flap_giro+=0.3;
 
 			if(caza.flap_trans<=caza.max_flap_trans)
-				caza.flap_trans+=0.001;
+				caza.flap_trans+=0.003;
 
 
 			if(caza.flap_giro>caza.max_flap_giro and caza.flap_trans>caza.max_flap_trans)
@@ -554,8 +554,8 @@ void animacion(){
 				caza.giro_aeronave_x-=0.1;
 
 			if(caza.angulo_trasero_l<=20){
-				caza.angulo_trasero_l+=0.3;
-				caza.angulo_trasero_r+=0.3;
+				caza.angulo_trasero_l+=0.2;
+				caza.angulo_trasero_r+=0.2;
 			}
 
 			if(caza.angulo_trasero_l>20 and caza.giro_aeronave_x<-15)
@@ -564,11 +564,25 @@ void animacion(){
 			break;
 		}
 
-		case 5:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		case 5:{		//Fase de poner las alas traseras de nuevo en su sitio
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.angulo_trasero_l>=0){
+				caza.angulo_trasero_l-=0.3;
+				caza.angulo_trasero_r-=0.3;
+			}			
+
+			if(caza.angulo_trasero_l<0)
+				caza.actos[acto]=true;			
+
+			break;
+		}
+
+		case 6:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
 		cout <<"Fase " <<acto <<endl;
 			sleep++;
-			cout <<"aii" <<sleep <<endl;
-			if(sleep==45){
+			//cout <<"aii" <<sleep <<endl;
+			if(sleep==24){
 				caza.actos[acto]=true;
 				sleep=0;
 			}
@@ -576,7 +590,26 @@ void animacion(){
 			break;
 		}
 
-		case 6:{		//Fase de poner todo recto
+		case 7:{		//Fase de levantar el tren de aterrizaje
+		cout <<"Fase " <<acto <<endl;
+		if(caza.tt_giro_x<=caza.max_tt_giro_x)
+			caza.tt_giro_x+=0.5;
+
+		if(caza.tt_giro_y<=caza.max_tt_giro_y)
+			caza.tt_giro_y+=0.5;
+
+		if(caza.giro_tren_d<=caza.max_giro_tren_d)
+			caza.giro_tren_d+=0.5;
+
+
+		if(caza.tt_giro_x>caza.max_tt_giro_x and caza.tt_giro_y>caza.max_tt_giro_y and caza.giro_tren_d>caza.max_giro_tren_d)
+			caza.actos[acto]=true;
+
+
+			break;
+		}		
+
+		case 8:{		//Fase de poner todo recto
 		cout <<"Fase " <<acto <<endl;
 
 			if(caza.giro_aeronave_x<=0)
@@ -592,9 +625,7 @@ void animacion(){
 
 			break;
 		}				
-
-
-		case 7:{		//Fase de poner todo recto
+		case 9:{		//Fase de poner todo recto
 		cout <<"Fase " <<acto <<endl;
 
 			if(caza.angulo_trasero_l<=0){
@@ -608,10 +639,10 @@ void animacion(){
 			break;
 		}	
 
-		case 8:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		case 10:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
 		cout <<"Fase " <<acto <<endl;
 			sleep++;
-			cout <<"aii" <<sleep <<endl;
+			//cout <<"aii" <<sleep <<endl;
 			if(sleep==45){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -620,7 +651,7 @@ void animacion(){
 			break;
 		}
 
-		case 9:{		//Fase de levantar los flaps
+		case 11:{		//Fase de levantar los flaps
 		cout <<"Fase " <<acto <<endl;
 			if(caza.flap_giro>=0)
 				caza.flap_giro-=0.3;
@@ -636,8 +667,299 @@ void animacion(){
 		}	
 
 		//Fase de levantar un spd brk a la mitad de la posicion final
+		case 12:{
+			cout <<"Fase " <<acto <<endl;
 
+			if(caza.giro_frenos_l<=(caza.max_giro_frenos/3))
+				caza.giro_frenos_l+=1;
+
+			if(caza.giro_frenos_l>(caza.max_giro_frenos/3))
+				caza.actos[acto]=true;
+
+			break;
+		}
 		//Fase de levantar del todo el spd brk y de girar la aeronave en el eje z 90 grados							
+		case 13:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_frenos_l<=caza.max_giro_frenos)
+				caza.giro_frenos_l+=1;
+
+			if(caza.giro_aeronave_z>=-90)
+				caza.giro_aeronave_z-=0.5;
+
+
+			if(caza.giro_frenos_l>caza.max_giro_frenos and caza.giro_aeronave_z<-90)
+				caza.actos[acto]=true;
+
+			break;
+		}	
+
+		//Bajamos de nuevo el spd brk levantado
+		case 14:{
+			if(caza.giro_frenos_l>=0)
+				caza.giro_frenos_l-=1.4;			
+
+			if(caza.giro_frenos_l<0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//Movemos el eje y 90 grados
+		case 15:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_aeronave_y<=90)
+				caza.giro_aeronave_y+=0.3;
+
+			if(caza.angulo_trasero_l<=20){
+				caza.angulo_trasero_l+=0.2;
+				caza.angulo_trasero_r+=0.2;
+			}
+
+
+			if(caza.giro_aeronave_y>90 and caza.angulo_trasero_l>20)
+				caza.actos[acto]=true;
+
+			break;
+		}	
+
+
+		//Fase de poner de nuevo las alas traseras en su sitio
+		case 16:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.angulo_trasero_l>=0){
+				caza.angulo_trasero_l-=0.2;
+				caza.angulo_trasero_r-=0.2;
+			}			
+
+			if(caza.angulo_trasero_l<0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//SPD BRK DERECHO A UN TERCIO
+		case 17:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_frenos_r<=(caza.max_giro_frenos/3))
+				caza.giro_frenos_r+=1;
+
+			if(caza.giro_frenos_r>(caza.max_giro_frenos/3))
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//Fase de ponerse de nuevo recto (bien posicionada toda la aeronave) mover el eje y
+		case 18:{
+			cout <<"Fase " <<acto <<endl;
+			if(caza.giro_frenos_r<=caza.max_giro_frenos)
+				caza.giro_frenos_r+=1;
+
+			if(caza.giro_aeronave_z<=0)
+				caza.giro_aeronave_z+=0.3;
+
+			
+			if(caza.giro_frenos_r>caza.max_giro_frenos and caza.giro_aeronave_z>0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//Fase de poner el spd brk derecho en su sitio
+		case 19:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.giro_frenos_r>=0)
+				caza.giro_frenos_r-=1.4;			
+
+			if(caza.giro_frenos_r<0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+
+		//Fase de mover las alas principales y ponerse en modo supersonico
+		case 20:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.angulo_alas<=caza.max_angulo_alas)
+				caza.angulo_alas+=0.3;
+
+			if(caza.angulo_alas>caza.max_angulo_alas)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+
+		//Fase de mover un poco las alas traseras para realizar giros
+		case 21:{
+			cout <<"Fase " <<acto <<endl;
+
+			if(caza.angulo_trasero_r<=6.7){
+				caza.angulo_trasero_r+=0.6;
+				caza.angulo_trasero_l-=0.6;
+			}
+
+			if(caza.angulo_trasero_r>5)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+
+		//Fase de hacer unos giros en supersonico 15 grados para las alas traseras
+		case 22:{
+			if(caza.angulo_trasero_r<=20){
+				caza.angulo_trasero_r+=0.6;
+				caza.angulo_trasero_l-=0.6;
+			}
+
+
+			if(caza.giro_aeronave_x<=720)
+				caza.giro_aeronave_x+=1;
+
+			if(caza.angulo_trasero_r>15 and caza.giro_aeronave_x>720){
+				caza.giro_aeronave_x=0;
+				caza.actos[acto]=true;
+			}
+
+			break;
+		}
+
+		//Fase de poner las alas traseras en su sitio
+		case 23:{
+			if(caza.angulo_trasero_r>=0){
+				caza.angulo_trasero_r-=0.8;
+				caza.angulo_trasero_l+=0.8;
+			}			
+
+			if(caza.angulo_trasero_r<0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//Fase de esperar un poco
+		case 24:{
+		//cout <<"Fase " <<acto <<endl;
+			sleep++;
+
+			if(sleep==45){
+				caza.actos[acto]=true;
+				sleep=0;
+			}
+
+			break;
+		}		
+
+		//Fase de deceleracion
+		case 25:{
+			if(caza.angulo_alas>=0)
+				caza.angulo_alas-=0.3;
+
+			if(caza.angulo_alas<0)
+				caza.actos[acto]=true;		
+
+			break;	
+		}
+
+		//Fase de sleep un poco
+		case 26:{
+		//cout <<"Fase " <<acto <<endl;
+			sleep++;
+
+			if(sleep==45){
+				caza.actos[acto]=true;
+				sleep=0;
+			}
+
+			break;
+		}
+
+		//Fase de moverse con el timon hacia la derecha EJE Y
+		case 27:{
+			//cout <<"EJE Y: " <<caza.giro_aeronave_y <<endl;
+			if(caza.giro_aeronave_y>=0)
+				caza.giro_aeronave_y-=0.3;
+
+			if(caza.timon_giro<=caza.max_timon_giro)
+				caza.timon_giro+=1;
+
+			
+
+			if(caza.giro_aeronave_y<0 and caza.timon_giro>caza.max_timon_giro)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+
+		//Fase de poner el timon en sus sitio
+		case 28:{
+			if(caza.timon_giro>=0)
+				caza.timon_giro-=1;			
+
+			if(caza.timon_giro<0)
+				caza.actos[acto]=true;
+
+			break;
+		}
+
+		//Fase de abrir flaps y mover un poco la aeronave hacia arriba (muy lento esto ultimo)
+		case 29:{
+			if(caza.flap_giro<=caza.max_flap_giro)
+				caza.flap_giro+=0.3;
+
+			if(caza.flap_trans<=caza.max_flap_trans)
+				caza.flap_trans+=0.003;
+
+			if(caza.giro_aeronave_x>=-2.5)
+				caza.giro_aeronave_x-=0.01;
+
+
+			if(caza.flap_giro>caza.max_flap_giro and caza.flap_trans>caza.max_flap_trans and caza.giro_aeronave_x<-2.5)
+				caza.actos[acto]=true;
+
+			break;
+		}		
+
+		//Fase de abrir el tren de aterrizaje
+		case 30:{
+			cout <<caza.tt_giro_x <<endl;
+		if(caza.tt_giro_x>=0)
+			caza.tt_giro_x-=0.5;
+
+		if(caza.tt_giro_y>=0)
+			caza.tt_giro_y-=0.5;
+
+		if(caza.giro_tren_d>=0)
+			caza.giro_tren_d-=0.5;
+
+
+		if(caza.tt_giro_x<0 and caza.tt_giro_y<0 and caza.giro_tren_d<0)
+			caza.actos[acto]=true;
+
+			break;			
+		}
+
+
+		//Fase de girar hasta 5 grados la aeronave y girar -5 grados el tren trasero
+
+
+		//Touchdown: (Mover la aeronave a 0 grados y las alas traseras a 3 grados hacia abajo)
+
+		//Mover las alas traseras a su sitio y abrir todos los spd brk
+
+		//Sleep
+
+		//Abir ventana
 	}
 
 	glutPostRedisplay();
@@ -659,7 +981,7 @@ int main(int argc, char *argv[] )
 
 	cout <<"Controles: " <<endl;
 	cout <<"Mover aeronave sobre eje x: W/S" <<endl;
-	cout <<"Mover aeronave sobre eje y: " <<endl;
+	cout <<"Mover aeronave sobre eje y: Z/X" <<endl;
 	cout <<"Mover aeronave sobre eje z: A/D" <<endl;
 	cout <<"Mover flaps: " <<endl;
 	cout <<"Mover alas principales: " <<endl;
