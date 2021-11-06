@@ -241,8 +241,8 @@ class _ala_ti: public _triangulos3D{
 	const double y=1.984261;
 	const double z=-4.66768;
 
-	const double intermedio_y=0.025641;
-	const double y_i_f=y-intermedio_y;
+	//const double intermedio_y=0.025641;
+	//const double y_i_f=y-intermedio_y;
 
 	protected:
 	vector<_cubo> base;
@@ -259,8 +259,8 @@ class _ventana_movil: public _triangulos3D{
 		double x=0;
 		double y=2.99002;
 		double z=1.60318;
-		double intermedio_y=1.03152;
-		double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
+		//double intermedio_y=1.03152;
+		//double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
 
 	protected:
 	vector<_cubo> base;
@@ -315,7 +315,7 @@ class _flap: public _triangulos3D{
 		const double mover_centro_z=0.26;
 		const double mover_centro_y=-2.1596;
 
-		const double intermedio_y=1.95865;
+		//const double intermedio_y=1.95865;
 	protected:
 	_cubo flap;
 };
@@ -342,8 +342,8 @@ class _freno_individual: public _triangulos3D{
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=2.2518;
-		const double intermedio_y=0.29316;
-		const double y_i_f=y-intermedio_y;
+		//const double intermedio_y=0.29316;
+		//const double y_i_f=y-intermedio_y;
 		const double freno_delantero_angulo_y=-15.9;
 		const double freno_delantero_angulo_z=4.6;
 
@@ -363,8 +363,8 @@ class _timon: public _triangulos3D{
 		const double y=3.579368;
 		const double z=-5.78512;
 
-		const double intermedio_y=1.620681;
-		const double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
+		//const double intermedio_y=1.620681;
+		//const double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
 
 		//double intermedio_x=1.03152;
 		//double x_i_f=x-intermedio_x;	//Lo que hay que subir desde el intermedio hasta el final		
@@ -453,6 +453,25 @@ class _tornado: public _triangulos3D{
 
 
 	//double constante=1;
+
+	/**
+	 * 0: giro_aeronave_x
+	 * 1: giro_aeronave_y
+	 * 2: giro_aeronave_z
+	 * 3: ft_giro
+	 * 4/5/6: tt_giro (tt_giro_x/tt_giro_y/giro_tren_d)
+	 * 7: giro_ventana
+	 * 8/9: flap_giro (flap_giro / flap_trans)
+	 * 10: angulo_alas
+	 * 11: giro_frenos (en general, solo un index)
+	 * 12: timon_giro
+	 * 13: angulo_trasero (en general, solo un index)
+	 * 
+	 */
+
+	const double constantes_animacion[14]={1, 1, 1, 1, 1, 1, 1, 1, 1, 0.01, 1, 1, 1, 1};
+	double factor_mult[14]={1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
 
 	double giro_ventana=0;
 	const double max_giro_ventana=45;
