@@ -451,8 +451,16 @@ class _tornado: public _triangulos3D{
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
+		//Cuando se corta la animacion es necesario restaurar todo a su estado original
+		void limpiar_actos(){
+			for(int i=0; i<50; i++)
+				actos[i]=false;
 
-	//double constante=1;
+			giro_ventana=giro_aeronave_x=giro_aeronave_y=giro_aeronave_z=
+			timon_giro=angulo_trasero_l=angulo_trasero_r=angulo_alas=
+			giro_frenos_l=giro_frenos_r=flap_giro=flap_trans=ft_giro=
+			tt_giro_x=tt_giro_y=giro_tren_d=0;
+		}
 
 	/**
 	 * 0: giro_aeronave_x
@@ -478,19 +486,10 @@ class _tornado: public _triangulos3D{
 	const double min_giro_ventana=0;
 
 	double giro_aeronave_x=0;
-	//const double max_giro_aeronave_x=180;
-	//const double min_giro_aeronave_x=0;
 
 	double giro_aeronave_y=0;
-	//const double max_giro_aeronave_y=180;
-	//const double min_giro_aeronave_y=0;
 
 	double giro_aeronave_z=0;
-	//const double max_giro_aeronave_z=180;
-	//const double min_giro_aeronave_z=0;		
-
-	const double timon_trans_giro_z=-0.340424;
-	const double angulo_timon=37.8;
 	
 	
 	double timon_giro=0;
@@ -515,7 +514,7 @@ class _tornado: public _triangulos3D{
 	const double max_flap_giro=45;
 
 	double flap_trans=0;
-	const double max_flap_trans=0.25;	//GUESSING
+	const double max_flap_trans=0.25;
 
 
 	double ft_giro=0;

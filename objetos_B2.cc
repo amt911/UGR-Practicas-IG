@@ -1402,7 +1402,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.38);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1413,7 +1413,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(23.5, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.3);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1424,7 +1424,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.1, 0.105, 0.23);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();   
 
 
@@ -1435,7 +1435,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(15.9, 0, 1, 0);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.16, 0.075, 0.11);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -1449,7 +1449,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(24.8, 0, 1, 0);
   glRotatef(-94.6, 0, 0, 1);
   glScalef(0.12, 2.096, 0.366);
-  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -1460,7 +1460,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(14.5, 0, 0, 1);
   glRotatef(4.6, 0, 1, 0);
   glScalef(0.165, 0.465, 0.12);
-  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
   //Esferas para las esquinas   
@@ -1469,7 +1469,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glTranslatef(5.6556, 1.9831, -1.8168);
   glRotatef(-4.6, 0, 0, 1);
   glScalef(0.237, 0.12, 0.237);
-  esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  esquina.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();      
 }
 
@@ -1494,7 +1494,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.38);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1505,7 +1505,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-23.5, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.3);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -1516,7 +1516,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.1, 0.105, 0.23);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1527,7 +1527,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.16, 0.075, 0.11);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();    
 
 
@@ -1541,7 +1541,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-24.8, 0, 1, 0);
   glRotatef(94.6, 0, 0, 1);
   glScalef(0.12, 2.096, 0.366);
-  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -1553,7 +1553,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-14.5, 0, 0, 1);
   glRotatef(-4.6, 0, 1, 0);
   glScalef(0.165, 0.465, 0.12);
-  filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
   //Esferas para las esquinas
@@ -1562,7 +1562,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glTranslatef(-5.6556, 1.9831, -1.8168);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.237, 0.12, 0.237);
-  esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  esquina.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();        
 }
 
@@ -1730,7 +1730,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-31.4, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.68);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
     base.push_back(_cubo());
@@ -1741,7 +1741,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.4);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();
 
     base.push_back(_cubo());
@@ -1750,7 +1750,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.5423, -0.012661, -0.62752);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.32, 0.045, 0.411);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();          
 
 
@@ -1761,7 +1761,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(1.19, 1, 0, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(0.4, 0.045, 0.181);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -1773,7 +1773,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.231, 0.045, 0.330);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -1785,7 +1785,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.121, 0.045, 0.16);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -1795,7 +1795,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.1629, -0.001461, 0.29108);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.16, 0.045, 1.222);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();     
 
 
@@ -1807,7 +1807,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(18, 0, 1, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(1.06, 0.045, 0.181);
-    base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix(); 
 
 
@@ -1822,7 +1822,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-2.75, 0, 0, 1);
     glRotatef(88.9, 1, 0, 0);       
     glScalef(0.15, 1.56, 0.04);
-    filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
     filos.push_back(_cilindro());
@@ -1832,7 +1832,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-1.19, 0, 0, 1);
     glRotatef(91.7, 1, 0, 0);       
     glScalef(0.15, 0.34, 0.04);
-    filos[filos.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
 
@@ -1843,7 +1843,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(3.9, 1, 0, 0);
     glRotatef(-5.9, 0, 0, 1);
     glScalef(0.135, 0.035, 0.125);
-    esquina.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+    esquina.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();                 
 }
 
@@ -2048,7 +2048,7 @@ void _flap::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
   //izquierdo
   glPushMatrix();
   glScalef(2.23, 0.08, 0.26);
-  flap.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  flap.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();
 }
 
@@ -2097,7 +2097,7 @@ void _freno_individual::draw(_modo modo, float r1, float g1, float b1, float r2,
   glPushMatrix();
   glTranslatef(0, 0, -0.18);
   glScalef(1.29, 0.02, 0.18);
-  base.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 }
 
@@ -2124,7 +2124,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.735068, 0.57972);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.48, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix(); 
 
 
@@ -2134,7 +2134,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.013668, -0.35948);
   glRotatef(-33.5, 1, 0, 0);
   glScalef(0.126, 0.9, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();   
 
 
@@ -2144,7 +2144,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.725832, -0.52188);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.34, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix(); 
 
 
@@ -2154,7 +2154,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.006568, 0.36032);
   glRotatef(-37.8, 1, 0, 0);
   glScalef(0.126, 0.95, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
   //Relleno del marco (de arriba a abajo)
@@ -2164,7 +2164,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.635032, -0.49598);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();     
 
 
@@ -2174,7 +2174,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.507032, -0.41638);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();  
 
 
@@ -2184,7 +2184,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.000268, 0.00522);
   glRotatef(-35.6, 1, 0, 0);
   glScalef(0.126, 0.71, 0.29);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();            
 
 
@@ -2194,7 +2194,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.499868, 0.43822);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();       
 
 
@@ -2204,7 +2204,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.658968, 0.55672);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();       
 }
 
@@ -2251,7 +2251,7 @@ void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, f
   glPushMatrix();
   glTranslatef(0, 0, -0.64);
   glScalef(0.26, 0.02, 0.64);
-  base.draw(modo, rf1, gf1, b1, rf2, gf2, bf2, grosor);
+  base.draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
   glPopMatrix();           
 }
 
@@ -2427,11 +2427,11 @@ void _tornado::draw(_modo modo, float r1, float g1, float b1, float r2, float g2
     //Timon
     glPushMatrix();
       glTranslatef(0, timon.y-cuerpo.y, timon.z);  
-      glRotatef(-angulo_timon, 1, 0, 0);   //Deshacemos el cambio
-      glTranslatef(0, 0, -timon_trans_giro_z); //LO movemos para poder hacer el propio giro
+      glRotatef(-37.8, 1, 0, 0);   //Deshacemos el cambio
+      glTranslatef(0, 0, 0.340424); //LO movemos para poder hacer el propio giro
       glRotatef(timon_giro, 0, 1, 0);   //Hacemos el propio giro
-      glTranslatef(0, 0, timon_trans_giro_z); //LO movemos para poder hacer el propio giro
-      glRotatef(angulo_timon, 1, 0, 0);   //Lo ponemos recto
+      glTranslatef(0, 0, -0.340424); //LO movemos para poder hacer el propio giro
+      glRotatef(37.8, 1, 0, 0);   //Lo ponemos recto
       timon.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
