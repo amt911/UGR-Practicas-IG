@@ -13,11 +13,10 @@ using namespace std;
 
 // tipos
 typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO, CAZA} _tipo_objeto;
-//enum Activo{SI, NO};
+
 _tipo_objeto t_objeto=CUBO;
 _modo   modo=POINTS;
 Tipo tipo;
-//Activo ac=NO;
 
 // variables que definen la posicion de la camara en coordenadas polares
 GLfloat Observer_distance;
@@ -818,6 +817,8 @@ void normal_key(unsigned char Tecla1,int x,int y)
 	cout <<"** Mover ala trasera: F11/F12" <<endl;
 	cout <<"** Mover frenos aereos traseros: G/T" <<endl;
 	cout <<"** Mover tren de aterrizaje: H/Y" <<endl;
+	cout <<"** Cambiar a pintado especial: 6" <<endl;
+	cout <<"** Cambiar a pintado normal: 5" <<endl;
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
@@ -958,7 +959,7 @@ switch (toupper(Tecla1)){
 				break;
 
 			case 10:
-				cout <<"Angulo de las alas" <<endl;
+				cout <<"Giro de las alas principales" <<endl;
 				break;
 
 			case 11:
@@ -979,7 +980,7 @@ switch (toupper(Tecla1)){
 	}
 
 		case 'N':{
-			if(caza.factor_mult[indice]>0.1)
+			if(caza.factor_mult[indice]>0.2)
 				caza.factor_mult[indice]-=0.1;
 
 			cout <<"El valor de la variable es: " <<caza.constantes_animacion[indice]*caza.factor_mult[indice] <<endl;
@@ -1024,6 +1025,8 @@ void special_key(int Tecla1,int x,int y)
 	cout <<"** Mover ala trasera: F11/F12" <<endl;
 	cout <<"** Mover frenos aereos traseros: G/T" <<endl;
 	cout <<"** Mover tren de aterrizaje: H/Y" <<endl;
+	cout <<"** Cambiar a pintado especial: 6" <<endl;
+	cout <<"** Cambiar a pintado normal: 5" <<endl;
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
