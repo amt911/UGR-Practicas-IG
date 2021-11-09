@@ -196,6 +196,7 @@ glutPostRedisplay();
 //FUncion de animacion
 
 int sleep=0;
+const double mult=0.5;	//Factor que permite que la animacion vaya mas rapido o mas lento
 void animacion(){
 	bool encontrado=false;
 	int acto=0;
@@ -210,7 +211,7 @@ void animacion(){
 	switch(acto){
 		case 0:{		//Abre la ventana para entrar
 			if(caza.giro_ventana<=caza.max_giro_ventana)
-				caza.giro_ventana+=0.3;
+				caza.giro_ventana+=mult*0.3;
 
 			if(caza.giro_ventana>caza.max_giro_ventana)
 				caza.actos[acto]=true;
@@ -232,7 +233,7 @@ void animacion(){
 		}
 		case 2:{	//La cierra
 		
-			caza.giro_ventana-=0.3;
+			caza.giro_ventana-=mult*0.3;
 
 			if(caza.giro_ventana<0)
 				caza.actos[acto]=true;			
@@ -243,10 +244,10 @@ void animacion(){
 		case 3:{	//Baja los flaps
 		
 			if(caza.flap_giro<=caza.max_flap_giro)
-				caza.flap_giro+=0.3;
+				caza.flap_giro+=mult*0.3;
 
 			if(caza.flap_trans<=caza.max_flap_trans)
-				caza.flap_trans+=0.003;
+				caza.flap_trans+=mult*0.003;
 
 
 			if(caza.flap_giro>caza.max_flap_giro and caza.flap_trans>caza.max_flap_trans)
@@ -269,11 +270,11 @@ void animacion(){
 		
 
 			if(caza.giro_aeronave_x>=-15)
-				caza.giro_aeronave_x-=0.1;
+				caza.giro_aeronave_x-=mult*0.1;
 
 			if(caza.angulo_trasero_l<=20){
-				caza.angulo_trasero_l+=0.2;
-				caza.angulo_trasero_r+=0.2;
+				caza.angulo_trasero_l+=mult*0.2;
+				caza.angulo_trasero_r+=mult*0.2;
 			}
 
 			if(caza.angulo_trasero_l>20 and caza.giro_aeronave_x<-15)
@@ -286,8 +287,8 @@ void animacion(){
 			
 
 			if(caza.angulo_trasero_l>=0){
-				caza.angulo_trasero_l-=0.3;
-				caza.angulo_trasero_r-=0.3;
+				caza.angulo_trasero_l-=mult*0.3;
+				caza.angulo_trasero_r-=mult*0.3;
 			}			
 
 			if(caza.angulo_trasero_l<0)
@@ -311,13 +312,13 @@ void animacion(){
 		case 8:{		//Fase de levantar el tren de aterrizaje
 		
 		if(caza.tt_giro_x<=caza.max_tt_giro_x)
-			caza.tt_giro_x+=0.5;
+			caza.tt_giro_x+=mult*0.5;
 
 		if(caza.tt_giro_y<=caza.max_tt_giro_y)
-			caza.tt_giro_y+=0.5;
+			caza.tt_giro_y+=mult*0.5;
 
 		if(caza.giro_tren_d<=caza.max_giro_tren_d)
-			caza.giro_tren_d+=0.5;
+			caza.giro_tren_d+=mult*0.5;
 
 
 		if(caza.tt_giro_x>caza.max_tt_giro_x and caza.tt_giro_y>caza.max_tt_giro_y and caza.giro_tren_d>caza.max_giro_tren_d){
@@ -332,11 +333,11 @@ void animacion(){
 		
 
 			if(caza.giro_aeronave_x<=0)
-				caza.giro_aeronave_x+=0.1;
+				caza.giro_aeronave_x+=mult*0.1;
 
 			if(caza.angulo_trasero_l>=-10){
-				caza.angulo_trasero_l-=0.3;
-				caza.angulo_trasero_r-=0.3;
+				caza.angulo_trasero_l-=mult*0.3;
+				caza.angulo_trasero_r-=mult*0.3;
 			}
 
 			if(caza.angulo_trasero_l<-10 and caza.giro_aeronave_x>0)
@@ -348,8 +349,8 @@ void animacion(){
 		
 
 			if(caza.angulo_trasero_l<=0){
-				caza.angulo_trasero_l+=0.3;
-				caza.angulo_trasero_r+=0.3;
+				caza.angulo_trasero_l+=mult*0.3;
+				caza.angulo_trasero_r+=mult*0.3;
 			}
 
 			if(caza.angulo_trasero_l>0)
@@ -373,10 +374,10 @@ void animacion(){
 		case 12:{		//Fase de levantar los flaps
 		
 			if(caza.flap_giro>=0)
-				caza.flap_giro-=0.3;
+				caza.flap_giro-=mult*0.3;
 
 			if(caza.flap_trans>=0)
-				caza.flap_trans-=0.003;
+				caza.flap_trans-=mult*0.003;
 
 
 			if(caza.flap_giro<0 and caza.flap_trans<0)
@@ -390,7 +391,7 @@ void animacion(){
 			
 
 			if(caza.giro_frenos_l<=(caza.max_giro_frenos/3))
-				caza.giro_frenos_l+=1;
+				caza.giro_frenos_l+=mult*1;
 
 			if(caza.giro_frenos_l>(caza.max_giro_frenos/3))
 				caza.actos[acto]=true;
@@ -402,10 +403,10 @@ void animacion(){
 			
 
 			if(caza.giro_frenos_l<=caza.max_giro_frenos)
-				caza.giro_frenos_l+=1;
+				caza.giro_frenos_l+=mult*1;
 
 			if(caza.giro_aeronave_z>=-90)
-				caza.giro_aeronave_z-=0.5;
+				caza.giro_aeronave_z-=mult*0.5;
 
 
 			if(caza.giro_frenos_l>caza.max_giro_frenos and caza.giro_aeronave_z<-90)
@@ -417,7 +418,7 @@ void animacion(){
 		//Bajamos de nuevo el spd brk levantado
 		case 15:{
 			if(caza.giro_frenos_l>=0)
-				caza.giro_frenos_l-=1.4;			
+				caza.giro_frenos_l-=mult*1.4;			
 
 			if(caza.giro_frenos_l<0)
 				caza.actos[acto]=true;
@@ -430,11 +431,11 @@ void animacion(){
 			
 
 			if(caza.giro_aeronave_y<=90)
-				caza.giro_aeronave_y+=0.3;
+				caza.giro_aeronave_y+=mult*0.3;
 
 			if(caza.angulo_trasero_l<=20){
-				caza.angulo_trasero_l+=0.2;
-				caza.angulo_trasero_r+=0.2;
+				caza.angulo_trasero_l+=mult*0.2;
+				caza.angulo_trasero_r+=mult*0.2;
 			}
 
 
@@ -450,8 +451,8 @@ void animacion(){
 			
 
 			if(caza.angulo_trasero_l>=0){
-				caza.angulo_trasero_l-=0.2;
-				caza.angulo_trasero_r-=0.2;
+				caza.angulo_trasero_l-=mult*0.2;
+				caza.angulo_trasero_r-=mult*0.2;
 			}			
 
 			if(caza.angulo_trasero_l<0)
@@ -465,7 +466,7 @@ void animacion(){
 			
 
 			if(caza.giro_frenos_r<=(caza.max_giro_frenos/3))
-				caza.giro_frenos_r+=1;
+				caza.giro_frenos_r+=mult*1;
 
 			if(caza.giro_frenos_r>(caza.max_giro_frenos/3))
 				caza.actos[acto]=true;
@@ -477,10 +478,10 @@ void animacion(){
 		case 19:{
 			
 			if(caza.giro_frenos_r<=caza.max_giro_frenos)
-				caza.giro_frenos_r+=1;
+				caza.giro_frenos_r+=mult*1;
 
 			if(caza.giro_aeronave_z<=0)
-				caza.giro_aeronave_z+=0.3;
+				caza.giro_aeronave_z+=mult*0.3;
 
 			
 			if(caza.giro_frenos_r>caza.max_giro_frenos and caza.giro_aeronave_z>0)
@@ -494,7 +495,7 @@ void animacion(){
 			
 
 			if(caza.giro_frenos_r>=0)
-				caza.giro_frenos_r-=1.4;			
+				caza.giro_frenos_r-=mult*1.4;			
 
 			if(caza.giro_frenos_r<0)
 				caza.actos[acto]=true;
@@ -508,7 +509,7 @@ void animacion(){
 			
 
 			if(caza.angulo_alas<=caza.max_angulo_alas)
-				caza.angulo_alas+=0.3;
+				caza.angulo_alas+=mult*0.3;
 
 			if(caza.angulo_alas>caza.max_angulo_alas)
 				caza.actos[acto]=true;
@@ -522,8 +523,8 @@ void animacion(){
 			
 
 			if(caza.angulo_trasero_r<=6.7){
-				caza.angulo_trasero_r+=0.6;
-				caza.angulo_trasero_l-=0.6;
+				caza.angulo_trasero_r+=mult*0.6;
+				caza.angulo_trasero_l-=mult*0.6;
 			}
 
 			if(caza.angulo_trasero_r>5)
@@ -536,13 +537,13 @@ void animacion(){
 		//Fase de hacer unos giros en supersonico 15 grados para las alas traseras
 		case 23:{
 			if(caza.angulo_trasero_r<=20){
-				caza.angulo_trasero_r+=0.6;
-				caza.angulo_trasero_l-=0.6;
+				caza.angulo_trasero_r+=mult*0.6;
+				caza.angulo_trasero_l-=mult*0.6;
 			}
 
 
 			if(caza.giro_aeronave_x<=360)
-				caza.giro_aeronave_x+=1;
+				caza.giro_aeronave_x+=mult*1;
 
 			if(caza.angulo_trasero_r>15 and caza.giro_aeronave_x>360){
 				caza.giro_aeronave_x=0;
@@ -555,8 +556,8 @@ void animacion(){
 		//Fase de poner las alas traseras en su sitio
 		case 24:{
 			if(caza.angulo_trasero_r>=0){
-				caza.angulo_trasero_r-=0.8;
-				caza.angulo_trasero_l+=0.8;
+				caza.angulo_trasero_r-=mult*0.8;
+				caza.angulo_trasero_l+=mult*0.8;
 			}			
 
 			if(caza.angulo_trasero_r<0)
@@ -581,7 +582,7 @@ void animacion(){
 		//Fase de deceleracion
 		case 26:{
 			if(caza.angulo_alas>=0)
-				caza.angulo_alas-=0.3;
+				caza.angulo_alas-=mult*0.3;
 
 			if(caza.angulo_alas<0)
 				caza.actos[acto]=true;		
@@ -606,7 +607,7 @@ void animacion(){
 		case 28:{
 			//cout <<"EJE Y: " <<caza.giro_aeronave_y <<endl;
 			if(caza.giro_aeronave_y>=0)
-				caza.giro_aeronave_y-=0.3;
+				caza.giro_aeronave_y-=mult*0.3;
 
 			if(caza.timon_giro<=caza.max_timon_giro)
 				caza.timon_giro+=1;
@@ -623,7 +624,7 @@ void animacion(){
 		//Fase de poner el timon en sus sitio
 		case 29:{
 			if(caza.timon_giro>=0)
-				caza.timon_giro-=1;			
+				caza.timon_giro-=mult*1;			
 
 			if(caza.timon_giro<0)
 				caza.actos[acto]=true;
@@ -634,13 +635,13 @@ void animacion(){
 		//Fase de abrir flaps y mover un poco la aeronave hacia arriba (muy lento esto ultimo)
 		case 30:{
 			if(caza.flap_giro<=caza.max_flap_giro)
-				caza.flap_giro+=0.3;
+				caza.flap_giro+=mult*0.3;
 
 			if(caza.flap_trans<=caza.max_flap_trans)
-				caza.flap_trans+=0.003;
+				caza.flap_trans+=mult*0.003;
 
 			if(caza.giro_aeronave_x>=-2.5)
-				caza.giro_aeronave_x-=0.01;
+				caza.giro_aeronave_x-=mult*0.01;
 
 
 			if(caza.flap_giro>caza.max_flap_giro and caza.flap_trans>caza.max_flap_trans and caza.giro_aeronave_x<-2.5)
@@ -653,13 +654,13 @@ void animacion(){
 		case 31:{
 			//cout <<caza.tt_giro_x <<endl;
 		if(caza.tt_giro_x>=0)
-			caza.tt_giro_x-=0.5;
+			caza.tt_giro_x-=mult*0.5;
 
 		if(caza.tt_giro_y>=0)
-			caza.tt_giro_y-=0.5;
+			caza.tt_giro_y-=mult*0.5;
 
 		if(caza.giro_tren_d>=0)
-			caza.giro_tren_d-=0.5;
+			caza.giro_tren_d-=mult*0.5;
 
 
 		if(caza.tt_giro_x<0 and caza.tt_giro_y<0 and caza.giro_tren_d<0){
@@ -673,11 +674,11 @@ void animacion(){
 		//Fase de girar hasta 5 grados la aeronave y girar -5 grados el tren trasero
 		case 32:{
 			if(caza.giro_aeronave_x>=-10)
-				caza.giro_aeronave_x-=0.02;			
+				caza.giro_aeronave_x-=mult*0.02;			
 
 			if(caza.angulo_trasero_l<=10){
-				caza.angulo_trasero_l+=0.03;
-				caza.angulo_trasero_r+=0.03;
+				caza.angulo_trasero_l+=mult*0.03;
+				caza.angulo_trasero_r+=mult*0.03;
 			}
 
 			if(caza.giro_aeronave_x<-10 and caza.angulo_trasero_l>10)
@@ -701,11 +702,11 @@ void animacion(){
 		//Touchdown: (Mover la aeronave a 0 grados y las alas traseras a 3 grados hacia abajo)
 		case 34:{
 			if(caza.giro_aeronave_x<=0)
-				caza.giro_aeronave_x+=0.1;						
+				caza.giro_aeronave_x+=mult*0.1;						
 
 			if(caza.angulo_trasero_l>=-10){
-				caza.angulo_trasero_l-=0.3;
-				caza.angulo_trasero_r-=0.3;
+				caza.angulo_trasero_l-=mult*0.3;
+				caza.angulo_trasero_r-=mult*0.3;
 			}
 
 			if(caza.giro_aeronave_x>0 and caza.angulo_trasero_l<-10)
@@ -718,13 +719,13 @@ void animacion(){
 		//Mover las alas traseras a su sitio y abrir todos los spd brk
 		case 35:{
 			if(caza.angulo_trasero_l<=0){
-				caza.angulo_trasero_l+=0.7;
-				caza.angulo_trasero_r+=0.7;
+				caza.angulo_trasero_l+=mult*0.7;
+				caza.angulo_trasero_r+=mult*0.7;
 			}			
 
 			if(caza.giro_frenos_l<=caza.max_giro_frenos){
-				caza.giro_frenos_l+=0.7;
-				caza.giro_frenos_r+=0.7;
+				caza.giro_frenos_l+=mult*0.7;
+				caza.giro_frenos_r+=mult*0.7;
 			}
 
 			if(caza.ft_giro<=caza.max_ft_giro)
@@ -752,14 +753,14 @@ void animacion(){
 		//Cerrar todos los flaps y frenos aereos
 		case 37:{
 			if(caza.flap_giro>=0)
-				caza.flap_giro-=0.3;
+				caza.flap_giro-=mult*0.3;
 
 			if(caza.flap_trans>=0)
-				caza.flap_trans-=0.003;			
+				caza.flap_trans-=mult*0.003;			
 
 			if(caza.giro_frenos_l>=0){
-				caza.giro_frenos_l-=1;
-				caza.giro_frenos_r-=1;
+				caza.giro_frenos_l-=mult*1;
+				caza.giro_frenos_r-=mult*1;
 			}
 
 			if(caza.ft_giro>=0)
@@ -775,7 +776,7 @@ void animacion(){
 		//Abir ventana
 		case 38:{
 			if(caza.giro_ventana<=caza.max_giro_ventana)
-				caza.giro_ventana+=0.3;
+				caza.giro_ventana+=mult*0.3;
 
 			if(caza.giro_ventana>caza.max_giro_ventana)
 				caza.actos[acto]=true;			
