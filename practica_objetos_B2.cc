@@ -140,19 +140,7 @@ switch (t_objeto){
 		case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case CAZA: /*prueba.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
-		prueba2.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
-		prueba3.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);
-		prueba5.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		flaps.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		p6.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		p7.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		p8.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		p9.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);*/
-
-		//prueba5.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);	
-		caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo);
-		break;
+		case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	}
 
 }
@@ -196,7 +184,7 @@ glutPostRedisplay();
 //FUncion de animacion
 
 int sleep=0;
-const double mult=0.5;	//Factor que permite que la animacion vaya mas rapido o mas lento
+const double mult=0.5;	//Factor que permite que la animacion vaya mas rapido o mas lento (debido a que la velocidad es dependiente de la maquina)
 void animacion(){
 	bool encontrado=false;
 	int acto=0;
@@ -255,10 +243,9 @@ void animacion(){
 			break;
 		}
 
-		case 4:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		case 4:{
 		
 			sleep++;
-			//cout <<sleep <<endl;
 			if(sleep==45){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -297,10 +284,9 @@ void animacion(){
 			break;
 		}
 
-		case 7:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
+		case 7:{
 		
 			sleep++;
-			//cout <<"aii" <<sleep <<endl;
 			if(sleep==24){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -311,20 +297,19 @@ void animacion(){
 
 		case 8:{		//Fase de levantar el tren de aterrizaje
 		
-		if(caza.tt_giro_x<=caza.max_tt_giro_x)
-			caza.tt_giro_x+=mult*0.5;
+			if(caza.tt_giro_x<=caza.max_tt_giro_x)
+				caza.tt_giro_x+=mult*0.5;
 
-		if(caza.tt_giro_y<=caza.max_tt_giro_y)
-			caza.tt_giro_y+=mult*0.5;
+			if(caza.tt_giro_y<=caza.max_tt_giro_y)
+				caza.tt_giro_y+=mult*0.5;
 
-		if(caza.giro_tren_d<=caza.max_giro_tren_d)
-			caza.giro_tren_d+=mult*0.5;
+			if(caza.giro_tren_d<=caza.max_giro_tren_d)
+				caza.giro_tren_d+=mult*0.5;
 
 
-		if(caza.tt_giro_x>caza.max_tt_giro_x and caza.tt_giro_y>caza.max_tt_giro_y and caza.giro_tren_d>caza.max_giro_tren_d){
-			caza.actos[acto]=true;
-		}
-
+			if(caza.tt_giro_x>caza.max_tt_giro_x and caza.tt_giro_y>caza.max_tt_giro_y and caza.giro_tren_d>caza.max_giro_tren_d){
+				caza.actos[acto]=true;
+			}
 
 			break;
 		}		
@@ -359,10 +344,8 @@ void animacion(){
 			break;
 		}	
 
-		case 11:{		//Si implemento los afterburners irian aqui, pero por ahora solo una espera
-		
+		case 11:{
 			sleep++;
-			//cout <<"aii" <<sleep <<endl;
 			if(sleep==45){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -592,7 +575,6 @@ void animacion(){
 
 		//Fase de sleep un poco
 		case 27:{
-		//
 			sleep++;
 
 			if(sleep==45){
@@ -605,7 +587,6 @@ void animacion(){
 
 		//Fase de moverse con el timon hacia la derecha EJE Y
 		case 28:{
-			//cout <<"EJE Y: " <<caza.giro_aeronave_y <<endl;
 			if(caza.giro_aeronave_y>=0)
 				caza.giro_aeronave_y-=mult*0.3;
 
@@ -652,20 +633,19 @@ void animacion(){
 
 		//Fase de abrir el tren de aterrizaje
 		case 31:{
-			//cout <<caza.tt_giro_x <<endl;
-		if(caza.tt_giro_x>=0)
-			caza.tt_giro_x-=mult*0.5;
+			if(caza.tt_giro_x>=0)
+				caza.tt_giro_x-=mult*0.5;
 
-		if(caza.tt_giro_y>=0)
-			caza.tt_giro_y-=mult*0.5;
+			if(caza.tt_giro_y>=0)
+				caza.tt_giro_y-=mult*0.5;
 
-		if(caza.giro_tren_d>=0)
-			caza.giro_tren_d-=mult*0.5;
+			if(caza.giro_tren_d>=0)
+				caza.giro_tren_d-=mult*0.5;
 
 
-		if(caza.tt_giro_x<0 and caza.tt_giro_y<0 and caza.giro_tren_d<0){
-			caza.actos[acto]=true;
-		}
+			if(caza.tt_giro_x<0 and caza.tt_giro_y<0 and caza.giro_tren_d<0){
+				caza.actos[acto]=true;
+			}
 
 			break;			
 		}
@@ -690,7 +670,6 @@ void animacion(){
 		//Sleep
 		case 33:{
 			sleep++;
-			//cout <<"Duerme: " <<sleep <<endl;
 			if(sleep==45){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -741,7 +720,6 @@ void animacion(){
 		//Sleep
 		case 36:{
 			sleep++;
-			//cout <<"Duerme: " <<sleep <<endl;
 			if(sleep==45){
 				caza.actos[acto]=true;
 				sleep=0;
@@ -820,6 +798,8 @@ void normal_key(unsigned char Tecla1,int x,int y)
 	cout <<"** Mover tren de aterrizaje: H/Y" <<endl;
 	cout <<"** Cambiar a pintado especial: 6" <<endl;
 	cout <<"** Cambiar a pintado normal: 5" <<endl;
+	cout <<"** Activar animacion: 9" <<endl;
+	cout <<"** Desactivar animacion: 0" <<endl;
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
@@ -932,7 +912,7 @@ switch (toupper(Tecla1)){
 				break;
 
 			case 3:
-				cout <<"Frenos aereos traseros" <<endl;
+				cout <<"Giro de los frenos aereos traseros" <<endl;
 				break;
 
 			case 4:
@@ -997,7 +977,7 @@ switch (toupper(Tecla1)){
 	
 	}
 
-glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 //***************************************************************************
@@ -1031,147 +1011,148 @@ void special_key(int Tecla1,int x,int y)
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
-switch (Tecla1){
-	case GLUT_KEY_LEFT:Observer_angle_y--;break;
-	case GLUT_KEY_RIGHT:Observer_angle_y++;break;
-	case GLUT_KEY_UP:Observer_angle_x--;break;
-	case GLUT_KEY_DOWN:Observer_angle_x++;break;
-	case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
-	case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
-	case GLUT_KEY_F1: {
-		caza.giro_ventana+=caza.constantes_animacion[7]*caza.factor_mult[7]; 
+	switch (Tecla1){
+		case GLUT_KEY_LEFT:Observer_angle_y--;break;
+		case GLUT_KEY_RIGHT:Observer_angle_y++;break;
+		case GLUT_KEY_UP:Observer_angle_x--;break;
+		case GLUT_KEY_DOWN:Observer_angle_x++;break;
+		case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;
+		case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
+		case GLUT_KEY_F1: {
+			caza.giro_ventana+=caza.constantes_animacion[7]*caza.factor_mult[7]; 
 
-		if(caza.giro_ventana>caza.max_giro_ventana)
-			caza.giro_ventana=caza.max_giro_ventana;
+			if(caza.giro_ventana>caza.max_giro_ventana)
+				caza.giro_ventana=caza.max_giro_ventana;
+				
+			break;
+		}
+		case GLUT_KEY_F2:{
+			caza.giro_ventana-=caza.constantes_animacion[7]*caza.factor_mult[7]; 
 			
-		break;
-	}
-	case GLUT_KEY_F2:{
-		caza.giro_ventana-=caza.constantes_animacion[7]*caza.factor_mult[7]; 
-		
-		if(caza.giro_ventana<caza.min_giro_ventana)
-			caza.giro_ventana=caza.min_giro_ventana;
+			if(caza.giro_ventana<caza.min_giro_ventana)
+				caza.giro_ventana=caza.min_giro_ventana;
 
-		break;
+			break;
 
-	} 		
+		} 		
 
 
-	case GLUT_KEY_F3: {
-		caza.flap_giro+=caza.constantes_animacion[8]*caza.factor_mult[8]; 
+		case GLUT_KEY_F3: {
+			caza.flap_giro+=caza.constantes_animacion[8]*caza.factor_mult[8]; 
 
-		caza.flap_trans+=caza.constantes_animacion[9]*caza.factor_mult[9];
+			caza.flap_trans+=caza.constantes_animacion[9]*caza.factor_mult[9];
 
-		if(caza.flap_trans>caza.max_flap_trans)
-			caza.flap_trans=caza.max_flap_trans;
+			if(caza.flap_trans>caza.max_flap_trans)
+				caza.flap_trans=caza.max_flap_trans;
 
-		if(caza.flap_giro>caza.max_flap_giro)
-			caza.flap_giro=caza.max_flap_giro;
+			if(caza.flap_giro>caza.max_flap_giro)
+				caza.flap_giro=caza.max_flap_giro;
 
-					
-		break;
-	}
-	case GLUT_KEY_F4:{
-		caza.flap_giro-=caza.constantes_animacion[8]*caza.factor_mult[8]; 
-		caza.flap_trans-=caza.constantes_animacion[9]*caza.factor_mult[9];
+						
+			break;
+		}
+		case GLUT_KEY_F4:{
+			caza.flap_giro-=caza.constantes_animacion[8]*caza.factor_mult[8]; 
+			caza.flap_trans-=caza.constantes_animacion[9]*caza.factor_mult[9];
 
-		if(caza.flap_trans<0)
-			caza.flap_trans=0;
+			if(caza.flap_trans<0)
+				caza.flap_trans=0;
 
-		if(caza.flap_giro<0)
-			caza.flap_giro=0;
+			if(caza.flap_giro<0)
+				caza.flap_giro=0;
 
-		break;
-	} 					
+			break;
+		} 					
 
-	case GLUT_KEY_F5: {
-		caza.angulo_alas+=caza.constantes_animacion[10]*caza.factor_mult[10]; 
+		case GLUT_KEY_F5: {
+			caza.angulo_alas+=caza.constantes_animacion[10]*caza.factor_mult[10]; 
 
-		if(caza.angulo_alas>caza.max_angulo_alas)
-			caza.angulo_alas=caza.max_angulo_alas;
+			if(caza.angulo_alas>caza.max_angulo_alas)
+				caza.angulo_alas=caza.max_angulo_alas;
 
+				
+			break;
+		}
+		case GLUT_KEY_F6:{
+			caza.angulo_alas-=caza.constantes_animacion[10]*caza.factor_mult[10]; 
 			
-		break;
-	}
-	case GLUT_KEY_F6:{
-		caza.angulo_alas-=caza.constantes_animacion[10]*caza.factor_mult[10]; 
-		
-		if(caza.angulo_alas<0)
-			caza.angulo_alas=0;
+			if(caza.angulo_alas<0)
+				caza.angulo_alas=0;
 
-		break;
-	}
-
-
-	case GLUT_KEY_F7: {
-		caza.giro_frenos_l+=caza.constantes_animacion[11]*caza.factor_mult[11]; 
-		caza.giro_frenos_r+=caza.constantes_animacion[11]*caza.factor_mult[11]; 
-
-		if(caza.giro_frenos_l>caza.max_giro_frenos)
-			caza.giro_frenos_l=caza.giro_frenos_r=caza.max_giro_frenos;
-
-		break;
-	}
-	case GLUT_KEY_F8:{
-		caza.giro_frenos_l-=caza.constantes_animacion[11]*caza.factor_mult[11]; 
-		caza.giro_frenos_r-=caza.constantes_animacion[11]*caza.factor_mult[11];
-		
-		if(caza.giro_frenos_l<0)
-			caza.giro_frenos_l=caza.giro_frenos_r=0;
-
-		break;
-	} 	
-
-	case GLUT_KEY_F9: {
-		caza.timon_giro+=caza.constantes_animacion[12]*caza.factor_mult[12]; 
-	//cout <<"------------giro: " <<caza.giro_ventana <<endl;
-						if(caza.timon_giro>caza.max_timon_giro){
-							caza.timon_giro=caza.max_timon_giro;
-						}
-							
-						break;
-	}
-	case GLUT_KEY_F10:{
-		caza.timon_giro-=caza.constantes_animacion[12]*caza.factor_mult[12]; 
-		
-		if(caza.timon_giro<-caza.max_timon_giro){
-			caza.timon_giro=-caza.max_timon_giro;
+			break;
 		}
 
-		break;
 
-	} 	
+		case GLUT_KEY_F7: {
+			caza.giro_frenos_l+=caza.constantes_animacion[11]*caza.factor_mult[11]; 
+			caza.giro_frenos_r+=caza.constantes_animacion[11]*caza.factor_mult[11]; 
+
+			if(caza.giro_frenos_l>caza.max_giro_frenos)
+				caza.giro_frenos_l=caza.giro_frenos_r=caza.max_giro_frenos;
+
+			break;
+		}
+		case GLUT_KEY_F8:{
+			caza.giro_frenos_l-=caza.constantes_animacion[11]*caza.factor_mult[11]; 
+			caza.giro_frenos_r-=caza.constantes_animacion[11]*caza.factor_mult[11];
+			
+			if(caza.giro_frenos_l<0)
+				caza.giro_frenos_l=caza.giro_frenos_r=0;
+
+			break;
+		} 	
+
+		case GLUT_KEY_F9: {
+			caza.timon_giro+=caza.constantes_animacion[12]*caza.factor_mult[12]; 
+
+							if(caza.timon_giro>caza.max_timon_giro){
+								caza.timon_giro=caza.max_timon_giro;
+							}
+								
+							break;
+		}
+		case GLUT_KEY_F10:{
+			caza.timon_giro-=caza.constantes_animacion[12]*caza.factor_mult[12]; 
+			
+			if(caza.timon_giro<-caza.max_timon_giro){
+				caza.timon_giro=-caza.max_timon_giro;
+			}
+
+			break;
+
+		} 	
 
 
-	case GLUT_KEY_F11: {
-		caza.angulo_trasero_l+=caza.constantes_animacion[13]*caza.factor_mult[13]; 
-		caza.angulo_trasero_r+=caza.constantes_animacion[13]*caza.factor_mult[13]; 
+		case GLUT_KEY_F11: {
+			caza.angulo_trasero_l+=caza.constantes_animacion[13]*caza.factor_mult[13]; 
+			caza.angulo_trasero_r+=caza.constantes_animacion[13]*caza.factor_mult[13]; 
 
-						if(caza.angulo_trasero_l>caza.max_angulo_trasero)
-							caza.angulo_trasero_l=caza.max_angulo_trasero;
-							
+							if(caza.angulo_trasero_l>caza.max_angulo_trasero)
+								caza.angulo_trasero_l=caza.max_angulo_trasero;
+								
 
-						if(caza.angulo_trasero_r>caza.max_angulo_trasero)
-							caza.angulo_trasero_r=caza.max_angulo_trasero;							
-						break;
-	}
-	case GLUT_KEY_F12:{
-		caza.angulo_trasero_l-=caza.constantes_animacion[13]*caza.factor_mult[13]; 
-		caza.angulo_trasero_r-=caza.constantes_animacion[13]*caza.factor_mult[13]; 
+							if(caza.angulo_trasero_r>caza.max_angulo_trasero)
+								caza.angulo_trasero_r=caza.max_angulo_trasero;							
+							break;
+		}
+		case GLUT_KEY_F12:{
+			caza.angulo_trasero_l-=caza.constantes_animacion[13]*caza.factor_mult[13]; 
+			caza.angulo_trasero_r-=caza.constantes_animacion[13]*caza.factor_mult[13]; 
+			
+			if(caza.angulo_trasero_r<-caza.max_angulo_trasero)
+				caza.angulo_trasero_r=-caza.max_angulo_trasero;
+
+			if(caza.angulo_trasero_l<-caza.max_angulo_trasero)
+				caza.angulo_trasero_l=-caza.max_angulo_trasero;
+
+			break;
+
+		} 	
+
 		
-		if(caza.angulo_trasero_r<-caza.max_angulo_trasero)
-			caza.angulo_trasero_r=-caza.max_angulo_trasero;
-
-		if(caza.angulo_trasero_l<-caza.max_angulo_trasero)
-			caza.angulo_trasero_l=-caza.max_angulo_trasero;
-
-		break;
-
-	} 	
-
-	
 	}
-glutPostRedisplay();
+	
+	glutPostRedisplay();
 }
 
 
