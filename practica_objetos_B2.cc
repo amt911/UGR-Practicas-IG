@@ -1008,6 +1008,8 @@ void special_key(int Tecla1,int x,int y)
 	cout <<"** Mover tren de aterrizaje: H/Y" <<endl;
 	cout <<"** Cambiar a pintado especial: 6" <<endl;
 	cout <<"** Cambiar a pintado normal: 5" <<endl;
+	cout <<"** Activar animacion: 9" <<endl;
+	cout <<"** Desactivar animacion: 0" <<endl;	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
