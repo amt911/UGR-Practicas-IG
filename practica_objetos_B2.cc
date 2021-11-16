@@ -186,10 +186,6 @@ switch (toupper(Tecla1)){
 	case '2':modo=EDGES;break;
 	case '3':modo=SOLID;break;
 	case '4':modo=SOLID_CHESS;break;
-	//case '5':tipo=NORMAL;break;
-	//case '6':tipo=ESPECIAL;break;
-	//case '9': caza.limpiar_actos();glutPostRedisplay();glutIdleFunc(animacion);break;
-	//case '0': glutIdleFunc(NULL); caza.limpiar_actos(); glutPostRedisplay(); break;
         case 'P':t_objeto=PIRAMIDE;break;
         case 'C':t_objeto=CUBO;break;
         case 'O':t_objeto=OBJETO_PLY;break;	
