@@ -149,12 +149,28 @@ switch (t_objeto){
 //**************************************************************************
 //
 //***************************************************************************
+void luces(){			//INCLUIR LO DE LA FOTO
+	float  luz1[]={1.0, 1.0, 1.0, 1.0},
+        pos1[]= {0, 20.0, 40.0, 1.0};
+
+	glLightfv (GL_LIGHT1, GL_DIFFUSE, luz1);
+glLightfv (GL_LIGHT1, GL_SPECULAR, luz1);
+
+glLightfv (GL_LIGHT1, GL_POSITION, pos1);
+
+glDisable (GL_LIGHT0);
+glEnable (GL_LIGHT1);
+
+}
+
 
 void draw(void)
 {
 
 clean_window();
 change_observer();
+//luces(alfa, beta);//Por ahora sera vacia
+luces();
 draw_axis();
 draw_objects();
 glutSwapBuffers();
@@ -813,17 +829,21 @@ switch (toupper(Tecla1)){
 	case '6':tipo=ESPECIAL;break;
 	case '9': caza.limpiar_actos();glutPostRedisplay();glutIdleFunc(animacion);break;
 	case '0': glutIdleFunc(NULL); caza.limpiar_actos(); glutPostRedisplay(); break;
-        /*case 'P':t_objeto=PIRAMIDE;break;
-        case 'C':t_objeto=CUBO;break;
-        case 'O':t_objeto=OBJETO_PLY;break;	
-        case 'R':t_objeto=ROTACION;break;
-		case '5':t_objeto=ESFERA;break;
-		case 'N':t_objeto=CONO; break;
-		case 'Z':t_objeto=CILINDRO; break;
-		case 'X':t_objeto=ROTACION_X; break;
-		case 'A':t_objeto=RELOJ; break;
-		case 'W':t_objeto=RARO; break;*/
-		case 'F':t_objeto=CAZA; break;
+	case 'F':t_objeto=CAZA; break;
+
+	
+        case 'I':t_objeto=PIRAMIDE;break;
+        case 'U':t_objeto=CUBO;break;
+        case 'L':t_objeto=OBJETO_PLY;break;	
+        case 'O':t_objeto=ROTACION;break;
+		case 'P':t_objeto=ESFERA;break;
+		case 'J':t_objeto=CONO; break;
+		case 'C':t_objeto=CILINDRO; break;
+		case 'V':t_objeto=ROTACION_X; break;
+		case ',':t_objeto=RELOJ; break;
+		case '.':t_objeto=RARO; break;
+		case '7':modo=SOLID_ILLUMINATED_FLAT;break;
+		case '8':modo=SOLID_ILLUMINATED_GOURAUD;break;
 
 	case 'D': caza.giro_aeronave_z+=caza.constantes_animacion[2]*caza.factor_mult[2]; break;
 	case 'A': caza.giro_aeronave_z-=caza.constantes_animacion[2]*caza.factor_mult[2]; break;
@@ -974,7 +994,7 @@ switch (toupper(Tecla1)){
 			cout <<"El valor de la variable es: " <<caza.constantes_animacion[indice]*caza.factor_mult[indice] <<endl;
 			break;			
 		}
-	
+
 	}
 
 	glutPostRedisplay();

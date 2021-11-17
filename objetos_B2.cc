@@ -48,6 +48,12 @@ glDrawArrays(GL_POINTS,0,vertices.size());
 
 _triangulos3D::_triangulos3D()
 {
+b_normales_caras=false;
+b_normales_vertices=false;
+
+ambiente_difusa=_vertex4f(0.2,0.4,0.9,1.0);  //coeficientes ambiente y difuso
+especular=_vertex4f(0.5,0.5,0.5,1.0);        //coeficiente especular
+brillo=50;                                   //exponente del brillo 
 }
 
 
@@ -146,9 +152,56 @@ switch (modo){
 	case EDGES:draw_aristas(r1, g1, b1, grosor);break;
 	case SOLID_CHESS:draw_solido_ajedrez(r1, g1, b1, r2, g2, b2);break;
 	case SOLID:draw_solido(r1, g1, b1);break;
+  case SOLID_ILLUMINATED_FLAT: draw_iluminacion_plana(); break;
+  //case SOLID_ILLUMINATED_GOURAUD: draw_iluminacion_suave();break;
 	}
 }
 
+
+void _triangulos3D::draw_iluminacion_plana( )
+{
+int i;
+if (b_normales_caras==false) calcular_normales_caras();
+glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+glEnable (GL_LIGHTING);
+glShadeModel(GL_FLAT);  //GL_SMOOTH
+glEnable(GL_NORMALIZE);
+
+glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &ambiente_difusa);
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &especular);
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,brillo);
+
+glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+glBegin(GL_TRIANGLES);
+for (i=0;i<caras.size();i++){
+  glNormal3fv((GLfloat *) &normales_caras[i]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+	}
+glEnd();
+glDisable(GL_LIGHTING);
+}
+
+
+void _triangulos3D::calcular_normales_caras( ){
+  _vertex3f a1, a2, n;
+normales_caras.resize(caras.size());
+
+for(int i=0; i<caras.size(); i++){
+	// obtener dos vectores en el triángulo y calcular el producto vectorial
+	a1=vertices[caras[i]._1]-vertices[caras[i]._0];
+       	a2=vertices[caras[i]._2]-vertices[caras[i]._0];
+        n=a1.cross_product(a2);
+	// modulo
+	float m=sqrt(n.x*n.x+n.y*n.y+n.z*n.z);
+	// normalización
+    	normales_caras[i]= _vertex3f(n.x/m, n.y/m, n.z/m);
+	}
+  
+b_normales_caras=true;
+}
 //*************************************************************************
 // clase cubo
 //*************************************************************************

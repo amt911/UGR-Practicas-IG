@@ -9,7 +9,7 @@
 
 
 const float AXIS_SIZE=5000;
-typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID} _modo;
+typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID, SOLID_ILLUMINATED_FLAT, SOLID_ILLUMINATED_GOURAUD} _modo;
 enum Eje{x, y, z};
 enum Tipo{NORMAL, ESPECIAL};
 
@@ -42,7 +42,25 @@ void    draw_solido(float r, float g, float b);
 void 	draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
 void 	draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
 
+//Practica 4
+void 	draw_iluminacion_plana( );
+//void 	draw_iluminacion_suave( );
+
+void	calcular_normales_caras();
+void 	calcular_normales_vertices();
+
 vector<_vertex3i> caras;
+
+//Practica 4
+vector<_vertex3f> normales_caras;
+vector<_vertex3f> normales_vertices;
+
+bool b_normales_caras;
+bool b_normales_vertices;
+
+_vertex4f ambiente_difusa;     //coeficientes ambiente y difuso
+_vertex4f especular;           //coeficiente especular
+float brillo;                  //exponente del brillo 
 };
 
 
