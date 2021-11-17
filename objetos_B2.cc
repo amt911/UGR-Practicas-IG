@@ -162,8 +162,8 @@ void _triangulos3D::draw_iluminacion_plana( )
 {
 int i;
 if (b_normales_caras==false) calcular_normales_caras();
-glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 glEnable (GL_LIGHTING);
 glShadeModel(GL_FLAT);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
@@ -474,14 +474,14 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
       for (int i = 0; i < (num_aux - 1); i++)
       {
         caras[c]._0 = (i + j * num_aux) % num_ver;
-        caras[c]._1 = ((j + 1) * num_aux + 1 + i) % num_ver;
-        caras[c]._2 = ((j + 1) * num_aux + i) % num_ver;
+        caras[c]._2 = ((j + 1) * num_aux + 1 + i) % num_ver;
+        caras[c]._1 = ((j + 1) * num_aux + i) % num_ver;
 
         c++;
 
         caras[c]._0 = (i + j * num_aux) % num_ver;
-        caras[c]._1 = (1 + i + j * num_aux) % num_ver;
-        caras[c]._2 = ((j + 1) * num_aux + 1 + i) % num_ver;
+        caras[c]._2 = (1 + i + j * num_aux) % num_ver;
+        caras[c]._1 = ((j + 1) * num_aux + 1 + i) % num_ver;
 
         c++;
       }

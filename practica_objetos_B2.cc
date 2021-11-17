@@ -39,7 +39,7 @@ _objeto_ply  ply;
 _rotacion rotacion, rotacion_x, raro; 
 _esfera esfera(1, ROTACIONES, ROTACIONES, y);
 _cono cono(1, 3, ROTACIONES, z);
-_cilindro cilindro(1, 3, ROTACIONES, x);
+_cilindro cilindro(1, 3, ROTACIONES, z);
 _ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
 
@@ -153,13 +153,22 @@ void luces(){			//INCLUIR LO DE LA FOTO
 	float  luz1[]={1.0, 1.0, 1.0, 1.0},
         pos1[]= {0, 20.0, 40.0, 1.0};
 
+	float  luz2[]={0, 1.0, 0, 1.0},
+        pos2[]= {0, 20.0, -40.0, 1.0};
+
 	glLightfv (GL_LIGHT1, GL_DIFFUSE, luz1);
 glLightfv (GL_LIGHT1, GL_SPECULAR, luz1);
 
 glLightfv (GL_LIGHT1, GL_POSITION, pos1);
 
+	glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
+glLightfv (GL_LIGHT2, GL_SPECULAR, luz2);
+
+glLightfv (GL_LIGHT2, GL_POSITION, pos2);
+
 glDisable (GL_LIGHT0);
 glEnable (GL_LIGHT1);
+glEnable (GL_LIGHT2);
 
 }
 
@@ -831,7 +840,7 @@ switch (toupper(Tecla1)){
 	case '0': glutIdleFunc(NULL); caza.limpiar_actos(); glutPostRedisplay(); break;
 	case 'F':t_objeto=CAZA; break;
 
-	
+
         case 'I':t_objeto=PIRAMIDE;break;
         case 'U':t_objeto=CUBO;break;
         case 'L':t_objeto=OBJETO_PLY;break;	
