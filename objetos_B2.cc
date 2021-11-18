@@ -163,7 +163,7 @@ void _triangulos3D::draw_iluminacion_plana( )
 int i;
 if (b_normales_caras==false) calcular_normales_caras();
 //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 glEnable (GL_LIGHTING);
 glShadeModel(GL_FLAT);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
@@ -340,12 +340,22 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
       {
           for (int i=0;i<num_aux;i++)
           {
+            
             if(perfil[i].y!=0.0 or perfil[i].z!=0){
               vertice_aux.y=perfil[i].y*cos(2.0*M_PI*j/(1.0*num))+
                             perfil[i].z*sin(2.0*M_PI*j/(1.0*num));
 
               vertice_aux.z=-perfil[i].y*sin(2.0*M_PI*j/(1.0*num))+
                             perfil[i].z*cos(2.0*M_PI*j/(1.0*num));
+
+/*
+              vertice_aux.y=perfil[i].y*cos(2.0*M_PI*j/(1.0*num))-
+                            perfil[i].z*sin(2.0*M_PI*j/(1.0*num));
+
+              vertice_aux.z=perfil[i].y*sin(2.0*M_PI*j/(1.0*num))+
+                            perfil[i].z*cos(2.0*M_PI*j/(1.0*num));
+*/
+
 
               vertice_aux.x=perfil[i].x;
             //vertices[i+j*num_aux]=vertice_aux;
@@ -419,12 +429,18 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
           for (int i=0;i<num_aux;i++)
           {
             if(perfil[i].x!=0.0 or perfil[i].y!=0.0){
-              vertice_aux.x=perfil[i].x*cos(2.0*M_PI*j/(1.0*num))+
+/*              vertice_aux.x=perfil[i].x*cos(2.0*M_PI*j/(1.0*num))+
                             perfil[i].y*sin(2.0*M_PI*j/(1.0*num));
 
               vertice_aux.y=-perfil[i].x*sin(2.0*M_PI*j/(1.0*num))+
                             perfil[i].y*cos(2.0*M_PI*j/(1.0*num));
+*/
+//VERSION MEJORADA PARA LA PRACTICA 4
+              vertice_aux.x=-perfil[i].y*sin(2.0*M_PI*j/(1.0*num))+
+                            perfil[i].x*cos(2.0*M_PI*j/(1.0*num));
 
+              vertice_aux.y=perfil[i].x*sin(2.0*M_PI*j/(1.0*num))+
+                            perfil[i].y*cos(2.0*M_PI*j/(1.0*num));
               vertice_aux.z=perfil[i].z;
             //vertices[i+j*num_aux]=vertice_aux;
               vertices.push_back(vertice_aux);
@@ -477,25 +493,33 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
         caras[c]._2 = ((j + 1) * num_aux + 1 + i) % num_ver;
         caras[c]._1 = ((j + 1) * num_aux + i) % num_ver;
 
+        //cout <<(char)('A'+caras[c]._0) <<"\t " <<(char)('A'+caras[c]._1) <<"\t " <<(char)('A'+caras[c]._2) <<endl;
+
         c++;
 
         caras[c]._0 = (i + j * num_aux) % num_ver;
         caras[c]._2 = (1 + i + j * num_aux) % num_ver;
         caras[c]._1 = ((j + 1) * num_aux + 1 + i) % num_ver;
 
+        //cout <<(char)('A'+caras[c]._0) <<"\t " <<(char)('A'+caras[c]._1) <<"\t " <<(char)('A'+caras[c]._2) <<endl;
+
         c++;
       }
     }
   }
 
+  //cout <<"------------------------------------------" <<endl;
   //tapa inferior    
   for(int i=0; i<num; i++){
     caras[c]._0=((i+1)*num_aux) % num_ver;
     caras[c]._1=i*num_aux;
     caras[c]._2=vertices.size()-2;
+
+    //cout <<(char)('A'+caras[c]._0) <<"\t " <<(char)('A'+caras[c]._1) <<"\t " <<(char)('A'+caras[c]._2) <<endl;
+
     c++;
   }
- 
+ //cout <<"------------------------------------------" <<endl;
  // tapa superior
   //El -1 lo que hace es que nos vamos al vertice mas alto del perfil anterior
   //(Con la formula sin -1 nos permite irnos a los vertices inferiores, como pasa mas arriba)
@@ -503,6 +527,8 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
     caras[c]._0=(i+1)*num_aux-1;
     caras[c]._1=((i+2)*num_aux-1) % num_ver;
     caras[c]._2=vertices.size()-1;
+
+    //cout <<(char)('A'+caras[c]._0) <<"\t " <<(char)('A'+caras[c]._1) <<"\t " <<(char)('A'+caras[c]._2) <<endl;
     c++;
   }
   
@@ -736,12 +762,13 @@ _cilindro::_cilindro(double radio, double h, int num, Eje axis){
       perfil.push_back(paux);
         break;
   }
-
-  //vertices=perfil;
-  //cout<<"Cilindro: ";
+  //cout <<"CILINDRO---------------------------------" <<endl;
   parametros(perfil, num, axis);
+  /*char cont='A';
+  for(auto it=vertices.cbegin(); it!=vertices.cend(); ++it)
+    cout <<cont++ <<": " <<it->_0 <<"\t" <<it->_1 <<"\t" <<it->_2 <<endl;*/
 
-  //cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
+//cout <<"CILINDRO---------------------------------" <<endl;    
 }
 
 
@@ -772,7 +799,7 @@ _ply_rot::_ply_rot(char *file, int rot, Eje axis){
 
   _rotacion aux;
 
-  aux.parametros(perfil, rot, axis);
+  //aux.parametros(perfil, rot, axis);
 
   vertices=aux.vertices;
   caras=aux.caras;

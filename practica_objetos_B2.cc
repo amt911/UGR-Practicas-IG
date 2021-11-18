@@ -31,7 +31,7 @@ int Window_x=50,Window_y=50,Window_width=450,Window_high=450;
 
 
 // objetos
-const int ROTACIONES=6;
+const int ROTACIONES=32;
 
 _cubo cubo;
 _piramide piramide(0.85,1.3);
@@ -42,17 +42,6 @@ _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 _ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
-
-
-_cuerpo prueba;
-_alas prueba2;
-//_alas_traseras prueba3;
-_ventana_movil prueba5;
-_flaps flaps;
-_frenos_delanteros p6;
-_timon p7;
-_frenos_traseros p8;
-_ventana_fija p9;
 _tornado caza;
 
 //**************************************************************************
@@ -150,21 +139,27 @@ switch (t_objeto){
 //
 //***************************************************************************
 void luces(){			//INCLUIR LO DE LA FOTO
-	float  luz1[]={1.0, 1.0, 1.0, 1.0},
-        pos1[]= {0, 20.0, 40.0, 1.0};
+	/*float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
+        pos1[]= {0, 20.0, 40.0, 1.0};*/
 
-	float  luz2[]={0, 1.0, 0, 1.0},
-        pos2[]= {0, 20.0, -40.0, 1.0};
+float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
+        pos1[]= {0, 20, 0, 1.0};
+
+	/*float  luz2[]={0, 1.0, 0, 1.0},		//Verde
+        pos2[]= {0, 20.0, -40.0, 1.0};*/
+
+	/*float  luz2[]={0, 1.0, 0, 1.0},
+        pos2[]= {40, 20.0, 0, 1.0};*/
 
 	glLightfv (GL_LIGHT1, GL_DIFFUSE, luz1);
 glLightfv (GL_LIGHT1, GL_SPECULAR, luz1);
 
 glLightfv (GL_LIGHT1, GL_POSITION, pos1);
 
-	glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
+	/*glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
 glLightfv (GL_LIGHT2, GL_SPECULAR, luz2);
 
-glLightfv (GL_LIGHT2, GL_POSITION, pos2);
+glLightfv (GL_LIGHT2, GL_POSITION, pos2);*/
 
 glDisable (GL_LIGHT0);
 glEnable (GL_LIGHT1);
@@ -807,6 +802,7 @@ void animacion(){
 int indice=0;	//Indice usado para elegir cambiar velocidad a una articulacion
 void normal_key(unsigned char Tecla1,int x,int y)
 {
+	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 	cout <<"** Controles: " <<endl;
@@ -1021,6 +1017,7 @@ switch (toupper(Tecla1)){
 
 void special_key(int Tecla1,int x,int y)
 {
+	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 	cout <<"** Controles: " <<endl;
