@@ -198,7 +198,7 @@ class _ply_rot: public _objeto_ply
 
 class _cuerpo: public _triangulos3D{
 	public:
-		_cuerpo(Materiales::tipoMaterial tipo=Materiales::CROMADO):_triangulos3D(tipo){}
+		_cuerpo(Materiales::tipoMaterial tipo=Materiales::ORO_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);
 
 	double y=1.95865;
@@ -219,6 +219,9 @@ class _alas: public _triangulos3D{
 	public:
 		_alas(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -241,6 +244,9 @@ class _ala_izda: public _triangulos3D{
 		const double angulo_z=-4.6;
 		const double x=1.3854;
 
+	private:
+	const int CUBO_TAM=2;
+
 	protected:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
@@ -256,6 +262,9 @@ class _ala_dcha: public _triangulos3D{
 	const double angulo_y=-23.5;
 	const double angulo_z=4.6;
 	const double x=-1.3854;
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -278,6 +287,9 @@ class _ala_td: public _triangulos3D{
 	const double intermedio_y=0.025641;
 	const double y_i_f=y-intermedio_y;
 
+	private:
+	const int CUBO_TAM=2;
+
 	protected:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
@@ -299,6 +311,10 @@ class _ala_ti: public _triangulos3D{
 	//const double intermedio_y=0.025641;
 	//const double y_i_f=y-intermedio_y;
 
+
+	private:
+	const int CUBO_TAM=2;
+
 	protected:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
@@ -316,6 +332,9 @@ class _ventana_movil: public _triangulos3D{
 		double z=1.60318;
 		//double intermedio_y=1.03152;
 		//double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -336,6 +355,9 @@ class _ventana_fija: public _triangulos3D{
 		double y=2.99002;
 		double z=1.60318;
 
+	private:
+	const int CUBO_TAM=2;
+
 	protected:
 	vector<_cubo> base;
 	_cilindro filos;
@@ -349,6 +371,9 @@ class _flaps: public _triangulos3D{
 	public:
 		_flaps(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> flaps;
@@ -370,6 +395,9 @@ class _flap: public _triangulos3D{
 		const double mover_centro_z=0.26;
 		const double mover_centro_y=-2.1596;
 
+	private:
+	const int CUBO_TAM=2;
+
 		//const double intermedio_y=1.95865;
 	protected:
 	_cubo flap;
@@ -384,6 +412,9 @@ class _frenos_delanteros: public _triangulos3D{
 	public:
 		_frenos_delanteros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -402,6 +433,9 @@ class _freno_individual: public _triangulos3D{
 		const double freno_delantero_angulo_y=-15.9;
 		const double freno_delantero_angulo_z=4.6;
 
+	private:
+	const int CUBO_TAM=2;
+
 	protected:
 	_cubo base;
 };
@@ -417,6 +451,9 @@ class _timon: public _triangulos3D{
 
 		const double y=3.579368;
 		const double z=-5.78512;
+
+	private:
+	const int CUBO_TAM=2;
 
 		//const double intermedio_y=1.620681;
 		//const double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
@@ -434,6 +471,9 @@ class _frenos_traseros: public _triangulos3D{
 	public:
 		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -455,7 +495,8 @@ class _freno_trasero_individual: public _triangulos3D{
 
 		const double centro_z=0.64;	//Para centrar la figura
 
-
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	_cubo base;
