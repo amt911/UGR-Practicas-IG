@@ -139,31 +139,42 @@ switch (t_objeto){
 //
 //***************************************************************************
 void luces(){			//INCLUIR LO DE LA FOTO
-	/*float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
-        pos1[]= {0, 20.0, 40.0, 1.0};*/
-
-float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
-        pos1[]= {0, 20, 0, 1.0};
-
-	/*float  luz2[]={0, 1.0, 0, 1.0},		//Verde
-        pos2[]= {0, 20.0, -40.0, 1.0};*/
-
-	/*float  luz2[]={0, 1.0, 0, 1.0},
-        pos2[]= {40, 20.0, 0, 1.0};*/
-
+	float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
+        pos1[]= {0, 20.0, 20, 1.0};
+/*
+	float  luz2[]={0, 1.0, 0, 1.0},
+        pos2[]= {40, 20.0, 0, 1.0};
+*/
 	glLightfv (GL_LIGHT1, GL_DIFFUSE, luz1);
 glLightfv (GL_LIGHT1, GL_SPECULAR, luz1);
 
 glLightfv (GL_LIGHT1, GL_POSITION, pos1);
 
-	/*glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
+
+
+
+/*
+	glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
 glLightfv (GL_LIGHT2, GL_SPECULAR, luz2);
 
 glLightfv (GL_LIGHT2, GL_POSITION, pos2);*/
+//glEnable(GL_LIGHTING);
+/*
+float ambiente[]={0.25, 0.148, 0.06475, 1.0};
+float l1[]={0.4, 0.2368, 0.1036, 1.0};
+float l2[]={0.774597, 0.458561, 0.200621, 1.0};
+float l3[]={76.8};//76.8;
 
-glDisable (GL_LIGHT0);
+
+glLightfv(GL_LIGHT0, GL_AMBIENT, ambiente);
+glLightfv(GL_LIGHT1, GL_DIFFUSE, l1);
+glLightfv(GL_LIGHT3, GL_SPECULAR, l2);
+glLightfv(GL_LIGHT3, GL_SHININESS, l3);
+
+//glDisable (GL_LIGHT0);
+glEnable(GL_LIGHT0);*/
 glEnable (GL_LIGHT1);
-glEnable (GL_LIGHT2);
+//glEnable (GL_LIGHT2);
 
 }
 

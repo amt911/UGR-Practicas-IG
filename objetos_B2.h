@@ -44,11 +44,11 @@ void 	draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b
 
 //Practica 4
 void 	draw_iluminacion_plana( );
-//void 	draw_iluminacion_suave( );
+void 	draw_iluminacion_suave( );
 
 void	calcular_normales_caras();
 void 	calcular_normales_vertices();
-
+//void calcular_normal_cara(int i);
 vector<_vertex3i> caras;
 
 //Practica 4
@@ -60,7 +60,13 @@ bool b_normales_vertices;
 
 _vertex4f ambiente_difusa;     //coeficientes ambiente y difuso
 _vertex4f especular;           //coeficiente especular
+_vertex4f difusa;
 float brillo;                  //exponente del brillo 
+
+
+void prueba(){
+
+}
 };
 
 

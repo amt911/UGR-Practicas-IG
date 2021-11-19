@@ -50,10 +50,17 @@ _triangulos3D::_triangulos3D()
 {
 b_normales_caras=false;
 b_normales_vertices=false;
-
+/*
 ambiente_difusa=_vertex4f(0.2,0.4,0.9,1.0);  //coeficientes ambiente y difuso
 especular=_vertex4f(0.5,0.5,0.5,1.0);        //coeficiente especular
 brillo=50;                                   //exponente del brillo 
+
+*/
+
+ambiente_difusa=_vertex4f(0.25, 0.148, 0.06475, 1);  //coeficientes ambiente y difuso
+especular=_vertex4f(0.774597, 0.458561, 0.200621, 1);        //coeficiente especular
+difusa=_vertex4f(0.4, 0.2368, 0.1036, 1);
+brillo=100;                                   //exponente del brillo 
 }
 
 
@@ -153,7 +160,7 @@ switch (modo){
 	case SOLID_CHESS:draw_solido_ajedrez(r1, g1, b1, r2, g2, b2);break;
 	case SOLID:draw_solido(r1, g1, b1);break;
   case SOLID_ILLUMINATED_FLAT: draw_iluminacion_plana(); break;
-  //case SOLID_ILLUMINATED_GOURAUD: draw_iluminacion_suave();break;
+  case SOLID_ILLUMINATED_GOURAUD: draw_iluminacion_suave();break;
 	}
 }
 
@@ -201,6 +208,78 @@ for(int i=0; i<caras.size(); i++){
 	}
   
 b_normales_caras=true;
+}
+
+void _triangulos3D::calcular_normales_vertices(){
+  //Para cada vertice
+  //normales_vertices.resize(vertices.size());
+/*
+  for(int i=0; i<vertices.size(); i++){
+    normales_vertices.push_back(_vertex3f(0, 0, 0));
+    for(int j=0; j<caras.size(); j++){    //Recorremos todas las caras para encontrar aquellas con ese vertice
+      if(caras[j]._0==i or caras[j]._1==i or caras[j]._2==i){
+        normales_vertices[i]+=normales_caras[j];
+      }
+    }
+    normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
+  }
+*/
+
+for(int i=0; i<vertices.size(); i++)
+  normales_vertices.push_back(_vertex3f(0, 0, 0));
+
+for(int i=0; i<caras.size(); i++){
+  normales_vertices[caras[i]._0]+=normales_caras[i];
+  normales_vertices[caras[i]._1]+=normales_caras[i];
+  normales_vertices[caras[i]._2]+=normales_caras[i];
+}
+
+for(auto it=normales_vertices.begin(); it!=normales_vertices.cend(); ++it)
+  (*it)/=sqrt(it->x*it->x+it->y*it->y+it->z*it->z);
+
+
+  b_normales_vertices=true;
+}
+
+void _triangulos3D::draw_iluminacion_suave(){
+if (b_normales_vertices==false){
+  if(!b_normales_caras)
+    calcular_normales_caras();
+
+  calcular_normales_vertices();
+} 
+//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+glEnable (GL_LIGHTING);
+glShadeModel(GL_SMOOTH);  //GL_SMOOTH
+glEnable(GL_NORMALIZE);
+
+glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &ambiente_difusa);
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &especular);
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,brillo);
+
+glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+glBegin(GL_TRIANGLES);
+/*
+for (int i=0;i<caras.size();i++){
+  glNormal3fv((GLfloat *) &normales_vertices[i]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+	}
+*/
+  for(int i=0; i<caras.size(); i++){
+    glNormal3fv((GLfloat *) &normales_vertices[caras[i]._0]);
+    glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+
+    glNormal3fv((GLfloat *) &normales_vertices[caras[i]._1]);
+	  glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+
+    glNormal3fv((GLfloat *) &normales_vertices[caras[i]._2]);
+	  glVertex3fv((GLfloat *) &vertices[caras[i]._2]);    
+  }
+glEnd();
+glDisable(GL_LIGHTING);
 }
 //*************************************************************************
 // clase cubo
