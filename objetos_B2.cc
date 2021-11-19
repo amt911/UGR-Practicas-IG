@@ -109,6 +109,7 @@ Materiales::Materiales(tipoMaterial material){
 
     case ORO:{
       ambiente=_vertex4f(0.24725, 0.1995, 0.0745, 1);
+      //ambiente=_vertex4f(0, 0.5, 0, 1);
       difusa=_vertex4f(0.75164, 0.60648, 0.22648, 1);
       especular=_vertex4f(0.628281, 0.555802, 0.366065, 1);
       brillo=51.2;
