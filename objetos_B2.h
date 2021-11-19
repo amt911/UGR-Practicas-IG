@@ -29,6 +29,35 @@ vector<_vertex3f> vertices;
 };
 
 //*************************************************************************
+// clase materiales
+//*************************************************************************
+
+class Materiales{
+	private:
+	_vertex4f ambiente;     //coeficientes ambiente y difuso
+	_vertex4f especular;           //coeficiente especular
+	_vertex4f difusa;
+	float brillo;                  //exponente del brillo 
+
+	public:
+	enum tipoMaterial{LATON, BRONCE, BRONCE_PULIDO, CROMADO, COBRE, COBRE_PULIDO, ORO, ORO_PULIDO};
+
+	public:
+	tipoMaterial mat;
+
+	public:
+	//enum tipoMaterial{LATON, BRONCE, BRONCE_PULIDO, CROMADO, COBRE, COBRE_PULIDO,
+	//ORO, ORO_PULIDO};
+	Materiales(tipoMaterial material);
+	const _vertex4f &getAmbiente() const;
+	const _vertex4f &getEspecular() const;
+	const _vertex4f &getDifusa() const;
+	const float getBrillo();
+};
+
+
+
+//*************************************************************************
 // clase triángulo
 //*************************************************************************
 
@@ -36,7 +65,7 @@ class _triangulos3D: public _puntos3D
 {
 public:
 
-	_triangulos3D();
+	_triangulos3D(Materiales::tipoMaterial m=Materiales::ORO_PULIDO);
 void 	draw_aristas(float r, float g, float b, int grosor);
 void    draw_solido(float r, float g, float b);
 void 	draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
@@ -57,16 +86,14 @@ vector<_vertex3f> normales_vertices;
 
 bool b_normales_caras;
 bool b_normales_vertices;
-
+Materiales material;
+/*
 _vertex4f ambiente_difusa;     //coeficientes ambiente y difuso
 _vertex4f especular;           //coeficiente especular
 _vertex4f difusa;
 float brillo;                  //exponente del brillo 
+*/
 
-
-void prueba(){
-
-}
 };
 
 
@@ -78,7 +105,7 @@ class _cubo: public _triangulos3D
 {
 public:
 
-	_cubo(float tam=2);
+	_cubo(float tam=2, Materiales::tipoMaterial tipo=Materiales::CROMADO);
 };
 
 
@@ -90,7 +117,7 @@ class _piramide: public _triangulos3D
 {
 public:
 
-	_piramide(float tam=0.5, float al=0.75);
+	_piramide(float tam=0.5, float al=0.75, Materiales::tipoMaterial tipo=Materiales::CROMADO);
 };
 
 //*************************************************************************
@@ -112,7 +139,7 @@ int   parametros(char *archivo);
 class _rotacion: public _triangulos3D
 {
 public:
-       _rotacion();
+       _rotacion(Materiales::tipoMaterial tipo=Materiales::LATON);
 //void  parametros(vector<_vertex3f> perfil1, int num1);
 void  parametros(vector<_vertex3f> perfil1, int num1, Eje axis=y);
 
@@ -127,7 +154,7 @@ int num;
 class _esfera: public _rotacion
 {
 	public:
-	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=y);
+	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::CROMADO);
 };
 
 //************************************************************************
@@ -137,7 +164,7 @@ class _esfera: public _rotacion
 class _cono: public _rotacion
 {
 	public:
-		_cono(double radio=1, double h=2, int num=12, Eje axis=y);
+		_cono(double radio=1, double h=2, int num=12, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::ORO);
 };
 
 //************************************************************************
@@ -147,7 +174,7 @@ class _cono: public _rotacion
 class _cilindro: public _rotacion
 {
 	public:
-		_cilindro(double radio=1, double h=2, int num=12, Eje axis=y);
+		_cilindro(double radio=1, double h=2, int num=12, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::ORO);
 };
 
 //************************************************************************
@@ -157,9 +184,10 @@ class _cilindro: public _rotacion
 class _ply_rot: public _objeto_ply
 {
 	public:
-		_ply_rot(char *file, int rot=3, Eje axis=y);
+		_ply_rot(char *file, int rot=3, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::ORO);
 
 	private:
+	Materiales material;
 	vector<_vertex3f> perfil;
 };
 
@@ -170,10 +198,13 @@ class _ply_rot: public _objeto_ply
 
 class _cuerpo: public _triangulos3D{
 	public:
-		_cuerpo();
+		_cuerpo(Materiales::tipoMaterial tipo=Materiales::CROMADO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);
 
 	double y=1.95865;
+
+	private:
+	const int CUBO_TAM=2;
 
 	protected:
 	vector<_cubo> base;
@@ -186,7 +217,7 @@ class _cuerpo: public _triangulos3D{
 
 class _alas: public _triangulos3D{
 	public:
-		_alas();
+		_alas(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
@@ -203,7 +234,7 @@ class _alas: public _triangulos3D{
 
 class _ala_izda: public _triangulos3D{
 	public:
-		_ala_izda()=default;
+		_ala_izda(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y=23.5;
@@ -219,7 +250,7 @@ class _ala_izda: public _triangulos3D{
 
 class _ala_dcha: public _triangulos3D{
 	public:
-		_ala_dcha()=default;
+		_ala_dcha(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double angulo_y=-23.5;
@@ -237,7 +268,7 @@ class _ala_dcha: public _triangulos3D{
 //************************************************************************
 class _ala_td: public _triangulos3D{
 	public:
-		_ala_td(){}
+		_ala_td(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=-1.0603;
@@ -258,7 +289,7 @@ class _ala_td: public _triangulos3D{
 
 class _ala_ti: public _triangulos3D{
 	public:
-		_ala_ti(){}
+		_ala_ti(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=1.0603;
@@ -277,7 +308,7 @@ class _ala_ti: public _triangulos3D{
 
 class _ventana_movil: public _triangulos3D{
 	public:
-		_ventana_movil()=default;
+		_ventana_movil(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 		
 		double x=0;
@@ -298,7 +329,7 @@ class _ventana_movil: public _triangulos3D{
 
 class _ventana_fija: public _triangulos3D{
 	public:
-		_ventana_fija()=default;
+		_ventana_fija(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		double x=0;
@@ -316,7 +347,7 @@ class _ventana_fija: public _triangulos3D{
 
 class _flaps: public _triangulos3D{
 	public:
-		_flaps()=default;
+		_flaps(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
@@ -327,7 +358,7 @@ class _flaps: public _triangulos3D{
 //************************************************************************
 class _flap: public _triangulos3D{
 	public:
-		_flap()=default;
+		_flap(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y_r=14.6;
@@ -351,7 +382,7 @@ class _flap: public _triangulos3D{
 
 class _frenos_delanteros: public _triangulos3D{
 	public:
-		_frenos_delanteros()=default;
+		_frenos_delanteros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
@@ -362,7 +393,7 @@ class _frenos_delanteros: public _triangulos3D{
 
 class _freno_individual: public _triangulos3D{
 	public:
-		_freno_individual()=default;
+		_freno_individual(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=2.2518;
@@ -380,7 +411,7 @@ class _freno_individual: public _triangulos3D{
 
 class _timon: public _triangulos3D{
 	public:
-		_timon()=default;
+		_timon(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 
@@ -401,7 +432,7 @@ class _timon: public _triangulos3D{
 
 class _frenos_traseros: public _triangulos3D{
 	public:
-		_frenos_traseros()=default;
+		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	protected:
@@ -413,7 +444,7 @@ class _frenos_traseros: public _triangulos3D{
 
 class _freno_trasero_individual: public _triangulos3D{
 	public:
-		_freno_trasero_individual()=default;
+		_freno_trasero_individual(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_z_l=-23.5;
@@ -436,7 +467,7 @@ class _freno_trasero_individual: public _triangulos3D{
 
 class _tren_trasero: public _triangulos3D{
 	public:
-		_tren_trasero()=default;
+		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double x_r=-0.89669;
@@ -453,7 +484,7 @@ class _tren_trasero: public _triangulos3D{
 
 class _tren_delantero: public _triangulos3D{
 	public:
-		_tren_delantero()=default;
+		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=1.28617;

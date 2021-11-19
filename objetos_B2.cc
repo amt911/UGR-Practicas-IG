@@ -41,26 +41,115 @@ glDrawArrays(GL_POINTS,0,vertices.size());
 
 }
 
+//*************************************************************************
+// materiales
+//*************************************************************************
+Materiales::Materiales(tipoMaterial material){
+  /**
+   * LATON, BRONCE, BRONCE_PULIDO, CROMADO, COBRE, COBRE_PULIDO,
+	ORO, ORO_PULIDO
+   * 
+   */
 
+  mat=material;
+  switch(material){
+    case LATON:{
+      ambiente=_vertex4f(0.329412, 0.223529, 0.027451, 1);
+      difusa=_vertex4f(0.780392, 0.568627, 0.113725, 1);
+      especular=_vertex4f(0.992157, 0.941176, 0.807843, 1);
+      brillo=27.8974;
+      
+      break;
+    }
+
+    case BRONCE:{
+      ambiente=_vertex4f(0.2125, 0.1275, 0.054, 1);
+      difusa=_vertex4f(0.714, 0.4284, 0.18144, 1);
+      especular=_vertex4f(0.393548, 0.271906, 0.166721, 1);
+      brillo=25.6;
+      
+      break;
+    }
+
+    case BRONCE_PULIDO:{
+      ambiente=_vertex4f(0.25, 0.148, 0.06475, 1);
+      difusa=_vertex4f(0.4, 0.2368, 0.1036, 1);
+      especular=_vertex4f(0.774597, 0.458561, 0.200621, 1);
+      brillo=76.8;
+      
+      break;
+    }
+
+    case CROMADO:{
+      ambiente=_vertex4f(0.25, 0.25, 0.25, 1);
+      difusa=_vertex4f(0.4, 0.4, 0.4, 1);
+      especular=_vertex4f(0.774597, 0.774597, 0.774597, 1);
+      brillo=76.8;
+      
+      break;
+    }
+
+    case COBRE:{
+      ambiente=_vertex4f(0.19125, 0.0735, 0.0225, 1);
+      difusa=_vertex4f(0.7038, 0.27048, 0.0828, 1);
+      especular=_vertex4f(0.256777, 0.137622, 0.086014, 1);
+      brillo=12.8;
+      
+      break;
+    }
+
+    case COBRE_PULIDO:{
+      ambiente=_vertex4f(0.2295, 0.08825, 0.0275, 1);
+      difusa=_vertex4f(0.5508, 0.2118, 0.066, 1);
+      especular=_vertex4f(0.580594, 0.223257, 0.0695701, 1);
+      brillo=51.2;
+      
+      break;
+    }
+
+    case ORO:{
+      ambiente=_vertex4f(0.24725, 0.1995, 0.0745, 1);
+      difusa=_vertex4f(0.75164, 0.60648, 0.22648, 1);
+      especular=_vertex4f(0.628281, 0.555802, 0.366065, 1);
+      brillo=51.2;
+      
+      break;
+    }
+
+    case ORO_PULIDO:{
+      ambiente=_vertex4f(0.24725, 0.2245, 0.0645, 1);
+      difusa=_vertex4f(0.34615, 0.3143, 0.0903, 1);
+      especular=_vertex4f(0.797357, 0.723991, 0.208006, 1);
+      brillo=83.2;
+      
+      break;
+    }
+  }
+}
+
+const _vertex4f &Materiales::getAmbiente() const{
+  return ambiente;
+}
+
+const _vertex4f &Materiales::getEspecular() const{
+  return especular;
+}
+const _vertex4f &Materiales::getDifusa() const{
+  return difusa;
+}
+
+
+const float Materiales::getBrillo(){
+  return brillo;
+}
 //*************************************************************************
 // _triangulos3D
 //*************************************************************************
 
-_triangulos3D::_triangulos3D()
+_triangulos3D::_triangulos3D(Materiales::tipoMaterial m): material(m)
 {
-b_normales_caras=false;
-b_normales_vertices=false;
-/*
-ambiente_difusa=_vertex4f(0.2,0.4,0.9,1.0);  //coeficientes ambiente y difuso
-especular=_vertex4f(0.5,0.5,0.5,1.0);        //coeficiente especular
-brillo=50;                                   //exponente del brillo 
-
-*/
-
-ambiente_difusa=_vertex4f(0.25, 0.148, 0.06475, 1);  //coeficientes ambiente y difuso
-especular=_vertex4f(0.774597, 0.458561, 0.200621, 1);        //coeficiente especular
-difusa=_vertex4f(0.4, 0.2368, 0.1036, 1);
-brillo=100;                                   //exponente del brillo 
+  b_normales_caras=false;
+  b_normales_vertices=false;
 }
 
 
@@ -70,28 +159,13 @@ brillo=100;                                   //exponente del brillo
 
 void _triangulos3D::draw_aristas(float r, float g, float b, int grosor)
 {
-  /*
-int i;
-glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-glLineWidth(grosor);
-glColor3f(r,g,b);
-glBegin(GL_TRIANGLES);
-for (i=0;i<caras.size();i++){
-	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-glEnd();
-*/
+  glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);	//GL_FILL
+  glLineWidth(grosor);
+  glColor3f(r,g,b);
 
-//**** usando vertex_array ****
-glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);	//GL_FILL
-glLineWidth(grosor);
-glColor3f(r,g,b);
-
-glEnableClientState(GL_VERTEX_ARRAY);
-glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
-glDrawElements(GL_TRIANGLES,caras.size()*3,GL_UNSIGNED_INT,&caras[0]);
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
+  glDrawElements(GL_TRIANGLES,caras.size()*3,GL_UNSIGNED_INT,&caras[0]);
 }
 
 //*************************************************************************
@@ -100,27 +174,12 @@ glDrawElements(GL_TRIANGLES,caras.size()*3,GL_UNSIGNED_INT,&caras[0]);
 
 void _triangulos3D::draw_solido(float r, float g, float b)
 {
-  /*
-int i;
-glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-//glLineWidth(grosor);
-glColor3f(r,g,b);
-glBegin(GL_TRIANGLES);
-for (i=0;i<caras.size();i++){
-	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-glEnd();
-*/
+  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);	//GL_FILL
+  glColor3f(r,g,b);
 
-//**** usando vertex_array ****
-glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);	//GL_FILL
-glColor3f(r,g,b);
-
-glEnableClientState(GL_VERTEX_ARRAY);
-glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
-glDrawElements(GL_TRIANGLES,caras.size()*3,GL_UNSIGNED_INT,&caras[0]);
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
+  glDrawElements(GL_TRIANGLES,caras.size()*3,GL_UNSIGNED_INT,&caras[0]);
 }
 
 //*************************************************************************
@@ -131,8 +190,6 @@ void _triangulos3D::draw_solido_ajedrez(float r1, float g1, float b1, float r2, 
 {
 int i;
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-//glLineWidth(grosor);
-//glColor3f(r,g,b);
 glBegin(GL_TRIANGLES);
 for (i=0;i<caras.size();i++){
   if(i%2==0)
@@ -175,9 +232,11 @@ glEnable (GL_LIGHTING);
 glShadeModel(GL_FLAT);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
 
-glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &ambiente_difusa);
-glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &especular);
-glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,brillo);
+//glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &material.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &material.getEspecular());
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
 
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
@@ -211,20 +270,6 @@ b_normales_caras=true;
 }
 
 void _triangulos3D::calcular_normales_vertices(){
-  //Para cada vertice
-  //normales_vertices.resize(vertices.size());
-/*
-  for(int i=0; i<vertices.size(); i++){
-    normales_vertices.push_back(_vertex3f(0, 0, 0));
-    for(int j=0; j<caras.size(); j++){    //Recorremos todas las caras para encontrar aquellas con ese vertice
-      if(caras[j]._0==i or caras[j]._1==i or caras[j]._2==i){
-        normales_vertices[i]+=normales_caras[j];
-      }
-    }
-    normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
-  }
-*/
-
 for(int i=0; i<vertices.size(); i++)
   normales_vertices.push_back(_vertex3f(0, 0, 0));
 
@@ -248,26 +293,24 @@ if (b_normales_vertices==false){
 
   calcular_normales_vertices();
 } 
-//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+
 glEnable (GL_LIGHTING);
 glShadeModel(GL_SMOOTH);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
-
+/*
 glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &ambiente_difusa);
 glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &especular);
 glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,brillo);
+*/
+
+glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &material.getEspecular());
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
+
 
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
-/*
-for (int i=0;i<caras.size();i++){
-  glNormal3fv((GLfloat *) &normales_vertices[i]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-*/
   for(int i=0; i<caras.size(); i++){
     glNormal3fv((GLfloat *) &normales_vertices[caras[i]._0]);
     glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
@@ -285,7 +328,7 @@ glDisable(GL_LIGHTING);
 // clase cubo
 //*************************************************************************
 
-_cubo::_cubo(float tam)
+_cubo::_cubo(float tam, Materiales::tipoMaterial tipo):_triangulos3D(tipo)
 {
 //vertices
 vertices.resize(8); 
@@ -319,7 +362,7 @@ caras[11]._0=5;caras[11]._1=6;caras[11]._2=7;
 // clase piramide
 //*************************************************************************
 
-_piramide::_piramide(float tam, float al)
+_piramide::_piramide(float tam, float al, Materiales::tipoMaterial tipo):_triangulos3D(tipo)
 {
 
 //vertices 
@@ -392,7 +435,7 @@ return(0);
 // objeto por revolucion
 //************************************************************************
 
-_rotacion::_rotacion()
+_rotacion::_rotacion(Materiales::tipoMaterial tipo):_triangulos3D(tipo)
 {
 
 }
@@ -616,7 +659,9 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
 //************************************************************************
 // esfera
 //************************************************************************
-_esfera::_esfera(int radio, int num_puntos, int num_rot, Eje axis){
+_esfera::_esfera(int radio, int num_puntos, int num_rot, Eje axis, Materiales::tipoMaterial tipo):
+_rotacion(tipo)
+{
   assert(radio>0.0 and num_puntos>2 and num_rot>2);
   num=num_rot;
 
@@ -708,7 +753,9 @@ _esfera::_esfera(int radio, int num_puntos, int num_rot, Eje axis){
 //************************************************************************
 // cono
 //************************************************************************
-_cono::_cono(double radio, double h, int num, Eje axis){
+_cono::_cono(double radio, double h, int num, Eje axis, Materiales::tipoMaterial tipo):
+_rotacion(tipo)
+{
   assert(radio>0.0 and h>0.0 and num>2);
   this->num=num;
 
@@ -791,7 +838,8 @@ _cono::_cono(double radio, double h, int num, Eje axis){
 // cilindro
 //************************************************************************
 
-_cilindro::_cilindro(double radio, double h, int num, Eje axis){
+_cilindro::_cilindro(double radio, double h, int num, Eje axis, Materiales::tipoMaterial tipo):_rotacion(tipo)
+{
   assert(radio>0.0 and h>0.0 and num>2);
   _vertex3f paux;
 
@@ -855,7 +903,10 @@ _cilindro::_cilindro(double radio, double h, int num, Eje axis){
 // clase ply_rot
 //************************************************************************
 
-_ply_rot::_ply_rot(char *file, int rot, Eje axis){
+_ply_rot::_ply_rot(char *file, int rot, Eje axis, Materiales::tipoMaterial tipo):
+material(tipo)
+{
+  
   int n_perfil,n_car;
 
   vector<float> ver_ply ;
@@ -888,10 +939,6 @@ _ply_rot::_ply_rot(char *file, int rot, Eje axis){
 // caza
 //************************************************************************
 
-_cuerpo::_cuerpo(){
-
-}
-
 // Version centrada
 void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
  float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
@@ -904,7 +951,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
    rf2=gf2=bf2=0.22;
  }
  //Air intakes
-  base.push_back(_cubo());
+  base.push_back(_cubo(CUBO_TAM, material.mat));
 
   glPushMatrix();
   glTranslatef(-0.9218, 0.1132, 1.4685);
@@ -1373,11 +1420,6 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
 //************************************************************************
-_alas::_alas(){
-
-}
-
-
 void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
   //Cubos con la forma primitiva de las alas
     //derecha
