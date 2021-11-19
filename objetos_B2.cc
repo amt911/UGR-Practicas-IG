@@ -109,7 +109,6 @@ Materiales::Materiales(tipoMaterial material){
 
     case ORO:{
       ambiente=_vertex4f(0.24725, 0.1995, 0.0745, 1);
-      //ambiente=_vertex4f(0, 0.5, 0, 1);
       difusa=_vertex4f(0.75164, 0.60648, 0.22648, 1);
       especular=_vertex4f(0.628281, 0.555802, 0.366065, 1);
       brillo=51.2;
@@ -143,6 +142,32 @@ const _vertex4f &Materiales::getDifusa() const{
 const float Materiales::getBrillo(){
   return brillo;
 }
+
+
+void Materiales::setAmbiente(double v1, double v2, double v3){
+  _vertex4f aux(v1, v2, v3, 1);
+
+  ambiente=aux;
+}
+
+void Materiales::setEspecular(double v1, double v2, double v3){
+  _vertex4f aux(v1, v2, v3, 1);
+
+  especular=aux;
+}
+
+
+void Materiales::setDifusa(double v1, double v2, double v3){
+  _vertex4f aux(v1, v2, v3, 1);
+
+  difusa=aux;
+}
+
+
+void Materiales::setBrillo(double valor){
+  brillo=valor;
+}
+
 //*************************************************************************
 // _triangulos3D
 //*************************************************************************
@@ -751,6 +776,36 @@ _rotacion(tipo)
   //cout <<"\nNumero de caras: " <<caras.size() <<endl <<"Numero de vertices: " <<vertices.size() <<endl <<endl;
 }
 
+
+void _esfera::calcular_normales_vertices( ){
+
+  cout <<"OVERRRRIRIRJREOSJKHFLJDHFKLJSDHFLDSKJFLKSDJFLKJSDKLFJGHDKLJGHDFKLJFGHDKLJSHGKJFSLDKJG" <<endl;
+  int i;
+if (b_normales_caras==false) calcular_normales_caras();
+//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+glEnable (GL_LIGHTING);
+glShadeModel(GL_FLAT);  //GL_SMOOTH
+glEnable(GL_NORMALIZE);
+
+//glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &material.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &material.getEspecular());
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
+
+glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+glBegin(GL_TRIANGLES);
+for (i=0;i<caras.size();i++){
+  glNormal3fv((GLfloat *) &normales_caras[i]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
+	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
+	}
+glEnd();
+glDisable(GL_LIGHTING);
+}
+
 //************************************************************************
 // cono
 //************************************************************************
@@ -930,7 +985,7 @@ material(tipo)
 
   _rotacion aux;
 
-  //aux.parametros(perfil, rot, axis);
+  aux.parametros(perfil, rot, axis);
 
   vertices=aux.vertices;
   caras=aux.caras;
@@ -1218,7 +1273,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 //Ahora la parte de los cilindros
 
 //Parte de abajo del caza
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.524, 1.5759);
@@ -1228,7 +1283,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0.2268, -0.504, -0.2723);
@@ -1239,7 +1294,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-0.2268, -0.504, -0.2723);
@@ -1255,7 +1310,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
   //Parte de arriba delantera
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 0.2058, 2.8629);
@@ -1266,7 +1321,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
   //Cilindro de arriba que recorre media aeronave
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 0.6863, -1.3726);
@@ -1277,7 +1332,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
   //Parte de la cola
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.3637, -1.58);
@@ -1287,7 +1342,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 0.171, -2.7727);
@@ -1297,7 +1352,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.2311, -3.0631);
@@ -1307,7 +1362,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 0.1517, -4.4509);
@@ -1317,7 +1372,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.0391, -4.6683);
@@ -1327,7 +1382,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();  
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 0.1189, -5.1279);
@@ -1338,7 +1393,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
 //Escape del turbojet
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0.4586, 0.0771, -5.5719);
@@ -1350,7 +1405,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     esquinas[esquinas.size()-1].draw(modo, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, grosor);
   glPopMatrix();
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-0.4586, 0.0771, -5.5719);
@@ -1389,7 +1444,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 
 //Filos del timon
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 1.095, -2.1481);
@@ -1399,7 +1454,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 2.3451, -4.5454);
@@ -1409,7 +1464,7 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
   glPopMatrix();
 
 
-  esquinas.push_back(_cilindro());
+  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, 3.2411, -6.4318);
@@ -1515,7 +1570,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 
 //Cilindros para el filo de las alas
   //derecha
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-3.6565, 2.1568, -1.0302);  
@@ -1526,7 +1581,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
   glPopMatrix();  
 
 
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-5.8499, 1.9745, -2.315);
@@ -1538,7 +1593,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
   glPopMatrix();  
 
   //izquierda       
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(3.6565, 2.1568, -1.0302);
@@ -1549,7 +1604,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
   glPopMatrix();  
 
 
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   glPushMatrix();
   glTranslatef(5.8499, 1.9745, -2.315);
   glRotatef(90, 1, 0, 0);  
@@ -1561,7 +1616,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 
   //Esferas para las esquinas
   //derecha
-  esquinas.push_back(_esfera());
+  esquinas.push_back(_esfera(ES_RADIO, NUM, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-5.6556, 1.9831, -1.8168);
@@ -1572,7 +1627,7 @@ void _alas::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
 
 
   //izquierda
-  esquinas.push_back(_esfera());
+  esquinas.push_back(_esfera(ES_RADIO, NUM, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(5.6556, 1.9831, -1.8168);
@@ -1644,7 +1699,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
 
 //Cilindros para el filo de las alas
   //izquierda       
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(3.6565, 2.1568, -1.0302);
@@ -1655,7 +1710,7 @@ void _ala_izda::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glPopMatrix();  
 
 
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   glPushMatrix();
   glTranslatef(5.8499, 1.9745, -2.315);
   glRotatef(90, 1, 0, 0);  
@@ -1736,7 +1791,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
 
 //Cilindros para el filo de las alas
   //derecha
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-3.6565, 2.1568, -1.0302);  
@@ -1747,7 +1802,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glPopMatrix();  
 
 
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(-5.8499, 1.9745, -2.315);
@@ -1876,7 +1931,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 
 //Ahora los cilindros que hacen que los filos sean redondeados
   //derecha
-    filos.push_back(_cilindro());
+    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
     glPushMatrix();
     glTranslatef(-1.0211, -0.034261, 0.33208);
@@ -1888,7 +1943,7 @@ void _ala_td::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glPopMatrix();   
 
 
-    filos.push_back(_cilindro());
+    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
     glPushMatrix();
     glTranslatef(-1.9383, -0.049661, -1.32752);
@@ -2016,7 +2071,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 //Ahora los cilindros que hacen que los filos sean redondeados
   //izquierda
 
-    filos.push_back(_cilindro());
+    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
     glPushMatrix();
     glTranslatef(1.0211, -0.034261, 0.33208);
@@ -2027,7 +2082,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor);
     glPopMatrix();   
 
-    filos.push_back(_cilindro());
+    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
     glPushMatrix();
     glTranslatef(1.9383, -0.049661, -1.32752);
@@ -2102,7 +2157,7 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
 
 
   //Ahora los cilindros
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.26732, 0.97712);
@@ -2116,7 +2171,7 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
 
 
 
-  filos.push_back(_cilindro());
+  filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.28891, 2.0103);
@@ -2463,7 +2518,7 @@ void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, f
 
 void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
   //Brazo
-  piezas.push_back(_cilindro());
+  piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.6, 0);
@@ -2491,7 +2546,7 @@ void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, flo
 
 void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo){
   //Brazo 0.7 0.4
-  piezas.push_back(_cilindro());
+  piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
   glPushMatrix();
   glTranslatef(0, -0.55, 0);

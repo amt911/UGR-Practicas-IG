@@ -52,6 +52,12 @@ class Materiales{
 	const _vertex4f &getAmbiente() const;
 	const _vertex4f &getEspecular() const;
 	const _vertex4f &getDifusa() const;
+
+	void setAmbiente(double v1, double v2, double v3);
+	void setEspecular(double v1, double v2, double v3);
+	void setDifusa(double v1, double v2, double v3);
+	void setBrillo(double valor);
+
 	const float getBrillo();
 };
 
@@ -65,7 +71,7 @@ class _triangulos3D: public _puntos3D
 {
 public:
 
-	_triangulos3D(Materiales::tipoMaterial m=Materiales::ORO_PULIDO);
+	_triangulos3D(Materiales::tipoMaterial m=Materiales::LATON);
 void 	draw_aristas(float r, float g, float b, int grosor);
 void    draw_solido(float r, float g, float b);
 void 	draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
@@ -155,6 +161,7 @@ class _esfera: public _rotacion
 {
 	public:
 	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::CROMADO);
+	void 	calcular_normales_vertices();
 };
 
 //************************************************************************
@@ -198,13 +205,19 @@ class _ply_rot: public _objeto_ply
 
 class _cuerpo: public _triangulos3D{
 	public:
-		_cuerpo(Materiales::tipoMaterial tipo=Materiales::ORO_PULIDO):_triangulos3D(tipo){}
+		_cuerpo(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), 
+		nariz(CONO_RADIO, CONO_H, NUM, eje,  tipo), nariz_curva(ES_RADIO, NUM, NUM, eje, tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);
 
 	double y=1.95865;
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -217,11 +230,16 @@ class _cuerpo: public _triangulos3D{
 
 class _alas: public _triangulos3D{
 	public:
-		_alas(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_alas(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -237,7 +255,8 @@ class _alas: public _triangulos3D{
 
 class _ala_izda: public _triangulos3D{
 	public:
-		_ala_izda(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ala_izda(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y=23.5;
@@ -246,6 +265,11 @@ class _ala_izda: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -256,7 +280,9 @@ class _ala_izda: public _triangulos3D{
 
 class _ala_dcha: public _triangulos3D{
 	public:
-		_ala_dcha(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ala_dcha(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double angulo_y=-23.5;
@@ -265,6 +291,11 @@ class _ala_dcha: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -277,7 +308,9 @@ class _ala_dcha: public _triangulos3D{
 //************************************************************************
 class _ala_td: public _triangulos3D{
 	public:
-		_ala_td(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ala_td(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=-1.0603;
@@ -289,6 +322,11 @@ class _ala_td: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -301,7 +339,9 @@ class _ala_td: public _triangulos3D{
 
 class _ala_ti: public _triangulos3D{
 	public:
-		_ala_ti(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ala_ti(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	const double x=1.0603;
@@ -314,6 +354,11 @@ class _ala_ti: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -324,7 +369,9 @@ class _ala_ti: public _triangulos3D{
 
 class _ventana_movil: public _triangulos3D{
 	public:
-		_ventana_movil(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ventana_movil(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		pico(CONO_RADIO, CONO_H, NUM, eje, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 		
 		double x=0;
@@ -335,6 +382,11 @@ class _ventana_movil: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -348,7 +400,9 @@ class _ventana_movil: public _triangulos3D{
 
 class _ventana_fija: public _triangulos3D{
 	public:
-		_ventana_fija(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_ventana_fija(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		filos(CIL_RAD, CIL_H, NUM, eje, tipo), pico(CONO_RADIO, CONO_H, NUM, eje, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		double x=0;
@@ -357,6 +411,11 @@ class _ventana_fija: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -369,11 +428,16 @@ class _ventana_fija: public _triangulos3D{
 
 class _flaps: public _triangulos3D{
 	public:
-		_flaps(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_flaps(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> flaps;
@@ -383,7 +447,8 @@ class _flaps: public _triangulos3D{
 //************************************************************************
 class _flap: public _triangulos3D{
 	public:
-		_flap(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_flap(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), flap(CUBO_TAM, tipo){}
+
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_y_r=14.6;
@@ -397,6 +462,11 @@ class _flap: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 		//const double intermedio_y=1.95865;
 	protected:
@@ -410,11 +480,16 @@ class _flap: public _triangulos3D{
 
 class _frenos_delanteros: public _triangulos3D{
 	public:
-		_frenos_delanteros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_frenos_delanteros(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -424,7 +499,7 @@ class _frenos_delanteros: public _triangulos3D{
 
 class _freno_individual: public _triangulos3D{
 	public:
-		_freno_individual(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_freno_individual(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), base(CUBO_TAM, tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=2.2518;
@@ -435,6 +510,11 @@ class _freno_individual: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	_cubo base;
@@ -445,7 +525,7 @@ class _freno_individual: public _triangulos3D{
 
 class _timon: public _triangulos3D{
 	public:
-		_timon(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_timon(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 
@@ -454,6 +534,11 @@ class _timon: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 		//const double intermedio_y=1.620681;
 		//const double y_i_f=y-intermedio_y;	//Lo que hay que subir desde el intermedio hasta el final
@@ -469,11 +554,16 @@ class _timon: public _triangulos3D{
 
 class _frenos_traseros: public _triangulos3D{
 	public:
-		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cubo> base;
@@ -484,7 +574,7 @@ class _frenos_traseros: public _triangulos3D{
 
 class _freno_trasero_individual: public _triangulos3D{
 	public:
-		_freno_trasero_individual(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_freno_trasero_individual(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), base(CUBO_TAM, tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double angulo_z_l=-23.5;
@@ -497,6 +587,11 @@ class _freno_trasero_individual: public _triangulos3D{
 
 	private:
 	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	_cubo base;
@@ -508,12 +603,21 @@ class _freno_trasero_individual: public _triangulos3D{
 
 class _tren_trasero: public _triangulos3D{
 	public:
-		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double x_r=-0.89669;
 		const double y_r=1.30617;
 		const double z_r=-1.107;
+
+
+	private:
+	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cilindro> piezas;
@@ -525,11 +629,20 @@ class _tren_trasero: public _triangulos3D{
 
 class _tren_delantero: public _triangulos3D{
 	public:
-		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::ORO):_triangulos3D(tipo){}
+		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double y=1.28617;
 		const double z=3.5297;
+
+
+	private:
+	const int CUBO_TAM=2;
+	const double CIL_RAD=1, CIL_H=2;
+	const int NUM=12;
+	const Eje eje=Eje::y;
+	const double CONO_RADIO=1, CONO_H=2;
+	const double ES_RADIO=1;
 
 	protected:
 	vector<_cilindro> piezas;
@@ -541,7 +654,23 @@ class _tren_delantero: public _triangulos3D{
 
 class _tornado: public _triangulos3D{
 	public:
-		_tornado(){
+	/*
+		_cuerpo cuerpo;
+	_ala_izda ala_izda;
+	_ala_dcha ala_dcha;
+	_ala_td td;
+	_ala_ti ti;
+	_ventana_fija ventana_fija;
+	_ventana_movil ventana_movil;
+	_flap flap;
+	_freno_individual frenos;
+	_freno_trasero_individual ft;
+	_timon timon;
+	_tren_trasero tt;
+	_tren_delantero tren_d;*/
+
+		_tornado(Materiales::tipoMaterial mat=Materiales::CROMADO): cuerpo(mat), ala_izda(mat), ala_dcha(mat), td(mat), ti(mat),
+		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tt(mat), tren_d(mat){
 			for(int i=0; i<50; i++)
 				actos[i]=false;
 		}

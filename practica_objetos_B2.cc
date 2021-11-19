@@ -811,12 +811,14 @@ void animacion(){
 // posicion y del raton
 //***************************************************************************
 int indice=0;	//Indice usado para elegir cambiar velocidad a una articulacion
+int indiceObjetos=0;	//INDICE QUE SE USA PARA CICLAR ENTRE OBJETOS
 void normal_key(unsigned char Tecla1,int x,int y)
 {
 	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
-	cout <<"** Controles: " <<endl;
+	cout <<"** IMPORTANTE: Debido a la evidente falta de teclas, los objetos se puede ciclar si se pulsa repetidamente la tecla P" <<endl;
+	cout <<"** Controles avion: " <<endl;
 	cout <<"** Mover aeronave sobre eje x: W/S" <<endl;
 	cout <<"** Mover aeronave sobre eje y: Z/X" <<endl;
 	cout <<"** Mover aeronave sobre eje z: A/D" <<endl;
@@ -847,17 +849,27 @@ switch (toupper(Tecla1)){
 	case '0': glutIdleFunc(NULL); caza.limpiar_actos(); glutPostRedisplay(); break;
 	case 'F':t_objeto=CAZA; break;
 
+	case 'P':{
+		indiceObjetos=(indiceObjetos+1)%10;
 
-        case 'I':t_objeto=PIRAMIDE;break;
-        case 'U':t_objeto=CUBO;break;
-        case 'L':t_objeto=OBJETO_PLY;break;	
-        case 'O':t_objeto=ROTACION;break;
-		case 'P':t_objeto=ESFERA;break;
-		case 'J':t_objeto=CONO; break;
-		case 'C':t_objeto=CILINDRO; break;
-		case 'V':t_objeto=ROTACION_X; break;
-		case ',':t_objeto=RELOJ; break;
-		case '.':t_objeto=RARO; break;
+		switch (indiceObjetos)
+		{
+			case 0:t_objeto=PIRAMIDE;break;
+			case 1:t_objeto=CUBO;break;
+			case 2:t_objeto=OBJETO_PLY;break;	
+			case 3:t_objeto=ROTACION;break;
+			case 4:t_objeto=ESFERA;break;
+			case 5:t_objeto=CONO; break;
+			case 6:t_objeto=CILINDRO; break;
+			case 7:t_objeto=ROTACION_X; break;
+			case 8:t_objeto=RELOJ; break;
+			case 9:t_objeto=RARO; break;			
+		}
+
+		break;
+	}
+
+
 		case '7':modo=SOLID_ILLUMINATED_FLAT;break;
 		case '8':modo=SOLID_ILLUMINATED_GOURAUD;break;
 
