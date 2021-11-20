@@ -41,7 +41,7 @@ class Materiales{
 
 	public:
 	enum tipoMaterial{LATON, BRONCE, BRONCE_PULIDO, CROMADO, COBRE, COBRE_PULIDO, ORO, ORO_PULIDO, TIN, PLATA, PLATA_PULIDA,
-	ESMERALDA, JADE, OBSIDIANA, PERLADO, RUBI, TURQUESA, PLASTICO, GOMA};
+	ESMERALDA, JADE, OBSIDIANA, PERLADO, RUBI, TURQUESA, PLASTICO, GOMA, ALUMINIO, CRISTAL};
 
 	tipoMaterial mat;
 
@@ -54,6 +54,8 @@ class Materiales{
 	void setEspecular(double v1, double v2, double v3);
 	void setDifusa(double v1, double v2, double v3);
 	void setBrillo(double valor);
+
+	void setValores(tipoMaterial tipo);
 
 	const float getBrillo();
 };
@@ -545,8 +547,7 @@ class _freno_trasero_individual: public _triangulos3D{
 
 class _tren_trasero: public _triangulos3D{
 	public:
-		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		//_tren_trasero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
+		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::GOMA):_triangulos3D(tipo){}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
 		const double x_r=-0.89669;

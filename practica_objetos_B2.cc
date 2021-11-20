@@ -42,7 +42,7 @@ _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 _ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
-_tornado caza(Materiales::GOMA);
+_tornado caza(Materiales::LATON);
 
 //**************************************************************************
 //
