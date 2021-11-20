@@ -124,6 +124,105 @@ Materiales::Materiales(tipoMaterial material){
       
       break;
     }
+
+    case TIN:{
+      ambiente=_vertex4f(0.105882, 0.058824, 0.113725, 1);
+      difusa=_vertex4f(0.427451, 0.470588, 0.541176, 1);
+      especular=_vertex4f(0.333333, 0.333333, 0.521569, 1);
+      brillo=9.84615;
+
+      break;      
+    }
+
+    case PLATA:{
+      ambiente=_vertex4f(0.19225, 0.19225, 0.19225, 1);
+      difusa=_vertex4f(0.50754, 0.50754, 0.50754, 1);
+      especular=_vertex4f(0.508273, 0.508273, 0.508273, 1);
+      brillo=51.2;      
+
+      break;
+    }
+
+    case PLATA_PULIDA:{
+      ambiente=_vertex4f(0.23125, 0.23125, 0.23125, 1);
+      difusa=_vertex4f(0.2775, 0.2775, 0.2775, 1);
+      especular=_vertex4f(0.773911, 0.773911, 0.773911, 1);
+      brillo=89.6;
+
+      break;      
+    }
+
+    case ESMERALDA:{
+      ambiente=_vertex4f(0.0215, 0.1745, 0.0215, 0.55);
+      difusa=_vertex4f(0.07568, 0.61424, 0.07568, 0.55);
+      especular=_vertex4f(0.633, 0.727811, 0.633, 0.55);
+      brillo=76.8;      
+
+      break;
+    }
+
+    case JADE:{
+      ambiente=_vertex4f(0.135, 0.2225, 0.1575, 0.95);
+      difusa=_vertex4f(0.54, 0.89, 0.63, 0.95);
+      especular=_vertex4f(0.316228, 0.316228, 0.316228, 0.95);
+      brillo=12.8;
+
+      break;
+    }
+
+    case OBSIDIANA:{
+      ambiente=_vertex4f(0.05375, 0.05, 0.06625, 0.82);
+      difusa=_vertex4f(0.18275, 0.17, 0.22525, 0.82);
+      especular=_vertex4f(0.332741, 0.328634, 0.346435, 0.82);
+      brillo=38.4;
+
+      break;
+    }
+
+    case PERLADO:{
+      ambiente=_vertex4f(0.25, 0.20725, 0.20725, 0.922);
+      difusa=_vertex4f(1, 0.829, 0.829, 0.922);
+      especular=_vertex4f(0.296648, 0.296648, 0.296648, 0.922);
+      brillo=11.264;
+
+      break;      
+    }
+
+    case RUBI:{
+      ambiente=_vertex4f(0.1745, 0.01175, 0.01175, 0.55);
+      difusa=_vertex4f(0.61424, 0.04136, 0.04136, 0.55);
+      especular=_vertex4f(0.727811, 0.626959, 0.626959, 0.55);
+      brillo=76.8;
+
+      break;      
+    }
+
+    case TURQUESA:{
+      ambiente=_vertex4f(0.1, 0.18725, 0.1745, 0.8);
+      difusa=_vertex4f(0.396, 0.74151, 0.69102, 0.8);
+      especular=_vertex4f(0.297254, 0.30829, 0.306678, 0.8);
+      brillo=12.8;
+
+      break;
+    }
+
+    case PLASTICO:{
+      ambiente=_vertex4f(0, 0, 0, 1);
+      difusa=_vertex4f(0.01, 0.01, 0.01, 1);
+      especular=_vertex4f(0.5, 0.5, 0.5, 1);
+      brillo=32;      
+
+      break;
+    }
+
+    case GOMA:{
+      ambiente=_vertex4f(0.02, 0.02, 0.02, 1);
+      difusa=_vertex4f(0.01, 0.01, 0.01, 1);
+      especular=_vertex4f(0.4, 0.4, 0.4, 1);
+      brillo=10;
+
+      break;      
+    }
   }
 }
 
@@ -778,32 +877,15 @@ _rotacion(tipo)
 
 
 void _esfera::calcular_normales_vertices( ){
+for(int i=0; i<vertices.size(); i++)
+  normales_vertices.push_back(_vertex3f(0, 0, 0));
 
-  cout <<"OVERRRRIRIRJREOSJKHFLJDHFKLJSDHFLDSKJFLKSDJFLKJSDKLFJGHDKLJGHDFKLJFGHDKLJSHGKJFSLDKJG" <<endl;
-  int i;
-if (b_normales_caras==false) calcular_normales_caras();
-//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-glEnable (GL_LIGHTING);
-glShadeModel(GL_FLAT);  //GL_SMOOTH
-glEnable(GL_NORMALIZE);
+for(int i=0; i<vertices.size(); i++){
+  normales_vertices[i]=_vertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+  normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
+}
 
-//glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &material.getAmbiente());
-glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
-glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
-glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &material.getEspecular());
-glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
-
-glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-glBegin(GL_TRIANGLES);
-for (i=0;i<caras.size();i++){
-  glNormal3fv((GLfloat *) &normales_caras[i]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
-	glVertex3fv((GLfloat *) &vertices[caras[i]._2]);
-	}
-glEnd();
-glDisable(GL_LIGHTING);
+  b_normales_vertices=true;
 }
 
 //************************************************************************

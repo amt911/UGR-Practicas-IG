@@ -42,7 +42,7 @@ _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 _ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
-_tornado caza;
+_tornado caza(Materiales::GOMA);
 
 //**************************************************************************
 //
@@ -814,6 +814,7 @@ int indice=0;	//Indice usado para elegir cambiar velocidad a una articulacion
 int indiceObjetos=0;	//INDICE QUE SE USA PARA CICLAR ENTRE OBJETOS
 void normal_key(unsigned char Tecla1,int x,int y)
 {
+	/*
 	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
@@ -837,6 +838,8 @@ void normal_key(unsigned char Tecla1,int x,int y)
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
 
+
+*/
 switch (toupper(Tecla1)){
 	case 'Q':exit(0);
 	case '1':modo=POINTS;break;
@@ -1040,6 +1043,7 @@ switch (toupper(Tecla1)){
 
 void special_key(int Tecla1,int x,int y)
 {
+	/*
 	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
@@ -1061,7 +1065,7 @@ void special_key(int Tecla1,int x,int y)
 	cout <<"** Desactivar animacion: 0" <<endl;	
 	cout <<"******************************************************************" <<endl;
 	cout <<"******************************************************************" <<endl;
-
+*/
 	switch (Tecla1){
 		case GLUT_KEY_LEFT:Observer_angle_y--;break;
 		case GLUT_KEY_RIGHT:Observer_angle_y++;break;
