@@ -335,10 +335,10 @@ void _triangulos3D::draw_solido(float r, float g, float b)
 
 void _triangulos3D::draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2)
 {
-int i;
+//int i;
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
-for (i=0;i<caras.size();i++){
+for (long unsigned int i=0;i<caras.size();i++){
   if(i%2==0)
     glColor3f(r1,g1,b1);
 
@@ -371,7 +371,6 @@ switch (modo){
 
 void _triangulos3D::draw_iluminacion_plana( )
 {
-int i;
 if (b_normales_caras==false) calcular_normales_caras();
 //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
@@ -387,7 +386,7 @@ glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
 
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
-for (i=0;i<caras.size();i++){
+for (long unsigned int i=0;i<caras.size();i++){
   glNormal3fv((GLfloat *) &normales_caras[i]);
 	glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
 	glVertex3fv((GLfloat *) &vertices[caras[i]._1]);
@@ -402,7 +401,7 @@ void _triangulos3D::calcular_normales_caras( ){
   _vertex3f a1, a2, n;
 normales_caras.resize(caras.size());
 
-for(int i=0; i<caras.size(); i++){
+for(long unsigned int i=0; i<caras.size(); i++){
 	// obtener dos vectores en el triángulo y calcular el producto vectorial
 	a1=vertices[caras[i]._1]-vertices[caras[i]._0];
        	a2=vertices[caras[i]._2]-vertices[caras[i]._0];
@@ -417,17 +416,17 @@ b_normales_caras=true;
 }
 
 void _triangulos3D::calcular_normales_vertices(){
-for(int i=0; i<vertices.size(); i++)
-  normales_vertices.push_back(_vertex3f(0, 0, 0));
+  for(long unsigned int i=0; i<vertices.size(); i++)
+    normales_vertices.push_back(_vertex3f(0, 0, 0));
 
-for(int i=0; i<caras.size(); i++){
-  normales_vertices[caras[i]._0]+=normales_caras[i];
-  normales_vertices[caras[i]._1]+=normales_caras[i];
-  normales_vertices[caras[i]._2]+=normales_caras[i];
-}
+  for(long unsigned int i=0; i<caras.size(); i++){
+    normales_vertices[caras[i]._0]+=normales_caras[i];
+    normales_vertices[caras[i]._1]+=normales_caras[i];
+    normales_vertices[caras[i]._2]+=normales_caras[i];
+  }
 
-for(auto it=normales_vertices.begin(); it!=normales_vertices.cend(); ++it)
-  (*it)/=sqrt(it->x*it->x+it->y*it->y+it->z*it->z);
+  for(auto it=normales_vertices.begin(); it!=normales_vertices.cend(); ++it)
+    (*it)/=sqrt(it->x*it->x+it->y*it->y+it->z*it->z);
 
 
   b_normales_vertices=true;
@@ -458,7 +457,7 @@ glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
 
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
-  for(int i=0; i<caras.size(); i++){
+  for(long unsigned int i=0; i<caras.size(); i++){
     glNormal3fv((GLfloat *) &normales_vertices[caras[i]._0]);
     glVertex3fv((GLfloat *) &vertices[caras[i]._0]);
 
@@ -899,13 +898,13 @@ _rotacion(tipo)
 
 
 void _esfera::calcular_normales_vertices( ){
-for(int i=0; i<vertices.size(); i++)
-  normales_vertices.push_back(_vertex3f(0, 0, 0));
+  for(long unsigned int i=0; i<vertices.size(); i++)
+    normales_vertices.push_back(_vertex3f(0, 0, 0));
 
-for(int i=0; i<vertices.size(); i++){
-  normales_vertices[i]=_vertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
-  normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
-}
+  for(long unsigned int i=0; i<vertices.size(); i++){
+    normales_vertices[i]=_vertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+    normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
+  }
 
   b_normales_vertices=true;
 }
@@ -1063,7 +1062,7 @@ _cilindro::_cilindro(double radio, double h, int num, Eje axis, Materiales::tipo
 // clase ply_rot
 //************************************************************************
 
-_ply_rot::_ply_rot(char *file, int rot, Eje axis, Materiales::tipoMaterial tipo):
+_ply_rot::_ply_rot(const char *file, int rot, Eje axis, Materiales::tipoMaterial tipo):
 material(tipo)
 {
   
@@ -1111,10 +1110,10 @@ void _cuerpo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
    rf2=gf2=bf2=0.22;
  }
  //Air intakes
-if(tipo==NORMAL)
-  base.push_back(_cubo(CUBO_TAM, material.mat));
-else
-  base.push_back(_cubo(CUBO_TAM, Materiales::ALUMINIO));
+  if(tipo==NORMAL)
+    base.push_back(_cubo(CUBO_TAM, material.mat));
+  else
+    base.push_back(_cubo(CUBO_TAM, Materiales::ALUMINIO));
 
   glPushMatrix();
   glTranslatef(-0.9218, 0.1132, 1.4685);
@@ -1380,10 +1379,10 @@ else
 //Ahora la parte de los cilindros
 
 //Parte de abajo del caza
-if(tipo==NORMAL)
-  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
-else
-  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
+  if(tipo==NORMAL)
+    esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
+  else
+    esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
 
   glPushMatrix();
   glTranslatef(0, -0.524, 1.5759);
@@ -1566,10 +1565,10 @@ else{
 
 //Filos del timon
   //esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
-if(tipo==NORMAL)
-  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
-else
-  esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
+  if(tipo==NORMAL)
+    esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
+  else
+    esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
 
   glPushMatrix();
   glTranslatef(0, 1.095, -2.1481);
@@ -1955,10 +1954,10 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
 
   //Esferas para las esquinas
   //derecha
-if(tipo==NORMAL)
-  esquina.material.setValores(material.mat);
-else
-  esquina.material.setValores(Materiales::ALUMINIO);
+  if(tipo==NORMAL)
+    esquina.material.setValores(material.mat);
+  else
+    esquina.material.setValores(Materiales::ALUMINIO);
 
   glPushMatrix();
   glTranslatef(-5.6556, 1.9831, -1.8168);

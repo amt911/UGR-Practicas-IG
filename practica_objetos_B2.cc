@@ -40,10 +40,13 @@ _rotacion rotacion, rotacion_x, raro;
 _esfera esfera(1, ROTACIONES, ROTACIONES, y);
 _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
-_ply_rot reloj("revolucion", ROTACIONES, y);
+
+const char *archivo="revolucion";
+_ply_rot reloj(archivo, ROTACIONES, y);
 // _objeto_ply *ply1;
 _tornado caza(Materiales::LATON);
-
+Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
+Luces luz2(1, 0.5, 1, 1, 20, 20, 0, 1);
 //**************************************************************************
 //
 //***************************************************************************
@@ -138,46 +141,27 @@ switch (t_objeto){
 //**************************************************************************
 //
 //***************************************************************************
-void luces(){			//INCLUIR LO DE LA FOTO
-	float  luz1[]={1.0, 1.0, 1.0, 1.0},		//Azul
-        pos1[]= {0, 20.0, 20, 1.0};
+Luces luz(1, 0.5, 0, 1, 0, 20, 0, 1);
+void luces(){
 /*
-	float  luz2[]={0, 1.0, 0, 1.0},
-        pos2[]= {40, 20.0, 0, 1.0};
+	float inc=40/1000;
+
+	luz.setPosicion(0, valor);
+	luz.setPosicion(1, sqrt(400-valor*valor));
+
+	valor-=inc;
 */
-	glLightfv (GL_LIGHT1, GL_DIFFUSE, luz1);
-glLightfv (GL_LIGHT1, GL_SPECULAR, luz1);
+	
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, luz1.getLuzVector());
+	glLightfv(GL_LIGHT0, GL_POSITION, luz1.getPosicionVector());
 
-glLightfv (GL_LIGHT1, GL_POSITION, pos1);
-
-
-
-
-/*
-	glLightfv (GL_LIGHT2, GL_DIFFUSE, luz2);
-glLightfv (GL_LIGHT2, GL_SPECULAR, luz2);
-
-glLightfv (GL_LIGHT2, GL_POSITION, pos2);*/
-//glEnable(GL_LIGHTING);
-/*
-float ambiente[]={0.25, 0.148, 0.06475, 1.0};
-float l1[]={0.4, 0.2368, 0.1036, 1.0};
-float l2[]={0.774597, 0.458561, 0.200621, 1.0};
-float l3[]={76.8};//76.8;
-
-
-glLightfv(GL_LIGHT0, GL_AMBIENT, ambiente);
-glLightfv(GL_LIGHT1, GL_DIFFUSE, l1);
-glLightfv(GL_LIGHT3, GL_SPECULAR, l2);
-glLightfv(GL_LIGHT3, GL_SHININESS, l3);
-
-//glDisable (GL_LIGHT0);
-glEnable(GL_LIGHT0);*/
-glEnable (GL_LIGHT1);
-//glEnable (GL_LIGHT2);
-
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, luz2.getLuzVector());
+	glLightfv(GL_LIGHT1, GL_POSITION, luz2.getPosicionVector());
+	
+	
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);	
 }
-
 
 void draw(void)
 {
@@ -215,7 +199,7 @@ glutPostRedisplay();
 //FUncion de animacion
 
 int sleep=0;
-const double mult=0.5;	//Factor que permite que la animacion vaya mas rapido o mas lento (debido a que la velocidad es dependiente de la maquina)
+const double mult=/*0.5*/1;	//Factor que permite que la animacion vaya mas rapido o mas lento (debido a que la velocidad es dependiente de la maquina)
 void animacion(){
 	bool encontrado=false;
 	int acto=0;
@@ -812,6 +796,7 @@ void animacion(){
 //***************************************************************************
 int indice=0;	//Indice usado para elegir cambiar velocidad a una articulacion
 int indiceObjetos=0;	//INDICE QUE SE USA PARA CICLAR ENTRE OBJETOS
+int contLuces=0;
 void normal_key(unsigned char Tecla1,int x,int y)
 {
 	/*
@@ -872,7 +857,302 @@ switch (toupper(Tecla1)){
 		break;
 	}
 
+		case 'U':{
+			contLuces=(contLuces+1)%10;
 
+			switch (contLuces)
+			{
+				case 0:{
+					cout <<"Desactivar/Activar Luz 1" <<endl;
+					break;
+				}
+
+				case 1:{
+					cout <<"Desactivar/Activar Luz 2" <<endl;
+					break;
+				}
+
+				case 2:{
+					cout <<"Animacion +/- Luz 1" <<endl;
+					break;
+				}
+
+				case 3:{
+					cout <<"Animacion +/- Luz 2" <<endl;
+					break;
+				}				
+
+				case 4:{
+					cout <<"Color R Luz 1" <<endl;
+					break;
+				}
+
+				case 5:{
+					cout <<"Color G Luz 1" <<endl;
+					break;
+				}
+
+				case 6:{
+					cout <<"Color B Luz 1" <<endl;
+					break;
+				}				
+
+				case 7:{
+					cout <<"Color R Luz 2" <<endl;
+					break;
+				}
+
+				case 8:{
+					cout <<"Color G Luz 2" <<endl;
+					break;
+				}
+
+				case 9:{
+					cout <<"Color B Luz 2" <<endl;
+					break;
+				}								
+			}
+			break;
+
+		}
+
+		case 'I':{
+			switch (contLuces)
+			{
+				case 0:{
+					if(luz1.getDesactivado()){
+						luz1.setDesactivado(false);
+						cout <<"La luz 1 se ha activado" <<endl;
+					}
+					else{
+						luz1.setDesactivado(true);
+						cout <<"La luz 1 se ha desactivado" <<endl;						
+					}
+					break;
+				}
+
+				case 1:{
+					if(luz2.getDesactivado()){
+						luz2.setDesactivado(false);
+						cout <<"La luz 2 se ha activado" <<endl;
+					}
+					else{
+						luz2.setDesactivado(true);
+						cout <<"La luz 2 se ha desactivado" <<endl;						
+					}
+					break;
+				}
+
+				case 2:{
+					if(luz1.getPosicion(0)>-19){
+						luz1.setPosicion(0, luz1.getPosicion(0)-0.5);
+						luz1.setPosicion(1, sqrt(400-luz1.getPosicion(0)*luz1.getPosicion(0)));
+					}
+					//cout <<"Animacion +/- Luz 1" <<endl;
+					break;
+				}
+
+				case 3:{
+					if(luz2.getPosicion(0)>-19){
+						luz2.setPosicion(0, luz2.getPosicion(0)-0.5);
+						luz2.setPosicion(2, sqrt(400-luz2.getPosicion(0)*luz2.getPosicion(0)));
+					}					
+					//cout <<"Animacion +/- Luz 2" <<endl;
+					break;
+				}				
+
+				case 4:{
+					//cout <<"Color R Luz 1" <<endl;
+					if(luz1.getLuz(0)>0.1)
+						luz1.setLuz(0, luz1.getLuz(0)-0.1);
+					
+					cout <<"Componente roja de luz 1: " <<luz1.getLuz(0) <<endl;
+					break;
+				}
+
+				case 5:{
+					if(luz1.getLuz(1)>0.1)
+						luz1.setLuz(1, luz1.getLuz(1)-0.1);
+					
+					cout <<"Componente Verde de luz 1: " <<luz1.getLuz(1) <<endl;
+
+					//cout <<"Color G Luz 1" <<endl;
+					break;
+				}
+
+				case 6:{
+					if(luz1.getLuz(2)>0.1)
+						luz1.setLuz(2, luz1.getLuz(2)-0.1);
+					
+					cout <<"Componente Azul de luz 1: " <<luz1.getLuz(2) <<endl;
+
+					//cout <<"Color B Luz 1" <<endl;
+					break;
+				}				
+
+				case 7:{
+					if(luz2.getLuz(0)>0.1)
+						luz2.setLuz(0, luz2.getLuz(0)-0.1);
+					
+					cout <<"Componente roja de luz 2: " <<luz2.getLuz(0) <<endl;					
+
+					//cout <<"Color R Luz 2" <<endl;
+					break;
+				}
+
+				case 8:{
+					if(luz2.getLuz(1)>0.1)
+						luz2.setLuz(1, luz2.getLuz(1)-0.1);
+					
+					cout <<"Componente Verde de luz 2: " <<luz2.getLuz(1) <<endl;
+
+					break;
+				}
+
+				case 9:{
+					if(luz2.getLuz(2)>0.1)
+						luz2.setLuz(2, luz2.getLuz(2)-0.1);
+					
+					cout <<"Componente Azul de luz 2: " <<luz2.getLuz(2) <<endl;
+
+					//cout <<"Color B Luz 2" <<endl;
+					break;
+				}								
+			}	
+			break;		
+		}
+
+
+		case 'O':{
+			switch (contLuces)
+			{
+				case 0:{
+					if(luz1.getDesactivado()){
+						luz1.setDesactivado(false);
+						cout <<"La luz 1 se ha activado" <<endl;
+					}
+					else{
+						luz1.setDesactivado(true);
+						cout <<"La luz 1 se ha desactivado" <<endl;						
+					}
+					break;
+				}
+
+				case 1:{
+					if(luz2.getDesactivado()){
+						luz2.setDesactivado(false);
+						cout <<"La luz 2 se ha activado" <<endl;
+					}
+					else{
+						luz2.setDesactivado(true);
+						cout <<"La luz 2 se ha desactivado" <<endl;						
+					}
+					break;
+				}
+
+				case 2:{
+					if(luz1.getPosicion(0)<19){
+						luz1.setPosicion(0, luz1.getPosicion(0)+0.5);
+						luz1.setPosicion(1, sqrt(400-luz1.getPosicion(0)*luz1.getPosicion(0)));
+					}
+					//cout <<"Animacion +/- Luz 1" <<endl;
+					break;
+				}
+
+				case 3:{
+					if(luz2.getPosicion(0)<19){
+						luz2.setPosicion(0, luz2.getPosicion(0)+0.5);
+						luz2.setPosicion(2, sqrt(400-luz2.getPosicion(0)*luz2.getPosicion(0)));
+					}					
+					//cout <<"Animacion +/- Luz 2" <<endl;
+					break;
+				}				
+
+				case 4:{
+					//cout <<"Color R Luz 1" <<endl;
+					if(luz1.getLuz(0)<1)
+						luz1.setLuz(0, luz1.getLuz(0)+0.1);
+					
+					cout <<"Componente roja de luz 1: " <<luz1.getLuz(0) <<endl;
+					break;
+				}
+
+				case 5:{
+					if(luz1.getLuz(1)<1)
+						luz1.setLuz(1, luz1.getLuz(1)+0.1);
+					
+					cout <<"Componente Verde de luz 1: " <<luz1.getLuz(1) <<endl;
+
+					//cout <<"Color G Luz 1" <<endl;
+					break;
+				}
+
+				case 6:{
+					if(luz1.getLuz(2)<1)
+						luz1.setLuz(2, luz1.getLuz(2)+0.1);
+					
+					cout <<"Componente Azul de luz 1: " <<luz1.getLuz(2) <<endl;
+
+					//cout <<"Color B Luz 1" <<endl;
+					break;
+				}				
+
+				case 7:{
+					if(luz2.getLuz(0)<1)
+						luz2.setLuz(0, luz2.getLuz(0)+0.1);
+					
+					cout <<"Componente roja de luz 2: " <<luz2.getLuz(0) <<endl;					
+
+					//cout <<"Color R Luz 2" <<endl;
+					break;
+				}
+
+				case 8:{
+					if(luz2.getLuz(1)<1)
+						luz2.setLuz(1, luz2.getLuz(1)+0.1);
+					
+					cout <<"Componente Verde de luz 2: " <<luz2.getLuz(1) <<endl;
+
+					break;
+				}
+
+				case 9:{
+					if(luz2.getLuz(2)<1)
+						luz2.setLuz(2, luz2.getLuz(2)+0.1);
+					
+					cout <<"Componente Azul de luz 2: " <<luz2.getLuz(2) <<endl;
+
+					//cout <<"Color B Luz 2" <<endl;
+					break;
+				}								
+			}
+			break;			
+		}
+
+
+
+/*
+		case 'O':{
+			if(luz.getPosicion(0)>-19){
+				luz.setPosicion(0, luz.getPosicion(0)-0.5);
+				luz.setPosicion(1, sqrt(400-luz.getPosicion(0)*luz.getPosicion(0)));
+			}
+				//cout <<luz.getPosicion()[0] <<endl;
+
+			break;
+		}
+		case 'I':{
+			if(luz.getPosicion(0)<19){
+				luz.setPosicion(0, luz.getPosicion(0)+0.5);
+				luz.setPosicion(1, sqrt(400-luz.getPosicion(0)*luz.getPosicion(0)));
+			}
+
+				cout <<luz.getPosicion(0) <<endl;
+			break;
+
+		}
+
+		*/
 		case '7':modo=SOLID_ILLUMINATED_FLAT;break;
 		case '8':modo=SOLID_ILLUMINATED_GOURAUD;break;
 

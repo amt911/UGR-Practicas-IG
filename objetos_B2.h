@@ -28,6 +28,76 @@ void 	draw_puntos(float r, float g, float b, int grosor);
 vector<_vertex3f> vertices;
 };
 
+
+//*************************************************************************
+// clase luces
+//*************************************************************************
+
+class Luces{
+	private:
+		float luz[4], posicion[4];
+		const float desV[4]={0, 0, 0, 1};
+		bool desactivado=false;
+	public:
+		Luces()=default;
+		Luces(float *luz, float *pos){
+			for(int i=0; i<4; i++){
+				this->luz[i]=luz[i];
+				posicion[i]=pos[i];
+			}
+		}
+		Luces(float l1, float l2, float l3, float l4, float p1, float p2, float p3, float p4){
+			luz[0]=l1;
+			luz[1]=l2;
+			luz[2]=l3;
+			luz[3]=l4;
+
+			posicion[0]=p1;
+			posicion[1]=p2;
+			posicion[2]=p3;
+			posicion[3]=p4;
+
+		}
+
+		float getLuz(int i){
+			if(desactivado)
+				return 0;
+
+			return luz[i];
+		}
+
+		float getPosicion(int i){
+			return posicion[i];
+		}
+
+		void setLuz(int i, float valor){
+			luz[i]=valor;
+		}
+		void setPosicion(int i, float valor){
+			posicion[i]=valor;
+		}
+
+		void setDesactivado(bool v){
+			desactivado=v;
+		}
+
+		bool getDesactivado() const{
+			return desactivado;
+		}
+
+		const float *getLuzVector() const{
+			if(desactivado)
+				return desV;
+
+			return luz;
+		}
+
+		const float *getPosicionVector() const{
+			return posicion;
+		}
+};
+
+
 //*************************************************************************
 // clase materiales
 //*************************************************************************
@@ -183,7 +253,7 @@ class _cilindro: public _rotacion
 class _ply_rot: public _objeto_ply
 {
 	public:
-		_ply_rot(char *file, int rot=3, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::ORO);
+		_ply_rot(const char *file, int rot=3, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::ORO);
 
 	private:
 	Materiales material;
