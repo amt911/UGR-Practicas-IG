@@ -41,12 +41,12 @@ _esfera esfera(1, ROTACIONES, ROTACIONES, y);
 _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 
-const char *archivo="revolucion";
-_ply_rot reloj(archivo, ROTACIONES, y);
+//const char *archivo="revolucion";
+_ply_rot reloj(/*archivo*/ "revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
 _tornado caza(Materiales::LATON);
 Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
-Luces luz2(1, 0.5, 1, 1, 20, 20, 0, 1);
+Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
 //**************************************************************************
 //
 //***************************************************************************

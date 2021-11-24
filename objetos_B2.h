@@ -223,7 +223,7 @@ class _esfera: public _rotacion
 {
 	public:
 	_esfera(int radio=1, int num_puntos=12, int num_rot=12, Eje axis=y, Materiales::tipoMaterial tipo=Materiales::CROMADO);
-	void 	calcular_normales_vertices();
+	void 	calcular_normales_vertices() override;
 };
 
 //************************************************************************

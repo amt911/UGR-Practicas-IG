@@ -410,6 +410,7 @@ for(long unsigned int i=0; i<caras.size(); i++){
 	float m=sqrt(n.x*n.x+n.y*n.y+n.z*n.z);
 	// normalización
     	normales_caras[i]= _vertex3f(n.x/m, n.y/m, n.z/m);
+      
 	}
   
 b_normales_caras=true;
@@ -425,6 +426,8 @@ void _triangulos3D::calcular_normales_vertices(){
     normales_vertices[caras[i]._2]+=normales_caras[i];
   }
 
+    //normales_vertices[i]=_vertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+    //normales_vertices[i]=vertices[i];
   for(auto it=normales_vertices.begin(); it!=normales_vertices.cend(); ++it)
     (*it)/=sqrt(it->x*it->x+it->y*it->y+it->z*it->z);
 
@@ -443,11 +446,6 @@ if (b_normales_vertices==false){
 glEnable (GL_LIGHTING);
 glShadeModel(GL_SMOOTH);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
-/*
-glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &ambiente_difusa);
-glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &especular);
-glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,brillo);
-*/
 
 glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
 glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
@@ -898,13 +896,16 @@ _rotacion(tipo)
 
 
 void _esfera::calcular_normales_vertices( ){
+  cout <<"ESFERA OVERRIDE DE CALCULAR NORMALES" <<endl;
+  /*
   for(long unsigned int i=0; i<vertices.size(); i++)
     normales_vertices.push_back(_vertex3f(0, 0, 0));
+*/
 
-  for(long unsigned int i=0; i<vertices.size(); i++){
-    normales_vertices[i]=_vertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+  normales_vertices=vertices;
+
+  for(long unsigned int i=0; i<vertices.size(); i++)
     normales_vertices[i]/=sqrt(normales_vertices[i].x*normales_vertices[i].x+normales_vertices[i].y*normales_vertices[i].y+normales_vertices[i].z*normales_vertices[i].z);
-  }
 
   b_normales_vertices=true;
 }
