@@ -126,7 +126,15 @@ class Materiales{
 	void setBrillo(double valor);
 
 	void setValores(tipoMaterial tipo);
+/*
+	Materiales &operator=(const Materiales &aux){
+		if(this!=&aux){
+			*this=aux;
+		}
 
+		return *this;
+	}
+*/
 	const float getBrillo();
 };
 
@@ -662,6 +670,10 @@ class _tren_delantero: public _triangulos3D{
 
 class _tornado{
 	public:
+float  color_pick[13];
+int    color_selec[13][13];
+int    activo[13];
+int    piezas;
 	/*
 		_cuerpo cuerpo;
 	_ala_izda ala_izda;
@@ -685,7 +697,35 @@ class _tornado{
 		_tornado(Materiales::tipoMaterial mat): cuerpo(mat), ala_izda(mat), ala_dcha(mat), td(mat), ti(mat),
 		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tt(mat), tren_d(mat){
 			for(int i=0; i<50; i++)
-				actos[i]=false;			
+				actos[i]=false;		
+/*
+			piezas=3;
+			color_pick[0]=1.0;
+			color_pick[1]=0.0;
+			color_pick[2]=0.0; 
+			for (int i=0;i<piezas;i++)
+			{activo[i]=0;
+			color_selec[0][i]=color_selec[1][i]=color_selec[2][i]=c;
+			c=c+20;
+			}			
+			*/		
+		}
+
+
+		void setMaterial(Materiales::tipoMaterial tipo){
+			cuerpo.material=ala_izda.material=ala_dcha.material=td.material=ti.material=ventana_fija.material=ventana_movil.material=flap.material=frenos.material=
+			ft.material=ft.material=timon.material=tt.material=tren_d.material=Materiales(tipo);
+/*
+			piezas=3;
+			color_pick[0]=1.0;
+			color_pick[1]=0.0;
+			color_pick[2]=0.0; 
+			for (int i=0;i<piezas;i++)
+			{activo[i]=0;
+			color_selec[0][i]=color_selec[1][i]=color_selec[2][i]=c;
+			c=c+20;
+			}		
+			*/	
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
@@ -698,6 +738,8 @@ class _tornado{
 			timon_giro=angulo_trasero_l=angulo_trasero_r=angulo_alas=
 			giro_frenos_l=giro_frenos_r=flap_giro=flap_trans=ft_giro=
 			tt_giro_x=tt_giro_y=giro_tren_d=0;
+
+			
 		}
 
 	/**

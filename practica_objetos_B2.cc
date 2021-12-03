@@ -44,9 +44,17 @@ _cilindro cilindro(1, 3, ROTACIONES, z);
 //const char *archivo="revolucion";
 _ply_rot reloj(/*archivo*/ "revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
-_tornado caza(Materiales::LATON);
+Materiales::tipoMaterial material=Materiales::LATON;
+_tornado caza(material);
 Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
 Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
+
+
+
+//Practica 5
+int estadoRaton[3], xc, yc, cambio=0, factor=1;
+int Ancho, Alto;
+//void pick_color(int x, int y);
 //**************************************************************************
 //
 //***************************************************************************
@@ -163,18 +171,79 @@ void luces(){
 	glEnable(GL_LIGHT1);	
 }
 
+void vista_orto(){
+	//Frontal
+	
+	glViewport(Ancho/2,Alto/2,Ancho/2,Alto/2);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	luces();
+draw_axis();
+draw_objects();
+
+
+//Planta
+	glViewport(0,Alto/2,Ancho/2,Alto/2);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+	glRotatef(90, 1, 0, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	luces();
+draw_axis();
+draw_objects();
+
+//Alzado
+	glViewport(0,0,Ancho/2,Alto/2);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+	glRotatef(90, 0, 1, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	luces();
+draw_axis();
+draw_objects();
+
+//Poner perspectiva con glFrustum
+	glViewport(Ancho/2,0,Ancho,Alto);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+	glRotatef(90, 0, 1, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	luces();
+draw_axis();
+draw_objects();
+}
+
+
 void draw(void)
 {
 
 clean_window();
+if(cambio==0){
+glViewport(0, 0, Ancho, Alto);
+change_projection();
 change_observer();
-//luces(alfa, beta);//Por ahora sera vacia
 luces();
 draw_axis();
 draw_objects();
+}else vista_orto();
+//luces(alfa, beta);//Por ahora sera vacia
+luces();
+
 glutSwapBuffers();
 }
-
 
 
 //***************************************************************************
@@ -193,6 +262,8 @@ Aspect_ratio=(float) Alto1/(float )Ancho1;
 Size_y=Size_x*Aspect_ratio;
 change_projection();
 glViewport(0,0,Ancho1,Alto1);
+Ancho=Ancho1;
+Alto=Alto1;
 glutPostRedisplay();
 }
 
@@ -412,7 +483,7 @@ void animacion(){
 
 			break;
 		}	
-
+        //n=a2.cross_product(a1);
 		//Bajamos de nuevo el spd brk levantado
 		case 15:{
 			if(caza.giro_frenos_l>=0)
@@ -796,7 +867,7 @@ void animacion(){
 //***************************************************************************
 int indice=0;	//Indice usado para elegir cambiar velocidad a una articulacion
 int indiceObjetos=0;	//INDICE QUE SE USA PARA CICLAR ENTRE OBJETOS
-int contLuces=0;
+int contLuces=0, contMaterial=0;
 void normal_key(unsigned char Tecla1,int x,int y)
 {
 	/*
@@ -836,6 +907,11 @@ switch (toupper(Tecla1)){
 	case '9': caza.limpiar_actos();glutPostRedisplay();glutIdleFunc(animacion);break;
 	case '0': glutIdleFunc(NULL); caza.limpiar_actos(); glutPostRedisplay(); break;
 	case 'F':t_objeto=CAZA; break;
+	case 'C': cambio=0; break;
+	case 'V': cambio=1; break;
+	case '!': factor*=0.9; break;
+	case '"': factor*=1.2; break;
+
 
 	case 'P':{
 		indiceObjetos=(indiceObjetos+1)%10;
@@ -858,7 +934,7 @@ switch (toupper(Tecla1)){
 	}
 
 		case 'U':{
-			contLuces=(contLuces+1)%10;
+			contLuces=(contLuces+1)%11;
 
 			switch (contLuces)
 			{
@@ -910,7 +986,13 @@ switch (toupper(Tecla1)){
 				case 9:{
 					cout <<"Color B Luz 2" <<endl;
 					break;
-				}								
+				}	
+
+				case 10:{
+					cout <<"Cambiar material de la lista al caza" <<endl;
+
+					break;
+				}							
 			}
 			break;
 
@@ -963,7 +1045,7 @@ switch (toupper(Tecla1)){
 
 				case 4:{
 					//cout <<"Color R Luz 1" <<endl;
-					if(luz1.getLuz(0)>0.1)
+					if(luz1.getLuz(0)>0.0)
 						luz1.setLuz(0, luz1.getLuz(0)-0.1);
 					
 					cout <<"Componente roja de luz 1: " <<luz1.getLuz(0) <<endl;
@@ -971,7 +1053,7 @@ switch (toupper(Tecla1)){
 				}
 
 				case 5:{
-					if(luz1.getLuz(1)>0.1)
+					if(luz1.getLuz(1)>0.0)
 						luz1.setLuz(1, luz1.getLuz(1)-0.1);
 					
 					cout <<"Componente Verde de luz 1: " <<luz1.getLuz(1) <<endl;
@@ -981,7 +1063,7 @@ switch (toupper(Tecla1)){
 				}
 
 				case 6:{
-					if(luz1.getLuz(2)>0.1)
+					if(luz1.getLuz(2)>0.0)
 						luz1.setLuz(2, luz1.getLuz(2)-0.1);
 					
 					cout <<"Componente Azul de luz 1: " <<luz1.getLuz(2) <<endl;
@@ -991,7 +1073,7 @@ switch (toupper(Tecla1)){
 				}				
 
 				case 7:{
-					if(luz2.getLuz(0)>0.1)
+					if(luz2.getLuz(0)>0.0)
 						luz2.setLuz(0, luz2.getLuz(0)-0.1);
 					
 					cout <<"Componente roja de luz 2: " <<luz2.getLuz(0) <<endl;					
@@ -1001,7 +1083,7 @@ switch (toupper(Tecla1)){
 				}
 
 				case 8:{
-					if(luz2.getLuz(1)>0.1)
+					if(luz2.getLuz(1)>0.0)
 						luz2.setLuz(1, luz2.getLuz(1)-0.1);
 					
 					cout <<"Componente Verde de luz 2: " <<luz2.getLuz(1) <<endl;
@@ -1010,14 +1092,24 @@ switch (toupper(Tecla1)){
 				}
 
 				case 9:{
-					if(luz2.getLuz(2)>0.1)
+					if(luz2.getLuz(2)>0.0)
 						luz2.setLuz(2, luz2.getLuz(2)-0.1);
 					
 					cout <<"Componente Azul de luz 2: " <<luz2.getLuz(2) <<endl;
 
 					//cout <<"Color B Luz 2" <<endl;
 					break;
-				}								
+				}	
+
+				case 10:{
+					//21 materiales
+					contMaterial=(contMaterial+1)%21;
+					Materiales::tipoMaterial aux=(Materiales::tipoMaterial)(material+contMaterial);
+
+					caza.setMaterial(aux);
+					break;
+				}
+											
 			}	
 			break;		
 		}
@@ -1523,6 +1615,126 @@ glViewport(0,0,Window_width,Window_high);
 
 }
 
+//***************************************************************************
+// Funciones para manejo de eventos del ratón
+//***************************************************************************
+
+void clickRaton( int boton, int estado, int x, int y )
+{
+if(boton== GLUT_RIGHT_BUTTON) {
+   if( estado == GLUT_DOWN) {
+      estadoRaton[2] = 1;
+      xc=x;
+      yc=y;
+/*
+	  xc=y;
+	  yc=x;
+	  */
+     } 
+   else estadoRaton[2] = 1;
+   }
+   
+if(boton== GLUT_LEFT_BUTTON) {
+  if( estado == GLUT_DOWN) {
+      estadoRaton[2] = 2;
+      xc=x;
+      yc=y;
+      //pick_color(xc, yc);
+    } 
+  }
+
+	//3=scroll up
+  if(boton==3){
+	  if(estado==GLUT_DOWN){
+		Observer_distance/=1.2;
+
+		glutPostRedisplay();
+	  }
+  }
+
+	//4=scroll down
+  if(boton==4){
+	  if(estado==GLUT_DOWN){
+		Observer_distance*=1.2;
+
+		glutPostRedisplay();
+	  }
+  }  
+}
+
+/*************************************************************************/
+
+void getCamara (GLfloat *x, GLfloat *y)
+{
+*x=Observer_angle_x;
+*y=Observer_angle_y;
+}
+
+/*************************************************************************/
+
+void setCamara (GLfloat x, GLfloat y)
+{
+Observer_angle_x=x;
+Observer_angle_y=y;
+}
+
+
+
+/*************************************************************************/
+
+void RatonMovido( int x, int y )
+{
+float x0, y0, xn, yn; 
+if(estadoRaton[2]==1) 
+    {getCamara(&x0,&y0);
+     /*
+	 yn=y0+(y-yc);
+     xn=x0-(x-xc);
+	 */
+
+	 xn=x0+(y-yc);
+     yn=y0-(x-xc);
+
+     setCamara(xn,yn);
+     xc=x;
+     yc=y;
+     glutPostRedisplay();
+    }
+}
+/*
+//HACER PARA EL CAZA
+void procesar_color(unsigned char color[3])
+{
+int i;
+
+for (i=0;i<caza.piezas;i++)
+   {if (color[0]==tanque.color_selec[0][i])
+       {if (tanque.activo[i]==0) 
+                      {tanque.activo[i]=1;
+                      }
+                  else 
+                      {tanque.activo[i]=0;
+                      }
+         glutPostRedisplay();
+        }
+    }                
+ }
+
+*/
+
+void pick_color(int x, int y)
+{
+GLint viewport[4];
+unsigned char pixel[3];
+
+glGetIntegerv(GL_VIEWPORT, viewport);
+glReadBuffer(GL_BACK);
+glReadPixels(x,viewport[3]-y,1,1,GL_RGB,GL_UNSIGNED_BYTE,(GLubyte *) &pixel[0]);
+printf(" valor x %d, valor y %d, color %d, %d, %d \n",x,y,pixel[0],pixel[1],pixel[2]);
+
+//procesar_color(pixel);
+}
+
 
 //***************************************************************************
 // Programa principal
@@ -1639,6 +1851,11 @@ glutReshapeFunc(change_window_size);
 glutKeyboardFunc(normal_key);
 // asignación de la funcion llamada "tecla_Especial" al evento correspondiente
 glutSpecialFunc(special_key);
+
+// eventos ratón
+glutMouseFunc(clickRaton);
+glutMotionFunc(RatonMovido);
+
 
 // funcion de inicialización
 initialize();
