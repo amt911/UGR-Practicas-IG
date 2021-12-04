@@ -41,8 +41,7 @@ _esfera esfera(1, ROTACIONES, ROTACIONES, y);
 _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 
-//const char *archivo="revolucion";
-_ply_rot reloj(/*archivo*/ "revolucion", ROTACIONES, y);
+_ply_rot reloj("revolucion", ROTACIONES, y);
 // _objeto_ply *ply1;
 Materiales::tipoMaterial material=Materiales::LATON;
 _tornado caza(material);
@@ -132,15 +131,15 @@ void draw_objects()
 switch (t_objeto){
 	case CUBO: cubo.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case PIRAMIDE: piramide.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-        case OBJETO_PLY: ply.draw(modo,1.0,0.6,0.0,0.0,1.0,0.3,20);break;
-        case ROTACION: rotacion.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case ESFERA: esfera.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case CONO: cono.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case CILINDRO: cilindro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-		case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
+	case OBJETO_PLY: ply.draw(modo,1.0,0.6,0.0,0.0,1.0,0.3,20);break;
+	case ROTACION: rotacion.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case ESFERA: esfera.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case CONO: cono.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case CILINDRO: cilindro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
+	case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	}
 
 }
@@ -178,10 +177,11 @@ void vista_orto(){
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+		glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	luces();
+
 draw_axis();
 draw_objects();
 
@@ -191,11 +191,12 @@ draw_objects();
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+		glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
 	glRotatef(90, 1, 0, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	luces();
+
 draw_axis();
 draw_objects();
 
@@ -204,24 +205,33 @@ draw_objects();
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
+	//	glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
+	glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
 	glRotatef(90, 0, 1, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	luces();
+
 draw_axis();
 draw_objects();
 
 //Poner perspectiva con glFrustum
-	glViewport(Ancho/2,0,Ancho,Alto);
+	glViewport(Ancho/2,0,Ancho/2,Alto/2);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-5*Observer_distance, 5*Observer_distance, -5*Observer_distance, 5*Observer_distance, -100, 100);
-	glRotatef(90, 0, 1, 0);
+	//	glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
+	glFrustum(-Size_x,Size_x,-Size_y,Size_y,Front_plane,Back_plane);
+
+	//Se usa para mover la camara en perspectiva
+	glTranslatef(0,0,-Observer_distance);
+	glRotatef(Observer_angle_x,1,0,0);
+	glRotatef(Observer_angle_y,0,1,0);
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	luces();
+
 draw_axis();
 draw_objects();
 }
@@ -229,20 +239,21 @@ draw_objects();
 
 void draw(void)
 {
+	clean_window();
 
-clean_window();
-if(cambio==0){
-glViewport(0, 0, Ancho, Alto);
-change_projection();
-change_observer();
-luces();
-draw_axis();
-draw_objects();
-}else vista_orto();
-//luces(alfa, beta);//Por ahora sera vacia
-luces();
+	if(cambio==0){
+		glViewport(0, 0, Ancho, Alto);
+		change_projection();
+		change_observer();
+		luces();
+		draw_axis();
+		draw_objects();
+	}else vista_orto();
 
-glutSwapBuffers();
+	//luces(alfa, beta);//Por ahora sera vacia
+	luces();
+
+	glutSwapBuffers();
 }
 
 
