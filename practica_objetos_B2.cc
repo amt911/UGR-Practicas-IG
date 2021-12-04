@@ -239,6 +239,7 @@ draw_objects();
 
 void draw(void)
 {
+	glDrawBuffer(GL_FRONT);
 	clean_window();
 
 	if(cambio==0){
@@ -248,12 +249,20 @@ void draw(void)
 		luces();
 		draw_axis();
 		draw_objects();
+
+		if(t_objeto==CAZA){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			caza.seleccion();
+		}
 	}else vista_orto();
 
 	//luces(alfa, beta);//Por ahora sera vacia
 	luces();
 
-	glutSwapBuffers();
+	//glutSwapBuffers();
+	glFlush();
 }
 
 
@@ -1630,6 +1639,8 @@ glViewport(0,0,Window_width,Window_high);
 // Funciones para manejo de eventos del ratón
 //***************************************************************************
 
+void pick_color(int x, int y);
+
 void clickRaton( int boton, int estado, int x, int y )
 {
 if(boton== GLUT_RIGHT_BUTTON) {
@@ -1650,7 +1661,7 @@ if(boton== GLUT_LEFT_BUTTON) {
       estadoRaton[2] = 2;
       xc=x;
       yc=y;
-      //pick_color(xc, yc);
+      pick_color(xc, yc);
     } 
   }
 
@@ -1712,26 +1723,25 @@ if(estadoRaton[2]==1)
      glutPostRedisplay();
     }
 }
-/*
+
 //HACER PARA EL CAZA
 void procesar_color(unsigned char color[3])
 {
-int i;
+//int i;
 
-for (i=0;i<caza.piezas;i++)
-   {if (color[0]==tanque.color_selec[0][i])
-       {if (tanque.activo[i]==0) 
-                      {tanque.activo[i]=1;
-                      }
+for (int i=0;i<caza.piezas;i++)
+   {if (color[0]==(caza.color_selec[0][i]%256))
+       {if (caza.activo[i]==0) 
+                      {caza.activo[i]=1;}
                   else 
-                      {tanque.activo[i]=0;
+                      {caza.activo[i]=0;
                       }
          glutPostRedisplay();
         }
     }                
  }
 
-*/
+
 
 void pick_color(int x, int y)
 {
@@ -1743,7 +1753,7 @@ glReadBuffer(GL_BACK);
 glReadPixels(x,viewport[3]-y,1,1,GL_RGB,GL_UNSIGNED_BYTE,(GLubyte *) &pixel[0]);
 printf(" valor x %d, valor y %d, color %d, %d, %d \n",x,y,pixel[0],pixel[1],pixel[2]);
 
-//procesar_color(pixel);
+procesar_color(pixel);
 }
 
 

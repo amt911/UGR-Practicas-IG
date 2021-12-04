@@ -9,7 +9,7 @@
 
 
 const float AXIS_SIZE=5000;
-typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID, SOLID_ILLUMINATED_FLAT, SOLID_ILLUMINATED_GOURAUD} _modo;
+typedef enum{POINTS,EDGES,SOLID_CHESS,SOLID, SOLID_ILLUMINATED_FLAT, SOLID_ILLUMINATED_GOURAUD, SELECT} _modo;
 enum Eje{x, y, z};
 enum Tipo{NORMAL, ESPECIAL};
 
@@ -153,7 +153,7 @@ class _triangulos3D: public _puntos3D
 	void    draw_solido(float r, float g, float b);
 	void 	draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
 	void 	draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
-
+	void draw_seleccion(int r, int g, int b);
 	//Practica 4
 	void 	draw_iluminacion_plana( );
 	void 	draw_iluminacion_suave( );
@@ -670,10 +670,10 @@ class _tren_delantero: public _triangulos3D{
 
 class _tornado{
 	public:
-float  color_pick[13];
-int    color_selec[13][13];
-int    activo[13];
-int    piezas;
+float  color_pick[3];
+int    color_selec[3][17];
+int    activo[17];
+const int    piezas=17;
 	/*
 		_cuerpo cuerpo;
 	_ala_izda ala_izda;
@@ -698,8 +698,9 @@ int    piezas;
 		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tt(mat), tren_d(mat){
 			for(int i=0; i<50; i++)
 				actos[i]=false;		
-/*
-			piezas=3;
+
+			int c=20;
+			//piezas=13;
 			color_pick[0]=1.0;
 			color_pick[1]=0.0;
 			color_pick[2]=0.0; 
@@ -708,15 +709,17 @@ int    piezas;
 			color_selec[0][i]=color_selec[1][i]=color_selec[2][i]=c;
 			c=c+20;
 			}			
-			*/		
+			
 		}
 
 
 		void setMaterial(Materiales::tipoMaterial tipo){
 			cuerpo.material=ala_izda.material=ala_dcha.material=td.material=ti.material=ventana_fija.material=ventana_movil.material=flap.material=frenos.material=
 			ft.material=ft.material=timon.material=tt.material=tren_d.material=Materiales(tipo);
-/*
-			piezas=3;
+
+			int c=20;
+
+			//piezas=13;
 			color_pick[0]=1.0;
 			color_pick[1]=0.0;
 			color_pick[2]=0.0; 
@@ -725,7 +728,7 @@ int    piezas;
 			color_selec[0][i]=color_selec[1][i]=color_selec[2][i]=c;
 			c=c+20;
 			}		
-			*/	
+			
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
 
@@ -741,6 +744,8 @@ int    piezas;
 
 			
 		}
+
+		void seleccion();
 
 	/**
 	 * 0: giro_aeronave_x
