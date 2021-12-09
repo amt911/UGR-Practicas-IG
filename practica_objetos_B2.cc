@@ -175,7 +175,8 @@ void luces(){
 void vista_orto(){
 	//Frontal
 	
-	glViewport(Ancho/2,Alto/2,Ancho/2,Alto/2);
+	//glViewport(Ancho/2,Alto/2,Ancho/2,Alto/2);
+	glViewport(0,Alto/2,Ancho/2,Alto/2);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -189,7 +190,8 @@ draw_objects();
 
 
 //Planta
-	glViewport(0,Alto/2,Ancho/2,Alto/2);
+	//glViewport(0,Alto/2,Ancho/2,Alto/2);
+	glViewport(0,0,Ancho/2,Alto/2);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -203,7 +205,8 @@ draw_axis();
 draw_objects();
 
 //Alzado
-	glViewport(0,0,Ancho/2,Alto/2);
+	//glViewport(0,0,Ancho/2,Alto/2);
+	glViewport(Ancho/2 , Alto/2, Ancho/2, Alto/2);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -222,34 +225,23 @@ draw_objects();
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//	glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
-	//glFrustum(-Size_x,Size_x,-Size_y,Size_y,Front_plane,Back_plane);
 	change_projection();
-
-	//Se usa para mover la camara en perspectiva
-	/*glTranslatef(0,0,-Observer_distance);
-	glRotatef(Observer_angle_x,1,0,0);
-	glRotatef(Observer_angle_y,0,1,0);*/
 	change_observer();
-
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
 	luces();
 
 draw_axis();
 draw_objects();
 }
 
-
 void draw(void)
 {
-	
+
 	glDrawBuffer(GL_FRONT);
 	clean_window();
 
+	if (cambio == 0)
+	{
 
-	if(cambio==0){
-		
 		glViewport(0, 0, Ancho, Alto);
 		change_projection();
 		change_observer();
@@ -257,74 +249,96 @@ void draw(void)
 		draw_axis();
 		draw_objects();
 
+		switch (t_objeto)
+		{
+			case CAZA:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				caza.seleccion();
 
-		if(t_objeto==CAZA){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			caza.seleccion();
+				break;
+			}
+
+			case CUBO:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				cubo.seleccion();
+
+				break;
+			}
+
+			case PIRAMIDE:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				piramide.seleccion();
+
+				break;
+			}
+
+			case ESFERA:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				esfera.seleccion();
+
+				break;
+			}
+
+			case CONO:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				cono.seleccion();
+
+				break;
+			}
+
+			case ROTACION:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				rotacion.seleccion();
+
+				break;
+			}
+
+			case CILINDRO:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				cilindro.seleccion();
+
+				break;
+			}
+
+			case RELOJ:
+			{
+				glDrawBuffer(GL_BACK);
+				clean_window();
+				change_observer();
+				reloj.seleccion();
+
+				break;
+			}
 		}
+	}
+	else
+		vista_orto();
 
-		if(t_objeto==CUBO){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			cubo.seleccion();
-		}			
-
-		if(t_objeto==PIRAMIDE){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			piramide.seleccion();
-		}	
-		
-		if(t_objeto==ESFERA){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			esfera.seleccion();
-		}	
-
-		if(t_objeto==CONO){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			cono.seleccion();
-		}	
-
-		if(t_objeto==ROTACION){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			rotacion.seleccion();
-		}	
-
-
-		if(t_objeto==CILINDRO){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			cilindro.seleccion();
-		}	
-
-		if(t_objeto==RELOJ){
-			glDrawBuffer(GL_BACK);
-			clean_window();
-			change_observer();
-			reloj.seleccion();			
-		}
-
-
-	}else vista_orto();
-
-	//luces(alfa, beta);//Por ahora sera vacia
 	luces();
 
-	//glutSwapBuffers();
 	glFlush();
 }
-
 
 //***************************************************************************
 // Funcion llamada cuando se produce un cambio en el tamaño de la ventana
