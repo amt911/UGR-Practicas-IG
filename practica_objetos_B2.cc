@@ -52,7 +52,7 @@ Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
 
 
 //Practica 5
-int estadoRaton[3], xc, yc, cambio=0, factor=1;
+int estadoRaton[3], xc, yc, cambio=0;
 int Ancho, Alto;
 //void pick_color(int x, int y);
 //**************************************************************************
@@ -1003,8 +1003,6 @@ switch (toupper(Tecla1)){
 	case 'F':t_objeto=CAZA; break;
 	case 'C': cambio=0; break;
 	case 'V': cambio=1; break;
-	case '!': factor*=0.9; break;
-	case '"': factor*=1.2; break;
 
 
 	case 'P':{
@@ -1766,7 +1764,7 @@ if(estadoRaton[2]==1)
 	 */
 
 	 xn=x0+(y-yc);
-     yn=y0-(x-xc);
+     yn=y0+(x-xc);
 
      setCamara(xn,yn);
      xc=x;
