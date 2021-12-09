@@ -31,7 +31,7 @@ int Window_x=50,Window_y=50,Window_width=450,Window_high=450;
 
 
 // objetos
-const int ROTACIONES=32;
+const int ROTACIONES=6;
 
 _cubo cubo;
 _piramide piramide(0.85,1.3);
@@ -42,9 +42,10 @@ _cono cono(1, 3, ROTACIONES, z);
 _cilindro cilindro(1, 3, ROTACIONES, z);
 
 _ply_rot reloj("revolucion", ROTACIONES, y);
-// _objeto_ply *ply1;
+ //_objeto_ply *ply1;
 Materiales::tipoMaterial material=Materiales::LATON;
 _tornado caza(material);
+_cuerpo c;
 Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
 Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
 
@@ -140,6 +141,7 @@ switch (t_objeto){
 	case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
+	//c.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	}
 
 }
@@ -221,15 +223,17 @@ draw_objects();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//	glOrtho(-0.5*Observer_distance, 0.5*Observer_distance, -0.5*Observer_distance, 0.5*Observer_distance, -100, 100);
-	glFrustum(-Size_x,Size_x,-Size_y,Size_y,Front_plane,Back_plane);
+	//glFrustum(-Size_x,Size_x,-Size_y,Size_y,Front_plane,Back_plane);
+	change_projection();
 
 	//Se usa para mover la camara en perspectiva
-	glTranslatef(0,0,-Observer_distance);
+	/*glTranslatef(0,0,-Observer_distance);
 	glRotatef(Observer_angle_x,1,0,0);
-	glRotatef(Observer_angle_y,0,1,0);
+	glRotatef(Observer_angle_y,0,1,0);*/
+	change_observer();
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 	luces();
 
 draw_axis();
@@ -239,10 +243,13 @@ draw_objects();
 
 void draw(void)
 {
+	
 	glDrawBuffer(GL_FRONT);
 	clean_window();
 
+
 	if(cambio==0){
+		
 		glViewport(0, 0, Ancho, Alto);
 		change_projection();
 		change_observer();
@@ -250,12 +257,65 @@ void draw(void)
 		draw_axis();
 		draw_objects();
 
+
 		if(t_objeto==CAZA){
 			glDrawBuffer(GL_BACK);
 			clean_window();
 			change_observer();
 			caza.seleccion();
 		}
+
+		if(t_objeto==CUBO){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			cubo.seleccion();
+		}			
+
+		if(t_objeto==PIRAMIDE){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			piramide.seleccion();
+		}	
+		
+		if(t_objeto==ESFERA){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			esfera.seleccion();
+		}	
+
+		if(t_objeto==CONO){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			cono.seleccion();
+		}	
+
+		if(t_objeto==ROTACION){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			rotacion.seleccion();
+		}	
+
+
+		if(t_objeto==CILINDRO){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			cilindro.seleccion();
+		}	
+
+		if(t_objeto==RELOJ){
+			glDrawBuffer(GL_BACK);
+			clean_window();
+			change_observer();
+			reloj.seleccion();			
+		}
+
+
 	}else vista_orto();
 
 	//luces(alfa, beta);//Por ahora sera vacia
@@ -1242,31 +1302,8 @@ switch (toupper(Tecla1)){
 		}
 
 
-
-/*
-		case 'O':{
-			if(luz.getPosicion(0)>-19){
-				luz.setPosicion(0, luz.getPosicion(0)-0.5);
-				luz.setPosicion(1, sqrt(400-luz.getPosicion(0)*luz.getPosicion(0)));
-			}
-				//cout <<luz.getPosicion()[0] <<endl;
-
-			break;
-		}
-		case 'I':{
-			if(luz.getPosicion(0)<19){
-				luz.setPosicion(0, luz.getPosicion(0)+0.5);
-				luz.setPosicion(1, sqrt(400-luz.getPosicion(0)*luz.getPosicion(0)));
-			}
-
-				cout <<luz.getPosicion(0) <<endl;
-			break;
-
-		}
-
-		*/
-		case '7':modo=SOLID_ILLUMINATED_FLAT;break;
-		case '8':modo=SOLID_ILLUMINATED_GOURAUD;break;
+	case '7':modo=SOLID_ILLUMINATED_FLAT;break;
+	case '8':modo=SOLID_ILLUMINATED_GOURAUD;break;
 
 	case 'D': caza.giro_aeronave_z+=caza.constantes_animacion[2]*caza.factor_mult[2]; break;
 	case 'A': caza.giro_aeronave_z-=caza.constantes_animacion[2]*caza.factor_mult[2]; break;
@@ -1656,7 +1693,7 @@ if(boton== GLUT_RIGHT_BUTTON) {
    else estadoRaton[2] = 1;
    }
    
-if(boton== GLUT_LEFT_BUTTON) {
+else if(boton== GLUT_LEFT_BUTTON) {
   if( estado == GLUT_DOWN) {
       estadoRaton[2] = 2;
       xc=x;
@@ -1666,7 +1703,7 @@ if(boton== GLUT_LEFT_BUTTON) {
   }
 
 	//3=scroll up
-  if(boton==3){
+  else if(boton==3){
 	  if(estado==GLUT_DOWN){
 		Observer_distance/=1.2;
 
@@ -1675,7 +1712,7 @@ if(boton== GLUT_LEFT_BUTTON) {
   }
 
 	//4=scroll down
-  if(boton==4){
+  else if(boton==4){
 	  if(estado==GLUT_DOWN){
 		Observer_distance*=1.2;
 
@@ -1727,18 +1764,147 @@ if(estadoRaton[2]==1)
 //HACER PARA EL CAZA
 void procesar_color(unsigned char color[3])
 {
-//int i;
 
-for (int i=0;i<caza.piezas;i++)
-   {if (color[0]==(caza.color_selec[0][i]%256))
-       {if (caza.activo[i]==0) 
-                      {caza.activo[i]=1;}
-                  else 
-                      {caza.activo[i]=0;
-                      }
-         glutPostRedisplay();
-        }
-    }                
+
+switch(t_objeto){
+	case CAZA:{
+	for (int i = 0; i < caza.piezas; i++)
+	{
+		//cout<<"caza_color_R: " <<(int)color[0] <<" caza_color_G: " <<(int)color[1] <<" caza_color_B: " <<(int)color[2] <<endl;
+		if (color[0] == caza.color_selec[0][i])
+		{
+			if (caza.activo[i] == 0)
+				caza.activo[i] = 1;
+
+			else
+				caza.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}
+	break;
+	}
+
+	case CUBO:{
+	for (int i = 0; i < cubo.triangulos; i++)
+	{
+		if (color[0] == cubo.color_selec[0][i])
+		{
+			if (cubo.activo[i] == 0)
+				cubo.activo[i] = 1;
+
+			else
+				cubo.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}
+	break;
+	}
+
+	case ROTACION:{
+	for (int i = 0; i < rotacion.triangulos; i++)
+	{
+		if (color[0] == rotacion.color_selec[0][i])
+		{
+			if (rotacion.activo[i] == 0)
+				rotacion.activo[i] = 1;
+
+			else
+				rotacion.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}	
+	break;
+	}
+
+	case ESFERA:{
+	for (int i = 0; i < esfera.triangulos; i++)
+	{
+		if (color[0] == esfera.color_selec[0][i])
+		{
+			if (esfera.activo[i] == 0)
+				esfera.activo[i] = 1;
+
+			else
+				esfera.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}
+	break;
+	}
+
+	case CILINDRO:{
+	for (int i = 0; i < cilindro.triangulos; i++)
+	{
+		if (color[0] == cilindro.color_selec[0][i])
+		{
+			if (cilindro.activo[i] == 0)
+				cilindro.activo[i] = 1;
+
+			else
+				cilindro.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}
+	break;
+	}
+
+	case CONO:{
+	for (int i = 0; i < cono.triangulos; i++)
+	{
+		if (color[0] == cono.color_selec[0][i])
+		{
+			if (cono.activo[i] == 0)
+				cono.activo[i] = 1;
+
+			else
+				cono.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}
+
+	break;
+	}
+
+	case PIRAMIDE:{
+	for (int i = 0; i < piramide.triangulos; i++)
+	{
+		if (color[0] == piramide.color_selec[0][i])
+		{
+			if (piramide.activo[i] == 0)
+				piramide.activo[i] = 1;
+
+			else
+				piramide.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}	
+	break;
+	}
+
+	case RELOJ:{
+	for (int i = 0; i < reloj.triangulos; i++)
+	{
+		if (color[0] == reloj.color_selec[0][i])
+		{
+			if (reloj.activo[i] == 0)
+				reloj.activo[i] = 1;
+
+			else
+				reloj.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}
+	}	
+	break;		
+	}
+}
  }
 
 
@@ -1862,7 +2028,7 @@ glutInitWindowSize(Window_width,Window_high);
 
 // llamada para crear la ventana, indicando el titulo (no se visualiza hasta que se llama
 // al bucle de eventos)
-glutCreateWindow("PRACTICA - 2");
+glutCreateWindow("PRACTICA - 5");
 
 // asignación de la funcion llamada "dibujar" al evento de dibujo
 glutDisplayFunc(draw);
@@ -1883,7 +2049,7 @@ initialize();
 
 // creación del objeto ply
 ply.parametros(argv[1]);
-
+//cout <<"CREADO PLY -----------------------------------------" <<endl;
 
 //ply1 = new _objeto_ply(argv[1]);
 

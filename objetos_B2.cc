@@ -514,8 +514,26 @@ caras[8]._0=0;caras[8]._1=7;caras[8]._2=3;
 caras[9]._0=0;caras[9]._1=4;caras[9]._2=7;
 caras[10]._0=5;caras[10]._1=7;caras[10]._2=4;
 caras[11]._0=5;caras[11]._1=6;caras[11]._2=7;
-}
 
+
+int c = 20;
+
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++)
+{
+  activo.push_back(0);
+  color_selec[0].push_back(c);
+  color_selec[1].push_back(c);
+  color_selec[2].push_back(c);
+
+  c = c + 20; 
+}
+}
 
 //*************************************************************************
 // clase piramide
@@ -539,6 +557,24 @@ caras[2]._0=2;caras[2]._1=3;caras[2]._2=4;
 caras[3]._0=3;caras[3]._1=0;caras[3]._2=4;
 caras[4]._0=3;caras[4]._1=1;caras[4]._2=0;
 caras[5]._0=3;caras[5]._1=2;caras[5]._2=1;
+
+int c = 20;
+
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++)
+{
+  activo.push_back(0);
+  color_selec[0].push_back(c);
+  color_selec[1].push_back(c);
+  color_selec[2].push_back(c);
+
+  c = c + 20; 
+}
 }
 
 //*************************************************************************
@@ -549,7 +585,6 @@ caras[5]._0=3;caras[5]._1=2;caras[5]._2=1;
 _objeto_ply::_objeto_ply() 
 {
    // leer lista de coordenadas de vértices y lista de indices de vértices
-  
 }
 
 
@@ -585,7 +620,6 @@ for (int i = 0; i < n_car; i++)
   caras[i]._2=car_ply[3*i+2];
 }
 
-
 return(0);
 }
 
@@ -596,11 +630,16 @@ return(0);
 
 _rotacion::_rotacion(Materiales::tipoMaterial tipo):_triangulos3D(tipo)
 {
-
 }
 
 void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
 {
+
+
+
+
+
+
   //int i,j;
   _vertex3f vertice_aux;
   _vertex3i cara_aux;
@@ -813,6 +852,26 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
     c++;
   }
   
+
+
+
+c = 1;
+
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++)
+{
+  activo.push_back(0);
+  color_selec[0].push_back(c);
+  color_selec[1].push_back(c);
+  color_selec[2].push_back(c);
+
+  c=(c+1)%256; 
+}
 }
 
 //************************************************************************
@@ -1108,6 +1167,26 @@ material(tipo)
 
   vertices=aux.vertices;
   caras=aux.caras;
+
+
+int c = 1;
+
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++)
+{
+  activo.push_back(0);
+  color_selec[0].push_back(c);
+  color_selec[1].push_back(c);
+  color_selec[2].push_back(c);
+
+  //c = c + 20; 
+  c=(c+1)%256;
+}  
 }
 
 //************************************************************************
@@ -3032,7 +3111,7 @@ b_p=color_pick[2];
 
 void _tornado::seleccion(){
 int c;
-  
+  //cuerpo.seleccion();
   glPushMatrix();
     //Cuerpo de la aeronave
 
