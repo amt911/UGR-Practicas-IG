@@ -2846,7 +2846,7 @@ void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, flo
 
 //************************************************************************
 
-void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
+void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){    //QUIZAS HAGA FALTA PONER UN BUCLE PARA CICLAR POR CADA PIEZA
   //Brazo 0.7 0.4
   if(tipo==NORMAL)
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));

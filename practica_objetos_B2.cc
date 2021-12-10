@@ -12,7 +12,7 @@
 using namespace std;
 
 // tipos
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO, CAZA} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, ROTACION, ESFERA, CONO, CILINDRO, ROTACION_X, RELOJ, RARO, CAZA, TEST} _tipo_objeto;
 
 _tipo_objeto t_objeto=CUBO;
 _modo   modo=POINTS;
@@ -45,7 +45,9 @@ _ply_rot reloj("revolucion", ROTACIONES, y);
  //_objeto_ply *ply1;
 Materiales::tipoMaterial material=Materiales::LATON;
 _tornado caza(material);
-_cuerpo c;
+_tren_delantero pruebas;
+
+
 Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
 Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
 
@@ -141,6 +143,7 @@ switch (t_objeto){
 	case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	//c.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
+	case TEST: pruebas.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	}
 
 }
@@ -329,6 +332,16 @@ void draw(void)
 
 				break;
 			}
+
+			case TEST:
+			{
+				glDrawBuffer(GL_FRONT);
+				clean_window();
+				change_observer();
+				pruebas.seleccion();
+
+				break;
+			}			
 		}
 	}
 	else
@@ -1002,6 +1015,7 @@ switch (toupper(Tecla1)){
 	case 'F':t_objeto=CAZA; break;
 	case 'C': cambio=0; break;
 	case 'V': cambio=1; break;
+	case '<': t_objeto=TEST; break;
 
 
 	case 'P':{

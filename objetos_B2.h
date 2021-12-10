@@ -979,11 +979,54 @@ class _tren_trasero: public _triangulos3D{
 
 class _tren_delantero: public _triangulos3D{
 	public:
-		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
+		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){
+			
+		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double y=1.28617;
 		const double z=3.5297;
+
+
+	void seleccion(){
+  //Brazo 0.7 0.4
+  glPushMatrix();
+  glTranslatef(0, -0.55, 0);
+  glScalef(0.05, 0.57, 0.05);
+    piezas[piezas.size()-1].seleccion();
+  glPopMatrix();
+
+  //Ruedas 0.24 0.12
+  //Izquierda
+  //No hay otra forma de hacer el material que creando otra pieza
+
+  glPushMatrix();
+  glTranslatef(-0.1543, -1.1262, -0.006611);
+  glRotatef(90, 0, 0, 1);
+  glScalef(0.2, 0.12, 0.2);
+    piezas[piezas.size()-1].seleccion();
+  glPopMatrix();
+
+  //Derecha
+  //No hay otra forma de hacer el material que creando otra pieza
+
+  glPushMatrix();
+  glTranslatef(0.1543, -1.1262, -0.006611);
+  glRotatef(90, 0, 0, 1);
+  glScalef(0.2, 0.12, 0.2);
+    piezas[piezas.size()-1].seleccion();
+  glPopMatrix();		
+	}
+
+
+
+
+
+
+	float  color_pick[3];
+	vector<int>    color_selec[3];
+	vector<int>    activo;
+	int    triangulos;
 
 
 	private:
