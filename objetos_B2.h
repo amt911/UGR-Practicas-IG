@@ -144,11 +144,11 @@ class _triangulos3D: public _puntos3D
 	void 	draw_aristas(float r, float g, float b, int grosor);
 	void    draw_solido(float r, float g, float b);
 	void 	draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
-	void 	draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+	void 	draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool selec=false);
 	void draw_seleccion(int r, int g, int b);
 	//Practica 4
-	void 	draw_iluminacion_plana( );
-	void 	draw_iluminacion_suave( );
+	void 	draw_iluminacion_plana( bool selec=false);		//Por ahora asi
+	void 	draw_iluminacion_suave( bool selec=false);		//Por ahora asi
 
 	void	calcular_normales_caras();
 	virtual void 	calcular_normales_vertices();
@@ -193,41 +193,62 @@ public:
 			}
 	}
 
-	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-		float r_p,g_p,b_p;
+	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s = false)
+	{
+		float r_p, g_p, b_p;
 
-		r_p=color_pick[0];
-		g_p=color_pick[1];
-		b_p=color_pick[2];
+		r_p = color_pick[0];
+		g_p = color_pick[1];
+		b_p = color_pick[2];
 
 		_triangulos3D aux;
-		aux.vertices=vertices;
+		aux.vertices = vertices;
 
-		for(int i=0; i<caras.size(); i++){
-			
+		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
+		{
+			for (int i = 0; i < caras.size(); i++)
+			{
 
-			aux.caras.push_back(caras[i]);
+				aux.caras.clear();
+				aux.caras.push_back(caras[i]);
 
-			if(activo[i]==1)
-				aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor);
-
-			else{
-				if(modo==SOLID_CHESS){
-					if(i%2==0)
-						aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor);		
-					
-					else
-						aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor);	
-				}
-
-				else if(modo==SOLID_ILLUMINATED_FLAT or modo==SOLID_ILLUMINATED_GOURAUD)
-					_triangulos3D::draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+				if (activo[i] == 1)
+					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
 
 				else
-					aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-			}
-				
+				{
+					if (modo == SOLID_CHESS)
+					{
+						if (i % 2 == 0)
+							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 
+						else
+							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
+					}
+
+					else
+						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+				}
+			}
+		}
+		else
+		{
+			_triangulos3D a(material.mat), noa(material.mat);
+			a.vertices = noa.vertices = vertices;
+
+			for (int i = 0; i < caras.size(); i++)
+			{
+				if (activo[i] == 1)
+					a.caras.push_back(caras[i]);
+
+				else
+					noa.caras.push_back(caras[i]);
+			}
+
+			if (a.caras.size() > 0)
+				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 		}
 	}
 
@@ -268,42 +289,61 @@ public:
 			}
 	}
 
-	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-		float r_p,g_p,b_p;
+	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
+		float r_p, g_p, b_p;
 
-		r_p=color_pick[0];
-		g_p=color_pick[1];
-		b_p=color_pick[2];
+		r_p = color_pick[0];
+		g_p = color_pick[1];
+		b_p = color_pick[2];
 
 		_triangulos3D aux;
-		aux.vertices=vertices;
+		aux.vertices = vertices;
 
+		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
+		{
+			for (int i = 0; i < caras.size(); i++)
+			{
 
-		for(int i=0; i<caras.size(); i++){
-			
+				aux.caras.clear();
+				aux.caras.push_back(caras[i]);
 
-			aux.caras.push_back(caras[i]);
-
-			if(activo[i]==1)
-				aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor);
-
-			else{
-				if(modo==SOLID_CHESS){
-					if(i%2==0)
-						aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor);		
-					
-					else
-						aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor);	
-				}
-
-				else if(modo==SOLID_ILLUMINATED_FLAT or modo==SOLID_ILLUMINATED_GOURAUD)
-					_triangulos3D::draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+				if (activo[i] == 1)
+					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
 
 				else
-					aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-			}
-				
+				{
+					if (modo == SOLID_CHESS)
+					{
+						if (i % 2 == 0)
+							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 
+						else
+							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
+					}
+
+					else
+						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+				}
+			}
+		}
+		else
+		{
+			_triangulos3D a(material.mat), noa(material.mat);
+			a.vertices = noa.vertices = vertices;
+
+			for (int i = 0; i < caras.size(); i++)
+			{
+				if (activo[i] == 1)
+					a.caras.push_back(caras[i]);
+
+				else
+					noa.caras.push_back(caras[i]);
+			}
+
+			if (a.caras.size() > 0)
+				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 		}
 	}
 
@@ -364,45 +404,61 @@ int num;
 			}
 	}
 
-	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-		float r_p,g_p,b_p;
+	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
+		float r_p, g_p, b_p;
 
-		r_p=color_pick[0];
-		g_p=color_pick[1];
-		b_p=color_pick[2];
+		r_p = color_pick[0];
+		g_p = color_pick[1];
+		b_p = color_pick[2];
 
 		_triangulos3D aux;
-		aux.vertices=vertices;
+		aux.vertices = vertices;
 
+		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
+		{
+			for (int i = 0; i < caras.size(); i++)
+			{
 
+				aux.caras.clear();
+				aux.caras.push_back(caras[i]);
 
-		//aux.caras.clear();
-
-		for(int i=0; i<caras.size(); i++){
-			
-
-			aux.caras.push_back(caras[i]);
-
-			if(activo[i]==1)
-				aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor);
-
-			else{
-				if(modo==SOLID_CHESS){
-					if(i%2==0)
-						aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor);		
-					
-					else
-						aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor);	
-				}
-
-				else if(modo==SOLID_ILLUMINATED_FLAT or modo==SOLID_ILLUMINATED_GOURAUD)
-					_triangulos3D::draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+				if (activo[i] == 1)
+					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
 
 				else
-					aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-			}
-				
+				{
+					if (modo == SOLID_CHESS)
+					{
+						if (i % 2 == 0)
+							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 
+						else
+							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
+					}
+
+					else
+						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+				}
+			}
+		}
+		else
+		{
+			_triangulos3D a(material.mat), noa(material.mat);
+			a.vertices = noa.vertices = vertices;
+
+			for (int i = 0; i < caras.size(); i++)
+			{
+				if (activo[i] == 1)
+					a.caras.push_back(caras[i]);
+
+				else
+					noa.caras.push_back(caras[i]);
+			}
+
+			if (a.caras.size() > 0)
+				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 		}
 	}
 
@@ -471,42 +527,61 @@ class _ply_rot: public _objeto_ply
 	}
 
 
-	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor){
-		float r_p,g_p,b_p;
+	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
+		float r_p, g_p, b_p;
 
-		r_p=color_pick[0];
-		g_p=color_pick[1];
-		b_p=color_pick[2];
+		r_p = color_pick[0];
+		g_p = color_pick[1];
+		b_p = color_pick[2];
 
 		_triangulos3D aux;
-		aux.vertices=vertices;
+		aux.vertices = vertices;
 
+		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
+		{
+			for (int i = 0; i < caras.size(); i++)
+			{
 
-		for(int i=0; i<caras.size(); i++){
-			
+				aux.caras.clear();
+				aux.caras.push_back(caras[i]);
 
-			aux.caras.push_back(caras[i]);
-
-			if(activo[i]==1)
-				aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor);
-
-			else{
-				if(modo==SOLID_CHESS){
-					if(i%2==0)
-						aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor);		
-					
-					else
-						aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor);	
-				}
-
-				else if(modo==SOLID_ILLUMINATED_FLAT or modo==SOLID_ILLUMINATED_GOURAUD)
-					_triangulos3D::draw(modo, r1, g1, b1, r2, g2, b2, grosor);
+				if (activo[i] == 1)
+					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
 
 				else
-					aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor);
-			}
-				
+				{
+					if (modo == SOLID_CHESS)
+					{
+						if (i % 2 == 0)
+							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 
+						else
+							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
+					}
+
+					else
+						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+				}
+			}
+		}
+		else
+		{
+			_triangulos3D a(material.mat), noa(material.mat);
+			a.vertices = noa.vertices = vertices;
+
+			for (int i = 0; i < caras.size(); i++)
+			{
+				if (activo[i] == 1)
+					a.caras.push_back(caras[i]);
+
+				else
+					noa.caras.push_back(caras[i]);
+			}
+
+			if (a.caras.size() > 0)
+				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
 		}
 	}
 
@@ -530,7 +605,7 @@ class _cuerpo: public _triangulos3D{
 	public:
 		_cuerpo(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), 
 		nariz(CONO_RADIO, CONO_H, NUM, eje,  tipo), nariz_curva(ES_RADIO, NUM, NUM, eje, tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);
 
 	double y=1.95865;
 
@@ -557,7 +632,7 @@ public:
 class _alas: public _triangulos3D{
 	public:
 		_alas(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	private:
 	const int CUBO_TAM=2;
@@ -582,7 +657,7 @@ class _ala_izda: public _triangulos3D{
 	public:
 		_ala_izda(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
 		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double angulo_y=23.5;
 		const double angulo_z=-4.6;
@@ -607,7 +682,7 @@ class _ala_dcha: public _triangulos3D{
 		_ala_dcha(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
 		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	const double angulo_y=-23.5;
 	const double angulo_z=4.6;
@@ -634,7 +709,7 @@ class _ala_td: public _triangulos3D{
 		_ala_td(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
 		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	const double x=-1.0603;
 	const double y=1.984261;
@@ -664,7 +739,7 @@ class _ala_ti: public _triangulos3D{
 		_ala_ti(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
 		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	const double x=1.0603;
 	const double y=1.984261;
@@ -693,7 +768,7 @@ class _ventana_movil: public _triangulos3D{
 		_ventana_movil(Materiales::tipoMaterial tipo=Materiales::PERLADO):_triangulos3D(tipo),
 		pico(CONO_RADIO, CONO_H, NUM, eje, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 		
 		double x=0;
 		double y=2.99002;
@@ -722,7 +797,7 @@ class _ventana_fija: public _triangulos3D{
 		_ventana_fija(Materiales::tipoMaterial tipo=Materiales::PERLADO):_triangulos3D(tipo),
 		filos(CIL_RAD, CIL_H, NUM, eje, tipo), pico(CONO_RADIO, CONO_H, NUM, eje, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		double x=0;
 		double y=2.99002;
@@ -747,7 +822,7 @@ class _ventana_fija: public _triangulos3D{
 class _flaps: public _triangulos3D{
 	public:
 		_flaps(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	private:
 	const int CUBO_TAM=2;
@@ -762,7 +837,7 @@ class _flap: public _triangulos3D{
 	public:
 		_flap(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), flap(CUBO_TAM, tipo){}
 
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double angulo_y_r=14.6;
 		const double angulo_z_r=-4.6;
@@ -789,7 +864,7 @@ class _flap: public _triangulos3D{
 class _frenos_delanteros: public _triangulos3D{
 	public:
 		_frenos_delanteros(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	private:
 	const int CUBO_TAM=2;
@@ -803,7 +878,7 @@ class _frenos_delanteros: public _triangulos3D{
 class _freno_individual: public _triangulos3D{
 	public:
 		_freno_individual(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), base(CUBO_TAM, tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double y=2.2518;
 		//const double intermedio_y=0.29316;
@@ -824,7 +899,7 @@ class _freno_individual: public _triangulos3D{
 class _timon: public _triangulos3D{
 	public:
 		_timon(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 
 		const double y=3.579368;
@@ -843,7 +918,7 @@ class _timon: public _triangulos3D{
 class _frenos_traseros: public _triangulos3D{
 	public:
 		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 	private:
 	const int CUBO_TAM=2;
@@ -858,7 +933,7 @@ class _frenos_traseros: public _triangulos3D{
 class _freno_trasero_individual: public _triangulos3D{
 	public:
 		_freno_trasero_individual(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), base(CUBO_TAM, tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double angulo_z_l=-23.5;
 		const double x=0.7922;
@@ -882,7 +957,7 @@ class _freno_trasero_individual: public _triangulos3D{
 class _tren_trasero: public _triangulos3D{
 	public:
 		_tren_trasero(Materiales::tipoMaterial tipo=Materiales::GOMA):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double x_r=-0.89669;
 		const double y_r=1.30617;
@@ -905,7 +980,7 @@ class _tren_trasero: public _triangulos3D{
 class _tren_delantero: public _triangulos3D{
 	public:
 		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double y=1.28617;
 		const double z=3.5297;
@@ -973,7 +1048,7 @@ const int    piezas=17;
 			cuerpo.material=ala_izda.material=ala_dcha.material=td.material=ti.material=ventana_fija.material=ventana_movil.material=flap.material=frenos.material=
 			ft.material=ft.material=timon.material=tt.material=tren_d.material=Materiales(tipo);	
 		}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo);		
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		//Cuando se corta la animacion es necesario restaurar todo a su estado original
 		void limpiar_actos(){

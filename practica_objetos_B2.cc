@@ -50,7 +50,6 @@ Luces luz1(1, 1, 1, 1, 20, 0, 0, 1);
 Luces luz2(1, 1, 1, 1, 20, 20, 0, 1);
 
 
-
 //Practica 5
 int estadoRaton[3], xc, yc, cambio=0;
 int Ancho, Alto;
