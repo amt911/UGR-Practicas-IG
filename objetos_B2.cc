@@ -384,7 +384,7 @@ void _triangulos3D::draw_seleccion(int r, int g, int b){
 }
 
 
-void _triangulos3D::draw_iluminacion_plana( )
+void _triangulos3D::draw_iluminacion_plana(Materiales::tipoMaterial tipo=Materiales::GOMA )
 {
 if (b_normales_caras==false) calcular_normales_caras();
 //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
@@ -393,12 +393,21 @@ glEnable (GL_LIGHTING);
 glShadeModel(GL_FLAT);  //GL_SMOOTH
 glEnable(GL_NORMALIZE);
 
+if(tipo==Materiales::GOMA){
+  Materiales aux(Materiales::GOMA)
+  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &aux.getAmbiente());
+glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &aux.getDifusa());
+glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &aux.getEspecular());
+glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
+}
+
+else{
 //glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *) &material.getAmbiente());
 glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *) &material.getAmbiente());
 glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *) &material.getDifusa());
 glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *) &material.getEspecular());
 glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,material.getBrillo());
-
+}
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 glBegin(GL_TRIANGLES);
 for (long unsigned int i=0;i<caras.size();i++){
