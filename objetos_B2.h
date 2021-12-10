@@ -126,15 +126,7 @@ class Materiales{
 	void setBrillo(double valor);
 
 	void setValores(tipoMaterial tipo);
-/*
-	Materiales &operator=(const Materiales &aux){
-		if(this!=&aux){
-			*this=aux;
-		}
 
-		return *this;
-	}
-*/
 	const float getBrillo();
 };
 
