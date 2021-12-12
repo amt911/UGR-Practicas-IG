@@ -31,7 +31,7 @@ int Window_x=50,Window_y=50,Window_width=450,Window_high=450;
 
 
 // objetos
-const int ROTACIONES=6;
+const int ROTACIONES=5;
 
 _cubo cubo;
 _piramide piramide(0.85,1.3);
@@ -1831,7 +1831,7 @@ switch(t_objeto){
 			}		
 	}
 
-	for(auto it=caza.tt.piezas.begin(); it!=caza.tt.piezas.end(); ++it){
+	for(auto it=caza.tt[0].piezas.begin(); it!=caza.tt[0].piezas.end(); ++it){
 			for (int i = 0; i < it->triangulos; i++)
 			{
 				if (color[0] == it->color_selec[0][i])
@@ -1849,6 +1849,26 @@ switch(t_objeto){
 				}
 			}		
 	}	
+
+/*
+	for(auto it=caza.tt[1].piezas.begin(); it!=caza.tt[1].piezas.end(); ++it){
+			for (int i = 0; i < it->triangulos; i++)
+			{
+				if (color[0] == it->color_selec[0][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (it->activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						it->activo[i] = 1;
+					}
+
+					else
+						it->activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	}		*/
 	break;
 	}
 
@@ -2006,7 +2026,7 @@ unsigned char pixel[3];
 
 glGetIntegerv(GL_VIEWPORT, viewport);
 glReadBuffer(GL_BACK);
-glReadPixels(x,viewport[3]-y,1,1,GL_RGB,GL_UNSIGNED_BYTE,(GLubyte *) &pixel[0]);
+glReadPixels(x,viewport[3]-y,1,1,GL_RGB,GL_UNSIGNED_BYTE, (GLubyte *) &pixel[0]);
 printf(" valor x %d, valor y %d, color %d, %d, %d \n",x,y,pixel[0],pixel[1],pixel[2]);
 
 procesar_color(pixel);

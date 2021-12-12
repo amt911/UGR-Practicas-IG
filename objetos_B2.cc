@@ -3119,26 +3119,26 @@ b_p=color_pick[2];
     //Tren de aterrizaje trasero
     //Derecha
     glPushMatrix();
-      glTranslatef(tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
+      glTranslatef(tt[0].x_r, tt[0].y_r-cuerpo.y, tt[0].z_r);
       glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
       glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      if(activo[14]==1 or tt.algunoActivo())
-        tt.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+      if(activo[14]==1 or tt[0].algunoActivo())
+        tt[0].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
-        tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+        tt[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
 
 
     //Izquierda
     glPushMatrix();
-      glTranslatef(-tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
+      glTranslatef(-tt[1].x_r, tt[1].y_r-cuerpo.y, tt[1].z_r);
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      if(activo[15]==1 or tt.algunoActivo())
-        tt.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+      if(activo[15]==1)
+        tt[1].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
-        tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+        tt[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
 
@@ -3302,7 +3302,8 @@ int c;
       glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
       c=color_selec[0][12];
-      ft.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      //ft.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      ft.draw(SELECT, color_selec[0][12], color_selec[1][12], color_selec[2][12], color_selec[0][12], color_selec[1][12], color_selec[2][12], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3323,26 +3324,26 @@ int c;
     //Tren de aterrizaje trasero
     //Derecha
     glPushMatrix();
-      glTranslatef(tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
+      glTranslatef(tt[0].x_r, tt[0].y_r-cuerpo.y, tt[0].z_r);
       glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
       glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
 
       //c=color_selec[0][14];
       //tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
-      tt.seleccion();
+      tt[0].seleccion();
     glPopMatrix();
 
 
 
     //Izquierda
     glPushMatrix();
-      glTranslatef(-tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
+      glTranslatef(-tt[1].x_r, tt[1].y_r-cuerpo.y, tt[1].z_r);
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
 
-      //c=color_selec[0][15];
-      //tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
-      tt.seleccion();
+      c=color_selec[0][15];
+      tt[1].draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+     // tt[1].seleccion();
     glPopMatrix();
 
 

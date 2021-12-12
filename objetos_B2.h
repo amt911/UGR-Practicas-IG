@@ -184,7 +184,7 @@ public:
 			aux.caras=caras;
 
 			for(int i=0; i<caras.size(); i++){
-					int c=color_selec[0][i];
+					int c[3]={color_selec[0][i], color_selec[1][i], colr;
 					_triangulos3D aux;
 					aux.vertices=vertices;
 					aux.caras.push_back(caras[i]);
@@ -961,7 +961,9 @@ class _tren_trasero: public _triangulos3D{
 			piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 			piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
 
-			recolorea(1, 1);
+
+			int v[3]={0, 0, 1};
+			recolorea(v, 1);
 
 		}
 
@@ -979,15 +981,35 @@ class _tren_trasero: public _triangulos3D{
 			return alguno_activo;			
 		}
 
-	void recolorea(int empieza, int salto){
-		int c=empieza;
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
 
 		for (int i = 0; i < piezas.size(); i++)
 		{
 			for (int j = 0; j < piezas[i].color_selec[0].size(); j++)
 			{
-				piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
-				c = (c + salto) % 256;
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				piezas[i].color_selec[0][j]=v[0];
+				piezas[i].color_selec[1][j]=v[1];
+				piezas[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
 			}
 		}		
 	}
@@ -1017,7 +1039,7 @@ class _tren_trasero: public _triangulos3D{
 
 	private:
 	const double CIL_RAD=1, CIL_H=2;
-	const int NUM=12;
+	const int NUM=8;
 	const Eje eje=Eje::y;
 
 	//protected:
@@ -1048,24 +1070,44 @@ class _tren_delantero: public _triangulos3D{
 			}
 		}
 		*/
-
-	recolorea(1, 1);
+		int v[3]={0, 0, 1};
+	recolorea(v, 1);
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double y=1.28617;
 		const double z=3.5297;
 
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
 
-	void recolorea(int empieza, int salto){
-		int c=empieza;
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
 
 		for (int i = 0; i < piezas.size(); i++)
 		{
 			for (int j = 0; j < piezas[i].color_selec[0].size(); j++)
 			{
-				piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
-				c = (c + salto) % 256;
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				piezas[i].color_selec[0][j]=v[0];
+				piezas[i].color_selec[1][j]=v[1];
+				piezas[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
 			}
 		}		
 	}
@@ -1127,7 +1169,7 @@ class _tren_delantero: public _triangulos3D{
 
 	private:
 	const double CIL_RAD=1, CIL_H=2;
-	const int NUM=12;
+	const int NUM=8;
 	const Eje eje=Eje::y;
 
 	//protected:
@@ -1166,12 +1208,27 @@ const int    piezas=17;
 		}
 
 		_tornado(Materiales::tipoMaterial mat): cuerpo(mat), ala_izda(mat), ala_dcha(mat), td(mat), ti(mat),
-		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tt(mat), tren_d(mat){
+		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tren_d(mat){
+			
+			
+			tt[0].material.setValores(mat);
+			tt[1].material.setValores(mat);
+
 			for (int i = 0; i < 50; i++)
 				actos[i] = false;
 
-			int c = 14;
 
+			int c=1;
+			c=tren_d.recolorea(c, 1);
+			cout <<"c: " <<c <<endl;
+			c=tt[0].recolorea(c, 1);
+			cout <<"c: " <<c <<endl;
+			//c=tt[1].recolorea(c%255, 1);
+
+			c++;
+			cout <<"c: " <<c <<endl;
+			//int c = 14;
+			//c%=255;
 			color_pick[0] = 1.0;
 			color_pick[1] = 0.0;
 			color_pick[2] = 0.0;
@@ -1179,18 +1236,17 @@ const int    piezas=17;
 			{
 				activo[i] = 0;
 				color_selec[0][i] = color_selec[1][i] = color_selec[2][i] = c;
-				c = c + 14;
+				c++;
 			}
 
-			c=1;
-
+			cout <<"c: " <<c <<endl;
 
 		}
 
 
 		void setMaterial(Materiales::tipoMaterial tipo){
 			cuerpo.material=ala_izda.material=ala_dcha.material=td.material=ti.material=ventana_fija.material=ventana_movil.material=flap.material=frenos.material=
-			ft.material=ft.material=timon.material=tt.material=tren_d.material=Materiales(tipo);	
+			ft.material=ft.material=timon.material=tt[0].material=tt[1].material=tren_d.material=Materiales(tipo);	
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
@@ -1291,6 +1347,6 @@ const int    piezas=17;
 	_freno_individual frenos;
 	_freno_trasero_individual ft;
 	_timon timon;
-	_tren_trasero tt;
+	_tren_trasero tt[2];
 	_tren_delantero tren_d;
 };
