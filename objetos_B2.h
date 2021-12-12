@@ -914,13 +914,119 @@ class _ventana_movil: public _triangulos3D{
 class _ventana_fija: public _triangulos3D{
 	public:
 		_ventana_fija(Materiales::tipoMaterial tipo=Materiales::PERLADO):_triangulos3D(tipo),
-		filos(CIL_RAD, CIL_H, NUM, eje, tipo), pico(CONO_RADIO, CONO_H, NUM, eje, tipo){}
+		filos(CIL_RAD, CIL_H, NUM, eje, tipo), pico(CONO_RADIO, CONO_H, NUM, eje, tipo){
+			for(int i=0; i<2; i++)
+				base.push_back(_cubo(CUBO_TAM, tipo));
+		}
 
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		double x=0;
 		double y=2.99002;
 		double z=1.60318;
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		for (int i = 0; i < base.size(); i++)
+		{
+			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			{
+				base[i].color_selec[0][j]=v[0];
+				base[i].color_selec[1][j]=v[1];
+				base[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}	
+
+		for(int i=0; i<filos.color_selec[0].size(); i++){
+				filos.color_selec[0][i]=v[0];
+				filos.color_selec[1][i]=v[1];
+				filos.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);			
+		}
+
+		for(int i=0; i<pico.color_selec[0].size(); i++){
+				pico.color_selec[0][i]=v[0];
+				pico.color_selec[1][i]=v[1];
+				pico.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);						
+		}
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(int i=0; i<filos.activo.size(); i++){
+							if(filos.activo[i]==1)
+					alguno_activo=true;
+		}
+
+		for(int i=0; i<pico.activo.size(); i++){
+							if(pico.activo[i]==1)
+					alguno_activo=true;			
+		}
+		return alguno_activo;
+	}
+
+
+	void seleccion(){
+  glPushMatrix();
+  glTranslatef(-0.2208, -0.47467, 2.4468);
+  glRotatef(-14.5, 0, 0, 1);
+  glRotatef(12.1, 0, 1, 0);
+  glRotatef(7.47, 1, 0, 0);
+  glScalef(0.05, 0.16, 0.26);
+  base[0].seleccion();
+  glPopMatrix();   
+
+
+
+  glPushMatrix();
+  glTranslatef(0.2208, -0.47467, 2.4468);
+  glRotatef(14.5, 0, 0, 1);
+  glRotatef(-12.1, 0, 1, 0);
+  glRotatef(7.47, 1, 0, 0);
+  glScalef(0.05, 0.16, 0.26);
+  base[1].seleccion();
+  glPopMatrix();   
+
+  glPushMatrix();
+  glTranslatef(0, -0.403, 2.26);
+  glRotatef(117, 1, 0, 0);
+  glScalef(0.265, 0.225, 0.265);
+  filos.seleccion();
+  glPopMatrix(); 
+
+  glPushMatrix();
+  glTranslatef(0, -0.60895, 2.9173);
+  glRotatef(106, 1, 0, 0);
+  glScalef(0.249, 0.429, 0.249);
+  pico.seleccion();
+  glPopMatrix();		
+	}
 
 	private:
 	const int CUBO_TAM=2;
@@ -929,7 +1035,8 @@ class _ventana_fija: public _triangulos3D{
 	const Eje eje=Eje::y;
 	const double CONO_RADIO=1, CONO_H=2;
 
-	protected:
+	//protected:
+	public:
 	vector<_cubo> base;
 	_cilindro filos;
 	_cono pico;	
@@ -1636,6 +1743,8 @@ const int    piezas=17;
 
 			timon.recolorea(v, 1);
 
+			ventana_fija.recolorea(v, 1);
+
 			RGB_Suma(v, 1);
 			//c++;
 			////cout <<"c: " <<c <<endl;
@@ -1758,11 +1867,11 @@ const int    piezas=17;
 	_ala_td td;
 	_ala_ti ti;
 	_ventana_fija ventana_fija;
-	_ventana_movil ventana_movil;
+	_ventana_movil ventana_movil;	
 	_flap flap[2];					//
 	_freno_individual frenos[2];	//
 	_freno_trasero_individual ft[2];//
-	_timon timon;
+	_timon timon;					//
 	_tren_trasero tt[2];			//
 	_tren_delantero tren_d;			//
 };

@@ -2492,10 +2492,16 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
 //Version centrado
 void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
 
-  if(tipo==NORMAL)
-    base.push_back(_cubo(CUBO_TAM, material.mat));
-  else
-    base.push_back(_cubo(CUBO_TAM, Materiales::CRISTAL));
+  if(tipo==NORMAL){
+    for(int i=0; i<2; i++)
+      base[i].material.setValores(material.mat);
+  }
+    //base.push_back(_cubo(CUBO_TAM, material.mat));
+  else{
+      for(int i=0; i<2; i++)
+      base[i].material.setValores(Materiales::CRISTAL);
+  }
+    //base.push_back(_cubo(CUBO_TAM, Materiales::CRISTAL));
 
   glPushMatrix();
   glTranslatef(-0.2208, -0.47467, 2.4468);
@@ -2506,9 +2512,9 @@ void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, flo
   //base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
 
   if(tipo==NORMAL)
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    base[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    base[base.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
+    base[0].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
   glPopMatrix();   
 
 
@@ -2522,9 +2528,9 @@ void _ventana_fija::draw(_modo modo, float r1, float g1, float b1, float r2, flo
   //base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
 
   if(tipo==NORMAL)
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    base[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    base[base.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
+    base[1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
   glPopMatrix();   
 
 
@@ -3049,7 +3055,7 @@ b_p=color_pick[2];
     //Ventana de la aeronave
     glPushMatrix();
       glTranslatef(ventana_movil.x, ventana_movil.y-cuerpo.y, ventana_movil.z);  //Movemos la pieza a su sitio, pero mas abajo para poder realizar la animacion propia de la aeronave
-      if(activo[7]==1)
+      if(activo[7]==1 or ventana_fija.algunoActivo())
         ventana_fija.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         ventana_fija.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);      
@@ -3287,11 +3293,14 @@ int c[3];
 
     //Ventana de la aeronave
     glPushMatrix();
+    /*
     c[0]=color_selec[0][7];
     c[0]=color_selec[1][7];
     c[0]=color_selec[2][7];
+    */
       glTranslatef(ventana_movil.x, ventana_movil.y-cuerpo.y, ventana_movil.z);  //Movemos la pieza a su sitio, pero mas abajo para poder realizar la animacion propia de la aeronave
-      ventana_fija.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      //ventana_fija.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      ventana_fija.seleccion();
       glRotatef(-giro_ventana, 1, 0, 0);
     c[0]=color_selec[0][8];
     c[1]=color_selec[1][8];
