@@ -2812,10 +2812,21 @@ void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, f
 
 void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
   //Brazo
+  /*
   if(tipo==NORMAL)
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   else
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::PLATA));
+*/
+
+if(tipo==NORMAL){
+  piezas[0].material=material.mat;
+  piezas[1].material=material.mat;
+}
+else{
+  piezas[0].material=Materiales::PLATA;
+  piezas[1].material=Materiales::GOMA;  
+}
 
 
   glPushMatrix();
@@ -2823,24 +2834,27 @@ void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, flo
   glScalef(0.05, 0.57, 0.05);
 
   if(tipo==NORMAL)
-    piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    piezas[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    piezas[piezas.size()-1].draw(modo, 0.7, 0.7, 0.7, 0.4, 0.4, 0.4, grosor, s);  
+    piezas[0].draw(modo, 0.7, 0.7, 0.7, 0.4, 0.4, 0.4, grosor, s);  
   glPopMatrix();
 
   //Rueda
-  //No hay otra forma de hacer el material que creando otra pieza
+
+/*
   if(tipo==ESPECIAL)
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::GOMA));
+*/
+
 
   glPushMatrix();
   glTranslatef(-0.1262, -1.1462, 0);
   glRotatef(90, 0, 0, 1);
   glScalef(0.34, 0.16, 0.34);
   if(tipo==NORMAL)
-    piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    piezas[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    piezas[piezas.size()-1].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);  
+    piezas[1].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);  
   glPopMatrix();
 }
 
@@ -3108,7 +3122,7 @@ b_p=color_pick[2];
       glTranslatef(tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
       glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
       glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      if(activo[14]==1)
+      if(activo[14]==1 or tt.algunoActivo())
         tt.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
@@ -3121,7 +3135,7 @@ b_p=color_pick[2];
       glTranslatef(-tt.x_r, tt.y_r-cuerpo.y, tt.z_r);
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      if(activo[15]==1)
+      if(activo[15]==1 or tt.algunoActivo())
         tt.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         tt.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
@@ -3313,8 +3327,9 @@ int c;
       glRotatef(tt_giro_y, 0, 1, 0);  //Realizamos la animacion
       glRotatef(-tt_giro_x, 1, 0, 0);  //Realizamos la animacion
 
-      c=color_selec[0][14];
-      tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      //c=color_selec[0][14];
+      //tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      tt.seleccion();
     glPopMatrix();
 
 
@@ -3325,8 +3340,9 @@ int c;
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
 
-      c=color_selec[0][15];
-      tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      //c=color_selec[0][15];
+      //tt.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      tt.seleccion();
     glPopMatrix();
 
 
@@ -3335,7 +3351,7 @@ int c;
       glTranslatef(0, tren_d.y-cuerpo.y, tren_d.z);  
       glRotatef(-giro_tren_d, 1, 0, 0);
 
-      c=color_selec[0][16];
+      //c=color_selec[0][16];
       //tren_d.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
       tren_d.seleccion();
     glPopMatrix();

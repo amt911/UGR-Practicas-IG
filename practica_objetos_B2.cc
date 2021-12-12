@@ -1830,6 +1830,25 @@ switch(t_objeto){
 				}
 			}		
 	}
+
+	for(auto it=caza.tt.piezas.begin(); it!=caza.tt.piezas.end(); ++it){
+			for (int i = 0; i < it->triangulos; i++)
+			{
+				if (color[0] == it->color_selec[0][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (it->activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						it->activo[i] = 1;
+					}
+
+					else
+						it->activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	}	
 	break;
 	}
 
