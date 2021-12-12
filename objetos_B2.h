@@ -826,9 +826,203 @@ class _ala_dcha: public _triangulos3D{
 class _ala_td: public _triangulos3D{
 	public:
 		_ala_td(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
-		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){
+			for (int i = 0; i < 8; i++)
+				base.push_back(_cubo(CUBO_TAM, tipo));
+
+			for(int i=0; i<2; i++)
+				filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));
+
+		}
 
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		for (int i = 0; i < base.size(); i++)
+		{
+			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			{
+				base[i].color_selec[0][j]=v[0];
+				base[i].color_selec[1][j]=v[1];
+				base[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}	
+
+		for (int i = 0; i < filos.size(); i++)
+		{
+			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			{
+				filos[i].color_selec[0][j]=v[0];
+				filos[i].color_selec[1][j]=v[1];
+				filos[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}
+
+		for(int i=0; i<esquina.triangulos; i++){
+				esquina.color_selec[0][i]=v[0];
+				esquina.color_selec[1][i]=v[1];
+				esquina.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);			
+		}	
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(int i=0; i<esquina.triangulos; i++){
+			if(esquina.activo[i]==1)
+				alguno_activo=true;
+		}
+
+		return alguno_activo;
+	}
+
+
+	void seleccion(){
+    glPushMatrix();
+    glTranslatef(-1.0904, -0.035261, -0.61322);
+    glRotatef(-1.1, 1, 0, 0);
+    glRotatef(31.4, 0, 1, 0);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.451, 0.045, 0.68);
+    base[0].seleccion();
+    glPopMatrix();      
+
+
+
+    glPushMatrix();
+    glTranslatef(-0.5252, -0.014561, 0.26328);
+    glRotatef(-1.1, 1, 0, 0);
+    glRotatef(35.2, 0, 1, 0);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.451, 0.045, 0.4);
+    base[1].seleccion();
+    glPopMatrix(); 
+
+
+
+    glPushMatrix();
+    glTranslatef(-0.5423, -0.012661, -0.62752);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.32, 0.045, 0.411);
+    base[2].seleccion();
+    glPopMatrix(); 
+
+
+
+    glPushMatrix();
+    glTranslatef(-1.5295, -0.045961, -1.14682);
+    glRotatef(1.19, 1, 0, 0);
+    glRotatef(1.66, 0, 0, 1);
+    glScalef(0.4, 0.045, 0.181);
+    base[3].seleccion();
+    glPopMatrix(); 
+
+
+
+    glPushMatrix();
+    glTranslatef(-0.4695, -0.017161, 0.73348);
+    glRotatef(-1.1, 1, 0, 0);
+    glRotatef(35.2, 0, 1, 0);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.231, 0.045, 0.330);
+    base[4].seleccion();
+    glPopMatrix(); 
+
+
+
+    glPushMatrix();
+    glTranslatef(-0.3154, -0.016461, 1.14298);
+    glRotatef(-1.1, 1, 0, 0);
+    glRotatef(35.2, 0, 1, 0);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.121, 0.045, 0.16);
+    base[5].seleccion();
+    glPopMatrix(); 
+
+
+    glPushMatrix();
+    glTranslatef(-0.1629, -0.001461, 0.29108);
+    glRotatef(2.75, 0, 0, 1);
+    glScalef(0.16, 0.045, 1.222);
+    base[6].seleccion();
+    glPopMatrix(); 
+
+
+
+    glPushMatrix();
+    glTranslatef(-0.8785, -0.020161, -1.18222);
+    glRotatef(1.19, 1, 0, 0);
+    glRotatef(-18, 0, 1, 0);
+    glRotatef(1.66, 0, 0, 1);
+    glScalef(1.06, 0.045, 0.181);
+    base[7].seleccion();
+    glPopMatrix(); 
+
+
+//Ahora los cilindros que hacen que los filos sean redondeados
+  //derecha
+
+    glPushMatrix();
+    glTranslatef(-1.0211, -0.034261, 0.33208);
+    glRotatef(35.2, 0, 1, 0);
+    glRotatef(2.75, 0, 0, 1);
+    glRotatef(88.9, 1, 0, 0);       
+    glScalef(0.15, 1.56, 0.04);
+    filos[0].seleccion();
+    glPopMatrix();   
+
+
+
+    glPushMatrix();
+    glTranslatef(-1.9383, -0.049661, -1.32752);
+    glRotatef(1.19, 0, 0, 1);
+    glRotatef(91.7, 1, 0, 0);       
+    glScalef(0.15, 0.34, 0.04);
+    filos[1].seleccion();
+    glPopMatrix();   
+
+    glPushMatrix();
+    glTranslatef(-1.9503, -0.058461, -0.95252);
+    glRotatef(3.9, 1, 0, 0);       
+    glRotatef(5.9, 0, 0, 1);
+    glScalef(0.135, 0.035, 0.125);
+    esquina.seleccion();
+    glPopMatrix();  
+	}
 
 	const double x=-1.0603;
 	const double y=1.984261;
@@ -844,7 +1038,8 @@ class _ala_td: public _triangulos3D{
 	const Eje eje=Eje::y;
 	const double ES_RADIO=1;
 
-	protected:
+	//protected:
+	public:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
 	_esfera esquina;	
@@ -2057,6 +2252,8 @@ const int    piezas=17;
 
 			ti.recolorea(v, 1);
 
+			td.recolorea(v, 1);
+
 			RGB_Suma(v, 1);
 			//c++;
 			////cout <<"c: " <<c <<endl;
@@ -2177,7 +2374,7 @@ const int    piezas=17;
 	_ala_izda ala_izda;
 	_ala_dcha ala_dcha;
 	_ala_td td;
-	_ala_ti ti;
+	_ala_ti ti;						//
 	_ventana_fija ventana_fija;		//
 	_ventana_movil ventana_movil;	//
 	_flap flap[2];					//
