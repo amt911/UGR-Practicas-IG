@@ -723,12 +723,19 @@ class _ply_rot: public _objeto_ply
 class _cuerpo: public _triangulos3D{
 	public:
 		_cuerpo(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo), 
-		nariz(CONO_RADIO, CONO_H, NUM, eje,  tipo), nariz_curva(ES_RADIO, NUM, NUM, eje, tipo){}
+		nariz(CONO_RADIO, CONO_H, NUM, eje,  tipo), nariz_curva(ES_RADIO, NUM, NUM, eje, tipo){
+			for(int i=0; i<16; i++)
+				esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));
+
+			for(int i=0; i<27; i++)
+				base.push_back(_cubo(CUBO_TAM, tipo));
+
+		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);
 
 	double y=1.95865;
 
-	private:
+	public:
 	const int CUBO_TAM=2;
 	const double CIL_RAD=1, CIL_H=2;
 	const int NUM=12;
@@ -736,7 +743,431 @@ class _cuerpo: public _triangulos3D{
 	const double CONO_RADIO=1, CONO_H=2;
 	const double ES_RADIO=1;
 
-	protected:
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		for (int i = 0; i < base.size(); i++)
+		{
+			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			{
+				base[i].color_selec[0][j]=v[0];
+				base[i].color_selec[1][j]=v[1];
+				base[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}	
+
+		for (int i = 0; i < esquinas.size(); i++)
+		{
+			for (int j = 0; j < esquinas[i].color_selec[0].size(); j++)
+			{
+				esquinas[i].color_selec[0][j]=v[0];
+				esquinas[i].color_selec[1][j]=v[1];
+				esquinas[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}
+
+		for(int i=0; i<nariz.triangulos; i++){
+				nariz.color_selec[0][i]=v[0];
+				nariz.color_selec[1][i]=v[1];
+				nariz.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);			
+		}	
+
+		for(int i=0; i<nariz_curva.triangulos; i++){
+				nariz_curva.color_selec[0][i]=v[0];
+				nariz_curva.color_selec[1][i]=v[1];
+				nariz_curva.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);			
+		}			
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(auto it=esquinas.cbegin(); it!=esquinas.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(int i=0; i<nariz.triangulos; i++){
+			if(nariz.activo[i]==1)
+				alguno_activo=true;
+		}
+
+		for(int i=0; i<nariz_curva.triangulos; i++){
+			if(nariz_curva.activo[i]==1)
+				alguno_activo=true;
+		}
+
+		return alguno_activo;
+	}
+
+
+	void seleccion(){
+  glPushMatrix();
+  glTranslatef(-0.9218, 0.1132, 1.4685);
+  glRotatef(3.59, 1, 0, 0);
+  glScalef(0.432, 0.406, 1);
+  base[0].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0.9218, 0.1132, 1.4685);
+  glRotatef(3.59, 1, 0, 0);
+  glScalef(0.432, 0.406, 1);
+  base[1].seleccion();
+  glPopMatrix();
+
+
+//Frame
+  glPushMatrix();
+  glTranslatef(0, -0.2509, 1.5759);
+  glScalef(0.59, 0.302, 3.62);
+  base[2].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.0721, 3.468);
+  glRotatef(3.59, 1, 0, 0);
+  glScalef(0.59, 0.116, 1.031);
+  base[3].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.1484, 0.8318);
+  glRotatef(4.92, 1, 0, 0);
+  glScalef(0.925, 0.406, 0.466);
+  base[4].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.1692, -0.4898);
+  glScalef(0.925, 0.406, 1);
+  base[5].seleccion();
+  glPopMatrix();  
+
+
+//Laterales del instake que se curvan hacia dentro
+  glPushMatrix();
+  glTranslatef(-0.9414, 0.1692, -0.4284);
+  glRotatef(-8.05, 0, 1, 0);
+  glScalef(0.270, 0.406, 0.976);
+  base[6].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(0.9414, 0.1692, -0.4284);
+  glRotatef(8.05, 0, 1, 0);
+  glScalef(0.270, 0.406, 0.976);
+  base[7].seleccion();
+  glPopMatrix();  
+
+//Alisadores de curvas
+  glPushMatrix();
+  glTranslatef(0.5176, -0.3433, -0.0620);
+  glRotatef(-13.9, 0, 1, 0);
+  glScalef(0.270, 0.137, 1.061);
+  base[8].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(-0.5176, -0.3433, -0.0620);
+  glRotatef(13.9, 0, 1, 0);
+  glScalef(0.270, 0.137, 1.061);
+  base[9].seleccion();
+  glPopMatrix();  
+
+
+//Sujeta alas, los que permite que se puedan plegar
+  //1 izquierda y derecha
+
+  glPushMatrix();
+  glTranslatef(1.2496, 0.323, -0.7854);
+  glRotatef(-38.4, 0, 1, 0);
+  glScalef(0.451, 0.209, 0.29);
+  base[10].seleccion();
+  glPopMatrix();  
+
+
+  glPushMatrix();
+  glTranslatef(-1.2496, 0.323, -0.7854);
+  glRotatef(38.4, 0, 1, 0);
+  glScalef(0.451, 0.209, 0.29);
+  base[11].seleccion();
+  glPopMatrix();
+
+  //2 izquierda y derecha
+
+  glPushMatrix();
+  glTranslatef(1.4784, 0.323, -0.2166);
+  glRotatef(9.56, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.46);
+  base[12].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(-1.4784, 0.323, -0.2166);
+  glRotatef(-9.56, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.46);
+  base[13].seleccion();
+  glPopMatrix();  
+
+
+  //3 izquierda y derecha
+
+  glPushMatrix();
+  glTranslatef(1.3179, 0.323, 0.4604);
+  glRotatef(-30.9, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.56);
+  base[14].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(-1.3179, 0.323, 0.4604);
+  glRotatef(30.9, 0, 1, 0);
+  glScalef(0.381, 0.209, 0.56);
+  base[15].seleccion();
+  glPopMatrix();      
+
+
+//Alisadores de curva cola
+  glPushMatrix();
+  glTranslatef(0, -0.0379, -2.0821);
+  glScalef(1.061, 0.24, 0.651);
+  base[16].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 0.0713, -3.3869);
+  glScalef(1.061, 0.123, 0.651);
+  base[17].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 0.0713, -4.6922);
+  glScalef(1.061, 0.087, 0.651);
+  base[18].seleccion();
+  glPopMatrix();      
+
+  glPushMatrix();
+  glTranslatef(0, -0.0844, -3.3869);
+  glRotatef(6.37, 1, 0, 0);
+  glScalef(1.061, 0.123, 0.651);
+  base[19].seleccion();
+  glPopMatrix();    
+
+
+//Estabilizador de cola
+  glPushMatrix();
+  glTranslatef(0, 0.8568, -2.5387);
+  glRotatef(-71.4, 1, 0, 0);
+  glScalef(0.126, 1.08, 0.435);
+  base[20].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 1.8809, -4.4713);
+  glRotatef(-55.3, 1, 0, 0);
+  glScalef(0.126, 1.96, 0.435);
+  base[21].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 1.6522, -4.8354);
+  glRotatef(-37.5, 1, 0, 0);
+  glScalef(0.126, 1.33, 0.435);
+  base[22].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 0.578, -5.0584);
+  glScalef(0.126, 0.247, 0.509);
+  base[23].seleccion();
+  glPopMatrix();      
+
+  glPushMatrix();
+  glTranslatef(0, 2.8776, -6.2732);
+  glScalef(0.126, 0.477, 0.435);
+  base[24].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, 2.8706, -6.787);
+  glRotatef(-33.3, 1, 0, 0);
+  glScalef(0.126, 0.437, 0.195);
+  base[25].seleccion();
+  glPopMatrix(); 
+
+  glPushMatrix();
+  glTranslatef(0, 3.198, -6.9019);
+  glScalef(0.126, 0.157, 0.195);
+  base[26].seleccion();
+  glPopMatrix();           
+
+  glPushMatrix();
+  glTranslatef(0, -0.524, 1.5759);
+  glRotatef(270, 1, 0, 0);
+  glScalef(0.595, 3.620, 0.279);
+  esquinas[0].seleccion();
+  glPopMatrix();
+
+
+  //esquinas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
+
+  glPushMatrix();
+  glTranslatef(0.2268, -0.504, -0.2723);
+  glRotatef(-13.9, 0, 1, 0);
+  glRotatef(270, 1, 0, 0);
+  glScalef(0.608, 0.899, 0.279);
+  esquinas[1].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(-0.2268, -0.504, -0.2723);
+  glRotatef(13.9, 0, 1, 0);
+  glRotatef(270, 1, 0, 0);
+  glScalef(0.608, 0.899, 0.279);
+  esquinas[2].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.2058, 2.8629);
+  glRotatef(93.2, 1, 0, 0);
+  glScalef(0.595, 2.297, 0.279);
+  esquinas[3].seleccion();
+  glPopMatrix();       
+
+  glPushMatrix();
+  glTranslatef(0, 0.6863, -1.3726);
+  glRotatef(88.2, 1, 0, 0);
+  glScalef(0.226, 2.951, 0.235);
+  esquinas[4].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(0, -0.3637, -1.58);
+  glRotatef(271, 1, 0, 0);
+  glScalef(1.059, 0.538, 0.422);
+  esquinas[5].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.171, -2.7727);
+  glRotatef(270, 1, 0, 0);
+  glScalef(1.059, 1.257, 0.422);
+  esquinas[6].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, -0.2311, -3.0631);
+  glRotatef(276, 1, 0, 0);
+  glScalef(1.059, 0.990, 0.423);
+  esquinas[7].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 0.1517, -4.4509);
+  glRotatef(269, 1, 0, 0);
+  glScalef(1.059, 0.41, 0.422);
+  esquinas[8].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, -0.0391, -4.6683);
+  glRotatef(276, 1, 0, 0);
+  glScalef(1.059, 0.632, 0.422);
+  esquinas[9].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(0, 0.1189, -5.1279);
+  glRotatef(266, 1, 0, 0);
+  glScalef(1.059, 0.41, 0.422);
+  esquinas[10].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(0.4586, 0.0771, -5.5719);
+  glRotatef(270, 1, 0, 0);
+  glScalef(0.321, 0.129, 0.321);
+esquinas[11].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(-0.4586, 0.0771, -5.5719);
+  glRotatef(270, 1, 0, 0);
+  glScalef(0.321, 0.129, 0.321);
+  esquinas[12].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, -0.3454, 6.407);
+  glRotatef(94.7, 1, 0, 0);
+  glScalef(0.475, 0.73, 0.502);
+  nariz.seleccion();
+  glPopMatrix();  
+
+
+//Curva de la nariz
+  glPushMatrix();
+  glTranslatef(0, -0.2473, 5.201);
+  glRotatef(4.72, 1, 0, 0);
+  glScalef(0.557, 0.557, 1.112);
+  nariz_curva.seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(0, 1.095, -2.1481);
+  glRotatef(-71.4, 1, 0, 0);
+  glScalef(0.12, 1.2, 0.232);
+  esquinas[13].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 2.3451, -4.5454);
+  glRotatef(-55.3, 1, 0, 0);
+  glScalef(0.12, 1.64, 0.232);
+  esquinas[14].seleccion();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0, 3.2411, -6.4318);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.12, 0.67, 0.232);
+  esquinas[15].seleccion();
+  glPopMatrix(); 		
+	}
+
+
+	//protected:
+	public:
 	vector<_cubo> base;
 	vector<_cilindro> esquinas;
 	_cono nariz;
@@ -744,27 +1175,6 @@ class _cuerpo: public _triangulos3D{
 
 
 public:
-};
-
-//************************************************************************
-
-class _alas: public _triangulos3D{
-	public:
-		_alas(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
-
-	private:
-	const int CUBO_TAM=2;
-	const double CIL_RAD=1, CIL_H=2;
-	const int NUM=12;
-	const Eje eje=Eje::y;
-	const double ES_RADIO=1;
-
-	protected:
-	vector<_cubo> base;
-	vector<_cilindro> filos;
-	vector<_esfera> esquinas;
-
 };
 
 
@@ -2323,7 +2733,7 @@ class _tren_trasero: public _triangulos3D{
 
 	private:
 	const double CIL_RAD=1, CIL_H=2;
-	const int NUM=8;
+	const int NUM=12;
 	const Eje eje=Eje::y;
 
 	//protected:
@@ -2436,7 +2846,7 @@ class _tren_delantero: public _triangulos3D{
 
 	private:
 	const double CIL_RAD=1, CIL_H=2;
-	const int NUM=8;
+	const int NUM=12;
 	const Eje eje=Eje::y;
 
 	//protected:
@@ -2540,6 +2950,8 @@ const int    piezas=17;
 
 			ala_dcha.recolorea(v, 1);
 			ala_izda.recolorea(v, 1);
+
+			cuerpo.recolorea(v, 1);
 
 			RGB_Suma(v, 1);
 			//c++;
@@ -2658,7 +3070,7 @@ const int    piezas=17;
 
 	//protected:
 	_cuerpo cuerpo;
-	_ala_izda ala_izda;
+	_ala_izda ala_izda;				//
 	_ala_dcha ala_dcha;				//
 	_ala_td td;						//
 	_ala_ti ti;						//

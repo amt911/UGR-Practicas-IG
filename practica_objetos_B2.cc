@@ -31,7 +31,7 @@ int Window_x=50,Window_y=50,Window_width=450,Window_high=450;
 
 
 // objetos
-const int ROTACIONES=5;
+const int ROTACIONES=6;
 
 _cubo cubo;
 _piramide piramide(0.85,1.3);
@@ -2247,6 +2247,68 @@ switch(t_objeto){
 					glutPostRedisplay();
 				}			
 		}
+
+//-----------------------------------------------------------------------------------
+for(auto it=caza.cuerpo.base.begin(); it!=caza.cuerpo.base.end(); ++it){
+	for(int i=0; i<it->triangulos; i++){
+			if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
+			{
+				if (it->activo[i] == 0){
+					it->activo[i] = 1;
+				}
+
+				else
+					it->activo[i] = 0;
+					
+				glutPostRedisplay();
+			}		
+	}
+}
+
+for(auto it=caza.cuerpo.esquinas.begin(); it!=caza.cuerpo.esquinas.end(); ++it){
+	for(int i=0; i<it->triangulos; i++){
+			if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
+			{
+				if (it->activo[i] == 0){
+					it->activo[i] = 1;
+				}
+
+				else
+					it->activo[i] = 0;
+					
+				glutPostRedisplay();
+			}		
+	}
+}
+
+for(int i=0; i<caza.cuerpo.nariz.triangulos; i++){
+		if (color[0] == caza.cuerpo.nariz.color_selec[0][i] and color[1] == caza.cuerpo.nariz.color_selec[1][i] and color[2] == caza.cuerpo.nariz.color_selec[2][i])
+		{
+			if (caza.cuerpo.nariz.activo[i] == 0){
+				caza.cuerpo.nariz.activo[i] = 1;
+			}
+
+			else
+				caza.cuerpo.nariz.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}			
+}
+
+
+for(int i=0; i<caza.cuerpo.nariz_curva.triangulos; i++){
+		if (color[0] == caza.cuerpo.nariz_curva.color_selec[0][i] and color[1] == caza.cuerpo.nariz_curva.color_selec[1][i] and color[2] == caza.cuerpo.nariz_curva.color_selec[2][i])
+		{
+			if (caza.cuerpo.nariz_curva.activo[i] == 0){
+				caza.cuerpo.nariz_curva.activo[i] = 1;
+			}
+
+			else
+				caza.cuerpo.nariz_curva.activo[i] = 0;
+				
+			glutPostRedisplay();
+		}			
+}
 
 //-----------------------------------------------------------------------------------
 	break;
