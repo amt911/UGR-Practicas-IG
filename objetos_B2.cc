@@ -2993,15 +2993,15 @@ b_p=color_pick[2];
 
       //Freno aereo delantero Izquierda
       glPushMatrix();
-        glTranslatef(3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-        glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-        glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+        glTranslatef(3.4478, frenos[0].y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+        glRotatef(-frenos[0].freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+        glRotatef(-frenos[0].freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_l, 1, 0, 0);    //Realizamos la animacion
-        if(activo[2]==1)
-          frenos.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+        if(activo[2]==1 or frenos[0].algunoActivo())
+          frenos[0].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
         else
-          frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+          frenos[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
       glPopMatrix();  
 
 
@@ -3039,16 +3039,16 @@ b_p=color_pick[2];
 
      //Freno aereo delantero Derecha
       glPushMatrix();
-        glTranslatef(-3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-        glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-        glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+        glTranslatef(-3.4478, frenos[1].y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+        glRotatef(frenos[1].freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+        glRotatef(frenos[1].freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_r, 1, 0, 0);    //Realizamos la animacion
 
-        if(activo[5]==1)
-          frenos.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+        if(activo[5]==1 or frenos[1].algunoActivo())
+          frenos[1].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
         else
-          frenos.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);        
+          frenos[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);        
       glPopMatrix();     
 
       //FLAP Derecho
@@ -3225,15 +3225,17 @@ int c[3];
 
       //Freno aereo delantero Izquierda
       glPushMatrix();
-        glTranslatef(3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-        glRotatef(-frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-        glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+        glTranslatef(3.4478, frenos[0].y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+        glRotatef(-frenos[0].freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+        glRotatef(-frenos[0].freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_l, 1, 0, 0);    //Realizamos la animacion
-    c[0]=color_selec[0][2];
+    /*c[0]=color_selec[0][2];
     c[1]=color_selec[1][2];
     c[2]=color_selec[2][2];
-        frenos.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+        frenos[0].draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);*/
+
+        frenos[0].seleccion();
       glPopMatrix();  
 
 
@@ -3274,15 +3276,17 @@ int c[3];
 
      //Freno aereo delantero Derecha
       glPushMatrix();
-        glTranslatef(-3.4478, frenos.y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
-        glRotatef(frenos.freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
-        glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
+        glTranslatef(-3.4478, frenos[1].y-cuerpo.y, -1.7708);  //La movemos al punto intermedio donde movemos toda la aeronave
+        glRotatef(frenos[1].freno_delantero_angulo_y, 0, 1, 0);  //LO mismo
+        glRotatef(frenos[1].freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_r, 1, 0, 0);    //Realizamos la animacion
-    c[0]=color_selec[0][5];
+    /*c[0]=color_selec[0][5];
     c[1]=color_selec[1][5];
     c[2]=color_selec[2][5];
-        frenos.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+        frenos[1].draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);*/
+
+        frenos[1].seleccion();
       glPopMatrix();     
 
       //FLAP Derecho

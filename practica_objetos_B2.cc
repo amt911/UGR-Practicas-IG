@@ -1873,44 +1873,45 @@ switch(t_objeto){
 
 
 	//FLAP 0
-	//for(auto it=caza.flap[0].piezas.begin(); it!=caza.flap[0].piezas.end(); ++it){
-			for (int i = 0; i < caza.flap[0].flap.triangulos; i++)
+	for(int i=0; i<2; i++){
+			for (int j = 0; j < caza.flap[i].flap.triangulos; j++)
 			{
-				if (color[0] == caza.flap[0].flap.color_selec[0][i] and color[1] == caza.flap[0].flap.color_selec[1][i] and color[2] == caza.flap[0].flap.color_selec[2][i])
+				if (color[0] == caza.flap[i].flap.color_selec[0][j] and color[1] == caza.flap[i].flap.color_selec[1][j] and color[2] == caza.flap[i].flap.color_selec[2][j])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
-					if (caza.flap[0].flap.activo[i] == 0){
+					if (caza.flap[i].flap.activo[j] == 0){
 						//cout <<"-------------------ACTIVADO" <<endl;
-						caza.flap[0].flap.activo[i] = 1;
+						caza.flap[i].flap.activo[j] = 1;
 					}
 
 					else
-						caza.flap[0].flap.activo[i] = 0;
+						caza.flap[i].flap.activo[j] = 0;
 						
 					glutPostRedisplay();
 				}
-			}		
-	//}
+			}				
+	}
 
-	//FLAP 1
-	//for(auto it=caza.flap[1].piezas.begin(); it!=caza.flap[1].piezas.end(); ++it){
-			for (int i = 0; i < caza.flap[1].flap.triangulos; i++)
+
+	//Frenos aereos delanteros
+	for(int i=0; i<2; i++){
+			for (int j = 0; j < caza.frenos[i].base.triangulos; j++)
 			{
-				if (color[0] == caza.flap[1].flap.color_selec[0][i] and color[1] == caza.flap[1].flap.color_selec[1][i] and color[2] == caza.flap[1].flap.color_selec[2][i])
+				if (color[0] == caza.flap[i].flap.color_selec[0][j] and color[1] == caza.frenos[i].base.color_selec[1][j] and color[2] == caza.frenos[i].base.color_selec[2][j])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
-					if (caza.flap[1].flap.activo[i] == 0){
+					if (caza.frenos[i].base.activo[j] == 0){
 						//cout <<"-------------------ACTIVADO" <<endl;
-						caza.flap[1].flap.activo[i] = 1;
+						caza.frenos[i].base.activo[j] = 1;
 					}
 
 					else
-						caza.flap[1].flap.activo[i] = 0;
+						caza.frenos[i].base.activo[j] = 0;
 						
 					glutPostRedisplay();
 				}
-			}		
-	//}		
+			}				
+	}	
 	break;
 	}
 
