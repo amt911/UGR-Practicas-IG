@@ -2615,10 +2615,13 @@ void _flap::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, f
     bf2=0;
   }
 
-  if(tipo==NORMAL)
+  if(tipo==NORMAL){
     flap.material.setValores(material.mat);
+  }
   else
+  {
     flap.material.setValores(Materiales::ALUMINIO);
+  }
 
   //izquierdo
   glPushMatrix();
@@ -3004,16 +3007,16 @@ b_p=color_pick[2];
 
       //FLAP Izquierdo
       glPushMatrix();
-        glTranslatef(-flap.mover_centro_x_r, -flap.mover_centro_y-cuerpo.y, -flap.mover_centro_z+flap.z);
-        glRotatef(flap.angulo_y_r, 0, 1, 0);
-        glRotatef(flap.angulo_z_r, 0, 0, 1);
-        glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
+        glTranslatef(-flap[0].mover_centro_x_r, -flap[0].mover_centro_y-cuerpo.y, -flap[0].mover_centro_z+flap[0].z);
+        glRotatef(flap[0].angulo_y_r, 0, 1, 0);
+        glRotatef(flap[0].angulo_z_r, 0, 0, 1);
+        glTranslatef(0, 0, flap[0].mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
-        glTranslatef(0, 0, -flap.mover_centro_z);
-        if(activo[3]==1)
-          flap.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+        glTranslatef(0, 0, -flap[0].mover_centro_z);
+        if(activo[3]==1 or flap[0].algunoActivo())
+          flap[0].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
         else
-          flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);        
+          flap[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);        
       glPopMatrix();           
     glPopMatrix();
 
@@ -3050,16 +3053,16 @@ b_p=color_pick[2];
 
       //FLAP Derecho
       glPushMatrix();   
-        glTranslatef(flap.mover_centro_x_r, -flap.mover_centro_y-cuerpo.y, -flap.mover_centro_z+flap.z);
-        glRotatef(-flap.angulo_y_r, 0, 1, 0);
-        glRotatef(-flap.angulo_z_r, 0, 0, 1);
-        glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
+        glTranslatef(flap[1].mover_centro_x_r, -flap[1].mover_centro_y-cuerpo.y, -flap[1].mover_centro_z+flap[1].z);
+        glRotatef(-flap[1].angulo_y_r, 0, 1, 0);
+        glRotatef(-flap[1].angulo_z_r, 0, 0, 1);
+        glTranslatef(0, 0, flap[1].mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
-        glTranslatef(0, 0, -flap.mover_centro_z);
-        if(activo[6]==1)
-          flap.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+        glTranslatef(0, 0, -flap[1].mover_centro_z);
+        if(activo[6]==1 or flap[1].algunoActivo())
+          flap[1].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
         else
-          flap.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+          flap[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
       glPopMatrix();      
     glPopMatrix();
 
@@ -3236,16 +3239,19 @@ int c[3];
 
       //FLAP Izquierdo
       glPushMatrix();
-        glTranslatef(-flap.mover_centro_x_r, -flap.mover_centro_y-cuerpo.y, -flap.mover_centro_z+flap.z);
-        glRotatef(flap.angulo_y_r, 0, 1, 0);
-        glRotatef(flap.angulo_z_r, 0, 0, 1);
-        glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
+        glTranslatef(-flap[0].mover_centro_x_r, -flap[0].mover_centro_y-cuerpo.y, -flap[0].mover_centro_z+flap[0].z);
+        glRotatef(flap[0].angulo_y_r, 0, 1, 0);
+        glRotatef(flap[0].angulo_z_r, 0, 0, 1);
+        glTranslatef(0, 0, flap[0].mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
-        glTranslatef(0, 0, -flap.mover_centro_z);
-    c[0]=color_selec[0][3];
+        glTranslatef(0, 0, -flap[0].mover_centro_z);
+   /* c[0]=color_selec[0][3];
     c[1]=color_selec[1][3];
     c[2]=color_selec[2][3];
-        flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+        flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);*/
+
+        flap[0].seleccion();
+
       glPopMatrix();           
     glPopMatrix();
 
@@ -3281,16 +3287,17 @@ int c[3];
 
       //FLAP Derecho
       glPushMatrix();   
-        glTranslatef(flap.mover_centro_x_r, -flap.mover_centro_y-cuerpo.y, -flap.mover_centro_z+flap.z);
-        glRotatef(-flap.angulo_y_r, 0, 1, 0);
-        glRotatef(-flap.angulo_z_r, 0, 0, 1);
-        glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
+        glTranslatef(flap[1].mover_centro_x_r, -flap[1].mover_centro_y-cuerpo.y, -flap[1].mover_centro_z+flap[1].z);
+        glRotatef(-flap[1].angulo_y_r, 0, 1, 0);
+        glRotatef(-flap[1].angulo_z_r, 0, 0, 1);
+        glTranslatef(0, 0, flap[1].mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
-        glTranslatef(0, 0, -flap.mover_centro_z);
-    c[0]=color_selec[0][6];
+        glTranslatef(0, 0, -flap[1].mover_centro_z);
+    /*c[0]=color_selec[0][6];
     c[1]=color_selec[1][6];
-    c[2]=color_selec[2][6];
-        flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+    c[2]=color_selec[2][6];*/
+        //flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+        flap[1].seleccion();
       glPopMatrix();      
     glPopMatrix();
 

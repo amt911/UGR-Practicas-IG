@@ -1873,9 +1873,44 @@ switch(t_objeto){
 
 
 	//FLAP 0
+	//for(auto it=caza.flap[0].piezas.begin(); it!=caza.flap[0].piezas.end(); ++it){
+			for (int i = 0; i < caza.flap[0].flap.triangulos; i++)
+			{
+				if (color[0] == caza.flap[0].flap.color_selec[0][i] and color[1] == caza.flap[0].flap.color_selec[1][i] and color[2] == caza.flap[0].flap.color_selec[2][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (caza.flap[0].flap.activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						caza.flap[0].flap.activo[i] = 1;
+					}
 
+					else
+						caza.flap[0].flap.activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	//}
 
-	//FLAP 1	
+	//FLAP 1
+	//for(auto it=caza.flap[1].piezas.begin(); it!=caza.flap[1].piezas.end(); ++it){
+			for (int i = 0; i < caza.flap[1].flap.triangulos; i++)
+			{
+				if (color[0] == caza.flap[1].flap.color_selec[0][i] and color[1] == caza.flap[1].flap.color_selec[1][i] and color[2] == caza.flap[1].flap.color_selec[2][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (caza.flap[1].flap.activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						caza.flap[1].flap.activo[i] = 1;
+					}
+
+					else
+						caza.flap[1].flap.activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	//}		
 	break;
 	}
 
