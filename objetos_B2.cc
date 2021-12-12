@@ -2789,31 +2789,6 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
 }
 
 //************************************************************************
-void _frenos_traseros::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
-  //derecho
-  base.push_back(_cubo(CUBO_TAM, material.mat));
-
-  glPushMatrix();
-  glTranslatef(-0.7922, 2.3859, -3.6341);
-  glRotatef(23.5, 0, 0, 1);
-  glScalef(0.26, 0.02, 0.64);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
-  glPopMatrix();         
-
-
-  //izquierdo
-  base.push_back(_cubo(CUBO_TAM, material.mat));
-
-  glPushMatrix();
-  glTranslatef(0.7922, 2.3859, -3.6341);
-  glRotatef(-23.5, 0, 0, 1);
-  glScalef(0.26, 0.02, 0.64);
-  base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
-  glPopMatrix();           
-}
-
-
-//************************************************************************
 void _freno_trasero_individual::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
   float rf1=r1, gf1=g1, bf1=b1, rf2=r2, gf2=g2, bf2=b2;
 
@@ -3124,28 +3099,28 @@ b_p=color_pick[2];
     //SPD BRK Traseros
     //Izquierda
     glPushMatrix();
-      glTranslatef(ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
-      glRotatef(ft.angulo_z_l, 0, 0, 1);
-      glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+      glTranslatef(ft[0].x, ft[0].y-cuerpo.y, -ft[0].centro_z+ft[0].z);
+      glRotatef(ft[0].angulo_z_l, 0, 0, 1);
+      glTranslatef(0, 0, ft[0].centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
-      if(activo[12]==1)
-        ft.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+      if(activo[12]==1 or ft[0].algunoActivo())
+        ft[0].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
-        ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+        ft[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
 
 
     //Derecha
     glPushMatrix();
-      glTranslatef(-ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
-      glRotatef(-ft.angulo_z_l, 0, 0, 1);
-      glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+      glTranslatef(-ft[1].x, ft[1].y-cuerpo.y, -ft[1].centro_z+ft[1].z);
+      glRotatef(-ft[1].angulo_z_l, 0, 0, 1);
+      glTranslatef(0, 0, ft[1].centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
-      if(activo[13]==1)
-        ft.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+      if(activo[13]==1 or ft[1].algunoActivo())
+        ft[1].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
-        ft.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
+        ft[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
 
 
@@ -3363,30 +3338,35 @@ int c[3];
     //SPD BRK Traseros
     //Izquierda
     glPushMatrix();
-      glTranslatef(ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
-      glRotatef(ft.angulo_z_l, 0, 0, 1);
-      glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+      glTranslatef(ft[0].x, ft[0].y-cuerpo.y, -ft[0].centro_z+ft[0].z);
+      glRotatef(ft[0].angulo_z_l, 0, 0, 1);
+      glTranslatef(0, 0, ft[0].centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
+    /*
     c[0]=color_selec[0][12];
     c[1]=color_selec[1][12];
     c[2]=color_selec[2][12];
-      //ft.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
       ft.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      */
+
+     ft[0].seleccion();
     glPopMatrix();
 
 
 
     //Derecha
     glPushMatrix();
-      glTranslatef(-ft.x, ft.y-cuerpo.y, -ft.centro_z+ft.z);
-      glRotatef(-ft.angulo_z_l, 0, 0, 1);
-      glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
+      glTranslatef(-ft[1].x, ft[1].y-cuerpo.y, -ft[1].centro_z+ft[1].z);
+      glRotatef(-ft[1].angulo_z_l, 0, 0, 1);
+      glTranslatef(0, 0, ft[1].centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
-
+/*
     c[0]=color_selec[0][13];
     c[1]=color_selec[1][13];
     c[2]=color_selec[2][13];
       ft.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      */
+     ft[1].seleccion();
     glPopMatrix();
 
 

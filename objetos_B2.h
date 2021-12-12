@@ -1131,25 +1131,12 @@ class _timon: public _triangulos3D{
 	private:
 	const int CUBO_TAM=2;
 
-	protected:
+	//protected:
 	vector<_cubo> base;
 };
 
 
 //************************************************************************
-
-class _frenos_traseros: public _triangulos3D{
-	public:
-		_frenos_traseros(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
-
-	private:
-	const int CUBO_TAM=2;
-
-	protected:
-	vector<_cubo> base;
-};
-
 
 //************************************************************************
 
@@ -1163,13 +1150,63 @@ class _freno_trasero_individual: public _triangulos3D{
 		const double y=2.3859;
 		const double z=-2.9941;
 
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		//for (int i = 0; i < piezas.size(); i++)
+		//{
+			for (int j = 0; j < base.color_selec[0].size(); j++)
+			{
+				base.color_selec[0][j]=v[0];
+				base.color_selec[1][j]=v[1];
+				base.color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		//}		
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		//for(auto it=base.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
+			for(int j=0; j<base.activo.size() and !alguno_activo; j++){
+				if(base.activo[j]==1)
+					alguno_activo=true;
+			}
+		//}
+
+
+		return alguno_activo;
+	}
+
+	void seleccion(){
+  glPushMatrix();
+  glTranslatef(0, 0, -0.64);
+  glScalef(0.26, 0.02, 0.64);
+  base.seleccion();
+  glPopMatrix(); 		
+	}
 
 		const double centro_z=0.64;	//Para centrar la figura
 
 	private:
 	const int CUBO_TAM=2;
 
-	protected:
+	//protected:
+	public:
 	_cubo base;
 };
 
@@ -1429,7 +1466,7 @@ const int    piezas=17;
 	}
 
 		_tornado(Materiales::tipoMaterial mat): cuerpo(mat), ala_izda(mat), ala_dcha(mat), td(mat), ti(mat),
-		ventana_fija(mat), ventana_movil(mat), ft(mat), timon(mat), tren_d(mat){
+		ventana_fija(mat), ventana_movil(mat), timon(mat), tren_d(mat){
 			
 			////cout <<"--------------------------------------------------------------" <<endl;
 			tt[0].material.setValores(mat);
@@ -1442,6 +1479,8 @@ const int    piezas=17;
 			frenos[0].material.setValores(mat);
 			frenos[1].material.setValores(mat);
 
+			ft[0].material.setValores(mat);
+			ft[1].material.setValores(mat);
 
 			for (int i = 0; i < 50; i++)
 				actos[i] = false;
@@ -1462,6 +1501,9 @@ const int    piezas=17;
 			
 			frenos[0].recolorea(v, 1);
 			frenos[1].recolorea(v, 1);
+
+			ft[0].recolorea(v, 1);
+			ft[1].recolorea(v, 1);
 
 
 			RGB_Suma(v, 1);
@@ -1490,7 +1532,7 @@ const int    piezas=17;
 
 		void setMaterial(Materiales::tipoMaterial tipo){
 			cuerpo.material=ala_izda.material=ala_dcha.material=td.material=ti.material=ventana_fija.material=ventana_movil.material=flap[0].material=flap[1].material=frenos[0].material=
-			frenos[1].material=ft.material=ft.material=timon.material=tt[0].material=tt[1].material=tren_d.material=Materiales(tipo);	
+			frenos[1].material=ft[0].material=ft[1].material=timon.material=tt[0].material=tt[1].material=tren_d.material=Materiales(tipo);	
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
@@ -1588,8 +1630,8 @@ const int    piezas=17;
 	_ventana_fija ventana_fija;
 	_ventana_movil ventana_movil;
 	_flap flap[2];					//
-	_freno_individual frenos[2];
-	_freno_trasero_individual ft;
+	_freno_individual frenos[2];	//
+	_freno_trasero_individual ft[2];
 	_timon timon;
 	_tren_trasero tt[2];			//
 	_tren_delantero tren_d;			//

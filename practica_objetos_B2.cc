@@ -1897,7 +1897,7 @@ switch(t_objeto){
 	for(int i=0; i<2; i++){
 			for (int j = 0; j < caza.frenos[i].base.triangulos; j++)
 			{
-				if (color[0] == caza.flap[i].flap.color_selec[0][j] and color[1] == caza.frenos[i].base.color_selec[1][j] and color[2] == caza.frenos[i].base.color_selec[2][j])
+				if (color[0] == caza.frenos[i].base.color_selec[0][j] and color[1] == caza.frenos[i].base.color_selec[1][j] and color[2] == caza.frenos[i].base.color_selec[2][j])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
 					if (caza.frenos[i].base.activo[j] == 0){
@@ -1912,6 +1912,26 @@ switch(t_objeto){
 				}
 			}				
 	}	
+
+	//Frenos aereos traseros
+	for(int i=0; i<2; i++){
+			for (int j = 0; j < caza.ft[i].base.triangulos; j++)
+			{
+				if (color[0] == caza.ft[i].base.color_selec[0][j] and color[1] == caza.ft[i].base.color_selec[1][j] and color[2] == caza.ft[i].base.color_selec[2][j])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (caza.ft[i].base.activo[j] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						caza.ft[i].base.activo[j] = 1;
+					}
+
+					else
+						caza.ft[i].base.activo[j] = 0;
+						
+					glutPostRedisplay();
+				}
+			}				
+	}		
 	break;
 	}
 
