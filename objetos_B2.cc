@@ -2701,10 +2701,14 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   }  
   
   //Marco exterior
-  if(tipo==NORMAL)
-    base.push_back(_cubo(CUBO_TAM, material.mat));  
-  else
-    base.push_back(_cubo(CUBO_TAM, Materiales::ALUMINIO));  
+  if(tipo==NORMAL){
+    for(int i=0; i<8; i++)
+      base[i].material=material.mat;  
+  }
+  else{
+    for(int i=0; i<8; i++)
+      base[i].material=Materiales::ALUMINIO; 
+  }
       
   
 
@@ -2712,7 +2716,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.735068, 0.57972);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.48, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[0].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix(); 
 
 
@@ -2721,7 +2725,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.013668, -0.35948);
   glRotatef(-33.5, 1, 0, 0);
   glScalef(0.126, 0.9, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();   
 
 
@@ -2730,7 +2734,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.725832, -0.52188);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.34, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[2].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix(); 
 
 
@@ -2739,7 +2743,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.006568, 0.36032);
   glRotatef(-37.8, 1, 0, 0);
   glScalef(0.126, 0.95, 0.05);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[3].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();     
 
   //Relleno del marco (de arriba a abajo)
@@ -2748,7 +2752,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.635032, -0.49598);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[4].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();     
 
 
@@ -2757,7 +2761,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, 0.507032, -0.41638);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.28, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[5].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();  
 
 
@@ -2766,7 +2770,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.000268, 0.00522);
   glRotatef(-35.6, 1, 0, 0);
   glScalef(0.126, 0.71, 0.29);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[6].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();            
 
 
@@ -2775,7 +2779,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.499868, 0.43822);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[7].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();       
 
 
@@ -2784,7 +2788,7 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   glTranslatef(0, -0.658968, 0.55672);
   glRotatef(90, 1, 0, 0);
   glScalef(0.126, 0.3, 0.08);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[8].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();       
 }
 
@@ -3065,7 +3069,7 @@ b_p=color_pick[2];
       glRotatef(timon_giro, 0, 1, 0);   //Hacemos el propio giro
       glTranslatef(0, 0, -0.340424); //LO movemos para poder hacer el propio giro
       glRotatef(37.8, 1, 0, 0);   //Lo ponemos recto
-      if(activo[9]==1)
+      if(activo[9]==1 or timon.algunoActivo())
         timon.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         timon.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);      
@@ -3304,10 +3308,11 @@ int c[3];
       glRotatef(timon_giro, 0, 1, 0);   //Hacemos el propio giro
       glTranslatef(0, 0, -0.340424); //LO movemos para poder hacer el propio giro
       glRotatef(37.8, 1, 0, 0);   //Lo ponemos recto
-    c[0]=color_selec[0][9];
+    /*c[0]=color_selec[0][9];
     c[1]=color_selec[1][9];
     c[2]=color_selec[2][9];
-      timon.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      timon.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);*/
+      timon.seleccion();
     glPopMatrix();
 
 

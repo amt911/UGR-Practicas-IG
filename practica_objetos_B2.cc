@@ -1932,6 +1932,27 @@ switch(t_objeto){
 				}
 			}				
 	}		
+
+
+	//TIMON
+	for(auto it=caza.timon.base.begin(); it!=caza.timon.base.end(); ++it){
+			for (int i = 0; i < it->triangulos; i++)
+			{
+				if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (it->activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						it->activo[i] = 1;
+					}
+
+					else
+						it->activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	}		
 	break;
 	}
 

@@ -1121,17 +1121,146 @@ class _freno_individual: public _triangulos3D{
 
 class _timon: public _triangulos3D{
 	public:
-		_timon(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){}
+		_timon(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){
+			for(int i=0; i<9; i++)
+				base.push_back(_cubo(CUBO_TAM, tipo));  
+
+			
+		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 
 		const double y=3.579368;
 		const double z=-5.78512;
 
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		for (int i = 0; i < base.size(); i++)
+		{
+			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			{
+				base[i].color_selec[0][j]=v[0];
+				base[i].color_selec[1][j]=v[1];
+				base[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}		
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+
+		return alguno_activo;
+	}
+
+	void seleccion(){
+ glPushMatrix();
+  glTranslatef(0, -0.735068, 0.57972);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.48, 0.05);
+  base[0].seleccion();
+  glPopMatrix(); 
+
+
+
+  glPushMatrix();
+  glTranslatef(0, -0.013668, -0.35948);
+  glRotatef(-33.5, 1, 0, 0);
+  glScalef(0.126, 0.9, 0.05);
+  base[1].seleccion();
+  glPopMatrix();   
+
+
+
+  glPushMatrix();
+  glTranslatef(0, 0.725832, -0.52188);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.34, 0.05);
+  base[2].seleccion();
+  glPopMatrix(); 
+
+
+
+  glPushMatrix();
+  glTranslatef(0, -0.006568, 0.36032);
+  glRotatef(-37.8, 1, 0, 0);
+  glScalef(0.126, 0.95, 0.05);
+  base[3].seleccion();
+  glPopMatrix();     
+
+  //Relleno del marco (de arriba a abajo)
+
+  glPushMatrix();
+  glTranslatef(0, 0.635032, -0.49598);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.28, 0.08);
+  base[4].seleccion();
+  glPopMatrix();     
+
+
+
+  glPushMatrix();
+  glTranslatef(0, 0.507032, -0.41638);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.28, 0.08);
+  base[5].seleccion();
+  glPopMatrix();  
+
+
+
+  glPushMatrix();
+  glTranslatef(0, -0.000268, 0.00522);
+  glRotatef(-35.6, 1, 0, 0);
+  glScalef(0.126, 0.71, 0.29);
+  base[6].seleccion();
+  glPopMatrix();            
+
+
+
+  glPushMatrix();
+  glTranslatef(0, -0.499868, 0.43822);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.3, 0.08);
+  base[7].seleccion();
+  glPopMatrix();       
+
+
+
+  glPushMatrix();
+  glTranslatef(0, -0.658968, 0.55672);
+  glRotatef(90, 1, 0, 0);
+  glScalef(0.126, 0.3, 0.08);
+  base[8].seleccion();
+  glPopMatrix();
+	}
+
 	private:
 	const int CUBO_TAM=2;
 
 	//protected:
+	public:
 	vector<_cubo> base;
 };
 
@@ -1505,6 +1634,7 @@ const int    piezas=17;
 			ft[0].recolorea(v, 1);
 			ft[1].recolorea(v, 1);
 
+			timon.recolorea(v, 1);
 
 			RGB_Suma(v, 1);
 			//c++;
@@ -1631,7 +1761,7 @@ const int    piezas=17;
 	_ventana_movil ventana_movil;
 	_flap flap[2];					//
 	_freno_individual frenos[2];	//
-	_freno_trasero_individual ft[2];
+	_freno_trasero_individual ft[2];//
 	_timon timon;
 	_tren_trasero tt[2];			//
 	_tren_delantero tren_d;			//
