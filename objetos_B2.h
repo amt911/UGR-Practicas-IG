@@ -803,6 +803,7 @@ class _ala_dcha: public _triangulos3D{
 	const int NUM=12;
 	const Eje eje=Eje::y;
 	const double ES_RADIO=1;
+
 		_ala_dcha(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
 		esquina(ES_RADIO, NUM, NUM, eje, tipo){
 			for(int i=0; i<4; i++)
@@ -2520,7 +2521,7 @@ const int    piezas=17;
 	//protected:
 	_cuerpo cuerpo;
 	_ala_izda ala_izda;
-	_ala_dcha ala_dcha;
+	_ala_dcha ala_dcha;				//
 	_ala_td td;						//
 	_ala_ti ti;						//
 	_ventana_fija ventana_fija;		//
