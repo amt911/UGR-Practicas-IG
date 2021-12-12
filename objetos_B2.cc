@@ -2848,49 +2848,57 @@ void _tren_trasero::draw(_modo modo, float r1, float g1, float b1, float r2, flo
 
 void _tren_delantero::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){    //QUIZAS HAGA FALTA PONER UN BUCLE PARA CICLAR POR CADA PIEZA
   //Brazo 0.7 0.4
+  /*
   if(tipo==NORMAL)
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   else
     piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::PLATA));
+*/
+
+if(tipo==ESPECIAL){
+  piezas[0].material=Materiales::PLATA;
+  piezas[1].material=piezas[2].material=Materiales::GOMA;
+  
+}
+else{
+  piezas[0].material=piezas[1].material=piezas[2].material=material.mat;
+}
+
 
   glPushMatrix();
   glTranslatef(0, -0.55, 0);
   glScalef(0.05, 0.57, 0.05);
-  if(tipo==NORMAL)
-    piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+  if(tipo==NORMAL){
+    piezas[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+  }
   else
-    piezas[piezas.size()-1].draw(modo, 0.7, 0.7, 0.7, 0.4, 0.4, 0.4, grosor, s);
+    piezas[0].draw(modo, 0.7, 0.7, 0.7, 0.4, 0.4, 0.4, grosor, s);
   glPopMatrix();
 
   //Ruedas 0.24 0.12
   //Izquierda
-  //No hay otra forma de hacer el material que creando otra pieza
-  if(tipo==ESPECIAL)
-    piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::GOMA));
+
 
   glPushMatrix();
   glTranslatef(-0.1543, -1.1262, -0.006611);
   glRotatef(90, 0, 0, 1);
   glScalef(0.2, 0.12, 0.2);
   if(tipo==NORMAL)
-    piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    piezas[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    piezas[piezas.size()-1].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);
+    piezas[1].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);
   glPopMatrix();
 
   //Derecha
-  //No hay otra forma de hacer el material que creando otra pieza
-  if(tipo==ESPECIAL)
-    piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::GOMA));
 
   glPushMatrix();
   glTranslatef(0.1543, -1.1262, -0.006611);
   glRotatef(90, 0, 0, 1);
   glScalef(0.2, 0.12, 0.2);
   if(tipo==NORMAL)
-    piezas[piezas.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    piezas[2].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    piezas[piezas.size()-1].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);
+    piezas[2].draw(modo, 0.24, 0.24, 0.24, 0.12, 0.12, 0.12, grosor, s);
   glPopMatrix();
 }  
 
@@ -3124,8 +3132,9 @@ b_p=color_pick[2];
     glPushMatrix();
       glTranslatef(0, tren_d.y-cuerpo.y, tren_d.z);  
       glRotatef(-giro_tren_d, 1, 0, 0);
-      if(activo[16]==1)
-        tren_d.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+      if(activo[16]==1 or tren_d.algunoActivo())
+        //tren_d.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
+        tren_d.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo);
       else
         tren_d.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
     glPopMatrix();
@@ -3327,7 +3336,8 @@ int c;
       glRotatef(-giro_tren_d, 1, 0, 0);
 
       c=color_selec[0][16];
-      tren_d.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      //tren_d.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      tren_d.seleccion();
     glPopMatrix();
 
   glPopMatrix();

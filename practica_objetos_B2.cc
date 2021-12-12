@@ -256,6 +256,7 @@ void draw(void)
 			case CAZA:
 			{
 				glDrawBuffer(GL_BACK);
+				//glDrawBuffer(GL_FRONT);
 				clean_window();
 				change_observer();
 				caza.seleccion();
@@ -266,6 +267,7 @@ void draw(void)
 			case CUBO:
 			{
 				glDrawBuffer(GL_BACK);
+				//glDrawBuffer(GL_FRONT);
 				clean_window();
 				change_observer();
 				cubo.seleccion();
@@ -335,7 +337,8 @@ void draw(void)
 
 			case TEST:
 			{
-				glDrawBuffer(GL_FRONT);
+				//glDrawBuffer(GL_FRONT);
+				glDrawBuffer(GL_BACK);
 				clean_window();
 				change_observer();
 				pruebas.seleccion();
@@ -1807,6 +1810,26 @@ switch(t_objeto){
 			glutPostRedisplay();
 		}
 	}
+
+
+	for(auto it=caza.tren_d.piezas.begin(); it!=caza.tren_d.piezas.end(); ++it){
+			for (int i = 0; i < it->triangulos; i++)
+			{
+				if (color[0] == it->color_selec[0][i])
+				{
+					//cout <<"------------------------ASDASDASD" <<endl;
+					if (it->activo[i] == 0){
+						//cout <<"-------------------ACTIVADO" <<endl;
+						it->activo[i] = 1;
+					}
+
+					else
+						it->activo[i] = 0;
+						
+					glutPostRedisplay();
+				}
+			}		
+	}
 	break;
 	}
 
@@ -1928,6 +1951,29 @@ switch(t_objeto){
 		}
 	}	
 	break;		
+	}
+
+	case TEST:{
+		for(auto it=pruebas.piezas.begin(); it!=pruebas.piezas.end(); ++it){
+			for (int i = 0; i < it->triangulos; i++)
+			{
+				if (color[0] == it->color_selec[0][i])
+				{
+					cout <<"------------------------ASDASDASD" <<endl;
+					if (it->activo[i] == 0){
+						cout <<"-------------------ACTIVADO" <<endl;
+						it->activo[i] = 1;
+					}
+
+					else
+						it->activo[i] = 0;
+						
+					//glutPostRedisplay();
+				}
+			}	
+			glutPostRedisplay();
+		}
+	break;				
 	}
 }
  }

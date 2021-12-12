@@ -980,7 +980,21 @@ class _tren_trasero: public _triangulos3D{
 class _tren_delantero: public _triangulos3D{
 	public:
 		_tren_delantero(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo){
-			
+
+    piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));
+	piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));
+	piezas.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));
+
+		int c=1;
+
+		for (int i = 0; i < piezas.size(); i++)
+		{
+			for (int j = 0; j < piezas[i].color_selec[0].size(); j++)
+			{
+				piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				c = (c + 1) % 256;
+			}
+		}
 		}
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
@@ -988,12 +1002,26 @@ class _tren_delantero: public _triangulos3D{
 		const double z=3.5297;
 
 
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=piezas.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+
+		return alguno_activo;
+	}
+
 	void seleccion(){
   //Brazo 0.7 0.4
   glPushMatrix();
   glTranslatef(0, -0.55, 0);
   glScalef(0.05, 0.57, 0.05);
-    piezas[piezas.size()-1].seleccion();
+    piezas[0].seleccion();
   glPopMatrix();
 
   //Ruedas 0.24 0.12
@@ -1004,7 +1032,7 @@ class _tren_delantero: public _triangulos3D{
   glTranslatef(-0.1543, -1.1262, -0.006611);
   glRotatef(90, 0, 0, 1);
   glScalef(0.2, 0.12, 0.2);
-    piezas[piezas.size()-1].seleccion();
+    piezas[1].seleccion();
   glPopMatrix();
 
   //Derecha
@@ -1014,7 +1042,7 @@ class _tren_delantero: public _triangulos3D{
   glTranslatef(0.1543, -1.1262, -0.006611);
   glRotatef(90, 0, 0, 1);
   glScalef(0.2, 0.12, 0.2);
-    piezas[piezas.size()-1].seleccion();
+    piezas[2].seleccion();
   glPopMatrix();		
 	}
 
@@ -1022,19 +1050,20 @@ class _tren_delantero: public _triangulos3D{
 
 
 
-
+/*
 	float  color_pick[3];
 	vector<int>    color_selec[3];
 	vector<int>    activo;
 	int    triangulos;
-
+*/
 
 	private:
 	const double CIL_RAD=1, CIL_H=2;
 	const int NUM=12;
 	const Eje eje=Eje::y;
 
-	protected:
+	//protected:
+	public:
 	vector<_cilindro> piezas;
 };
 
@@ -1178,7 +1207,7 @@ const int    piezas=17;
 
 	bool actos[50];
 
-	protected:
+	//protected:
 	_cuerpo cuerpo;
 	_ala_izda ala_izda;
 	_ala_dcha ala_dcha;
