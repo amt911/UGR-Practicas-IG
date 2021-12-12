@@ -2275,18 +2275,34 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
  
   //Empiezo por la forma basica (los cubos)
     //izquierda
+    /*
     if(tipo==NORMAL)
       base.push_back(_cubo(CUBO_TAM, material.mat));
     else
       base.push_back(_cubo(CUBO_TAM, Materiales::ALUMINIO));
+*/
 
+if(tipo==NORMAL){
+  for(int i=0; i<8; i++)
+    base[i].material.setValores(material.mat);
+
+  for(int i=0; i<2; i++)
+    filos[i].material.setValores(material.mat);
+}
+else{
+  for(int i=0; i<8; i++)
+    base[i].material.setValores(Materiales::ALUMINIO);
+
+  for(int i=0; i<2; i++)
+    filos[i].material.setValores(Materiales::ALUMINIO);  
+}
     glPushMatrix();
     glTranslatef(1.0904, -0.035261, -0.61322);
     glRotatef(-1.1, 1, 0, 0);
     glRotatef(-31.4, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.68);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[0].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();     
 
 
@@ -2296,7 +2312,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.451, 0.045, 0.4);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();
 
 
@@ -2304,7 +2320,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.5423, -0.012661, -0.62752);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.32, 0.045, 0.411);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[2].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();          
 
 
@@ -2314,7 +2330,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(1.19, 1, 0, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(0.4, 0.045, 0.181);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[3].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();     
 
 
@@ -2325,7 +2341,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.231, 0.045, 0.330);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[4].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();     
 
 
@@ -2336,7 +2352,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.121, 0.045, 0.16);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[5].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();     
 
 
@@ -2345,7 +2361,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glTranslatef(0.1629, -0.001461, 0.29108);
     glRotatef(-2.75, 0, 0, 1);
     glScalef(0.16, 0.045, 1.222);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[6].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();     
 
 
@@ -2356,25 +2372,25 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(18, 0, 1, 0);
     glRotatef(-1.66, 0, 0, 1);
     glScalef(1.06, 0.045, 0.181);
-    base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    base[7].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix(); 
 
 
 //Ahora los cilindros que hacen que los filos sean redondeados
   //izquierda
-
+/*
     if(tipo==NORMAL)
       filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
     else
       filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
-
+*/
     glPushMatrix();
     glTranslatef(1.0211, -0.034261, 0.33208);
     glRotatef(-35.2, 0, 1, 0);
     glRotatef(-2.75, 0, 0, 1);
     glRotatef(88.9, 1, 0, 0);       
     glScalef(0.15, 1.56, 0.04);
-    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    filos[0].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();   
 
 
@@ -2383,7 +2399,7 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
     glRotatef(-1.19, 0, 0, 1);
     glRotatef(91.7, 1, 0, 0);       
     glScalef(0.15, 0.34, 0.04);
-    filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+    filos[1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
     glPopMatrix();   
 
 
@@ -2720,11 +2736,11 @@ void _timon::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, 
   
   //Marco exterior
   if(tipo==NORMAL){
-    for(int i=0; i<8; i++)
+    for(int i=0; i<9; i++)
       base[i].material=material.mat;  
   }
   else{
-    for(int i=0; i<8; i++)
+    for(int i=0; i<9; i++)
       base[i].material=Materiales::ALUMINIO; 
   }
       
@@ -3099,7 +3115,7 @@ b_p=color_pick[2];
     glPushMatrix(); 
       glTranslatef(ti.x, ti.y-cuerpo.y, ti.z);
       glRotatef(angulo_trasero_l, 1, 0, 0);
-      if(activo[10]==1)
+      if(activo[10]==1 or ti.algunoActivo())
         ti.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         ti.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);      
@@ -3345,10 +3361,13 @@ int c[3];
     glPushMatrix(); 
       glTranslatef(ti.x, ti.y-cuerpo.y, ti.z);
       glRotatef(angulo_trasero_l, 1, 0, 0);
+      /*
     c[0]=color_selec[0][10];
     c[1]=color_selec[1][10];
     c[2]=color_selec[2][10];
       ti.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      */
+     ti.seleccion();
     glPopMatrix();
 
 
