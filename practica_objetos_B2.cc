@@ -2147,6 +2147,56 @@ switch(t_objeto){
 				}			
 		}
 //-----------------------------------------------------------------------------------
+		for(auto it=caza.ala_dcha.base.begin(); it!=caza.ala_dcha.base.end(); ++it){
+				for (int i = 0; i < it->triangulos; i++)
+				{
+					if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
+					{
+						if (it->activo[i] == 0){
+							it->activo[i] = 1;
+						}
+
+						else
+							it->activo[i] = 0;
+							
+						glutPostRedisplay();
+					}
+				}		
+		}
+
+
+		for(auto it=caza.ala_dcha.filos.begin(); it!=caza.ala_dcha.filos.end(); ++it){
+				for (int i = 0; i < it->triangulos; i++)
+				{
+					if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
+					{
+						if (it->activo[i] == 0){
+							it->activo[i] = 1;
+						}
+
+						else
+							it->activo[i] = 0;
+							
+						glutPostRedisplay();
+					}
+				}		
+		}
+
+		for(int i=0; i<caza.ala_dcha.esquina.triangulos; i++){
+				if (color[0] == caza.ala_dcha.esquina.color_selec[0][i] and color[1] == caza.ala_dcha.esquina.color_selec[1][i] and color[2] == caza.ala_dcha.esquina.color_selec[2][i])
+				{
+					if (caza.ala_dcha.esquina.activo[i] == 0){
+						caza.ala_dcha.esquina.activo[i] = 1;
+					}
+
+					else
+						caza.ala_dcha.esquina.activo[i] = 0;
+						
+					glutPostRedisplay();
+				}			
+		}
+
+//-----------------------------------------------------------------------------------
 	break;
 	}
 

@@ -2027,19 +2027,35 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
    rf2=gf2=bf2=0.22;
  }   
   
+if(tipo==NORMAL){
+  for(int i=0; i<4; i++)
+    base[i].material.setValores(material.mat);
+
+  for(int i=0; i<2; i++)
+    filos[i].material.setValores(material.mat);
+}
+else{
+  for(int i=0; i<4; i++)
+    base[i].material.setValores(Materiales::ALUMINIO);
+
+  for(int i=0; i<2; i++)
+    filos[i].material.setValores(Materiales::ALUMINIO);
+}
+
   //Cubos con la forma primitiva de las alas
     //derecha
+    /*
     if(tipo==NORMAL)
       base.push_back(_cubo(CUBO_TAM, material.mat));
     else
       base.push_back(_cubo(CUBO_TAM, Materiales::ALUMINIO));
-
+*/
   glPushMatrix();
   glTranslatef(-3.354, 2.1596, -1.5932);
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.38);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[0].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();     
 
 
@@ -2050,7 +2066,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-23.5, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(2.45, 0.12, 0.3);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();     
 
 
@@ -2061,7 +2077,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.1, 0.105, 0.23);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[2].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();    
 
 
@@ -2072,24 +2088,25 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-15.9, 0, 1, 0);
   glRotatef(4.6, 0, 0, 1);
   glScalef(0.16, 0.075, 0.11);
-  base[base.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  base[3].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();    
 
 
 
 //Cilindros para el filo de las alas
   //derecha
+  /*
   if(tipo==NORMAL)
     filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   else
     filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::ALUMINIO));
-
+*/
   glPushMatrix();
   glTranslatef(-3.6565, 2.1568, -1.0302);  
   glRotatef(-24.8, 0, 1, 0);
   glRotatef(94.6, 0, 0, 1);
   glScalef(0.12, 2.096, 0.366);
-  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  filos[0].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();  
 
 
@@ -2099,7 +2116,7 @@ void _ala_dcha::draw(_modo modo, float r1, float g1, float b1, float r2, float g
   glRotatef(-14.5, 0, 0, 1);
   glRotatef(-4.6, 0, 1, 0);
   glScalef(0.165, 0.465, 0.12);
-  filos[filos.size()-1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
+  filos[1].draw(modo, rf1, gf1, bf1, rf2, gf2, bf2, grosor, s);
   glPopMatrix();  
 
   //Esferas para las esquinas
@@ -3049,7 +3066,7 @@ b_p=color_pick[2];
       //Pintado del ala derecha
       glPushMatrix();
         glTranslatef(0, -cuerpo.y, 0); 
-        if(activo[4]==1)
+        if(activo[4]==1 or ala_dcha.algunoActivo())
           ala_dcha.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
         else
           ala_dcha.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);        
@@ -3286,10 +3303,13 @@ int c[3];
       //Pintado del ala derecha
       glPushMatrix();
         glTranslatef(0, -cuerpo.y, 0); 
+        /*
     c[0]=color_selec[0][4];
     c[1]=color_selec[1][4];
     c[2]=color_selec[2][4];
         ala_dcha.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+        */
+       ala_dcha.seleccion();
       glPopMatrix();
 
 
