@@ -177,20 +177,50 @@ public:
 	//Practica 5
 
 	void seleccion(){
-		int c;
 
 			_triangulos3D aux;
 			aux.vertices=vertices;
 			aux.caras=caras;
 
 			for(int i=0; i<caras.size(); i++){
-					int c[3]={color_selec[0][i], color_selec[1][i], colr;
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
 					aux.caras.push_back(caras[i]);
 
-					aux.draw(SELECT, c, c, c, c, c, c, 1);
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
 			}
+	}
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
+
+		for (int i = 0; i < caras.size(); i++)
+		{
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
+				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
+		}		
 	}
 
 	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s = false)
@@ -273,20 +303,50 @@ public:
 	//Practica 5
 
 	void seleccion(){
-		int c;
 
 			_triangulos3D aux;
 			aux.vertices=vertices;
 			aux.caras=caras;
 
 			for(int i=0; i<caras.size(); i++){
-					int c=color_selec[0][i];
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
 					aux.caras.push_back(caras[i]);
 
-					aux.draw(SELECT, c, c, c, c, c, c, 1);
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
 			}
+	}
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
+
+		for (int i = 0; i < caras.size(); i++)
+		{
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
+				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
+		}		
 	}
 
 	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
@@ -388,20 +448,49 @@ int num;
 	//Practica 5
 
 	void seleccion(){
-		int c;
 
 			_triangulos3D aux;
 			aux.vertices=vertices;
 			aux.caras=caras;
 
 			for(int i=0; i<caras.size(); i++){
-					int c=color_selec[0][i];
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
 					aux.caras.push_back(caras[i]);
 
-					aux.draw(SELECT, c, c, c, c, c, c, 1);
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
 			}
+	}
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
+
+		for (int i = 0; i < caras.size(); i++)
+		{
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
+		}		
 	}
 
 	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
@@ -510,20 +599,50 @@ class _ply_rot: public _objeto_ply
 
 
 	void seleccion(){
-		int c;
 
 			_triangulos3D aux;
 			aux.vertices=vertices;
 			aux.caras=caras;
 
 			for(int i=0; i<caras.size(); i++){
-					int c=color_selec[0][i];
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
 					aux.caras.push_back(caras[i]);
 
-					aux.draw(SELECT, c, c, c, c, c, c, 1);
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
 			}
+	}
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+	void recolorea(int *v, int salto){
+		//int c=empieza;
+
+
+		for (int i = 0; i < caras.size(); i++)
+		{
+				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
+				//c = (c + salto) % 255;
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+				//c+=salto;
+				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
+		}		
 	}
 
 
@@ -1010,6 +1129,7 @@ class _tren_trasero: public _triangulos3D{
 
 				RGB_Suma(v, salto);
 				//c+=salto;
+				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
 			}
 		}		
 	}
@@ -1108,6 +1228,7 @@ class _tren_delantero: public _triangulos3D{
 
 				RGB_Suma(v, salto);
 				//c+=salto;
+				////cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
 			}
 		}		
 	}
@@ -1207,10 +1328,24 @@ const int    piezas=17;
 				actos[i]=false;
 		}
 
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
 		_tornado(Materiales::tipoMaterial mat): cuerpo(mat), ala_izda(mat), ala_dcha(mat), td(mat), ti(mat),
 		ventana_fija(mat), ventana_movil(mat), flap(mat), frenos(mat), ft(mat), timon(mat), tren_d(mat){
 			
-			
+			////cout <<"--------------------------------------------------------------" <<endl;
 			tt[0].material.setValores(mat);
 			tt[1].material.setValores(mat);
 
@@ -1218,15 +1353,19 @@ const int    piezas=17;
 				actos[i] = false;
 
 
-			int c=1;
-			c=tren_d.recolorea(c, 1);
-			cout <<"c: " <<c <<endl;
-			c=tt[0].recolorea(c, 1);
-			cout <<"c: " <<c <<endl;
-			//c=tt[1].recolorea(c%255, 1);
+			//int c=1;
+			int v[3]={0, 0, 1};
+			tren_d.recolorea(v, 1);
+			////cout <<"c: " <<c <<endl;
+			tt[0].recolorea(v, 1);
+			////cout <<"c: " <<c <<endl;
+			tt[1].recolorea(v, 1);
 
-			c++;
-			cout <<"c: " <<c <<endl;
+
+
+			RGB_Suma(v, 1);
+			//c++;
+			////cout <<"c: " <<c <<endl;
 			//int c = 14;
 			//c%=255;
 			color_pick[0] = 1.0;
@@ -1235,11 +1374,15 @@ const int    piezas=17;
 			for (int i = 0; i < piezas; i++)
 			{
 				activo[i] = 0;
-				color_selec[0][i] = color_selec[1][i] = color_selec[2][i] = c;
-				c++;
+				color_selec[0][i] = v[0];
+				color_selec[1][i] = v[1];
+				color_selec[2][i] = v[2];
+				RGB_Suma(v, 1);
+				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
 			}
 
-			cout <<"c: " <<c <<endl;
+			////cout <<"c: " <<c <<endl;
+			////cout <<"--------------------------------------------------------------" <<endl;
 
 		}
 

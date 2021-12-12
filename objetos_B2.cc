@@ -539,7 +539,7 @@ caras[9]._0=0;caras[9]._1=4;caras[9]._2=7;
 caras[10]._0=5;caras[10]._1=7;caras[10]._2=4;
 caras[11]._0=5;caras[11]._1=6;caras[11]._2=7;
 
-
+/*
 int c = 20;
 
 color_pick[0] = 0.0;
@@ -557,6 +557,23 @@ for (int i = 0; i < caras.size(); i++)
 
   c = c + 20; 
 }
+*/
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++){
+  activo.push_back(0);
+  color_selec[0].push_back(0);
+  color_selec[1].push_back(0);
+  color_selec[2].push_back(0);  
+}
+
+int v[3]={0, 0, 1};
+
+  recolorea(v, 1);
 }
 
 //*************************************************************************
@@ -581,7 +598,7 @@ caras[2]._0=2;caras[2]._1=3;caras[2]._2=4;
 caras[3]._0=3;caras[3]._1=0;caras[3]._2=4;
 caras[4]._0=3;caras[4]._1=1;caras[4]._2=0;
 caras[5]._0=3;caras[5]._1=2;caras[5]._2=1;
-
+/*
 int c = 20;
 
 color_pick[0] = 0.0;
@@ -598,7 +615,24 @@ for (int i = 0; i < caras.size(); i++)
   color_selec[2].push_back(c);
 
   c = c + 20; 
+}*/
+
+color_pick[0] = 0.0;
+color_pick[1] = 0.0;
+color_pick[2] = 1.0;
+
+triangulos=caras.size();
+
+for (int i = 0; i < caras.size(); i++){
+  activo.push_back(0);
+  color_selec[0].push_back(0);
+  color_selec[1].push_back(0);
+  color_selec[2].push_back(0);  
 }
+
+int v[3]={0, 0, 1};
+
+  recolorea(v, 1);
 }
 
 //*************************************************************************
@@ -879,23 +913,22 @@ void _rotacion::parametros(vector<_vertex3f> perfil, int num, Eje axis)
 
 
 
-c = 1;
-
 color_pick[0] = 0.0;
 color_pick[1] = 0.0;
 color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++)
-{
+for (int i = 0; i < caras.size(); i++){
   activo.push_back(0);
-  color_selec[0].push_back(c);
-  color_selec[1].push_back(c);
-  color_selec[2].push_back(c);
-
-  c=(c+1)%256; 
+  color_selec[0].push_back(0);
+  color_selec[1].push_back(0);
+  color_selec[2].push_back(0);  
 }
+
+int v[3]={0, 0, 1};
+
+  recolorea(v, 1);
 }
 
 //************************************************************************
@@ -1193,24 +1226,22 @@ material(tipo)
   caras=aux.caras;
 
 
-int c = 1;
-
 color_pick[0] = 0.0;
 color_pick[1] = 0.0;
 color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++)
-{
+for (int i = 0; i < caras.size(); i++){
   activo.push_back(0);
-  color_selec[0].push_back(c);
-  color_selec[1].push_back(c);
-  color_selec[2].push_back(c);
+  color_selec[0].push_back(0);
+  color_selec[1].push_back(0);
+  color_selec[2].push_back(0);  
+}
 
-  //c = c + 20; 
-  c=(c+1)%256;
-}  
+int v[3]={0, 0, 1};
+
+  recolorea(v, 1); 
 }
 
 //************************************************************************
@@ -3135,7 +3166,7 @@ b_p=color_pick[2];
       glTranslatef(-tt[1].x_r, tt[1].y_r-cuerpo.y, tt[1].z_r);
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
-      if(activo[15]==1)
+      if(activo[15]==1 or tt[1].algunoActivo())
         tt[1].draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         tt[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
@@ -3157,20 +3188,22 @@ b_p=color_pick[2];
 }
 
 void _tornado::seleccion(){
-int c;
+int c[3];
   //cuerpo.seleccion();
   glPushMatrix();
     //Cuerpo de la aeronave
 
     //Animacion de la aeronave
-    c=color_selec[0][0];
+    c[0]=color_selec[0][0];
+    c[1]=color_selec[1][0];
+    c[2]=color_selec[2][0];
     glTranslatef(0, cuerpo.y, 0);
     glRotatef(giro_aeronave_x, 1, 0, 0);
     glRotatef(giro_aeronave_y, 0, 1, 0);
     glRotatef(giro_aeronave_z, 0, 0, 1);  
 
     //Pintado del cuerpo de la aeronave
-    cuerpo.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    cuerpo.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
 
     //****************************************Animacion del ala izquierda
     glPushMatrix();
@@ -3181,8 +3214,10 @@ int c;
       //Pintado del ala izquierda
       glPushMatrix();
         glTranslatef(0, -cuerpo.y, 0); 
-        c=color_selec[0][1];
-        ala_izda.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][1];
+    c[1]=color_selec[1][1];
+    c[2]=color_selec[2][1];
+        ala_izda.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();
 
       //Freno aereo delantero Izquierda
@@ -3192,8 +3227,10 @@ int c;
         glRotatef(-frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_l, 1, 0, 0);    //Realizamos la animacion
-        c=color_selec[0][2];
-        frenos.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][2];
+    c[1]=color_selec[1][2];
+    c[2]=color_selec[2][2];
+        frenos.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();  
 
 
@@ -3205,8 +3242,10 @@ int c;
         glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
         glTranslatef(0, 0, -flap.mover_centro_z);
-        c=color_selec[0][3];
-        flap.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][3];
+    c[1]=color_selec[1][3];
+    c[2]=color_selec[2][3];
+        flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();           
     glPopMatrix();
 
@@ -3220,8 +3259,10 @@ int c;
       //Pintado del ala derecha
       glPushMatrix();
         glTranslatef(0, -cuerpo.y, 0); 
-        c=color_selec[0][4];
-        ala_dcha.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][4];
+    c[1]=color_selec[1][4];
+    c[2]=color_selec[2][4];
+        ala_dcha.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();
 
 
@@ -3232,8 +3273,10 @@ int c;
         glRotatef(frenos.freno_delantero_angulo_z, 0, 0, 1);    //Hacemos las rotaciones para que se encuentre encima del ala
         glTranslatef(0, 0, 0.18);   //Movemos la pieza al origen de coordenadas
         glRotatef(giro_frenos_r, 1, 0, 0);    //Realizamos la animacion
-        c=color_selec[0][5];
-        frenos.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][5];
+    c[1]=color_selec[1][5];
+    c[2]=color_selec[2][5];
+        frenos.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();     
 
       //FLAP Derecho
@@ -3244,20 +3287,26 @@ int c;
         glTranslatef(0, 0, flap.mover_centro_z-flap_trans);  //Ahora lo movemos al centro de verdad y realizamos la animacion de translacion
         glRotatef(-flap_giro, 1, 0, 0);
         glTranslatef(0, 0, -flap.mover_centro_z);
-        c=color_selec[0][6];
-        flap.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][6];
+    c[1]=color_selec[1][6];
+    c[2]=color_selec[2][6];
+        flap.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glPopMatrix();      
     glPopMatrix();
 
 
     //Ventana de la aeronave
     glPushMatrix();
-    c=color_selec[0][7];
+    c[0]=color_selec[0][7];
+    c[0]=color_selec[1][7];
+    c[0]=color_selec[2][7];
       glTranslatef(ventana_movil.x, ventana_movil.y-cuerpo.y, ventana_movil.z);  //Movemos la pieza a su sitio, pero mas abajo para poder realizar la animacion propia de la aeronave
-      ventana_fija.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+      ventana_fija.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       glRotatef(-giro_ventana, 1, 0, 0);
-      c=color_selec[0][8];
-      ventana_movil.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][8];
+    c[1]=color_selec[1][8];
+    c[2]=color_selec[2][8];
+      ventana_movil.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3269,8 +3318,10 @@ int c;
       glRotatef(timon_giro, 0, 1, 0);   //Hacemos el propio giro
       glTranslatef(0, 0, -0.340424); //LO movemos para poder hacer el propio giro
       glRotatef(37.8, 1, 0, 0);   //Lo ponemos recto
-      c=color_selec[0][9];
-      timon.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][9];
+    c[1]=color_selec[1][9];
+    c[2]=color_selec[2][9];
+      timon.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3279,8 +3330,10 @@ int c;
     glPushMatrix(); 
       glTranslatef(ti.x, ti.y-cuerpo.y, ti.z);
       glRotatef(angulo_trasero_l, 1, 0, 0);
-      c=color_selec[0][10];
-      ti.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][10];
+    c[1]=color_selec[1][10];
+    c[2]=color_selec[2][10];
+      ti.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3289,8 +3342,10 @@ int c;
     glPushMatrix();
       glTranslatef(td.x, td.y-cuerpo.y, td.z);
       glRotatef(angulo_trasero_r, 1, 0, 0);
-      c=color_selec[0][11];
-      td.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][11];
+    c[1]=color_selec[1][11];
+    c[2]=color_selec[2][11];
+      td.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3301,9 +3356,11 @@ int c;
       glRotatef(ft.angulo_z_l, 0, 0, 1);
       glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
-      c=color_selec[0][12];
+    c[0]=color_selec[0][12];
+    c[1]=color_selec[1][12];
+    c[2]=color_selec[2][12];
       //ft.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
-      ft.draw(SELECT, color_selec[0][12], color_selec[1][12], color_selec[2][12], color_selec[0][12], color_selec[1][12], color_selec[2][12], 1, NORMAL);
+      ft.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3315,8 +3372,10 @@ int c;
       glTranslatef(0, 0, ft.centro_z);  //La movemos al centro
       glRotatef(ft_giro, 1, 0, 0);    //Animacion
 
-      c=color_selec[0][13];
-      ft.draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
+    c[0]=color_selec[0][13];
+    c[1]=color_selec[1][13];
+    c[2]=color_selec[2][13];
+      ft.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
     glPopMatrix();
 
 
@@ -3341,9 +3400,9 @@ int c;
       glRotatef(-tt_giro_y+180, 0, 1, 0);  //Realizamos la animacion
       glRotatef(tt_giro_x, 1, 0, 0);  //Realizamos la animacion
 
-      c=color_selec[0][15];
-      tt[1].draw(SELECT, c, c, c, c, c, c, 1, NORMAL);
-     // tt[1].seleccion();
+      //c=color_selec[0][15];
+      //tt[1].draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      tt[1].seleccion();
     glPopMatrix();
 
 

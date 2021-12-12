@@ -1799,8 +1799,9 @@ switch(t_objeto){
 	for (int i = 0; i < caza.piezas; i++)
 	{
 		//cout<<"caza_color_R: " <<(int)color[0] <<" caza_color_G: " <<(int)color[1] <<" caza_color_B: " <<(int)color[2] <<endl;
-		if (color[0] == caza.color_selec[0][i])
+		if (color[0] == caza.color_selec[0][i] and color[1] == caza.color_selec[1][i] and color[2] == caza.color_selec[2][i])
 		{
+			//cout <<"ENCONTRADO----------------------------_____________________" <<endl;
 			if (caza.activo[i] == 0)
 				caza.activo[i] = 1;
 
@@ -1815,7 +1816,7 @@ switch(t_objeto){
 	for(auto it=caza.tren_d.piezas.begin(); it!=caza.tren_d.piezas.end(); ++it){
 			for (int i = 0; i < it->triangulos; i++)
 			{
-				if (color[0] == it->color_selec[0][i])
+				if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
 					if (it->activo[i] == 0){
@@ -1834,7 +1835,7 @@ switch(t_objeto){
 	for(auto it=caza.tt[0].piezas.begin(); it!=caza.tt[0].piezas.end(); ++it){
 			for (int i = 0; i < it->triangulos; i++)
 			{
-				if (color[0] == it->color_selec[0][i])
+				if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
 					if (it->activo[i] == 0){
@@ -1850,11 +1851,11 @@ switch(t_objeto){
 			}		
 	}	
 
-/*
+
 	for(auto it=caza.tt[1].piezas.begin(); it!=caza.tt[1].piezas.end(); ++it){
 			for (int i = 0; i < it->triangulos; i++)
 			{
-				if (color[0] == it->color_selec[0][i])
+				if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
 				{
 					//cout <<"------------------------ASDASDASD" <<endl;
 					if (it->activo[i] == 0){
@@ -1868,15 +1869,22 @@ switch(t_objeto){
 					glutPostRedisplay();
 				}
 			}		
-	}		*/
+	}	
+
+
+	//FLAP 0
+
+
+	//FLAP 1	
 	break;
 	}
 
 	case CUBO:{
 	for (int i = 0; i < cubo.triangulos; i++)
 	{
-		if (color[0] == cubo.color_selec[0][i])
+		if (color[0] == cubo.color_selec[0][i] and color[1] == cubo.color_selec[1][i] and color[2] == cubo.color_selec[2][i])
 		{
+			//cout <<"ACTIVASODSDJSDFLSKDJFFKDS" <<endl;
 			if (cubo.activo[i] == 0)
 				cubo.activo[i] = 1;
 
@@ -1892,7 +1900,7 @@ switch(t_objeto){
 	case ROTACION:{
 	for (int i = 0; i < rotacion.triangulos; i++)
 	{
-		if (color[0] == rotacion.color_selec[0][i])
+		if (color[0] == rotacion.color_selec[0][i] and color[1] == rotacion.color_selec[1][i] and color[2] == rotacion.color_selec[2][i])
 		{
 			if (rotacion.activo[i] == 0)
 				rotacion.activo[i] = 1;
@@ -1909,7 +1917,7 @@ switch(t_objeto){
 	case ESFERA:{
 	for (int i = 0; i < esfera.triangulos; i++)
 	{
-		if (color[0] == esfera.color_selec[0][i])
+		if (color[0] == esfera.color_selec[0][i] and color[1] == esfera.color_selec[1][i] and color[2] == esfera.color_selec[2][i])
 		{
 			if (esfera.activo[i] == 0)
 				esfera.activo[i] = 1;
@@ -1926,7 +1934,7 @@ switch(t_objeto){
 	case CILINDRO:{
 	for (int i = 0; i < cilindro.triangulos; i++)
 	{
-		if (color[0] == cilindro.color_selec[0][i])
+		if (color[0] == cilindro.color_selec[0][i] and color[1] == cilindro.color_selec[1][i] and color[2] == cilindro.color_selec[2][i])
 		{
 			if (cilindro.activo[i] == 0)
 				cilindro.activo[i] = 1;
@@ -1943,7 +1951,7 @@ switch(t_objeto){
 	case CONO:{
 	for (int i = 0; i < cono.triangulos; i++)
 	{
-		if (color[0] == cono.color_selec[0][i])
+		if (color[0] == cono.color_selec[0][i] and color[1] == cono.color_selec[1][i] and color[2] == cono.color_selec[2][i])
 		{
 			if (cono.activo[i] == 0)
 				cono.activo[i] = 1;
@@ -1961,7 +1969,7 @@ switch(t_objeto){
 	case PIRAMIDE:{
 	for (int i = 0; i < piramide.triangulos; i++)
 	{
-		if (color[0] == piramide.color_selec[0][i])
+		if (color[0] == piramide.color_selec[0][i] and color[1] == piramide.color_selec[1][i] and color[2] == piramide.color_selec[2][i])
 		{
 			if (piramide.activo[i] == 0)
 				piramide.activo[i] = 1;
@@ -1978,7 +1986,7 @@ switch(t_objeto){
 	case RELOJ:{
 	for (int i = 0; i < reloj.triangulos; i++)
 	{
-		if (color[0] == reloj.color_selec[0][i])
+		if (color[0] == reloj.color_selec[0][i] and color[1] == reloj.color_selec[1][i] and color[2] == reloj.color_selec[2][i])
 		{
 			if (reloj.activo[i] == 0)
 				reloj.activo[i] = 1;
@@ -1996,7 +2004,7 @@ switch(t_objeto){
 		for(auto it=pruebas.piezas.begin(); it!=pruebas.piezas.end(); ++it){
 			for (int i = 0; i < it->triangulos; i++)
 			{
-				if (color[0] == it->color_selec[0][i])
+				if (color[0] == it->color_selec[0][i] and color[1] == it->color_selec[1][i] and color[2] == it->color_selec[2][i])
 				{
 					cout <<"------------------------ASDASDASD" <<endl;
 					if (it->activo[i] == 0){
