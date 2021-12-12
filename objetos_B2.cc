@@ -2411,19 +2411,31 @@ void _ala_ti::draw(_modo modo, float r1, float g1, float b1, float r2, float g2,
 //Version centrada
 void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s){
   //Primero los cubos
-  if(tipo==NORMAL)
-    base.push_back(_cubo(CUBO_TAM, material.mat));
-  else
-    base.push_back(_cubo(CUBO_TAM, Materiales::CRISTAL));
+  if(tipo==NORMAL){
+    //base.push_back(_cubo(CUBO_TAM, material.mat));
+    for(int i=0; i<3; i++)
+      base[i].material.setValores(material.mat);
+
+    for(int i=0; i<2; i++)
+      filos[i].material.setValores(material.mat);
+  }
+  else{
+    //base.push_back(_cubo(CUBO_TAM, Materiales::CRISTAL));
+    for(int i=0; i<3; i++)
+      base[i].material.setValores(Materiales::CRISTAL);    
+
+    for(int i=0; i<2; i++)
+      filos[i].material.setValores(Materiales::CRISTAL);    
+  }
 
   glPushMatrix();
   glTranslatef(0, -0.64416, 1.204);
   glRotatef(1.1, 1, 0, 0);
   glScalef(0.324, 0.064, 1.21);
   if(tipo==NORMAL)
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    base[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    base[base.size()-1].draw(modo, 0.35, 0.35, 0.35, 0.2, 0.2, 0.2, grosor, s);
+    base[0].draw(modo, 0.35, 0.35, 0.35, 0.2, 0.2, 0.2, grosor, s);
   glPopMatrix(); 
 
   //derecha
@@ -2435,9 +2447,9 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
   //base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
 
   if(tipo==NORMAL)
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    base[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    base[base.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
+    base[1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
   glPopMatrix(); 
 
 
@@ -2450,27 +2462,27 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
   //base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
 
   if(tipo==NORMAL)
-    base[base.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    base[2].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    base[base.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
+    base[2].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);  
   glPopMatrix(); 
 
 
 
   //Ahora los cilindros
-  if(tipo==NORMAL)
+ /* if(tipo==NORMAL)
     filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, material.mat));
   else
-    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::CRISTAL));
+    filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, Materiales::CRISTAL));*/
 
   glPushMatrix();
   glTranslatef(0, -0.26732, 0.97712);
   glRotatef(90, 1, 0, 0);
   glScalef(0.265, 0.985, 0.265);
   if(tipo==NORMAL)
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    filos[0].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    filos[filos.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);
+    filos[0].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);
   glPopMatrix();     
 
 
@@ -2481,9 +2493,9 @@ void _ventana_movil::draw(_modo modo, float r1, float g1, float b1, float r2, fl
   glRotatef(104, 1, 0, 0);
   glScalef(0.265, 0.115, 0.265);
   if(tipo==NORMAL)
-    filos[filos.size()-1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+    filos[1].draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
   else
-    filos[filos.size()-1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);
+    filos[1].draw(modo, 0, 0.56, 0.68, 0, 0.82, 1, grosor, s);
   glPopMatrix(); 
 }
 
@@ -3060,7 +3072,7 @@ b_p=color_pick[2];
       else
         ventana_fija.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);      
       glRotatef(-giro_ventana, 1, 0, 0);
-      if(activo[8]==1)
+      if(activo[8]==1 or ventana_movil.algunoActivo())
         ventana_movil.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, tipo, true);
       else
         ventana_movil.draw(modo, r1, g1, b1, r2, g2, b2, grosor, tipo);
@@ -3302,10 +3314,13 @@ int c[3];
       //ventana_fija.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
       ventana_fija.seleccion();
       glRotatef(-giro_ventana, 1, 0, 0);
+    /*
     c[0]=color_selec[0][8];
     c[1]=color_selec[1][8];
     c[2]=color_selec[2][8];
       ventana_movil.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1, NORMAL);
+      */
+     ventana_movil.seleccion();
     glPopMatrix();
 
 
