@@ -774,22 +774,159 @@ class _alas: public _triangulos3D{
 
 class _ala_izda: public _triangulos3D{
 	public:
-		_ala_izda(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
-		esquina(ES_RADIO, NUM, NUM, eje, tipo){}
-		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
-
-		const double angulo_y=23.5;
-		const double angulo_z=-4.6;
-		const double x=1.3854;
-
-	private:
 	const int CUBO_TAM=2;
 	const double CIL_RAD=1, CIL_H=2;
 	const int NUM=12;
 	const Eje eje=Eje::y;
 	const double ES_RADIO=1;
 
-	protected:
+
+		_ala_izda(Materiales::tipoMaterial tipo=Materiales::COBRE_PULIDO):_triangulos3D(tipo),
+		esquina(ES_RADIO, NUM, NUM, eje, tipo){
+			for(int i=0; i<4; i++)
+				base.push_back(_cubo(CUBO_TAM, tipo));
+
+			for(int i=0; i<2; i++)
+				filos.push_back(_cilindro(CIL_RAD, CIL_H, NUM, eje, tipo));			
+		}
+		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
+
+		const double angulo_y=23.5;
+		const double angulo_z=-4.6;
+		const double x=1.3854;
+
+	void RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+	void recolorea(int *v, int salto){
+		for (int i = 0; i < base.size(); i++)
+		{
+			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			{
+				base[i].color_selec[0][j]=v[0];
+				base[i].color_selec[1][j]=v[1];
+				base[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}	
+
+		for (int i = 0; i < filos.size(); i++)
+		{
+			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			{
+				filos[i].color_selec[0][j]=v[0];
+				filos[i].color_selec[1][j]=v[1];
+				filos[i].color_selec[2][j]=v[2];
+
+				RGB_Suma(v, salto);
+			}
+		}
+
+		for(int i=0; i<esquina.triangulos; i++){
+				esquina.color_selec[0][i]=v[0];
+				esquina.color_selec[1][i]=v[1];
+				esquina.color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);			
+		}	
+	}
+
+	bool algunoActivo() const{
+		bool alguno_activo=false;
+
+		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
+			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				if(it->activo[j]==1)
+					alguno_activo=true;
+			}
+		}
+
+		for(int i=0; i<esquina.triangulos; i++){
+			if(esquina.activo[i]==1)
+				alguno_activo=true;
+		}
+
+		return alguno_activo;
+	}
+
+	void seleccion(){
+  glPushMatrix();
+  glTranslatef(3.354, 2.1596, -1.5932);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.38);
+  base[0].seleccion();
+  glPopMatrix();     
+
+  glPushMatrix();
+  glTranslatef(3.3537, 2.1749, -1.1572);
+  glRotatef(23.5, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(2.45, 0.12, 0.3);
+  base[1].seleccion();
+  glPopMatrix();    
+
+  glPushMatrix();
+  glTranslatef(5.7552, 1.9762, -2.4362);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.1, 0.105, 0.23);
+  base[2].seleccion();
+  glPopMatrix();   
+
+  glPushMatrix();
+  glTranslatef(5.8797, 1.9762, -2.7862);
+  glRotatef(15.9, 0, 1, 0);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.16, 0.075, 0.11);
+  base[3].seleccion();
+  glPopMatrix();  
+  
+  glPushMatrix();
+  glTranslatef(3.6565, 2.1568, -1.0302);
+  glRotatef(24.8, 0, 1, 0);
+  glRotatef(-94.6, 0, 0, 1);
+  glScalef(0.12, 2.096, 0.366);
+  filos[0].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(5.8499, 1.9745, -2.315);
+  glRotatef(90, 1, 0, 0);  
+  glRotatef(14.5, 0, 0, 1);
+  glRotatef(4.6, 0, 1, 0);
+  glScalef(0.165, 0.465, 0.12);
+  filos[1].seleccion();
+  glPopMatrix();  
+
+  glPushMatrix();
+  glTranslatef(5.6556, 1.9831, -1.8168);
+  glRotatef(-4.6, 0, 0, 1);
+  glScalef(0.237, 0.12, 0.237);
+  esquina.seleccion();
+  glPopMatrix();
+	}
+	//protected:
+	public:
 	vector<_cubo> base;
 	vector<_cilindro> filos;
 	_esfera esquina;
@@ -2402,6 +2539,7 @@ const int    piezas=17;
 			td.recolorea(v, 1);
 
 			ala_dcha.recolorea(v, 1);
+			ala_izda.recolorea(v, 1);
 
 			RGB_Suma(v, 1);
 			//c++;
