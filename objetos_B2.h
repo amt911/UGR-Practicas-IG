@@ -182,7 +182,7 @@ public:
 			aux.vertices=vertices;
 			aux.caras=caras;
 
-			for(int i=0; i<caras.size(); i++){
+			for(long unsigned int i=0; i<caras.size(); i++){
 					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
@@ -209,7 +209,7 @@ public:
 		//int c=empieza;
 
 
-		for (int i = 0; i < caras.size(); i++)
+		for (long unsigned int i = 0; i < caras.size(); i++)
 		{
 				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
 				//c = (c + salto) % 255;
@@ -236,7 +236,7 @@ public:
 
 		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
 		{
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 
 				aux.caras.clear();
@@ -266,7 +266,7 @@ public:
 			_triangulos3D a(material.mat), noa(material.mat);
 			a.vertices = noa.vertices = vertices;
 
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 				if (activo[i] == 1)
 					a.caras.push_back(caras[i]);
@@ -308,7 +308,7 @@ public:
 			aux.vertices=vertices;
 			aux.caras=caras;
 
-			for(int i=0; i<caras.size(); i++){
+			for(long unsigned int i=0; i<caras.size(); i++){
 					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
@@ -335,7 +335,7 @@ public:
 		//int c=empieza;
 
 
-		for (int i = 0; i < caras.size(); i++)
+		for (long unsigned int i = 0; i < caras.size(); i++)
 		{
 				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
 				//c = (c + salto) % 255;
@@ -361,7 +361,7 @@ public:
 
 		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
 		{
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 
 				aux.caras.clear();
@@ -391,7 +391,7 @@ public:
 			_triangulos3D a(material.mat), noa(material.mat);
 			a.vertices = noa.vertices = vertices;
 
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 				if (activo[i] == 1)
 					a.caras.push_back(caras[i]);
@@ -453,7 +453,7 @@ int num;
 			aux.vertices=vertices;
 			aux.caras=caras;
 
-			for(int i=0; i<caras.size(); i++){
+			for(long unsigned int i=0; i<caras.size(); i++){
 					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
@@ -480,7 +480,7 @@ int num;
 		//int c=empieza;
 
 
-		for (int i = 0; i < caras.size(); i++)
+		for (long unsigned int i = 0; i < caras.size(); i++)
 		{
 				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
 				//c = (c + salto) % 255;
@@ -505,7 +505,7 @@ int num;
 
 		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
 		{
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 
 				aux.caras.clear();
@@ -535,7 +535,7 @@ int num;
 			_triangulos3D a(material.mat), noa(material.mat);
 			a.vertices = noa.vertices = vertices;
 
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 				if (activo[i] == 1)
 					a.caras.push_back(caras[i]);
@@ -604,7 +604,7 @@ class _ply_rot: public _objeto_ply
 			aux.vertices=vertices;
 			aux.caras=caras;
 
-			for(int i=0; i<caras.size(); i++){
+			for(long unsigned int i=0; i<caras.size(); i++){
 					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
 					_triangulos3D aux;
 					aux.vertices=vertices;
@@ -631,7 +631,7 @@ class _ply_rot: public _objeto_ply
 		//int c=empieza;
 
 
-		for (int i = 0; i < caras.size(); i++)
+		for (long unsigned int i = 0; i < caras.size(); i++)
 		{
 				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
 				//c = (c + salto) % 255;
@@ -658,7 +658,7 @@ class _ply_rot: public _objeto_ply
 
 		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
 		{
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 
 				aux.caras.clear();
@@ -688,7 +688,7 @@ class _ply_rot: public _objeto_ply
 			_triangulos3D a(material.mat), noa(material.mat);
 			a.vertices = noa.vertices = vertices;
 
-			for (int i = 0; i < caras.size(); i++)
+			for (long unsigned int i = 0; i < caras.size(); i++)
 			{
 				if (activo[i] == 1)
 					a.caras.push_back(caras[i]);
@@ -758,9 +758,9 @@ class _cuerpo: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -770,9 +770,9 @@ class _cuerpo: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < esquinas.size(); i++)
+		for (long unsigned int i = 0; i < esquinas.size(); i++)
 		{
-			for (int j = 0; j < esquinas[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < esquinas[i].color_selec[0].size(); j++)
 			{
 				esquinas[i].color_selec[0][j]=v[0];
 				esquinas[i].color_selec[1][j]=v[1];
@@ -803,14 +803,14 @@ class _cuerpo: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=esquinas.cbegin(); it!=esquinas.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -1220,9 +1220,9 @@ class _ala_izda: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -1232,9 +1232,9 @@ class _ala_izda: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < filos.size(); i++)
+		for (long unsigned int i = 0; i < filos.size(); i++)
 		{
-			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < filos[i].color_selec[0].size(); j++)
 			{
 				filos[i].color_selec[0][j]=v[0];
 				filos[i].color_selec[1][j]=v[1];
@@ -1257,14 +1257,14 @@ class _ala_izda: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -1386,9 +1386,9 @@ class _ala_dcha: public _triangulos3D{
 	_esfera esquina;
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -1398,9 +1398,9 @@ class _ala_dcha: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < filos.size(); i++)
+		for (long unsigned int i = 0; i < filos.size(); i++)
 		{
-			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < filos[i].color_selec[0].size(); j++)
 			{
 				filos[i].color_selec[0][j]=v[0];
 				filos[i].color_selec[1][j]=v[1];
@@ -1423,14 +1423,14 @@ class _ala_dcha: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -1546,9 +1546,9 @@ class _ala_td: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -1558,9 +1558,9 @@ class _ala_td: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < filos.size(); i++)
+		for (long unsigned int i = 0; i < filos.size(); i++)
 		{
-			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < filos[i].color_selec[0].size(); j++)
 			{
 				filos[i].color_selec[0][j]=v[0];
 				filos[i].color_selec[1][j]=v[1];
@@ -1583,14 +1583,14 @@ class _ala_td: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -1779,9 +1779,9 @@ class _ala_ti: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -1791,9 +1791,9 @@ class _ala_ti: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < filos.size(); i++)
+		for (long unsigned int i = 0; i < filos.size(); i++)
 		{
-			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < filos[i].color_selec[0].size(); j++)
 			{
 				filos[i].color_selec[0][j]=v[0];
 				filos[i].color_selec[1][j]=v[1];
@@ -1816,14 +1816,14 @@ class _ala_ti: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2006,9 +2006,9 @@ class _ventana_movil: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -2018,9 +2018,9 @@ class _ventana_movil: public _triangulos3D{
 			}
 		}	
 
-		for (int i = 0; i < filos.size(); i++)
+		for (long unsigned int i = 0; i < filos.size(); i++)
 		{
-			for (int j = 0; j < filos[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < filos[i].color_selec[0].size(); j++)
 			{
 				filos[i].color_selec[0][j]=v[0];
 				filos[i].color_selec[1][j]=v[1];
@@ -2035,14 +2035,14 @@ class _ventana_movil: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
 		for(auto it=filos.cbegin(); it!=filos.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2137,9 +2137,9 @@ class _ventana_fija: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -2149,7 +2149,7 @@ class _ventana_fija: public _triangulos3D{
 			}
 		}	
 
-		for(int i=0; i<filos.color_selec[0].size(); i++){
+		for(long unsigned int i=0; i<filos.color_selec[0].size(); i++){
 				filos.color_selec[0][i]=v[0];
 				filos.color_selec[1][i]=v[1];
 				filos.color_selec[2][i]=v[2];
@@ -2157,7 +2157,7 @@ class _ventana_fija: public _triangulos3D{
 				RGB_Suma(v, salto);			
 		}
 
-		for(int i=0; i<pico.color_selec[0].size(); i++){
+		for(long unsigned int i=0; i<pico.color_selec[0].size(); i++){
 				pico.color_selec[0][i]=v[0];
 				pico.color_selec[1][i]=v[1];
 				pico.color_selec[2][i]=v[2];
@@ -2170,18 +2170,18 @@ class _ventana_fija: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
 		}
 
-		for(int i=0; i<filos.activo.size(); i++){
+		for(long unsigned int i=0; i<filos.activo.size(); i++){
 							if(filos.activo[i]==1)
 					alguno_activo=true;
 		}
 
-		for(int i=0; i<pico.activo.size(); i++){
+		for(long unsigned int i=0; i<pico.activo.size(); i++){
 							if(pico.activo[i]==1)
 					alguno_activo=true;			
 		}
@@ -2288,7 +2288,7 @@ class _flap: public _triangulos3D{
 	void recolorea(int *v, int salto){
 		//for (int i = 0; i < piezas.size(); i++)
 		//{
-			for (int j = 0; j < flap.color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < flap.color_selec[0].size(); j++)
 			{
 				flap.color_selec[0][j]=v[0];
 				flap.color_selec[1][j]=v[1];
@@ -2303,7 +2303,7 @@ class _flap: public _triangulos3D{
 		bool alguno_activo=false;
 
 		//for(auto it=flap.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
-			for(int j=0; j<flap.activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<flap.activo.size() and !alguno_activo; j++){
 				if(flap.activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2377,7 +2377,7 @@ class _freno_individual: public _triangulos3D{
 	void recolorea(int *v, int salto){
 		//for (int i = 0; i < piezas.size(); i++)
 		//{
-			for (int j = 0; j < base.color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base.color_selec[0].size(); j++)
 			{
 				base.color_selec[0][j]=v[0];
 				base.color_selec[1][j]=v[1];
@@ -2392,7 +2392,7 @@ class _freno_individual: public _triangulos3D{
 		bool alguno_activo=false;
 
 		//for(auto it=flap.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
-			for(int j=0; j<base.activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<base.activo.size() and !alguno_activo; j++){
 				if(base.activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2452,9 +2452,9 @@ class _timon: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < base.size(); i++)
+		for (long unsigned int i = 0; i < base.size(); i++)
 		{
-			for (int j = 0; j < base[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base[i].color_selec[0].size(); j++)
 			{
 				base[i].color_selec[0][j]=v[0];
 				base[i].color_selec[1][j]=v[1];
@@ -2469,7 +2469,7 @@ class _timon: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=base.cbegin(); it!=base.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2600,7 +2600,7 @@ class _freno_trasero_individual: public _triangulos3D{
 	void recolorea(int *v, int salto){
 		//for (int i = 0; i < piezas.size(); i++)
 		//{
-			for (int j = 0; j < base.color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < base.color_selec[0].size(); j++)
 			{
 				base.color_selec[0][j]=v[0];
 				base.color_selec[1][j]=v[1];
@@ -2615,7 +2615,7 @@ class _freno_trasero_individual: public _triangulos3D{
 		bool alguno_activo=false;
 
 		//for(auto it=base.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
-			for(int j=0; j<base.activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<base.activo.size() and !alguno_activo; j++){
 				if(base.activo[j]==1)
 					alguno_activo=true;
 			}
@@ -2664,7 +2664,7 @@ class _tren_trasero: public _triangulos3D{
 			bool alguno_activo=false;
 
 			for(auto it=piezas.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
-				for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+				for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 					if(it->activo[j]==1)
 						alguno_activo=true;
 				}
@@ -2691,9 +2691,9 @@ class _tren_trasero: public _triangulos3D{
 		//int c=empieza;
 
 
-		for (int i = 0; i < piezas.size(); i++)
+		for (long unsigned int i = 0; i < piezas.size(); i++)
 		{
-			for (int j = 0; j < piezas[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < piezas[i].color_selec[0].size(); j++)
 			{
 				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
 				//c = (c + salto) % 255;
@@ -2776,9 +2776,9 @@ class _tren_delantero: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		for (int i = 0; i < piezas.size(); i++)
+		for (long unsigned int i = 0; i < piezas.size(); i++)
 		{
-			for (int j = 0; j < piezas[i].color_selec[0].size(); j++)
+			for (long unsigned int j = 0; j < piezas[i].color_selec[0].size(); j++)
 			{
 				piezas[i].color_selec[0][j]=v[0];
 				piezas[i].color_selec[1][j]=v[1];
@@ -2793,7 +2793,7 @@ class _tren_delantero: public _triangulos3D{
 		bool alguno_activo=false;
 
 		for(auto it=piezas.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
-			for(int j=0; j<it->activo.size() and !alguno_activo; j++){
+			for(long unsigned int j=0; j<it->activo.size() and !alguno_activo; j++){
 				if(it->activo[j]==1)
 					alguno_activo=true;
 			}

@@ -225,7 +225,7 @@ draw_objects();
 //Poner perspectiva con glFrustum
 	glViewport(Ancho/2,0,Ancho/2,Alto/2);
 
-	glMatrixMode(GL_PROJECTION);
+	//glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	change_projection();
 	change_observer();
@@ -344,7 +344,9 @@ void draw(void)
 				pruebas.seleccion();
 
 				break;
-			}			
+			}
+
+			default: break;			
 		}
 	}
 	else
@@ -1757,7 +1759,7 @@ void getCamara (GLfloat *x, GLfloat *y)
 *y=Observer_angle_y;
 }
 
-/*************************************************************************/
+/*********************clickRato****************************************************/
 
 void setCamara (GLfloat x, GLfloat y)
 {
@@ -2457,6 +2459,7 @@ for(int i=0; i<caza.cuerpo.nariz_curva.triangulos; i++){
 		}
 	break;				
 	}
+	default: break;
 }
  }
 

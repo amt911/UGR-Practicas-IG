@@ -374,7 +374,7 @@ void _triangulos3D::draw_seleccion(int r, int g, int b){
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glColor3ub(r, g, b);
   glBegin(GL_TRIANGLES);
-  for (int i = 0; i < caras.size(); i++)
+  for (long unsigned int i = 0; i < caras.size(); i++)
   {
     glVertex3fv((GLfloat *)&vertices[caras[i]._0]);
     glVertex3fv((GLfloat *)&vertices[caras[i]._1]);
@@ -564,7 +564,7 @@ color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++){
+for (long unsigned int i = 0; i < caras.size(); i++){
   activo.push_back(0);
   color_selec[0].push_back(0);
   color_selec[1].push_back(0);
@@ -623,7 +623,7 @@ color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++){
+for (long unsigned int i = 0; i < caras.size(); i++){
   activo.push_back(0);
   color_selec[0].push_back(0);
   color_selec[1].push_back(0);
@@ -919,7 +919,7 @@ color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++){
+for (long unsigned int i = 0; i < caras.size(); i++){
   activo.push_back(0);
   color_selec[0].push_back(0);
   color_selec[1].push_back(0);
@@ -1232,7 +1232,7 @@ color_pick[2] = 1.0;
 
 triangulos=caras.size();
 
-for (int i = 0; i < caras.size(); i++){
+for (long unsigned int i = 0; i < caras.size(); i++){
   activo.push_back(0);
   color_selec[0].push_back(0);
   color_selec[1].push_back(0);
@@ -3019,7 +3019,7 @@ b_p=color_pick[2];
 }
 
 void _tornado::seleccion(){
-int c[3];
+//int c[3];
   //cuerpo.seleccion();
   glPushMatrix();
     //Cuerpo de la aeronave
