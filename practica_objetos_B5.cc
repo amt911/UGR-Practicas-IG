@@ -141,7 +141,7 @@ switch (t_objeto){
 	case ROTACION_X: rotacion_x.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case RELOJ: reloj.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
 	case RARO: raro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20);break;
-	case CAZA: caza.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
+	case CAZA: caza.draw(modo,0.2,0.2,0.2,0.0,1.0,0.0,20, tipo); break;
 	//c.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	case TEST: pruebas.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,20, tipo); break;
 	}
