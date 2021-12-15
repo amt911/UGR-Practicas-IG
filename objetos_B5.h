@@ -40,61 +40,17 @@ class Luces{
 		bool desactivado=false;
 	public:
 		Luces()=default;
-		Luces(float *luz, float *pos){
-			for(int i=0; i<4; i++){
-				this->luz[i]=luz[i];
-				posicion[i]=pos[i];
-			}
-		}
-		Luces(float l1, float l2, float l3, float l4, float p1, float p2, float p3, float p4){
-			luz[0]=l1;
-			luz[1]=l2;
-			luz[2]=l3;
-			luz[3]=l4;
+		Luces(float *luz, float *pos);
+		Luces(float l1, float l2, float l3, float l4, float p1, float p2, float p3, float p4);
+		float getLuz(int i);
+		float getPosicion(int i);
+		void setLuz(int i, float valor);
+		void setPosicion(int i, float valor);
+		void setDesactivado(bool v);
+		bool getDesactivado() const;
+		const float *getLuzVector() const;
+		const float *getPosicionVector() const;
 
-			posicion[0]=p1;
-			posicion[1]=p2;
-			posicion[2]=p3;
-			posicion[3]=p4;
-
-		}
-
-		float getLuz(int i){
-			if(desactivado)
-				return 0;
-
-			return luz[i];
-		}
-
-		float getPosicion(int i){
-			return posicion[i];
-		}
-
-		void setLuz(int i, float valor){
-			luz[i]=valor;
-		}
-		void setPosicion(int i, float valor){
-			posicion[i]=valor;
-		}
-
-		void setDesactivado(bool v){
-			desactivado=v;
-		}
-
-		bool getDesactivado() const{
-			return desactivado;
-		}
-
-		const float *getLuzVector() const{
-			if(desactivado)
-				return desV;
-
-			return luz;
-		}
-
-		const float *getPosicionVector() const{
-			return posicion;
-		}
 };
 
 
@@ -175,112 +131,10 @@ public:
 	_cubo(float tam=2, Materiales::tipoMaterial tipo=Materiales::CROMADO);
 
 	//Practica 5
-
-	void seleccion(){
-
-			_triangulos3D aux;
-			aux.vertices=vertices;
-			aux.caras=caras;
-
-			for(long unsigned int i=0; i<caras.size(); i++){
-					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
-					_triangulos3D aux;
-					aux.vertices=vertices;
-					aux.caras.push_back(caras[i]);
-
-					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
-			}
-	}
-
-	void RGB_Suma(int *v, int salto){
-				v[2]+=salto;
-
-				if(v[2]>255){
-					if(v[1]==255){
-						v[0]++;
-						v[1]=0;
-					}
-					
-					v[1]++;
-					v[2]=0;
-				}
-	}
-	void recolorea(int *v, int salto){
-		//int c=empieza;
-
-
-		for (long unsigned int i = 0; i < caras.size(); i++)
-		{
-				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
-				//c = (c + salto) % 255;
-				color_selec[0][i]=v[0];
-				color_selec[1][i]=v[1];
-				color_selec[2][i]=v[2];
-
-				RGB_Suma(v, salto);
-				//c+=salto;
-				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
-		}		
-	}
-
-	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s = false)
-	{
-		float r_p, g_p, b_p;
-
-		r_p = color_pick[0];
-		g_p = color_pick[1];
-		b_p = color_pick[2];
-
-		_triangulos3D aux;
-		aux.vertices = vertices;
-
-		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
-		{
-			for (long unsigned int i = 0; i < caras.size(); i++)
-			{
-
-				aux.caras.clear();
-				aux.caras.push_back(caras[i]);
-
-				if (activo[i] == 1)
-					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
-
-				else
-				{
-					if (modo == SOLID_CHESS)
-					{
-						if (i % 2 == 0)
-							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
-
-						else
-							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
-					}
-
-					else
-						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
-				}
-			}
-		}
-		else
-		{
-			_triangulos3D a(material.mat), noa(material.mat);
-			a.vertices = noa.vertices = vertices;
-
-			for (long unsigned int i = 0; i < caras.size(); i++)
-			{
-				if (activo[i] == 1)
-					a.caras.push_back(caras[i]);
-
-				else
-					noa.caras.push_back(caras[i]);
-			}
-
-			if (a.caras.size() > 0)
-				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
-
-			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
-		}
-	}
+	void seleccion();
+	void RGB_Suma(int *v, int salto);
+	void recolorea(int *v, int salto);
+	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s = false);
 
 	float  color_pick[3];
 	vector<int>    color_selec[3];
@@ -302,52 +156,10 @@ public:
 
 	//Practica 5
 
-	void seleccion(){
+	void seleccion();
+	void RGB_Suma(int *v, int salto);
 
-			_triangulos3D aux;
-			aux.vertices=vertices;
-			aux.caras=caras;
-
-			for(long unsigned int i=0; i<caras.size(); i++){
-					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
-					_triangulos3D aux;
-					aux.vertices=vertices;
-					aux.caras.push_back(caras[i]);
-
-					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
-			}
-	}
-
-	void RGB_Suma(int *v, int salto){
-				v[2]+=salto;
-
-				if(v[2]>255){
-					if(v[1]==255){
-						v[0]++;
-						v[1]=0;
-					}
-					
-					v[1]++;
-					v[2]=0;
-				}
-	}
-	void recolorea(int *v, int salto){
-		//int c=empieza;
-
-
-		for (long unsigned int i = 0; i < caras.size(); i++)
-		{
-				//piezas[i].color_selec[0][j] = piezas[i].color_selec[1][j] = piezas[i].color_selec[2][j] = c;
-				//c = (c + salto) % 255;
-				color_selec[0][i]=v[0];
-				color_selec[1][i]=v[1];
-				color_selec[2][i]=v[2];
-
-				RGB_Suma(v, salto);
-				//c+=salto;
-				//cout <<v[0] <<"\t" <<v[1] <<"\t" <<v[2] <<endl;
-		}		
-	}
+	void recolorea(int *v, int salto);
 
 	void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s=false){
 		float r_p, g_p, b_p;
@@ -2355,8 +2167,6 @@ class _freno_individual: public _triangulos3D{
 		void draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, Tipo tipo, bool s=false);		
 
 		const double y=2.2518;
-		//const double intermedio_y=0.29316;
-		//const double y_i_f=y-intermedio_y;
 		const double freno_delantero_angulo_y=-15.9;
 		const double freno_delantero_angulo_z=4.6;
 
@@ -2375,8 +2185,7 @@ class _freno_individual: public _triangulos3D{
 	}
 
 	void recolorea(int *v, int salto){
-		//for (int i = 0; i < piezas.size(); i++)
-		//{
+
 			for (long unsigned int j = 0; j < base.color_selec[0].size(); j++)
 			{
 				base.color_selec[0][j]=v[0];
@@ -2385,18 +2194,15 @@ class _freno_individual: public _triangulos3D{
 
 				RGB_Suma(v, salto);
 			}
-		//}		
 	}
 
 	bool algunoActivo() const{
 		bool alguno_activo=false;
 
-		//for(auto it=flap.cbegin(); it!=piezas.cend() and !alguno_activo; ++it){
 			for(long unsigned int j=0; j<base.activo.size() and !alguno_activo; j++){
 				if(base.activo[j]==1)
 					alguno_activo=true;
 			}
-		//}
 
 
 		return alguno_activo;
@@ -2415,7 +2221,6 @@ class _freno_individual: public _triangulos3D{
 	private:
 	const int CUBO_TAM=2;
 
-	//protected:
 	public:
 	_cubo base;
 };

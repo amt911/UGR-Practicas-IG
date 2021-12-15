@@ -3009,3 +3009,215 @@ void _tornado::seleccion()
 
   glPopMatrix();
 }
+
+
+
+
+
+
+//**********************************************
+//        Metodos de la practica 5
+//**********************************************
+		Luces::Luces(float *luz, float *pos){
+			for(int i=0; i<4; i++){
+				this->luz[i]=luz[i];
+				posicion[i]=pos[i];
+			}
+		}
+		Luces::Luces(float l1, float l2, float l3, float l4, float p1, float p2, float p3, float p4){
+			luz[0]=l1;
+			luz[1]=l2;
+			luz[2]=l3;
+			luz[3]=l4;
+
+			posicion[0]=p1;
+			posicion[1]=p2;
+			posicion[2]=p3;
+			posicion[3]=p4;
+
+		}
+
+		float Luces::getLuz(int i){
+			if(desactivado)
+				return 0;
+
+			return luz[i];
+		}
+
+		float Luces::getPosicion(int i){
+			return posicion[i];
+		}
+
+		void Luces::setLuz(int i, float valor){
+			luz[i]=valor;
+		}
+		void Luces::setPosicion(int i, float valor){
+			posicion[i]=valor;
+		}
+
+		void Luces::setDesactivado(bool v){
+			desactivado=v;
+		}
+
+		bool Luces::getDesactivado() const{
+			return desactivado;
+		}
+
+		const float *Luces::getLuzVector() const{
+			if(desactivado)
+				return desV;
+
+			return luz;
+		}
+
+		const float *Luces::getPosicionVector() const{
+			return posicion;
+		}
+
+
+
+
+
+    //Clase _cubo
+  	void _cubo::seleccion(){
+
+			_triangulos3D aux;
+			aux.vertices=vertices;
+			aux.caras=caras;
+
+			for(long unsigned int i=0; i<caras.size(); i++){
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
+					_triangulos3D aux;
+					aux.vertices=vertices;
+					aux.caras.push_back(caras[i]);
+
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
+			}
+	}  
+
+
+	void _cubo::RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+  	void _cubo::recolorea(int *v, int salto){
+		for (long unsigned int i = 0; i < caras.size(); i++)
+		{
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+		}		
+	}
+
+  	void _cubo::draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor, bool s)
+	{
+		float r_p, g_p, b_p;
+
+		r_p = color_pick[0];
+		g_p = color_pick[1];
+		b_p = color_pick[2];
+
+		_triangulos3D aux;
+		aux.vertices = vertices;
+
+		if (modo != SOLID_ILLUMINATED_FLAT and modo != SOLID_ILLUMINATED_GOURAUD)
+		{
+			for (long unsigned int i = 0; i < caras.size(); i++)
+			{
+
+				aux.caras.clear();
+				aux.caras.push_back(caras[i]);
+
+				if (activo[i] == 1)
+					aux.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+				else
+				{
+					if (modo == SOLID_CHESS)
+					{
+						if (i % 2 == 0)
+							aux.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
+
+						else
+							aux.draw(modo, r2, g2, b2, r2, g2, b2, grosor, s);
+					}
+
+					else
+						aux.draw(modo, r1, g1, b1, r2, g2, b2, grosor, s);
+				}
+			}
+		}
+		else
+		{
+			_triangulos3D a(material.mat), noa(material.mat);
+			a.vertices = noa.vertices = vertices;
+
+			for (long unsigned int i = 0; i < caras.size(); i++)
+			{
+				if (activo[i] == 1)
+					a.caras.push_back(caras[i]);
+
+				else
+					noa.caras.push_back(caras[i]);
+			}
+
+			if (a.caras.size() > 0)
+				a.draw(modo, r_p, g_p, b_p, r_p, g_p, b_p, grosor, true);
+
+			noa.draw(modo, r1, g1, b1, r1, g1, b1, grosor, s);
+		}
+	}
+
+//Clase _piramide
+	void _piramide::seleccion(){
+
+			_triangulos3D aux;
+			aux.vertices=vertices;
+			aux.caras=caras;
+
+			for(long unsigned int i=0; i<caras.size(); i++){
+					int c[3]={color_selec[0][i], color_selec[1][i], color_selec[2][i]};
+					_triangulos3D aux;
+					aux.vertices=vertices;
+					aux.caras.push_back(caras[i]);
+
+					aux.draw(SELECT, c[0], c[1], c[2], c[0], c[1], c[2], 1);
+			}
+	}
+
+  	void _piramide::RGB_Suma(int *v, int salto){
+				v[2]+=salto;
+
+				if(v[2]>255){
+					if(v[1]==255){
+						v[0]++;
+						v[1]=0;
+					}
+					
+					v[1]++;
+					v[2]=0;
+				}
+	}
+
+  	void _piramide::recolorea(int *v, int salto){
+		for (long unsigned int i = 0; i < caras.size(); i++)
+		{
+				color_selec[0][i]=v[0];
+				color_selec[1][i]=v[1];
+				color_selec[2][i]=v[2];
+
+				RGB_Suma(v, salto);
+		}		
+	}
