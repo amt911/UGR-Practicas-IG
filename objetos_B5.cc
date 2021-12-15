@@ -2,7 +2,7 @@
 // Práctica 1 usando objetos
 //**************************************************************************
 
-#include "objetos_B2.h"
+#include "objetos_B5.h"
 #include "file_ply_stl.hpp"
 
 
