@@ -2554,6 +2554,11 @@ void pick_color(int x, int y)
 int main(int argc, char *argv[])
 {
 
+	cout <<"#################################################" <<endl;
+	cout <<"F.- Pasar al avión (modelo jerárquico)" <<endl;
+	cout <<"P.- Cambiar a las demás figuras" <<endl;
+	cout <<"#################################################" <<endl;
+
 	const int ROT = 4;
 
 	// perfil
